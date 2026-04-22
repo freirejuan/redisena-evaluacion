@@ -1,6 +1,6 @@
 # Rediseña.Evaluacion
 
-Web pública del kit guiado para rediseñar la evaluación de asignaturas universitarias. Un kit de **[Eutika](https://eutika.com/)**, desarrollado como contribución extra al **Plan IMPULSO Docente de la Universidad Carlos III de Madrid · Ruta 3**. Diseñado para ser reutilizable en otras universidades — publicado con licencia abierta (CC BY-SA 4.0 para contenidos, MIT para código).
+Web pública del kit guiado para rediseñar la evaluación de asignaturas universitarias. Un kit de **[Eutika](https://eutika.com/)**, diseñado para ser reutilizable en cualquier universidad — publicado con licencia abierta (CC BY-SA 4.0 para contenidos, MIT para código).
 
 URL de producción (provisional): `https://redisena-evaluacion.pages.dev`
 
@@ -115,15 +115,15 @@ Este repositorio combina dos licencias complementarias según la naturaleza del 
 
 Ambas permiten **uso, modificación y redistribución** — incluso con fines comerciales — siempre que:
 
-1. Se dé **atribución a Eutika** (<https://eutika.com/>) como autor original, indicando que el kit fue desarrollado como contribución al Plan IMPULSO Docente UC3M.
+1. Se dé **atribución a Eutika** (<https://eutika.com/>) como autor original.
 2. Para los **contenidos**, las obras derivadas se compartan bajo la misma licencia CC BY-SA 4.0.
 3. Se indiquen los cambios introducidos respecto al original.
 
 Atribución sugerida:
 
-> *"Basado en Rediseña.Evaluacion, kit desarrollado por Eutika (eutika.com) como contribución al Plan IMPULSO Docente de la Universidad Carlos III de Madrid. Publicado bajo CC BY-SA 4.0."*
+> *"Basado en Rediseña.Evaluacion, kit desarrollado por Eutika (eutika.com). Publicado bajo CC BY-SA 4.0."*
 
-Las **marcas y logotipos** ("Rediseña.Evaluacion", "Eutika", "Plan IMPULSO", "UC3M") y el **UC3M IMPULSO Design System** quedan fuera del alcance de estas licencias y requieren autorización específica de sus titulares.
+Las **marcas y logotipos** ("Rediseña.Evaluacion", "Eutika") quedan fuera del alcance de estas licencias y requieren autorización específica de sus titulares.
 
 ---
 

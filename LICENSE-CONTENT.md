@@ -12,7 +12,7 @@ Para el **código** de la web (HTML, CSS, JavaScript) aplica una licencia distin
 
 © 2026 **Eutika** · <https://eutika.com/>
 
-Eutika es una consultora fundada por Juan Freire, especializada en diseño de experiencias de aprendizaje, innovación educativa y transformación institucional. Rediseña.Evaluacion ha sido desarrollado por Eutika como **contribución extra** al Plan IMPULSO Docente de la Universidad Carlos III de Madrid, fuera del alcance contratado del proyecto.
+Eutika es una consultora fundada por Juan Freire, especializada en diseño de experiencias de aprendizaje, innovación educativa y transformación institucional. Rediseña.Evaluacion ha sido desarrollado por Eutika como pieza abierta del repertorio de Eutika, publicada con licencia libre para ser reutilizable por cualquier universidad.
 
 ---
 
@@ -36,7 +36,7 @@ Debes dar crédito de forma adecuada, proporcionar un enlace a la licencia e ind
 
 **Atribución sugerida:**
 
-> *"Basado en Rediseña.Evaluacion, kit desarrollado por Eutika (eutika.com) como contribución al Plan IMPULSO Docente de la Universidad Carlos III de Madrid. Publicado bajo CC BY-SA 4.0."*
+> *"Basado en Rediseña.Evaluacion, kit desarrollado por Eutika (eutika.com). Publicado bajo CC BY-SA 4.0."*
 
 Cuando sea técnicamente posible, enlaza a <https://eutika.com/> y al sitio del kit.
 
@@ -69,6 +69,6 @@ El resumen de arriba es un resumen legible por humanos (y no un sustituto) de la
 
 ## Marcas excluidas del alcance de esta licencia
 
-Las marcas "Rediseña.Evaluacion", "Eutika", "Plan IMPULSO Docente", "Universidad Carlos III de Madrid" y "UC3M" — así como sus respectivos logotipos e identidades visuales — **no** forman parte del material licenciado. Su uso requiere autorización específica de sus respectivos titulares.
+Las marcas "Rediseña.Evaluacion" y "Eutika" — así como sus respectivos logotipos e identidades visuales — **no** forman parte del material licenciado. Su uso requiere autorización específica de sus respectivos titulares.
 
-El **UC3M IMPULSO Design System** (paleta, tipografía, componentes visuales institucionales) se usa en esta web en el contexto del pilotaje UC3M. Quien adapte el kit en otra institución deberá sustituirlo por su propio sistema de diseño o por uno neutro.
+El sistema de diseño visual usado en esta web (paleta, tipografía, componentes) procede del **UC3M IMPULSO Design System** y conserva su nombre en la documentación técnica. Quien adapte el kit en otra institución debería sustituirlo por su propio sistema de diseño o por uno neutro.
