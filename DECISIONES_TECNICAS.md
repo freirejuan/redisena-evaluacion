@@ -58,7 +58,6 @@ redisena-evaluacion/
 │       └── panel-plan-operativo.html  (lee XLSX con SheetJS, genera Blueprint + Calendario)
 │
 ├── _headers                     Headers HTTP (caché, seguridad)
-├── _redirects                   Redirecciones y URLs limpias
 └── .gitignore
 ```
 
@@ -233,20 +232,11 @@ Cuando se publique una nueva versión de un asset, se cambia su nombre (e.g. `st
 
 ## 7 · URLs limpias
 
-Archivo `_redirects` en la raíz para que las URLs no terminen en `.html`.
+Cloudflare Pages canonicaliza automáticamente rutas sin extensión: si existe `proceso.html` en la raíz, `/proceso` lo sirve con 200 sin necesidad de `_redirects`. Adicionalmente, un acceso a `/proceso.html` devuelve un 308 hacia `/proceso` (canonicalización a URL limpia).
 
-```
-# URLs limpias
-/proceso        /proceso.html       200
-/sprint-0       /sprint-0.html      200
-/sprint-1       /sprint-1.html      200
-/sprint-2       /sprint-2.html      200
-/kit            /kit.html           200
-/referencia     /referencia.html    200
-/acerca         /acerca.html        200
-```
+Por eso **no se usa** `_redirects` en este proyecto. Una versión inicial del repo lo incluía con reglas de rewrite y provocaba un bucle 308 en producción al interactuar con la canonicalización automática. Se retiró en el segundo despliegue.
 
-El código 200 (no 301) hace rewrite sin cambiar la URL visible. El usuario ve `/proceso`, el servidor devuelve `proceso.html`.
+Si en el futuro se necesitan redirecciones reales (p. ej. cambios de ruta, acortadores), se puede volver a añadir `_redirects` con códigos 301/302/307/308 — evitando duplicar reglas de rewrite que Pages ya resuelve.
 
 ---
 

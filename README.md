@@ -49,14 +49,11 @@ Detalle completo en [DECISIONES_TECNICAS.md](./DECISIONES_TECNICAS.md).
 │
 ├── assets/
 │   ├── css/styles.css           Sistema de Diseño UC3M IMPULSO
-│   └── js/
-│       ├── app.js               Estado, localStorage, interacciones
-│       └── demo-controls.js     Panel de simulación (retirar en producción)
+│   └── js/app.js                Estado, localStorage, interacciones
 │
 ├── downloads/                   Piezas descargables del kit, por sprint
 │
 ├── _headers                     Caché + seguridad (Cloudflare Pages)
-├── _redirects                   URLs limpias sin .html
 └── .gitignore
 ```
 
@@ -77,9 +74,7 @@ npx serve -l 8080 .
 php -S localhost:8080
 ```
 
-Luego visita `http://localhost:8080`. Las URLs limpias (`/proceso`, `/sprint-0`, etc.) **no funcionan en servidores estáticos locales** — ahí hay que usar `/proceso.html`. El rewrite lo hace Cloudflare Pages en producción vía `_redirects`.
-
-Para probar el estado de `localStorage` en distintos momentos del profesor, el panel *Simular estado del profesor* (abajo-derecha) permite saltar entre escenarios. Ese panel se retira antes de publicar (lo controla `demo-controls.js`).
+Luego visita `http://localhost:8080`. En local hay que escribir la URL con extensión (`/proceso.html`); en producción, Cloudflare Pages canonicaliza automáticamente y `/proceso` sirve `proceso.html` (sin necesidad de `_redirects`).
 
 ---
 
