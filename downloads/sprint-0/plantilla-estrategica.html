@@ -1,0 +1,2185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plantilla estratégica v3 · Plantilla · Canvas · Blueprint 0 · Plan IMPULSO UC3M</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --azul-reflex:#171796; --azul-deep:#0F0F6B; --azul-mid:#3A3AB8;
+  --azul-light:#6868D4; --azul-pale:#E8E8F7; --azul-ghost:#F2F2FB;
+  --white:#FFFFFF; --gris-claro:#F7F6F6; --gris-100:#EFEFEF;
+  --gris-200:#E0E0E0; --gris-300:#C4C4C4; --gris-400:#9E9E9E;
+  --gris-500:#757575; --gris-600:#545454; --gris-700:#3A3A3A;
+  --ink:#1A1A1A; --ink-soft:#4A4A4A;
+  --acento-teal:#1A9E7A; --acento-teal-pale:#E6F7F1;
+  --acento-amber:#E8A317; --acento-amber-pale:#FFF7E6;
+  --acento-coral:#E05555; --acento-coral-pale:#FDECEC;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --serif:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'JetBrains Mono','Fira Code',monospace;
+  --text-xs:0.64rem; --text-sm:0.8rem; --text-base:1rem;
+  --text-md:1.125rem; --text-lg:1.25rem; --text-xl:1.563rem;
+  --text-2xl:1.953rem; --text-3xl:2.441rem; --text-4xl:3.052rem;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px;
+  --sp-6:24px; --sp-8:32px; --sp-10:40px; --sp-12:48px; --sp-16:64px;
+  --radius-sm:4px; --radius-md:8px; --radius-lg:12px; --radius-xl:16px; --radius-pill:100px;
+  --shadow-sm:0 1px 3px rgba(23,23,150,0.06);
+  --shadow-md:0 4px 12px rgba(23,23,150,0.08);
+  --shadow-lg:0 8px 30px rgba(23,23,150,0.10);
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;scroll-behavior:smooth;}
+body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-height:1.65;-webkit-font-smoothing:antialiased;}
+
+.nav{position:sticky;top:0;z-index:200;background:rgba(23,23,150,0.97);backdrop-filter:blur(16px);display:flex;align-items:center;gap:6px;padding:10px 24px;flex-wrap:wrap;}
+.nav-brand{font-size:var(--text-xs);font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-right:16px;}
+.nav a{padding:6px 14px;border-radius:var(--radius-pill);border:1px solid rgba(255,255,255,0.12);background:transparent;color:rgba(255,255,255,0.65);font-size:11px;font-weight:500;text-decoration:none;transition:all 0.2s;white-space:nowrap;}
+.nav a:hover{border-color:rgba(255,255,255,0.4);color:#fff;}
+.nav .nav-progress{margin-left:auto;display:flex;align-items:center;gap:10px;color:rgba(255,255,255,0.8);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;}
+.nav .nav-progress-track{width:120px;height:6px;border-radius:var(--radius-pill);background:rgba(255,255,255,0.15);overflow:hidden;}
+.nav .nav-progress-fill{height:100%;background:#fff;border-radius:var(--radius-pill);transition:width 0.3s;}
+
+.doc{max-width:920px;margin:0 auto;padding:0 24px 120px;}
+.section{padding:56px 0 16px;}
+.section + .section{border-top:1px solid var(--gris-200);}
+.section-chip{display:inline-flex;align-items:center;gap:10px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--azul-reflex);font-weight:700;margin-bottom:14px;}
+.section-chip::before{content:'';width:24px;height:2px;background:var(--azul-mid);}
+.section h2{font-family:var(--serif);font-size:var(--text-2xl);font-weight:700;color:var(--ink);letter-spacing:-0.02em;line-height:1.15;margin-bottom:8px;}
+.section .lead{font-family:var(--serif);font-size:var(--text-md);color:var(--gris-600);font-style:italic;line-height:1.7;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--gris-200);max-width:720px;}
+.section p{font-size:var(--text-base);color:var(--gris-700);margin-bottom:var(--sp-4);line-height:1.75;}
+.section strong{color:var(--ink);font-weight:600;}
+.section em{color:var(--gris-600);}
+.section h3{font-family:var(--sans);font-size:var(--text-md);font-weight:700;color:var(--ink);margin:var(--sp-8) 0 var(--sp-3);padding-bottom:6px;border-bottom:2px solid var(--azul-reflex);display:inline-block;}
+.section h4{font-family:var(--sans);font-size:var(--text-base);font-weight:700;color:var(--azul-reflex);margin:var(--sp-5) 0 var(--sp-2);}
+
+.cover{background:linear-gradient(135deg,var(--azul-reflex) 0%,var(--azul-deep) 100%);color:#fff;padding:80px 48px 56px;margin:0 -24px;position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;top:-120px;right:-80px;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,0.04);}
+.cover::after{content:'';position:absolute;bottom:-140px;left:-100px;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,0.03);}
+.cover-inner{position:relative;z-index:1;max-width:640px;}
+.cover .overline{display:flex;align-items:center;gap:14px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.55);font-weight:600;margin-bottom:24px;}
+.cover .overline::before{content:'';width:32px;height:2px;background:rgba(255,255,255,0.3);}
+.cover h1{font-family:var(--serif);font-size:var(--text-4xl);font-weight:700;letter-spacing:-0.025em;line-height:1.08;margin-bottom:16px;}
+.cover h1 em{font-style:normal;color:rgba(255,255,255,0.55);}
+.cover .subtitle{font-family:var(--serif);font-size:var(--text-md);font-style:italic;color:rgba(255,255,255,0.7);line-height:1.6;max-width:560px;margin-bottom:var(--sp-10);}
+.cover-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding-top:var(--sp-10);border-top:1px solid rgba(255,255,255,0.15);}
+.cover-meta .kv-label{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);font-weight:600;margin-bottom:4px;}
+.cover-meta .kv-value{font-size:13px;font-weight:600;color:#fff;line-height:1.4;}
+
+.intro-card{background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-md);padding:var(--sp-8) var(--sp-10);margin-top:-32px;position:relative;z-index:2;margin-bottom:var(--sp-10);}
+.intro-card-title{font-size:var(--text-xs);font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--azul-mid);margin-bottom:var(--sp-4);display:flex;align-items:center;gap:var(--sp-3);}
+.intro-card-title::before{content:'';width:24px;height:2px;background:var(--azul-reflex);}
+.intro-card p{font-size:var(--text-sm);color:var(--gris-700);margin-bottom:var(--sp-3);line-height:1.7;}
+.intro-card p:last-child{margin-bottom:0;}
+.intro-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-4);margin-top:var(--sp-5);padding-top:var(--sp-5);border-top:1px solid var(--gris-100);}
+.intro-stat{text-align:left;}
+.intro-stat-value{font-family:var(--serif);font-size:var(--text-xl);font-weight:700;color:var(--azul-reflex);line-height:1;}
+.intro-stat-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gris-500);font-weight:600;margin-top:4px;}
+
+.callout{border-radius:var(--radius-md);padding:18px 22px;margin:var(--sp-5) 0;font-size:var(--text-sm);line-height:1.7;display:flex;gap:14px;align-items:flex-start;}
+.callout-icon{font-size:14px;flex-shrink:0;margin-top:1px;font-weight:700;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-family:var(--serif);}
+.callout.info{background:var(--azul-ghost);border-left:3px solid var(--azul-reflex);color:var(--azul-deep);}
+.callout.info .callout-icon{background:var(--azul-reflex);}
+.callout.success{background:var(--acento-teal-pale);border-left:3px solid var(--acento-teal);color:#0D5C47;}
+.callout.success .callout-icon{background:var(--acento-teal);}
+.callout.warning{background:var(--acento-amber-pale);border-left:3px solid var(--acento-amber);color:#7A5200;}
+.callout.warning .callout-icon{background:var(--acento-amber);}
+.callout.danger{background:var(--acento-coral-pale);border-left:3px solid var(--acento-coral);color:#8A2A2A;}
+.callout.danger .callout-icon{background:var(--acento-coral);}
+.callout strong{color:inherit;font-weight:700;}
+.callout p{margin:0;color:inherit;font-size:inherit;}
+.callout p + p{margin-top:6px;}
+
+.signpost{background:var(--azul-ghost);border-left:3px solid var(--azul-mid);border-radius:var(--radius-sm);padding:14px 18px;margin:var(--sp-6) 0 var(--sp-4);font-family:var(--serif);font-size:var(--text-sm);font-style:italic;color:var(--azul-deep);line-height:1.65;}
+.signpost strong{font-family:var(--sans);font-style:normal;letter-spacing:0.04em;text-transform:uppercase;font-size:var(--text-xs);color:var(--azul-reflex);display:block;margin-bottom:4px;}
+.section-close{background:var(--white);border:1px solid var(--gris-200);border-radius:var(--radius-sm);padding:12px 18px;margin:var(--sp-6) 0 var(--sp-4);font-size:var(--text-xs);color:var(--gris-600);line-height:1.6;display:flex;gap:10px;align-items:center;}
+.section-close::before{content:'✓';display:inline-flex;width:20px;height:20px;border-radius:50%;background:var(--acento-teal);color:#fff;align-items:center;justify-content:center;font-weight:700;font-size:11px;flex-shrink:0;}
+
+.badge{display:inline-flex;align-items:center;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 12px;border-radius:var(--radius-pill);margin-right:6px;}
+.badge.primary{background:var(--azul-pale);color:var(--azul-reflex);}
+.badge.teal{background:var(--acento-teal-pale);color:var(--acento-teal);}
+.badge.amber{background:var(--acento-amber-pale);color:#7A5200;}
+.badge.coral{background:var(--acento-coral-pale);color:#8A2A2A;}
+.badge.neutral{background:var(--gris-100);color:var(--gris-600);}
+
+/* FORM COMPONENTS */
+.field{display:flex;flex-direction:column;margin-bottom:var(--sp-4);}
+.field > label{font-size:var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--azul-reflex);margin-bottom:6px;}
+.field-hint{font-size:var(--text-xs);color:var(--gris-500);margin-top:4px;font-style:italic;line-height:1.5;}
+.field input[type=text],.field input[type=number],.field input[type=email],.field select,.field textarea{width:100%;padding:10px 14px;border:1.5px solid var(--gris-200);border-radius:var(--radius-sm);font-family:var(--sans);font-size:var(--text-sm);color:var(--ink);background:var(--white);transition:border-color 0.2s,box-shadow 0.2s;}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--azul-reflex);box-shadow:0 0 0 3px rgba(23,23,150,0.1);}
+.field textarea{min-height:88px;resize:vertical;line-height:1.6;font-family:var(--sans);}
+.field-grid{display:grid;gap:var(--sp-4);}
+.field-grid.cols-2{grid-template-columns:1fr 1fr;}
+.field-grid.cols-3{grid-template-columns:1fr 1fr 1fr;}
+.field-grid.cols-4{grid-template-columns:repeat(4,1fr);}
+
+.pill-group{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
+.pill-group input[type=radio]{position:absolute;opacity:0;pointer-events:none;}
+.pill-group label{display:inline-flex;align-items:center;padding:8px 16px;border:1.5px solid var(--gris-200);background:var(--white);border-radius:var(--radius-pill);font-size:var(--text-xs);font-weight:600;color:var(--gris-600);cursor:pointer;transition:all 0.2s;letter-spacing:0.04em;}
+.pill-group label:hover{border-color:var(--azul-mid);color:var(--azul-reflex);}
+.pill-group input[type=radio]:checked + label{background:var(--azul-reflex);color:#fff;border-color:var(--azul-reflex);}
+.pill-group.teal input[type=radio]:checked + label{background:var(--acento-teal);border-color:var(--acento-teal);}
+.pill-group.amber input[type=radio]:checked + label{background:var(--acento-amber);border-color:var(--acento-amber);}
+.pill-group.coral input[type=radio]:checked + label{background:var(--acento-coral);border-color:var(--acento-coral);}
+
+.slider-row{display:grid;grid-template-columns:180px 1fr 60px;gap:var(--sp-3);align-items:center;padding:6px 0;}
+.slider-row label{font-size:var(--text-sm);color:var(--gris-700);font-weight:500;}
+.slider-row label strong{color:var(--ink);font-weight:700;display:block;font-size:var(--text-xs);letter-spacing:0.08em;text-transform:uppercase;color:var(--azul-reflex);margin-bottom:2px;}
+.slider-row input[type=range]{width:100%;accent-color:var(--azul-reflex);}
+.slider-row .slider-value{font-family:var(--mono);font-size:var(--text-sm);font-weight:600;color:var(--azul-reflex);text-align:right;}
+
+.checkbox-group{display:grid;gap:var(--sp-2);margin-top:var(--sp-2);}
+.checkbox-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border:1.5px solid var(--gris-200);border-radius:var(--radius-sm);background:var(--white);cursor:pointer;transition:all 0.2s;}
+.checkbox-item:hover{border-color:var(--azul-mid);}
+.checkbox-item input[type=checkbox],.checkbox-item input[type=radio]{flex-shrink:0;margin-top:2px;width:16px;height:16px;accent-color:var(--azul-reflex);cursor:pointer;}
+.checkbox-item-body{flex:1;}
+.checkbox-item-title{font-size:var(--text-sm);font-weight:600;color:var(--ink);line-height:1.4;}
+.checkbox-item-hint{font-size:var(--text-xs);color:var(--gris-500);margin-top:2px;line-height:1.5;}
+.checkbox-item:has(input:checked){background:var(--azul-ghost);border-color:var(--azul-reflex);}
+
+/* EDITABLE TABLES */
+.table-wrap{background:var(--white);border-radius:var(--radius-md);box-shadow:var(--shadow-sm);overflow:hidden;margin:var(--sp-5) 0;}
+.tbl{width:100%;border-collapse:collapse;font-size:var(--text-sm);table-layout:fixed;}
+.tbl th{background:var(--azul-reflex);color:#fff;padding:12px 16px;text-align:left;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;}
+.tbl td{padding:10px 14px;border-bottom:1px solid var(--gris-100);color:var(--gris-700);vertical-align:top;line-height:1.6;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl td input,.tbl td select,.tbl td textarea{width:100%;padding:6px 10px;border:1px solid var(--gris-200);border-radius:var(--radius-sm);font-family:var(--sans);font-size:var(--text-xs);background:var(--gris-claro);transition:all 0.2s;}
+.tbl td input:focus,.tbl td select:focus,.tbl td textarea:focus{outline:none;border-color:var(--azul-reflex);background:var(--white);box-shadow:0 0 0 2px rgba(23,23,150,0.08);}
+.tbl td textarea{min-height:52px;resize:vertical;line-height:1.5;}
+.row-actions{display:flex;gap:6px;align-items:center;justify-content:flex-end;}
+.btn-row-remove{background:transparent;border:1px solid var(--gris-200);color:var(--gris-500);padding:4px 10px;border-radius:var(--radius-sm);font-size:11px;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.btn-row-remove:hover{border-color:var(--acento-coral);color:var(--acento-coral);background:var(--acento-coral-pale);}
+.btn-add-row{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1.5px dashed var(--azul-mid);background:transparent;color:var(--azul-reflex);font-size:var(--text-xs);font-weight:600;letter-spacing:0.04em;border-radius:var(--radius-sm);cursor:pointer;transition:all 0.2s;margin-top:8px;}
+.btn-add-row:hover{background:var(--azul-ghost);border-style:solid;}
+
+/* DECISIONES BLOCKS (D1, D2, D3, D4) */
+.decision-block{background:var(--white);border-radius:var(--radius-lg);padding:var(--sp-6) var(--sp-8);margin:var(--sp-6) 0;box-shadow:var(--shadow-sm);position:relative;overflow:hidden;}
+.decision-block::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--azul-reflex);}
+.decision-header{display:grid;grid-template-columns:auto 1fr;gap:var(--sp-6);align-items:center;margin-bottom:var(--sp-5);padding-bottom:var(--sp-4);border-bottom:1px solid var(--gris-100);}
+.decision-num{font-family:var(--serif);font-size:var(--text-3xl);font-weight:700;color:var(--azul-pale);line-height:1;width:54px;text-align:center;}
+.decision-title h4{font-family:var(--serif);font-size:var(--text-lg);color:var(--ink);margin-bottom:4px;font-weight:600;}
+.decision-title p{font-size:var(--text-xs);color:var(--gris-500);margin:0;line-height:1.5;}
+
+/* TOUCHPOINT CARDS (acordeón) */
+.tp-list{display:flex;flex-direction:column;gap:var(--sp-4);margin:var(--sp-5) 0;}
+.tp-card{background:var(--white);border:1.5px solid var(--gris-200);border-radius:var(--radius-lg);overflow:hidden;transition:all 0.2s;}
+.tp-card:focus-within{border-color:var(--azul-mid);box-shadow:var(--shadow-sm);}
+.tp-card.open{border-color:var(--azul-reflex);}
+.tp-head{display:grid;grid-template-columns:auto 1fr auto auto;gap:var(--sp-3);align-items:center;padding:var(--sp-4) var(--sp-5);background:var(--gris-claro);border-bottom:1px solid var(--gris-200);}
+.tp-card.open .tp-head{background:var(--azul-ghost);}
+.tp-code{font-family:var(--mono);font-size:var(--text-xs);font-weight:700;color:var(--azul-reflex);background:var(--azul-pale);padding:4px 10px;border-radius:var(--radius-sm);letter-spacing:0.06em;}
+.tp-head .tp-nombre{border:1px solid var(--gris-200);border-radius:var(--radius-sm);padding:8px 12px;font-size:var(--text-sm);font-weight:500;background:var(--white);}
+.tp-head .tp-nombre:focus{outline:none;border-color:var(--azul-reflex);box-shadow:0 0 0 2px rgba(23,23,150,0.1);}
+.tp-head .tp-toggle{background:transparent;border:1px solid var(--gris-200);color:var(--gris-600);width:32px;height:32px;border-radius:var(--radius-sm);cursor:pointer;font-size:16px;display:inline-flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.tp-head .tp-toggle:hover{border-color:var(--azul-mid);color:var(--azul-reflex);}
+.tp-head .tp-remove{background:transparent;border:1px solid var(--gris-200);color:var(--gris-500);padding:4px 10px;border-radius:var(--radius-sm);font-size:11px;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.tp-head .tp-remove:hover{border-color:var(--acento-coral);color:var(--acento-coral);background:var(--acento-coral-pale);}
+.tp-meta{display:grid;grid-template-columns:auto 1fr 1fr;gap:var(--sp-4);padding:var(--sp-4) var(--sp-5);border-bottom:1px solid var(--gris-100);background:var(--white);align-items:end;}
+.tp-meta .field{margin-bottom:0;min-width:0;}
+.tp-meta input[type=text]{width:100%;padding:9px 12px;font-size:var(--text-sm);}
+.tp-body{padding:var(--sp-5) var(--sp-6) var(--sp-6);display:none;}
+.tp-card.open .tp-body{display:block;}
+.tp-dim{border:1px solid var(--gris-200);border-radius:var(--radius-sm);padding:var(--sp-4) var(--sp-5);margin-bottom:var(--sp-4);background:var(--white);}
+.tp-dim-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.tp-dim-code{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--azul-reflex);background:var(--azul-pale);padding:3px 8px;border-radius:var(--radius-sm);letter-spacing:0.06em;}
+.tp-dim-title{font-size:var(--text-sm);font-weight:600;color:var(--ink);}
+.tp-dim-hint{font-size:var(--text-xs);color:var(--gris-500);font-style:italic;line-height:1.5;margin-bottom:10px;}
+.tp-dim textarea{display:block;width:100%;box-sizing:border-box;min-height:64px;font-size:var(--text-sm);padding:10px 14px;border:1.5px solid var(--gris-200);border-radius:var(--radius-sm);font-family:var(--sans);color:var(--ink);background:var(--white);line-height:1.55;resize:vertical;transition:border-color 0.2s,box-shadow 0.2s;}
+.tp-dim textarea:focus{outline:none;border-color:var(--azul-reflex);box-shadow:0 0 0 3px rgba(23,23,150,0.1);}
+.tp-dim .pill-group{gap:6px;}
+.tp-dim .pill-group label{padding:6px 14px;font-size:11px;}
+.tp-add{display:flex;width:fit-content;align-items:center;gap:6px;padding:12px 20px;margin:var(--sp-2) 0 var(--sp-10);border:1.5px dashed var(--azul-mid);background:transparent;color:var(--azul-reflex);font-size:var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border-radius:var(--radius-sm);cursor:pointer;transition:all 0.2s;}
+.tp-add:hover{background:var(--azul-ghost);border-style:solid;}
+.tp-empty{padding:var(--sp-8);text-align:center;color:var(--gris-500);font-style:italic;font-size:var(--text-sm);border:1.5px dashed var(--gris-200);border-radius:var(--radius-md);}
+
+/* SEMAFORO ECONOMICO */
+.semaforo-wrap{background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);padding:var(--sp-6) var(--sp-8);margin:var(--sp-6) 0;display:grid;grid-template-columns:auto 1fr auto;gap:var(--sp-6);align-items:center;}
+.semaforo-light{width:64px;height:64px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:var(--text-xl);color:#fff;flex-shrink:0;}
+.semaforo-light.verde{background:var(--acento-teal);box-shadow:0 0 0 4px var(--acento-teal-pale);}
+.semaforo-light.ambar{background:var(--acento-amber);box-shadow:0 0 0 4px var(--acento-amber-pale);}
+.semaforo-light.rojo{background:var(--acento-coral);box-shadow:0 0 0 4px var(--acento-coral-pale);}
+.semaforo-light.gris{background:var(--gris-300);box-shadow:0 0 0 4px var(--gris-100);}
+.semaforo-body .semaforo-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--azul-reflex);font-weight:700;margin-bottom:4px;}
+.semaforo-body .semaforo-title{font-family:var(--serif);font-size:var(--text-lg);color:var(--ink);font-weight:600;margin-bottom:2px;}
+.semaforo-body .semaforo-desc{font-size:var(--text-xs);color:var(--gris-600);line-height:1.6;}
+.semaforo-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-4);text-align:center;min-width:240px;}
+.semaforo-stat-value{font-family:var(--serif);font-size:var(--text-lg);font-weight:700;color:var(--azul-reflex);line-height:1;}
+.semaforo-stat-label{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gris-500);font-weight:600;margin-top:4px;}
+
+/* SUMMARY BLOCK */
+.summary-wrap{background:var(--white);border:2px solid var(--azul-reflex);border-radius:var(--radius-lg);padding:var(--sp-8) var(--sp-10);margin:var(--sp-6) 0;}
+.summary-empty{text-align:center;color:var(--gris-500);padding:var(--sp-10) 0;font-style:italic;font-size:var(--text-sm);}
+.summary-row{display:grid;grid-template-columns:160px 1fr;gap:var(--sp-4);padding:var(--sp-3) 0;border-bottom:1px solid var(--gris-100);align-items:start;}
+.summary-row:last-child{border-bottom:none;}
+.summary-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--azul-reflex);padding-top:2px;}
+.summary-value{font-size:var(--text-sm);color:var(--ink);line-height:1.65;}
+.summary-value em{color:var(--gris-500);font-style:italic;}
+.summary-group{border-top:2px solid var(--azul-reflex);padding-top:var(--sp-4);margin-top:var(--sp-6);}
+.summary-group-title{font-family:var(--serif);font-size:var(--text-lg);font-weight:700;color:var(--ink);margin-bottom:var(--sp-4);}
+.summary-group:first-child{border-top:none;padding-top:0;margin-top:0;}
+
+/* ACTION BAR */
+.action-bar{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--gris-200);box-shadow:0 -4px 16px rgba(23,23,150,0.06);padding:14px 32px;display:flex;justify-content:space-between;align-items:center;gap:var(--sp-4);z-index:100;}
+.action-bar .save-state{font-size:var(--text-xs);color:var(--gris-500);display:flex;align-items:center;gap:6px;}
+.action-bar .save-state.saved::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--acento-teal);}
+.action-bar .save-state.unsaved::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--acento-amber);}
+.action-bar .btn-group{display:flex;gap:8px;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:var(--radius-sm);font-family:var(--sans);font-size:var(--text-xs);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;border:1.5px solid transparent;transition:all 0.2s;text-decoration:none;}
+.btn.primary{background:var(--azul-reflex);color:#fff;border-color:var(--azul-reflex);}
+.btn.primary:hover{background:var(--azul-deep);border-color:var(--azul-deep);}
+.btn.outline{background:transparent;color:var(--azul-reflex);border-color:var(--azul-reflex);}
+.btn.outline:hover{background:var(--azul-ghost);}
+.btn.ghost{background:transparent;color:var(--gris-600);border-color:var(--gris-200);}
+.btn.ghost:hover{color:var(--azul-reflex);border-color:var(--azul-mid);}
+.btn.danger{background:transparent;color:var(--acento-coral);border-color:var(--acento-coral);}
+.btn.danger:hover{background:var(--acento-coral-pale);}
+
+.inst-footer{margin-top:var(--sp-16);padding:var(--sp-8) var(--sp-6);border-top:3px solid var(--azul-reflex);background:var(--white);border-radius:var(--radius-md);display:grid;grid-template-columns:1fr auto;gap:var(--sp-6);align-items:center;}
+.inst-footer .footer-brand{font-family:var(--serif);font-size:var(--text-md);font-weight:600;color:var(--azul-reflex);}
+.inst-footer .footer-meta{font-size:var(--text-xs);color:var(--gris-500);letter-spacing:0.08em;text-transform:uppercase;text-align:right;}
+
+/* COMBO SUGGESTION CARDS */
+.combo-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--sp-3);margin:var(--sp-4) 0;}
+.combo-card{background:var(--white);border:1.5px solid var(--gris-200);border-radius:var(--radius-md);padding:var(--sp-4);cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;gap:8px;}
+.combo-card:hover{border-color:var(--azul-mid);}
+.combo-card.selected{border-color:var(--azul-reflex);background:var(--azul-ghost);box-shadow:var(--shadow-sm);}
+.combo-card input[type=checkbox]{display:none;}
+.combo-card .combo-code{font-family:var(--mono);font-size:var(--text-xs);font-weight:700;color:var(--azul-reflex);letter-spacing:0.08em;}
+.combo-card .combo-name{font-size:var(--text-sm);font-weight:600;color:var(--ink);line-height:1.3;}
+.combo-card .combo-signal{font-size:var(--text-xs);color:var(--gris-600);line-height:1.5;}
+
+@media (max-width:768px){
+  .cover{padding:56px 28px 40px;}
+  .cover h1{font-size:var(--text-3xl);}
+  .cover-meta{grid-template-columns:repeat(2,1fr);}
+  .intro-stats{grid-template-columns:repeat(2,1fr);}
+  .field-grid.cols-2,.field-grid.cols-3,.field-grid.cols-4{grid-template-columns:1fr;}
+  .decision-header{grid-template-columns:1fr;gap:var(--sp-3);}
+  .slider-row{grid-template-columns:140px 1fr 50px;}
+  .action-bar{flex-direction:column;gap:10px;padding:12px 20px;}
+  .summary-row{grid-template-columns:1fr;gap:4px;}
+  .tp-head{grid-template-columns:auto 1fr;gap:var(--sp-2);}
+  .tp-head .tp-toggle,.tp-head .tp-remove{grid-column:auto;}
+  .tp-meta{grid-template-columns:1fr;}
+  .semaforo-wrap{grid-template-columns:1fr;text-align:center;}
+  .semaforo-stats{margin:0 auto;}
+}
+@media print{
+  body{background:#fff;}
+  .nav,.action-bar,.btn-add-row,.btn-row-remove,.row-actions,.tp-add,.tp-head .tp-toggle,.tp-head .tp-remove{display:none;}
+  .section{page-break-inside:avoid;border-top:none;padding:40px 0 16px;}
+  .cover{margin:0;page-break-after:always;}
+  .section h2{page-break-after:avoid;}
+  .decision-block,.tp-card,.summary-wrap,.callout,.semaforo-wrap{page-break-inside:avoid;}
+  .tp-card .tp-body{display:block !important;}
+  .field input,.field select,.field textarea,.tbl td input,.tbl td textarea,.tbl td select{border:none;background:transparent;padding:2px 0;font-size:var(--text-sm);color:var(--ink);}
+  .pill-group label{border-color:var(--gris-300)!important;background:transparent!important;color:var(--gris-500)!important;}
+  .pill-group input[type=radio]:checked + label{background:var(--azul-reflex)!important;color:#fff!important;border-color:var(--azul-reflex)!important;}
+  .combo-card.selected{background:var(--azul-ghost)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .semaforo-light{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .doc{padding-bottom:40px;}
+}
+
+/* ====================================================================== */
+/* ========== TAB SYSTEM · Plantilla · Canvas · Blueprint 0 ============= */
+/* ====================================================================== */
+.tabs-bar{
+  position:sticky;top:0;z-index:201;
+  background:linear-gradient(135deg,#0F0F6B 0%,#171796 100%);
+  display:flex;align-items:stretch;gap:0;padding:0 24px;
+  box-shadow:0 2px 12px rgba(15,15,107,.3);
+}
+.tabs-brand{
+  color:rgba(255,255,255,.95);
+  font-family:var(--serif);font-size:var(--text-sm);font-weight:700;
+  letter-spacing:.02em;padding:14px 20px 14px 0;
+  display:flex;align-items:center;border-right:1px solid rgba(255,255,255,.15);
+  margin-right:20px;
+}
+.tabs-brand .brand-kicker{
+  font-family:var(--sans);font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  font-weight:600;opacity:.65;display:block;line-height:1;margin-bottom:3px;
+}
+.tab-btn{
+  background:transparent;border:none;color:rgba(255,255,255,.65);
+  font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.02em;
+  padding:14px 22px;cursor:pointer;
+  border-bottom:3px solid transparent;transition:all .18s ease;
+  display:flex;align-items:center;gap:8px;
+}
+.tab-btn:hover{color:#fff;background:rgba(255,255,255,.06);}
+.tab-btn.active{
+  color:#fff;border-bottom-color:#E8A317;
+  background:rgba(255,255,255,.08);
+}
+.tab-btn .tab-num{
+  font-family:var(--mono);font-size:10px;font-weight:700;
+  background:rgba(255,255,255,.15);padding:2px 7px;border-radius:10px;
+  letter-spacing:.04em;
+}
+.tab-btn.active .tab-num{background:#E8A317;color:#0F0F6B;}
+.tabs-actions{margin-left:auto;display:flex;align-items:center;gap:8px;padding:10px 0;}
+.tabs-actions button{
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  color:#fff;font-family:var(--sans);font-size:11px;font-weight:600;
+  padding:6px 12px;border-radius:var(--radius-pill);cursor:pointer;
+  transition:all .15s;letter-spacing:.02em;
+}
+.tabs-actions button:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.35);}
+
+.view{display:none;}
+.view.active{display:block;}
+
+/* Sub-nav (sólo visible en vista Plantilla) */
+.view-canvas .nav,.view-blueprint .nav{display:none;}
+
+/* Banner de vista incompleta */
+.view-banner{
+  max-width:1360px;margin:var(--sp-6) auto 0;padding:16px 24px;
+  background:#FBF0D9;border:1px solid #E8A317;border-radius:var(--radius-md);
+  color:#6A4E0C;font-size:var(--text-sm);line-height:1.55;
+  display:flex;align-items:flex-start;gap:12px;
+}
+.view-banner.hidden{display:none;}
+.view-banner::before{content:'◆';color:#E8A317;font-size:16px;margin-top:1px;}
+.view-banner strong{color:#3A2800;font-weight:600;}
+.view-banner .banner-link{
+  margin-left:auto;background:#0F0F6B;color:#fff;text-decoration:none;
+  padding:4px 12px;border-radius:var(--radius-pill);font-size:11px;font-weight:600;
+  white-space:nowrap;cursor:pointer;border:none;font-family:var(--sans);
+}
+.view-banner .banner-link:hover{background:#171796;}
+
+/* ====================================================================== */
+/* ========== VISTA CANVAS · estilos del Canvas (scoped) ================ */
+/* ====================================================================== */
+.view-canvas{background:var(--gris-claro);padding:var(--sp-6) var(--sp-5) var(--sp-10);min-height:100vh;}
+.view-canvas .canvas{
+  max-width:1360px;margin:0 auto;background:#fff;
+  border-radius:var(--radius-lg);box-shadow:var(--shadow-md);
+  border:1px solid var(--gris-200);overflow:hidden;
+}
+.view-canvas .canvas-head{
+  background:linear-gradient(135deg,var(--azul-deep) 0%,var(--azul-reflex) 55%,var(--azul-mid) 100%);
+  color:#fff;padding:var(--sp-6) var(--sp-8);
+  display:grid;grid-template-columns:auto 1fr auto;gap:var(--sp-8);align-items:center;
+}
+.view-canvas .kit-tag{
+  font-size:var(--text-xs);letter-spacing:.14em;text-transform:uppercase;
+  opacity:.72;margin-bottom:4px;font-weight:600;
+}
+.view-canvas .canvas-head h1{
+  font-family:var(--serif);font-size:var(--text-2xl);
+  font-weight:700;letter-spacing:-.01em;line-height:1.15;margin-bottom:2px;color:#fff;
+}
+.view-canvas .canvas-head .subtitle{font-size:var(--text-sm);opacity:.82;font-style:italic;}
+.view-canvas .identity-block{text-align:right;}
+.view-canvas .identity-block .asig-code{font-size:var(--text-xs);letter-spacing:.1em;opacity:.72;margin-bottom:2px;}
+.view-canvas .identity-block .asig-name{
+  font-family:var(--serif);font-size:var(--text-lg);font-weight:700;line-height:1.2;color:#fff;
+}
+.view-canvas .identity-block .asig-titulacion{font-size:var(--text-xs);opacity:.8;margin-top:2px;}
+.view-canvas .identity-meta{
+  display:flex;gap:var(--sp-4);padding:var(--sp-2) 0;
+  border-left:1px solid rgba(255,255,255,.25);padding-left:var(--sp-6);
+}
+.view-canvas .identity-meta .m{text-align:left;}
+.view-canvas .identity-meta .m-val{font-family:var(--serif);font-size:var(--text-xl);font-weight:700;line-height:1;}
+.view-canvas .identity-meta .m-lab{font-size:10px;letter-spacing:.08em;text-transform:uppercase;opacity:.7;margin-top:3px;}
+
+.view-canvas .canvas-body{padding:var(--sp-6) var(--sp-8);}
+.view-canvas .row{display:grid;gap:var(--sp-5);margin-bottom:var(--sp-5);}
+.view-canvas .row-1{grid-template-columns:3.3fr 4.8fr 3.3fr;}
+.view-canvas .row-3{grid-template-columns:2fr 2fr 1.6fr;}
+.view-canvas .panel{
+  background:var(--gris-claro);border:1px solid var(--gris-200);
+  border-radius:var(--radius-md);padding:var(--sp-5);
+  display:flex;flex-direction:column;
+}
+.view-canvas .panel-title{
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;
+  color:var(--gris-600);margin-bottom:var(--sp-3);
+  display:flex;align-items:center;gap:6px;
+}
+.view-canvas .panel-title .dot{width:8px;height:8px;border-radius:50%;background:var(--azul-reflex);}
+.view-canvas .panel-title .hint{
+  margin-left:auto;font-size:10px;letter-spacing:0;text-transform:none;
+  font-weight:400;color:var(--gris-500);font-style:italic;
+}
+.view-canvas .arq-axis{
+  display:grid;grid-template-columns:68px 1fr;gap:var(--sp-3);
+  margin-bottom:var(--sp-3);font-size:var(--text-xs);
+}
+.view-canvas .arq-axis .label{color:var(--gris-700);font-weight:600;padding-top:6px;font-size:10px;}
+.view-canvas .arq-track{
+  position:relative;height:22px;background:var(--gris-200);border-radius:11px;
+  display:flex;align-items:center;
+}
+.view-canvas .arq-track .end{
+  position:absolute;top:50%;transform:translateY(-50%);
+  font-size:9px;color:var(--gris-600);white-space:nowrap;padding:0 8px;
+  font-weight:500;letter-spacing:.04em;
+}
+.view-canvas .arq-track .end.left{left:6px;}
+.view-canvas .arq-track .end.right{right:6px;}
+.view-canvas .arq-marker{
+  width:22px;height:22px;border-radius:50%;background:var(--azul-reflex);
+  box-shadow:0 0 0 4px var(--azul-pale),var(--shadow-sm);
+  position:absolute;top:0;transform:translateX(-50%);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:10px;font-weight:700;
+}
+.view-canvas .arq-summary{
+  background:var(--azul-pale);border-left:3px solid var(--azul-reflex);
+  padding:var(--sp-3) var(--sp-4);border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  margin-top:var(--sp-3);
+}
+.view-canvas .arq-summary .arq-kicker{
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--azul-deep);
+  font-weight:700;margin-bottom:4px;
+}
+.view-canvas .arq-summary .arq-text{font-size:var(--text-sm);color:var(--ink);line-height:1.45;font-weight:500;}
+.view-canvas .hoy-block{margin-top:auto;padding-top:var(--sp-4);}
+.view-canvas .hoy-row{
+  display:grid;grid-template-columns:80px 1fr;gap:var(--sp-3);
+  padding:var(--sp-2) 0;border-top:1px solid var(--gris-200);
+  font-size:var(--text-sm);
+}
+.view-canvas .hoy-row:first-of-type{border-top:0;}
+.view-canvas .hoy-row .hoy-label{
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gris-600);font-weight:700;padding-top:3px;
+}
+.view-canvas .hoy-row.descripcion .hoy-label{color:var(--azul-reflex);}
+.view-canvas .hoy-row.funciona .hoy-label{color:var(--acento-teal);}
+.view-canvas .hoy-row.fricciona .hoy-label{color:var(--acento-coral);}
+.view-canvas .hoy-row .hoy-text{color:var(--ink);line-height:1.45;font-size:var(--text-sm);}
+.view-canvas .timeline-panel{
+  background:linear-gradient(180deg,#FFFFFF 0%,var(--gris-claro) 100%);
+  border:1px solid var(--gris-200);padding:var(--sp-6) var(--sp-5);
+}
+.view-canvas .timeline-track{position:relative;margin:var(--sp-6) 0 var(--sp-4);padding:0 var(--sp-2);}
+.view-canvas .timeline-bar{
+  height:4px;background:linear-gradient(90deg,var(--gris-300) 0%,var(--azul-reflex) 50%,var(--gris-300) 100%);
+  border-radius:2px;
+}
+.view-canvas .timeline-steps{display:flex;justify-content:space-between;margin-top:-14px;gap:var(--sp-3);}
+.view-canvas .timeline-step{flex:1;display:flex;flex-direction:column;align-items:center;max-width:260px;}
+.view-canvas .step-dot{
+  width:32px;height:32px;border-radius:50%;background:#fff;
+  border:3px solid var(--azul-reflex);box-shadow:var(--shadow-sm);
+  display:flex;align-items:center;justify-content:center;
+  font-size:var(--text-xs);font-weight:700;color:var(--azul-deep);
+  z-index:2;
+}
+.view-canvas .step-card{
+  margin-top:var(--sp-3);background:#fff;
+  border:1px solid var(--gris-200);border-radius:var(--radius-md);
+  padding:var(--sp-3) var(--sp-4);width:100%;box-shadow:var(--shadow-sm);
+}
+.view-canvas .step-card .step-title{
+  font-family:var(--serif);font-size:var(--text-base);font-weight:700;
+  color:var(--azul-deep);line-height:1.2;margin-bottom:4px;
+}
+.view-canvas .step-card .step-when{
+  font-size:var(--text-xs);color:var(--gris-600);
+  margin-bottom:var(--sp-2);display:flex;gap:var(--sp-2);align-items:center;flex-wrap:wrap;
+}
+.view-canvas .natur-badge{
+  display:inline-block;font-size:9px;letter-spacing:.08em;text-transform:uppercase;
+  font-weight:700;padding:2px 8px;border-radius:10px;
+}
+.view-canvas .natur-badge.puntual{background:var(--acento-teal-pale);color:var(--acento-teal);}
+.view-canvas .natur-badge.continuo{background:var(--acento-amber-pale);color:#8C6410;}
+.view-canvas .step-card .step-evidencia{
+  font-size:var(--text-xs);color:var(--gris-700);line-height:1.4;
+  padding-top:var(--sp-2);border-top:1px dashed var(--gris-300);
+}
+.view-canvas .step-card .step-evidencia strong{color:var(--azul-reflex);font-weight:600;}
+.view-canvas .dims-strip{
+  display:grid;grid-template-columns:auto 1fr;gap:var(--sp-4);align-items:center;
+  padding:var(--sp-4);background:var(--azul-pale);
+  border-radius:var(--radius-md);margin-top:var(--sp-4);
+}
+.view-canvas .dims-strip .strip-label{
+  font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  font-weight:700;color:var(--azul-deep);
+}
+.view-canvas .dims-list{display:flex;gap:var(--sp-2);flex-wrap:wrap;}
+.view-canvas .dim-chip{
+  background:#fff;border:1px solid var(--azul-mid);
+  color:var(--azul-deep);padding:4px 10px;border-radius:var(--radius-sm);
+  font-size:var(--text-xs);font-weight:600;
+  display:inline-flex;align-items:center;gap:5px;
+}
+.view-canvas .dim-chip .dim-code{
+  font-family:var(--mono);background:var(--azul-deep);color:#fff;
+  padding:1px 5px;border-radius:2px;font-size:10px;
+}
+.view-canvas .dim-chip.off{border-color:var(--gris-300);color:var(--gris-500);background:var(--gris-100);}
+.view-canvas .dim-chip.off .dim-code{background:var(--gris-400);}
+.view-canvas .dim-chip.later{border-color:var(--acento-amber);color:#8C6410;background:var(--acento-amber-pale);}
+.view-canvas .dim-chip.later .dim-code{background:var(--acento-amber);}
+.view-canvas .dec-capsula{
+  background:#fff;border:1px solid var(--gris-200);
+  border-radius:var(--radius-md);padding:var(--sp-3) var(--sp-4);
+  margin-bottom:var(--sp-3);position:relative;
+}
+.view-canvas .dec-capsula::before{
+  content:'';position:absolute;left:0;top:var(--sp-3);bottom:var(--sp-3);
+  width:3px;border-radius:2px;background:var(--azul-reflex);
+}
+.view-canvas .dec-capsula.d2::before{background:var(--acento-teal);}
+.view-canvas .dec-capsula.d3::before{background:var(--acento-amber);}
+.view-canvas .dec-capsula.d4::before{background:var(--acento-coral);}
+.view-canvas .dec-head{display:flex;align-items:baseline;gap:var(--sp-2);margin-bottom:4px;}
+.view-canvas .dec-code{
+  font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.04em;
+  background:var(--azul-deep);color:#fff;padding:2px 6px;border-radius:3px;
+}
+.view-canvas .dec-capsula.d2 .dec-code{background:var(--acento-teal);}
+.view-canvas .dec-capsula.d3 .dec-code{background:#8C6410;}
+.view-canvas .dec-capsula.d4 .dec-code{background:var(--acento-coral);}
+.view-canvas .dec-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gris-600);font-weight:700;}
+.view-canvas .dec-answer{
+  font-family:var(--serif);font-size:var(--text-base);
+  color:var(--ink);font-weight:700;line-height:1.3;margin-bottom:4px;
+}
+.view-canvas .dec-note{font-size:var(--text-xs);color:var(--gris-600);line-height:1.45;font-style:italic;}
+.view-canvas .semaforo-panel{background:#fff;border:2px solid var(--gris-200);border-radius:var(--radius-md);padding:var(--sp-5);}
+.view-canvas .semaforo-head{display:flex;align-items:center;gap:var(--sp-3);margin-bottom:var(--sp-3);}
+.view-canvas .sem-light{
+  width:52px;height:52px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;font-weight:700;color:#fff;
+  box-shadow:inset 0 -4px 8px rgba(0,0,0,.12),0 4px 14px rgba(26,158,122,.3);
+}
+.view-canvas .sem-light.verde{background:var(--acento-teal);}
+.view-canvas .sem-light.ambar{background:var(--acento-amber);box-shadow:inset 0 -4px 8px rgba(0,0,0,.12),0 4px 14px rgba(232,163,23,.3);}
+.view-canvas .sem-light.rojo{background:var(--acento-coral);box-shadow:inset 0 -4px 8px rgba(0,0,0,.12),0 4px 14px rgba(224,85,85,.3);}
+.view-canvas .sem-title{font-family:var(--serif);font-size:var(--text-lg);color:var(--ink);font-weight:700;line-height:1.2;}
+.view-canvas .sem-sub{font-size:var(--text-xs);color:var(--gris-600);margin-top:2px;}
+.view-canvas .sem-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-3);padding-top:var(--sp-3);border-top:1px solid var(--gris-200);}
+.view-canvas .sem-metric .sem-val{font-family:var(--serif);font-size:var(--text-xl);color:var(--azul-deep);font-weight:700;line-height:1;}
+.view-canvas .sem-metric .sem-lab{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--gris-600);font-weight:600;margin-top:3px;}
+.view-canvas .evid-item{
+  padding:var(--sp-2) 0;border-top:1px solid var(--gris-200);
+  display:grid;grid-template-columns:78px 1fr;gap:var(--sp-3);font-size:var(--text-sm);
+}
+.view-canvas .evid-item:first-of-type{border-top:0;padding-top:0;}
+.view-canvas .evid-when{font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding-top:3px;}
+.view-canvas .evid-when.ahora{color:var(--acento-teal);}
+.view-canvas .evid-when.despues{color:var(--acento-amber);}
+.view-canvas .evid-when.fuera{color:var(--gris-500);}
+.view-canvas .evid-text{color:var(--ink);line-height:1.45;font-size:var(--text-sm);}
+.view-canvas .cierre-panel{background:var(--azul-deep);color:#fff;border-radius:var(--radius-md);padding:var(--sp-5);display:flex;flex-direction:column;justify-content:space-between;}
+.view-canvas .cierre-panel .panel-title{color:rgba(255,255,255,.75);}
+.view-canvas .cierre-panel .panel-title .dot{background:var(--acento-amber);}
+.view-canvas .cierre-text{font-family:var(--serif);font-size:var(--text-base);line-height:1.45;margin-bottom:var(--sp-3);color:#fff;}
+.view-canvas .cierre-list{list-style:none;font-size:var(--text-xs);line-height:1.55;padding:0;}
+.view-canvas .cierre-list li{padding-left:18px;position:relative;margin-bottom:6px;opacity:.9;color:#fff;}
+.view-canvas .cierre-list li::before{content:'→';position:absolute;left:0;top:0;color:var(--acento-amber);font-weight:700;}
+.view-canvas .glosario-panel{background:var(--gris-claro);border:1px dashed var(--gris-300);border-radius:var(--radius-md);padding:var(--sp-5) var(--sp-6);margin-top:var(--sp-2);}
+.view-canvas .glosario-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:var(--sp-4);}
+.view-canvas .glos-kicker{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gris-600);font-weight:700;}
+.view-canvas .glos-hint{font-size:var(--text-xs);color:var(--gris-500);font-style:italic;}
+.view-canvas .glos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-4);}
+.view-canvas .glos-item{font-size:var(--text-xs);line-height:1.45;}
+.view-canvas .glos-term{font-weight:700;color:var(--azul-deep);font-size:var(--text-sm);margin-bottom:2px;display:flex;align-items:center;gap:6px;}
+.view-canvas .glos-term code{font-family:var(--mono);background:var(--azul-reflex);color:#fff;padding:1px 5px;border-radius:2px;font-size:10px;font-weight:600;}
+.view-canvas .glos-def{color:var(--gris-700);}
+.view-canvas .canvas-foot{
+  border-top:1px solid var(--gris-200);padding:var(--sp-4) var(--sp-8);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:var(--text-xs);color:var(--gris-500);background:var(--gris-claro);
+}
+.view-canvas .canvas-foot strong{color:var(--gris-700);font-weight:600;}
+
+/* ====================================================================== */
+/* ========== VISTA BLUEPRINT · estilos del Blueprint (scoped) ========== */
+/* ====================================================================== */
+.view-blueprint{background:var(--gris-claro);padding:var(--sp-6) var(--sp-5) var(--sp-10);min-height:100vh;}
+.view-blueprint .page{
+  max-width:1360px;margin:0 auto;background:#fff;
+  border-radius:var(--radius-lg);box-shadow:var(--shadow-md);
+  border:1px solid var(--gris-200);overflow:hidden;
+}
+.view-blueprint .bp-head{
+  background:linear-gradient(135deg,var(--azul-deep) 0%,var(--azul-reflex) 55%,var(--azul-mid) 100%);
+  color:#fff;padding:var(--sp-6) var(--sp-8);
+  display:grid;grid-template-columns:1fr auto;gap:var(--sp-6);align-items:end;
+}
+.view-blueprint .kit-tag{font-size:var(--text-xs);letter-spacing:.14em;text-transform:uppercase;opacity:.72;margin-bottom:4px;font-weight:600;}
+.view-blueprint .bp-head h1{font-family:var(--serif);font-size:var(--text-2xl);font-weight:700;letter-spacing:-.01em;line-height:1.15;margin-bottom:6px;color:#fff;}
+.view-blueprint .bp-head .subtitle{font-size:var(--text-sm);opacity:.82;font-style:italic;max-width:70ch;}
+.view-blueprint .identity-card{
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
+  border-radius:var(--radius-md);padding:var(--sp-3) var(--sp-5);text-align:right;
+}
+.view-blueprint .identity-card .asig-code{font-size:10px;letter-spacing:.1em;opacity:.72;margin-bottom:2px;}
+.view-blueprint .identity-card .asig-name{font-family:var(--serif);font-size:var(--text-md);font-weight:700;line-height:1.2;color:#fff;}
+.view-blueprint .identity-card .asig-meta{font-size:var(--text-xs);opacity:.8;margin-top:4px;}
+.view-blueprint .bp-meta{
+  display:grid;grid-template-columns:1fr auto;gap:var(--sp-6);
+  padding:var(--sp-5) var(--sp-8);background:var(--gris-claro);
+  border-bottom:1px solid var(--gris-200);align-items:center;
+}
+.view-blueprint .bp-intro{font-size:var(--text-sm);color:var(--gris-700);line-height:1.6;max-width:80ch;}
+.view-blueprint .bp-intro strong{color:var(--azul-deep);font-weight:600;}
+.view-blueprint .bp-states{display:flex;gap:var(--sp-2);flex-wrap:wrap;}
+.view-blueprint .state-legend{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:var(--radius-sm);font-size:var(--text-xs);background:#fff;border:1px solid var(--gris-200);}
+.view-blueprint .state-dot{width:10px;height:10px;border-radius:3px;}
+.view-blueprint .state-dot.cerrado{background:var(--acento-teal);}
+.view-blueprint .state-dot.placeholder{background:var(--acento-amber);}
+.view-blueprint .state-dot.sprint1{background:var(--gris-400);}
+.view-blueprint .bp-body{padding:var(--sp-6) var(--sp-8);}
+.view-blueprint .bp-matrix{display:grid;grid-template-columns:190px repeat(3,1fr) 1.1fr;gap:6px;margin-bottom:var(--sp-5);}
+.view-blueprint .corner{background:transparent;}
+.view-blueprint .col-head{background:var(--azul-deep);color:#fff;border-radius:var(--radius-md);padding:var(--sp-3) var(--sp-4);display:flex;flex-direction:column;gap:2px;}
+.view-blueprint .col-head.transversal{background:linear-gradient(180deg,var(--azul-reflex),var(--azul-mid));}
+.view-blueprint .col-head .col-code{font-family:var(--mono);font-size:10px;letter-spacing:.08em;opacity:.75;font-weight:600;}
+.view-blueprint .col-head .col-name{font-family:var(--serif);font-size:var(--text-base);font-weight:700;line-height:1.2;color:#fff;}
+.view-blueprint .col-head .col-when{font-size:10px;opacity:.8;margin-top:3px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.view-blueprint .col-natur{display:inline-block;font-size:9px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:1px 6px;border-radius:8px;background:rgba(255,255,255,.22);}
+.view-blueprint .row-label{background:var(--gris-claro);border:1px solid var(--gris-200);border-radius:var(--radius-md);padding:var(--sp-3) var(--sp-4);display:flex;flex-direction:column;justify-content:center;}
+.view-blueprint .row-label .rl-code{font-family:var(--mono);font-size:10px;color:var(--azul-reflex);letter-spacing:.08em;font-weight:700;margin-bottom:2px;}
+.view-blueprint .row-label .rl-name{font-family:var(--serif);font-size:var(--text-sm);color:var(--ink);font-weight:700;line-height:1.2;}
+.view-blueprint .row-label .rl-hint{font-size:10px;color:var(--gris-500);font-style:italic;margin-top:2px;}
+.view-blueprint .cell{border-radius:var(--radius-md);padding:var(--sp-3);min-height:78px;display:flex;flex-direction:column;gap:4px;position:relative;font-size:var(--text-xs);line-height:1.4;}
+.view-blueprint .cell .cell-tag{font-size:9px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;display:inline-flex;align-items:center;gap:4px;}
+.view-blueprint .cell .cell-text{color:var(--ink);font-size:var(--text-xs);}
+.view-blueprint .cell .cell-text strong{color:var(--azul-deep);font-weight:600;}
+.view-blueprint .cell.cerrado{background:var(--acento-teal-pale);border:1px solid var(--acento-teal);}
+.view-blueprint .cell.cerrado .cell-tag{color:var(--acento-teal);}
+.view-blueprint .cell.cerrado .cell-tag::before{content:'●';font-size:10px;}
+.view-blueprint .cell.placeholder{background:var(--acento-amber-pale);border:1.5px dashed var(--acento-amber);}
+.view-blueprint .cell.placeholder .cell-tag{color:#8C6410;}
+.view-blueprint .cell.placeholder .cell-tag::before{content:'◆';font-size:10px;}
+.view-blueprint .cell.placeholder .cell-text{color:#6A4E0C;}
+.view-blueprint .cell.sprint1{background:var(--gris-100);border:1px dashed var(--gris-400);}
+.view-blueprint .cell.sprint1 .cell-tag{color:var(--gris-600);}
+.view-blueprint .cell.sprint1 .cell-tag::before{content:'→';font-size:11px;}
+.view-blueprint .cell.sprint1 .cell-text{color:var(--gris-700);font-style:italic;}
+.view-blueprint .cell.na{background:var(--gris-claro);border:1px solid var(--gris-200);align-items:center;justify-content:center;}
+.view-blueprint .cell.na .cell-tag{color:var(--gris-500);font-style:italic;font-weight:500;text-transform:none;letter-spacing:0;}
+.view-blueprint .cell.na .cell-tag::before{content:'—';}
+.view-blueprint .cell.transversal{background:var(--azul-pale);border:1px solid var(--azul-mid);}
+.view-blueprint .cell.transversal .cell-tag{color:var(--azul-deep);}
+.view-blueprint .cell.transversal .cell-tag::before{content:'◈';font-size:10px;}
+.view-blueprint .sprint1-panel{background:var(--azul-deep);color:#fff;border-radius:var(--radius-md);padding:var(--sp-5) var(--sp-6);margin-top:var(--sp-5);display:grid;grid-template-columns:1fr 2fr;gap:var(--sp-6);align-items:center;}
+.view-blueprint .sprint1-panel .s1-title{font-family:var(--serif);font-size:var(--text-lg);font-weight:700;line-height:1.2;margin-bottom:4px;color:#fff;}
+.view-blueprint .sprint1-panel .s1-sub{font-size:var(--text-xs);opacity:.75;}
+.view-blueprint .sprint1-list{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-2) var(--sp-4);font-size:var(--text-sm);padding:0;}
+.view-blueprint .sprint1-list li{padding-left:22px;position:relative;line-height:1.45;color:#fff;}
+.view-blueprint .sprint1-list li::before{content:'◆';position:absolute;left:0;top:1px;color:var(--acento-amber);}
+.view-blueprint .sprint1-list li strong{color:#fff;font-weight:600;}
+.view-blueprint .sprint1-list li .what{opacity:.85;font-size:var(--text-xs);}
+.view-blueprint .counts-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-4);margin-top:var(--sp-5);}
+.view-blueprint .count-card{background:#fff;border:1px solid var(--gris-200);border-radius:var(--radius-md);padding:var(--sp-4) var(--sp-5);display:flex;align-items:center;gap:var(--sp-4);}
+.view-blueprint .count-card .count-dot{width:14px;height:14px;border-radius:4px;flex-shrink:0;}
+.view-blueprint .count-dot.cerrado{background:var(--acento-teal);}
+.view-blueprint .count-dot.placeholder{background:var(--acento-amber);}
+.view-blueprint .count-dot.sprint1{background:var(--gris-400);}
+.view-blueprint .count-card .count-val{font-family:var(--serif);font-size:var(--text-2xl);color:var(--azul-deep);font-weight:700;line-height:1;}
+.view-blueprint .count-card .count-lab{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gris-600);font-weight:700;margin-top:3px;}
+.view-blueprint .count-card .count-note{font-size:var(--text-xs);color:var(--gris-600);margin-top:4px;}
+.view-blueprint .bp-foot{border-top:1px solid var(--gris-200);padding:var(--sp-4) var(--sp-8);display:flex;justify-content:space-between;align-items:center;font-size:var(--text-xs);color:var(--gris-500);background:var(--gris-claro);}
+.view-blueprint .bp-foot strong{color:var(--gris-700);font-weight:600;}
+
+@media (max-width:1100px){
+  .view-canvas .row-1,.view-canvas .row-3,.view-canvas .glos-grid{grid-template-columns:1fr;}
+  .view-canvas .canvas-head{grid-template-columns:1fr;gap:var(--sp-4);}
+  .view-canvas .identity-block{text-align:left;}
+  .view-canvas .identity-meta{border-left:0;padding-left:0;}
+  .view-blueprint .bp-matrix{grid-template-columns:150px repeat(3,1fr) 1fr;}
+  .view-blueprint .cell{font-size:10px;padding:var(--sp-2);}
+  .view-blueprint .bp-head{grid-template-columns:1fr;}
+  .view-blueprint .identity-card{text-align:left;}
+  .view-blueprint .sprint1-panel{grid-template-columns:1fr;}
+  .view-blueprint .sprint1-list{grid-template-columns:1fr;}
+}
+@media print{
+  .tabs-bar{display:none!important;}
+  .view-banner{display:none!important;}
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== TABS BAR ==================== -->
+<div class="tabs-bar" id="tabsBar">
+  <div class="tabs-brand">
+    <span>
+      <span class="brand-kicker">UC3M · Plan IMPULSO</span>
+      Kit de instrumentos · Sprint 0
+    </span>
+  </div>
+  <button type="button" class="tab-btn active" data-view="plantilla" onclick="switchView('plantilla')">
+    <span class="tab-num">1</span> Plantilla
+  </button>
+  <button type="button" class="tab-btn" data-view="canvas" onclick="switchView('canvas')">
+    <span class="tab-num">2</span> Canvas
+  </button>
+  <button type="button" class="tab-btn" data-view="blueprint" onclick="switchView('blueprint')">
+    <span class="tab-num">3</span> Blueprint 0
+  </button>
+  <div class="tabs-actions">
+    <button type="button" onclick="loadExample()" title="Cargar el caso ejemplo en el estado actual">Cargar ejemplo</button>
+    <button type="button" onclick="window.print()" title="Imprimir la vista actual">Imprimir</button>
+  </div>
+</div>
+
+<!-- ==================== VISTA 1 · PLANTILLA ==================== -->
+<div class="view view-plantilla active" id="view-plantilla">
+
+<nav class="nav">
+  <span class="nav-brand">Plan IMPULSO · Ruta 3 · Plantilla v3</span>
+  <a href="#cover">Inicio</a>
+  <a href="#paso1">1 · Asignatura</a>
+  <a href="#paso2">2 · Arquetipo</a>
+  <a href="#paso3">3 · Lo que ya hago</a>
+  <a href="#paso4">4 · Decisiones</a>
+  <a href="#paso5">5 · Touchpoints</a>
+  <a href="#paso6">6 · Resumen</a>
+  <div class="nav-progress">
+    <span id="progress-label">0%</span>
+    <div class="nav-progress-track"><div class="nav-progress-fill" id="progress-fill" style="width:0%;"></div></div>
+  </div>
+</nav>
+
+<div class="doc">
+
+<section id="cover" class="cover">
+  <div class="cover-inner">
+    <div class="overline">Plantilla estratégica · Sprint 0</div>
+    <h1>Tus decisiones estratégicas <em>antes del Sprint 1</em></h1>
+    <p class="subtitle">Formulario rellenable para fijar el encuadre estratégico del rediseño de la evaluación en tu asignatura. Producto ejecutivo, no ejercicio.</p>
+    <div class="cover-meta">
+      <div><div class="kv-label">Plan</div><div class="kv-value">IMPULSO Docente UC3M</div></div>
+      <div><div class="kv-label">Ruta</div><div class="kv-value">3 · Evaluación formativa</div></div>
+      <div><div class="kv-label">Fase</div><div class="kv-value">Sprint 0 · Encuadre</div></div>
+      <div><div class="kv-label">Tiempo estimado</div><div class="kv-value">45–75 minutos</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="intro-card">
+  <div class="intro-card-title">Cómo usar esta plantilla</div>
+  <p>Esta plantilla operacionaliza la <strong>Guía estratégica</strong> en seis pasos. Al terminarla, llegas al Sprint 1 con tu posicionamiento estratégico cerrado: identidad de la asignatura, arquetipos dominantes, las <strong>cuatro decisiones de encuadre</strong> (D1–D4) y un <strong>listado de touchpoints con las dimensiones (C2–C7)</strong> activas en cada uno.</p>
+  <p><strong>No la rellenes de un tirón si no te apetece</strong>: tu progreso se guarda automáticamente en este navegador. No se envía nada al exterior. Usa <em>Exportar JSON</em> para portar tu plantilla a otro equipo, e <em>Imprimir</em> para llevarla al Sprint 1.</p>
+  <p>Puedes dejar cualquier campo como <em>«lo veré en Sprint 1»</em>. No pasa nada. La plantilla es un mapa, no un contrato.</p>
+  <div class="intro-stats">
+    <div class="intro-stat"><div class="intro-stat-value">6</div><div class="intro-stat-label">Pasos</div></div>
+    <div class="intro-stat"><div class="intro-stat-value">4</div><div class="intro-stat-label">Decisiones</div></div>
+    <div class="intro-stat"><div class="intro-stat-value">C1–C7</div><div class="intro-stat-label">Componentes</div></div>
+    <div class="intro-stat"><div class="intro-stat-value">45–75</div><div class="intro-stat-label">Minutos</div></div>
+  </div>
+</div>
+
+<form id="plantilla-form" autocomplete="off">
+
+<!-- ==================== PASO 1 · IDENTIFICACIÓN ==================== -->
+<section id="paso1" class="section">
+  <div class="section-chip">Paso 1 · Identificación</div>
+  <h2>Tu asignatura en una ficha</h2>
+  <p class="lead">El rediseño se ancla en una asignatura concreta. Empieza por fijar sus coordenadas institucionales. Esto sitúa todo lo demás.</p>
+
+  <div class="field-grid cols-2">
+    <div class="field">
+      <label for="asig-nombre">Nombre de la asignatura</label>
+      <input type="text" id="asig-nombre" name="asig-nombre" placeholder="p. ej. Termodinámica II">
+    </div>
+    <div class="field">
+      <label for="asig-codigo">Código</label>
+      <input type="text" id="asig-codigo" name="asig-codigo" placeholder="p. ej. 15224">
+    </div>
+  </div>
+  <div class="field-grid cols-3">
+    <div class="field">
+      <label for="asig-titulacion">Titulación</label>
+      <input type="text" id="asig-titulacion" name="asig-titulacion" placeholder="Grado en…">
+    </div>
+    <div class="field">
+      <label for="asig-curso">Curso</label>
+      <select id="asig-curso" name="asig-curso">
+        <option value="">—</option>
+        <option>1º</option><option>2º</option><option>3º</option><option>4º</option>
+        <option>Máster</option><option>Doctorado</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="asig-ects">ECTS</label>
+      <input type="number" id="asig-ects" name="asig-ects" min="1" max="30" step="0.5" placeholder="6">
+    </div>
+  </div>
+  <div class="field-grid cols-4">
+    <div class="field">
+      <label for="asig-semestre">Semestre</label>
+      <select id="asig-semestre" name="asig-semestre">
+        <option value="">—</option>
+        <option>Primer cuatrimestre</option>
+        <option>Segundo cuatrimestre</option>
+        <option>Anual</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="asig-estudiantes">Nº estudiantes</label>
+      <input type="number" id="asig-estudiantes" name="asig-estudiantes" min="1" placeholder="80">
+    </div>
+    <div class="field">
+      <label for="asig-equipo">Equipo docente</label>
+      <input type="number" id="asig-equipo" name="asig-equipo" min="1" placeholder="1">
+    </div>
+    <div class="field">
+      <label for="asig-horas-semana">Horas lectivas/semana</label>
+      <input type="number" id="asig-horas-semana" name="asig-horas-semana" min="0" step="0.5" placeholder="4">
+    </div>
+  </div>
+  <div class="field">
+    <label for="asig-formato">Formato de la asignatura</label>
+    <div class="pill-group" data-field="asig-formato">
+      <input type="radio" id="fmt-pres" name="asig-formato" value="Presencial"><label for="fmt-pres">Presencial</label>
+      <input type="radio" id="fmt-mixta" name="asig-formato" value="Mixta"><label for="fmt-mixta">Mixta · b-learning</label>
+      <input type="radio" id="fmt-online" name="asig-formato" value="Online"><label for="fmt-online">Online</label>
+    </div>
+  </div>
+  <div class="field">
+    <label for="asig-rol">Tu rol en la asignatura</label>
+    <div class="pill-group" data-field="asig-rol">
+      <input type="radio" id="rol-coord" name="asig-rol" value="Coordinación + docencia"><label for="rol-coord">Coordinación + docencia</label>
+      <input type="radio" id="rol-doc" name="asig-rol" value="Docencia sin coordinación"><label for="rol-doc">Docencia</label>
+      <input type="radio" id="rol-coord-only" name="asig-rol" value="Solo coordinación"><label for="rol-coord-only">Solo coordinación</label>
+    </div>
+  </div>
+
+  <div class="section-close">Con esto cierras el Paso 1. El resto de la plantilla se apoya en estas coordenadas.</div>
+</section>
+
+<!-- ==================== PASO 2 · ARQUETIPO ==================== -->
+<section id="paso2" class="section">
+  <div class="section-chip">Paso 2 · Arquetipo de tu aula</div>
+  <h2>Quién está en tu clase, en dos ejes</h2>
+  <p class="lead">Los ejes A (qué ves en el aula) y B (postura ante la evaluación) capturan la diversidad del alumnado. Identifica las 2–3 combinaciones dominantes, no las 16. El diseño se optimiza para la principal y se tensa contra las otras.</p>
+
+  <div class="callout info">
+    <span class="callout-icon">i</span>
+    <div><strong>Regla anti-parálisis.</strong> Usa tu intuición de aula, no una encuesta. Si inviertes demasiado tiempo aquí, ya has perdido el propósito. Señala lo mayoritario o crítico y avanza.</div>
+  </div>
+
+  <h3>Eje A · qué ves tú en el aula</h3>
+  <p>Ajusta el peso aproximado (%) de cada tipo en tu grupo típico. No es preciso; es orientación.</p>
+  <div class="slider-row"><label><strong>A1</strong>Brillantes</label><input type="range" min="0" max="100" value="25" id="eje-a1" data-slider-group="ejeA"><span class="slider-value"><output>25</output>%</span></div>
+  <div class="slider-row"><label><strong>A2</strong>Con dificultades de aprendizaje</label><input type="range" min="0" max="100" value="25" id="eje-a2" data-slider-group="ejeA"><span class="slider-value"><output>25</output>%</span></div>
+  <div class="slider-row"><label><strong>A3</strong>Con dificultades relacionales</label><input type="range" min="0" max="100" value="25" id="eje-a3" data-slider-group="ejeA"><span class="slider-value"><output>25</output>%</span></div>
+  <div class="slider-row"><label><strong>A4</strong>Sin interés aparente</label><input type="range" min="0" max="100" value="25" id="eje-a4" data-slider-group="ejeA"><span class="slider-value"><output>25</output>%</span></div>
+
+  <h3>Eje B · postura ante la evaluación</h3>
+  <p>Mismo ejercicio para el Eje B.</p>
+  <div class="slider-row"><label><strong>B1</strong>Estratega · nota</label><input type="range" min="0" max="100" value="25" id="eje-b1" data-slider-group="ejeB"><span class="slider-value"><output>25</output>%</span></div>
+  <div class="slider-row"><label><strong>B2</strong>Curioso · aprendizaje</label><input type="range" min="0" max="100" value="25" id="eje-b2" data-slider-group="ejeB"><span class="slider-value"><output>25</output>%</span></div>
+  <div class="slider-row"><label><strong>B3</strong>Bajo presión</label><input type="range" min="0" max="100" value="25" id="eje-b3" data-slider-group="ejeB"><span class="slider-value"><output>25</output>%</span></div>
+  <div class="slider-row"><label><strong>B4</strong>Co-creador</label><input type="range" min="0" max="100" value="25" id="eje-b4" data-slider-group="ejeB"><span class="slider-value"><output>25</output>%</span></div>
+
+  <h3>Combinaciones dominantes en tu aula</h3>
+  <p>Marca las <strong>2–3</strong> combinaciones A×B más presentes o críticas. Si la tuya no está en la lista, usa <em>Otra combinación</em>.</p>
+  <div class="combo-cards">
+    <label class="combo-card"><input type="checkbox" name="combo" value="A1×B1"><span class="combo-code">A1 × B1</span><span class="combo-name">Brillante estratega</span><span class="combo-signal">Optimiza para la mejor nota con mínimo esfuerzo.</span></label>
+    <label class="combo-card"><input type="checkbox" name="combo" value="A2×B3"><span class="combo-code">A2 × B3</span><span class="combo-name">Dificultad + presión</span><span class="combo-signal">Bloqueo ante evaluación alta-stakes.</span></label>
+    <label class="combo-card"><input type="checkbox" name="combo" value="A1×B2"><span class="combo-code">A1 × B2</span><span class="combo-name">Brillante curioso</span><span class="combo-signal">Se aburre si el diseño es reproductivo.</span></label>
+    <label class="combo-card"><input type="checkbox" name="combo" value="A4×B1"><span class="combo-code">A4 × B1</span><span class="combo-name">Sin interés + estratega</span><span class="combo-signal">Mínimos para aprobar, desconexión temprana.</span></label>
+    <label class="combo-card"><input type="checkbox" name="combo" value="A3×B4"><span class="combo-code">A3 × B4</span><span class="combo-name">Relacional + co-creador</span><span class="combo-signal">Quiere participar pero le cuesta la coevaluación.</span></label>
+  </div>
+  <div class="field">
+    <label for="combo-otra">Otra combinación dominante (opcional)</label>
+    <input type="text" id="combo-otra" name="combo-otra" placeholder="p. ej. A2 × B2 · dificultades de aprendizaje pero curiosas">
+  </div>
+  <div class="field">
+    <label for="combo-comentario">Nota sobre tu aula (observación, no encuesta)</label>
+    <textarea id="combo-comentario" name="combo-comentario" placeholder="Describe brevemente el patrón dominante. p. ej. 'Mayoría A1×B1 en seminarios de 4º, con una minoría A2×B3 que necesita apoyo temprano.'"></textarea>
+  </div>
+
+  <div class="callout info">
+    <span class="callout-icon">i</span>
+    <div><strong>Sistema único, no sistemas paralelos.</strong><p>Identificar arquetipos dominantes no divide tu sistema de evaluación en varias versiones. <strong>El sistema de tu asignatura es uno solo</strong>. Los arquetipos ayudan a decidir dónde ese sistema modula intensidad, frecuencia o acompañamiento (más retroalimentación para quien bloquea, mayor reto para quien necesita exigencia), no a fragmentar el proceso. En el Paso 5 verás cómo se aplica esto touchpoint por touchpoint.</p></div>
+  </div>
+
+  <div class="section-close">Con esto cierras el Paso 2. Los arquetipos quedan como parámetro del diseño: informan intensidades, no crean procesos paralelos.</div>
+</section>
+
+<!-- ==================== PASO 3 · LO QUE YA HAGO HOY ==================== -->
+<section id="paso3" class="section">
+  <div class="section-chip">Paso 3 · Lo que ya hago hoy</div>
+  <h2>La foto de tu evaluación actual</h2>
+  <p class="lead">Antes de decidir qué cambia, describe qué pasa hoy en tu asignatura. Esta es la línea base del rediseño, no una decisión. Separa realidad y decisión: así evitas confundir lo que ya hay con lo que quieres que haya.</p>
+
+  <div class="callout info">
+    <span class="callout-icon">i</span>
+    <div><strong>No te corrijas aquí.</strong> Describe tal cual lo haces hoy, con sus virtudes y sus cosas pendientes. Las decisiones vienen en el Paso 4; las redefiniciones de touchpoints, en el Paso 5.</div>
+  </div>
+
+  <div class="field">
+    <label for="hoy-descripcion">Cómo evalúas hoy tu asignatura</label>
+    <textarea id="hoy-descripcion" name="hoy-descripcion" style="min-height:140px;" placeholder="3–4 líneas. Menciona los momentos evaluativos principales (exámenes, entregas, participación…), pesos aproximados, qué retroalimentación das y cuándo, qué papel tiene hoy la IA (en tus estudiantes y en tu trabajo docente) y qué recogida de información mantienes para ajustar el curso."></textarea>
+    <div class="field-hint">Opcional pero recomendado: refleja tanto lo que funciona como lo que sientes que está atascado.</div>
+  </div>
+
+  <div class="field-grid cols-2">
+    <div class="field">
+      <label for="hoy-funciona">Lo que hoy funciona bien</label>
+      <textarea id="hoy-funciona" name="hoy-funciona" placeholder="Aquello que no querrías perder en el rediseño."></textarea>
+    </div>
+    <div class="field">
+      <label for="hoy-fricciona">Lo que hoy genera fricción</label>
+      <textarea id="hoy-fricciona" name="hoy-fricciona" placeholder="Lo que sabes que quieres mover — aunque todavía no sepas cómo."></textarea>
+    </div>
+  </div>
+
+  <div class="section-close">Con esto cierras el Paso 3. Esta foto es tu punto de partida: las decisiones del Paso 4 se miden contra ella.</div>
+</section>
+
+<!-- ==================== PASO 4 · CUATRO DECISIONES ==================== -->
+<section id="paso4" class="section">
+  <div class="section-chip">Paso 4 · Las cuatro decisiones estratégicas</div>
+  <h2>D1 · D2 · D3 · D4 — el encuadre del rediseño</h2>
+  <p class="lead">Si llegas al Sprint 1 con estas cuatro decisiones cerradas, el Sprint 1 es diseño de detalle. Si llegas sin ellas, el Sprint 1 se te consume en estrategia.</p>
+
+  <div class="signpost"><strong>Antes de seguir</strong>Cada decisión admite la respuesta <em>«lo veré en Sprint 1»</em>. Eso es legítimo: declara la duda en lugar de inventar una respuesta forzada.</div>
+
+  <!-- D1 -->
+  <div class="decision-block">
+    <div class="decision-header">
+      <div class="decision-num">D1</div>
+      <div class="decision-title">
+        <h4>¿Cuáles son los 2–3 momentos evaluativos clave de tu asignatura?</h4>
+        <p>No son todos. Son los que, si quitas uno, cambia el sentido del curso. Los demás se modulan alrededor.</p>
+      </div>
+    </div>
+    <div class="field">
+      <label for="d1-momentos">Tus momentos clave (2–3)</label>
+      <textarea id="d1-momentos" name="d1-momentos" placeholder="p. ej.: (1) Proyecto de grupo con dos entregas en semanas 7 y 14 · (2) Parcial individual en semana 10 · (3) Tutorías continuas de seguimiento."></textarea>
+      <div class="field-hint">Un par de frases por momento. Nombre + por qué es clave. No inventaríos todo lo que hay: solo lo estratégico.</div>
+    </div>
+    <div class="field">
+      <label for="d1-criterio">Criterio con el que has elegido</label>
+      <textarea id="d1-criterio" name="d1-criterio" placeholder="p. ej.: elegí estos momentos porque capturan la aplicación real de los conceptos y porque dan al estudiante dos oportunidades de corregir rumbo."></textarea>
+    </div>
+  </div>
+
+  <!-- D2 -->
+  <div class="decision-block">
+    <div class="decision-header">
+      <div class="decision-num">D2</div>
+      <div class="decision-title">
+        <h4>¿Qué papel tiene la IA en el trabajo del estudiante?</h4>
+        <p>Postura global. Marca el tono. En el Paso 5 podrás matizarla touchpoint por touchpoint.</p>
+      </div>
+    </div>
+    <div class="checkbox-group">
+      <label class="checkbox-item">
+        <input type="radio" name="d2-postura" value="Rechazo explícito">
+        <div class="checkbox-item-body">
+          <div class="checkbox-item-title">Rechazo explícito</div>
+          <div class="checkbox-item-hint">La IA no se usa en la asignatura. Toda producción es sin asistencia. Se declara y se defiende en evaluaciones presenciales.</div>
+        </div>
+      </label>
+      <label class="checkbox-item">
+        <input type="radio" name="d2-postura" value="Uso invisible">
+        <div class="checkbox-item-body">
+          <div class="checkbox-item-title">Uso invisible</div>
+          <div class="checkbox-item-hint">No se aborda explícitamente, pero se asume. No hay norma ni reflexión sobre su uso. <em>(Postura por defecto en ausencia de decisión — no la elijas por descuido.)</em></div>
+        </div>
+      </label>
+      <label class="checkbox-item">
+        <input type="radio" name="d2-postura" value="Herramienta abierta con reglas">
+        <div class="checkbox-item-body">
+          <div class="checkbox-item-title">Herramienta abierta con reglas</div>
+          <div class="checkbox-item-hint">La IA se permite con condiciones: declaración de uso, ámbitos acotados, criterios de autoría. Hay alfabetización activa.</div>
+        </div>
+      </label>
+      <label class="checkbox-item">
+        <input type="radio" name="d2-postura" value="Coautora declarada">
+        <div class="checkbox-item-body">
+          <div class="checkbox-item-title">Coautora declarada</div>
+          <div class="checkbox-item-hint">La IA es pareja de trabajo reconocida. Se evalúa explícitamente la interacción con ella, no solo el producto final.</div>
+        </div>
+      </label>
+      <label class="checkbox-item">
+        <input type="radio" name="d2-postura" value="Lo veré en Sprint 1">
+        <div class="checkbox-item-body">
+          <div class="checkbox-item-title">Lo veré en Sprint 1</div>
+          <div class="checkbox-item-hint">Llego con la duda declarada. Es legítimo: mejor aplazar que forzar una respuesta que no has decidido.</div>
+        </div>
+      </label>
+    </div>
+    <div class="field" style="margin-top:var(--sp-5);">
+      <label for="d2-comunicacion">Cómo lo comunicarás al estudiante el día 1</label>
+      <textarea id="d2-comunicacion" name="d2-comunicacion" placeholder="Redacta en 2–4 frases el mensaje al estudiante. Será la base de tu sección sobre IA en la guía docente."></textarea>
+    </div>
+    <div class="callout info" style="margin-top:var(--sp-3);">
+      <span class="callout-icon">i</span>
+      <div><strong>Postura única, matizable.</strong> Aquí fijas el tono general. En el Paso 5, cada touchpoint puede matizar esa postura (p. ej.: permitida con reglas en general, restringida en el parcial). No estás diseñando un sistema para cada arquetipo: el sistema es uno, las matizaciones viven en los touchpoints.</div>
+    </div>
+  </div>
+
+  <!-- D3 -->
+  <div class="decision-block">
+    <div class="decision-header">
+      <div class="decision-num">D3</div>
+      <div class="decision-title">
+        <h4>¿Qué evidencias cierras ahora y cuáles dejas para el Sprint 1?</h4>
+        <p>Dos preguntas acopladas. No todo tiene que estar listo en Sprint 0.</p>
+      </div>
+    </div>
+    <div class="field-grid cols-2">
+      <div class="field">
+        <label for="d3-ahora">Evidencias que cierro ahora</label>
+        <textarea id="d3-ahora" name="d3-ahora" style="min-height:120px;" placeholder="p. ej.: rúbrica general del proyecto · pauta de entrega del parcial · criterios públicos de participación."></textarea>
+        <div class="field-hint">Lo que el estudiante verá el día 1 o antes del primer touchpoint.</div>
+      </div>
+      <div class="field">
+        <label for="d3-despues">Evidencias que dejo para el Sprint 1</label>
+        <textarea id="d3-despues" name="d3-despues" style="min-height:120px;" placeholder="p. ej.: rúbrica de coevaluación · protocolo de observación de tutorías · plantilla de retroalimentación por IA."></textarea>
+        <div class="field-hint">Lo que cerraré con detalle en el Sprint 1, antes de su primer uso.</div>
+      </div>
+    </div>
+    <div class="field">
+      <label for="d3-fuera">Evidencias que no guardo (y por qué)</label>
+      <textarea id="d3-fuera" name="d3-fuera" placeholder="Declarar lo que queda fuera también es parte de la decisión. p. ej.: 'No guardo borradores intermedios; solo la entrega final con su rúbrica.'"></textarea>
+    </div>
+  </div>
+
+  <!-- D4 -->
+  <div class="decision-block">
+    <div class="decision-header">
+      <div class="decision-num">D4</div>
+      <div class="decision-title">
+        <h4>¿Qué papel tiene la IA en tu trabajo como docente?</h4>
+        <p>Preparación, retroalimentación, análisis de recogida, mejora docente. Esta decisión es independiente de D2.</p>
+      </div>
+    </div>
+    <div class="checkbox-group">
+      <label class="checkbox-item">
+        <input type="radio" name="d4-postura" value="Sin uso deliberado">
+        <div class="checkbox-item-body">
+          <div class="checkbox-item-title">Sin uso deliberado</div>
+          <div class="checkbox-item-hint">No uso IA en la preparación ni en la retroalimentación. Quiero preservar mi juicio y criterio personales.</div>
+        </div>
+      </label>
+      <label class="checkbox-item">
+        <input type="radio" name="d4-postura" value="Uso cauteloso">
+        <div class="checkbox-item-body">
+          <div class="checkbox-item-title">Uso cauteloso</div>
+          <div class="checkbox-item-hint">Uso IA para tareas periféricas (búsqueda, revisión ortográfica) pero no para valoración ni retroalimentación al estudiante.</div>
+        </div>
+      </label>
+      <label class="checkbox-item">
+        <input type="radio" name="d4-postura" value="Herramienta operativa">
+        <div class="checkbox-item-body">
+          <div class="checkbox-item-title">Herramienta operativa</div>
+          <div class="checkbox-item-hint">Uso IA para preparar materiales, estructurar retroalimentación y analizar datos de recogida. El juicio final siempre es mío.</div>
+        </div>
+      </label>
+      <label class="checkbox-item">
+        <input type="radio" name="d4-postura" value="Coautora metodológica">
+        <div class="checkbox-item-body">
+          <div class="checkbox-item-title">Coautora metodológica</div>
+          <div class="checkbox-item-hint">La IA participa en el diseño del proceso de evaluación y en su mejora entre ediciones. Documenta la interacción.</div>
+        </div>
+      </label>
+      <label class="checkbox-item">
+        <input type="radio" name="d4-postura" value="Lo veré en Sprint 1">
+        <div class="checkbox-item-body">
+          <div class="checkbox-item-title">Lo veré en Sprint 1</div>
+          <div class="checkbox-item-hint">Aplazo la decisión al Sprint 1 con información adicional.</div>
+        </div>
+      </label>
+    </div>
+    <div class="field" style="margin-top:var(--sp-5);">
+      <label for="d4-nota">Dónde, concretamente, usarás la IA (o no)</label>
+      <textarea id="d4-nota" name="d4-nota" placeholder="p. ej.: 'Uso IA para un primer borrador de retroalimentación por rúbrica; lo reviso siempre antes de publicar. No uso IA para observación de tutorías ni para notas finales.'"></textarea>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <span class="callout-icon">i</span>
+    <div><strong>Estas cuatro decisiones se cierran aquí.</strong> Llegan al Sprint 1 como restricciones del diseño de detalle. No se reabren durante el Sprint 1 salvo que aparezca información nueva sustantiva.</div>
+  </div>
+
+  <div class="section-close">Con esto cierras el Paso 4. Las cuatro decisiones son el encuadre; en el Paso 5 las bajas a touchpoints concretos.</div>
+</section>
+
+<!-- ==================== PASO 5 · TOUCHPOINTS ==================== -->
+<section id="paso5" class="section">
+  <div class="section-chip">Paso 5 · Listado de touchpoints y dimensiones activas</div>
+  <h2>C1 · los momentos del curso, dimensión a dimensión</h2>
+  <p class="lead">El sistema de evaluación de tu asignatura se articula en <strong>touchpoints</strong> (C1 · momentos evaluativos). Cada uno se parametriza con las seis dimensiones restantes (C2–C7), activadas o no según tu diseño. La intensidad de cada componente <em>emerge</em> de cuántos touchpoints lo activan — no se declara desde fuera.</p>
+
+  <div class="callout info">
+    <span class="callout-icon">i</span>
+    <div><strong>Sistema único, arquetipos modulan.</strong> Los touchpoints son los mismos para todos los estudiantes. Si en tu aula dominan arquetipos distintos, el sistema modula intensidad, frecuencia o acompañamiento dentro de cada touchpoint — no crea procesos paralelos por arquetipo. Usa las dimensiones C2–C7 y sus notas para reflejar esas modulaciones.</div>
+  </div>
+
+  <div class="signpost"><strong>Cómo se rellena</strong>Añade un touchpoint por cada momento evaluativo (puntual o continuo) que vayas a tener en Sprint 1. En cada uno, abre la tarjeta y marca qué dimensiones se activan. Puedes dejar cualquier dimensión como <em>«lo veré en Sprint 1»</em>.</div>
+
+  <h3>Touchpoints de tu asignatura</h3>
+  <div id="tp-list" class="tp-list"></div>
+  <div id="tp-empty" class="tp-empty" style="display:none;">Aún no has añadido touchpoints. Empieza por los 2–3 momentos clave que declaraste en D1.</div>
+  <button type="button" class="tp-add" onclick="addTouchpoint()">+ Añadir touchpoint</button>
+
+  <h3 style="margin-top:var(--sp-10);">Cierre cuantitativo y semáforo económico</h3>
+  <p>Una lectura orientativa de tu listado. No pide información nueva: se calcula con lo que ya declaraste en <strong>Paso 1</strong> (estudiantes · equipo docente · horas lectivas/semana) y en este <strong>Paso 5</strong> (número y naturaleza de tus touchpoints). Se actualiza automáticamente al cambiar cualquiera de esos datos. Si no ves movimiento, comprueba que has rellenado esos campos y pulsa <em>Recalcular</em>.</p>
+
+  <div class="semaforo-wrap" id="semaforo-wrap">
+    <div class="semaforo-light gris" id="semaforo-light">—</div>
+    <div class="semaforo-body">
+      <div class="semaforo-label">Semáforo económico · orientativo</div>
+      <div class="semaforo-title" id="semaforo-title">Añade touchpoints, estudiantes y horas lectivas para calcular tu semáforo.</div>
+      <div class="semaforo-desc" id="semaforo-desc">El semáforo es una guía, no un juicio. Si sale ámbar o rojo, es una invitación a priorizar o pedir refuerzo, no a descartar tu diseño.</div>
+    </div>
+    <div class="semaforo-stats">
+      <div><div class="semaforo-stat-value" id="stat-total">0</div><div class="semaforo-stat-label">Touchpoints</div></div>
+      <div><div class="semaforo-stat-value" id="stat-puntuales">0</div><div class="semaforo-stat-label">Puntuales</div></div>
+      <div><div class="semaforo-stat-value" id="stat-continuos">0</div><div class="semaforo-stat-label">Continuos</div></div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:10px;margin:var(--sp-3) 0 var(--sp-5);flex-wrap:wrap;align-items:center;">
+    <button type="button" class="btn outline" onclick="updateSemaforo();">Recalcular semáforo</button>
+    <span style="font-size:var(--text-xs);color:var(--gris-500);font-style:italic;">Auto-recalcula al cambiar touchpoints, estudiantes, equipo u horas lectivas.</span>
+  </div>
+
+  <div class="callout warning">
+    <span class="callout-icon">!</span>
+    <div><strong>Lectura del semáforo.</strong> <em>Verde</em>: carga sostenible con tu equipo y horas actuales. <em>Ámbar</em>: vigila; con este volumen de retroalimentación conviene apoyarse en coevaluación o IA-docente (D4). <em>Rojo</em>: riesgo de saturación; prioriza los touchpoints clave (D1) o pide refuerzo al Sprint 1.</div>
+  </div>
+
+  <div class="section-close">Con esto cierras el Paso 5. Tu listado de touchpoints y dimensiones activas es el mapa que el Sprint 1 convertirá en rúbricas, pautas y calendario.</div>
+</section>
+
+<!-- ==================== PASO 6 · RESUMEN ==================== -->
+<section id="paso6" class="section">
+  <div class="section-chip">Paso 6 · Resumen ejecutivo</div>
+  <h2>Tu plantilla estratégica, en una página</h2>
+  <p class="lead">Genera el resumen cuando tengas los pasos anteriores cumplimentados. Es lo que se traduce después al Canvas del Sprint 1.</p>
+
+  <div style="display:flex;gap:10px;margin-bottom:var(--sp-5);flex-wrap:wrap;">
+    <button type="button" class="btn primary" onclick="generateSummary()">Generar resumen</button>
+    <button type="button" class="btn ghost" onclick="clearSummary()">Limpiar resumen</button>
+  </div>
+
+  <div id="summary-wrap" class="summary-wrap">
+    <div class="summary-empty">El resumen aparece aquí cuando pulses <strong>Generar resumen</strong>.</div>
+  </div>
+</section>
+
+</form>
+
+<footer class="inst-footer">
+  <div class="footer-brand">Plan IMPULSO Docente · Ruta 3 · Universidad Carlos III de Madrid</div>
+  <div class="footer-meta">Plantilla estratégica · v3 · 21 abril 2026 · ahora con vista Canvas y Blueprint 0</div>
+</footer>
+
+</div>
+
+<!-- ACTION BAR -->
+<div class="action-bar">
+  <div class="save-state saved" id="save-state">Guardado localmente</div>
+  <div class="btn-group">
+    <button type="button" class="btn ghost" onclick="exportJSON()">Exportar JSON</button>
+    <button type="button" class="btn outline" onclick="importJSON()">Importar JSON</button>
+    <button type="button" class="btn primary" onclick="window.print()">Imprimir</button>
+    <button type="button" class="btn danger" onclick="clearAll()">Limpiar todo</button>
+  </div>
+</div>
+
+<input type="file" id="file-import" accept="application/json" style="display:none;" onchange="handleImport(event)">
+
+</div><!-- /view-plantilla -->
+
+<!-- ==================== VISTA 2 · CANVAS ==================== -->
+<div class="view view-canvas" id="view-canvas">
+  <div class="view-banner hidden" id="canvas-banner">
+    <div>
+      <strong>Vista parcial.</strong> Faltan campos en la Plantilla (asignatura o touchpoints). Completa la Plantilla para ver el Canvas con todos los datos.
+    </div>
+    <button type="button" class="banner-link" onclick="switchView('plantilla')">Ir a la Plantilla</button>
+  </div>
+  <div id="canvas-render"></div>
+</div>
+
+<!-- ==================== VISTA 3 · BLUEPRINT 0 ==================== -->
+<div class="view view-blueprint" id="view-blueprint">
+  <div class="view-banner hidden" id="blueprint-banner">
+    <div>
+      <strong>Vista parcial.</strong> Faltan campos en la Plantilla (asignatura o touchpoints). Completa la Plantilla para ver el Blueprint con todos los datos.
+    </div>
+    <button type="button" class="banner-link" onclick="switchView('plantilla')">Ir a la Plantilla</button>
+  </div>
+  <div id="blueprint-render"></div>
+</div>
+
+<script>
+'use strict';
+const STORAGE_KEY = 'uc3m-plantilla-estrategica-v0';
+const form = document.getElementById('plantilla-form');
+const saveState = document.getElementById('save-state');
+
+// ===== TOUCHPOINTS =====
+const DIMENSIONS = [
+  { code:'C2', title:'Auto y coevaluación', hint:'¿El estudiante evalúa su propio trabajo o el de sus pares en este touchpoint?' },
+  { code:'C3', title:'IA y tecnología · matización local', hint:'Matiza aquí la postura D2 solo si este touchpoint requiere algo distinto del tono general.' },
+  { code:'C4', title:'Evidencias y criterios', hint:'¿Qué evidencia se produce aquí y con qué rúbrica o criterio público se valora?' },
+  { code:'C5', title:'Recogida de información', hint:'¿Qué información recoges de este touchpoint para ajustar el curso o la mejora docente?' },
+  { code:'C6', title:'Retroalimentación', hint:'¿Cómo, cuándo y en qué formato retroalimentas? En puntuales, posterior al evento; en continuos, puntual (p. ej. mensual).' },
+  { code:'C7', title:'Mejora docente', hint:'¿Cómo alimenta este touchpoint tu ciclo de mejora docente entre ediciones?' }
+];
+const ESTADOS = ['Activa','No aplica','Lo veré en Sprint 1'];
+let tpCounter = 0;
+const tpListEl = document.getElementById('tp-list');
+const tpEmptyEl = document.getElementById('tp-empty');
+
+function addTouchpoint(data){
+  tpCounter++;
+  const idx = tpCounter;
+  const card = document.createElement('div');
+  card.className = 'tp-card';
+  card.dataset.tpId = idx;
+
+  let dimsHtml = '';
+  DIMENSIONS.forEach(d => {
+    const dimKey = `tp${idx}-${d.code.toLowerCase()}`;
+    const pills = ESTADOS.map(est => `
+      <input type="radio" id="${dimKey}-${est.replace(/\s/g,'_')}" name="${dimKey}-estado" value="${est}">
+      <label for="${dimKey}-${est.replace(/\s/g,'_')}">${est}</label>
+    `).join('');
+    dimsHtml += `
+      <div class="tp-dim">
+        <div class="tp-dim-head">
+          <span class="tp-dim-code">${d.code}</span>
+          <span class="tp-dim-title">${d.title}</span>
+        </div>
+        <div class="tp-dim-hint">${d.hint}</div>
+        <div class="pill-group" data-field="${dimKey}-estado">${pills}</div>
+        <textarea name="${dimKey}-nota" placeholder="Nota opcional: cómo se concreta esta dimensión en este touchpoint. Si marcas 'Lo veré en Sprint 1', puedes dejar anotada la duda." style="margin-top:8px;"></textarea>
+      </div>
+    `;
+  });
+
+  card.innerHTML = `
+    <div class="tp-head">
+      <span class="tp-code">TP${idx}</span>
+      <input type="text" class="tp-nombre" name="tp${idx}-nombre" placeholder="p. ej. Parcial 1 · Proyecto · Tutorías continuas…">
+      <button type="button" class="tp-toggle" title="Abrir / cerrar" aria-label="Abrir o cerrar tarjeta">▾</button>
+      <button type="button" class="tp-remove" title="Eliminar touchpoint">Eliminar</button>
+    </div>
+    <div class="tp-meta">
+      <div class="field">
+        <label>Naturaleza temporal</label>
+        <div class="pill-group" data-field="tp${idx}-naturaleza">
+          <input type="radio" id="tp${idx}-punt" name="tp${idx}-naturaleza" value="Puntual"><label for="tp${idx}-punt">Puntual</label>
+          <input type="radio" id="tp${idx}-cont" name="tp${idx}-naturaleza" value="Continuo"><label for="tp${idx}-cont">Continuo</label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="tp${idx}-cuando">Cuándo sucede</label>
+        <input type="text" id="tp${idx}-cuando" name="tp${idx}-cuando" placeholder="p. ej. semana 7 · todo el semestre">
+      </div>
+      <div class="field">
+        <label for="tp${idx}-cuando-retro">Cuándo retroalimentas</label>
+        <input type="text" id="tp${idx}-cuando-retro" name="tp${idx}-cuando-retro" placeholder="p. ej. semana 8 · mensualmente en tutoría">
+      </div>
+    </div>
+    <div class="tp-body">${dimsHtml}</div>
+  `;
+  tpListEl.appendChild(card);
+
+  // Toggle
+  const toggleBtn = card.querySelector('.tp-toggle');
+  toggleBtn.addEventListener('click', () => {
+    card.classList.toggle('open');
+    toggleBtn.textContent = card.classList.contains('open') ? '▴' : '▾';
+  });
+  // Remove
+  card.querySelector('.tp-remove').addEventListener('click', () => {
+    if(confirm('¿Eliminar este touchpoint? Esta acción no se puede deshacer.')){
+      card.remove();
+      refreshTpCodes();
+      persist();
+    }
+  });
+  // Persist on change
+  card.querySelectorAll('input,select,textarea').forEach(el => {
+    el.addEventListener('input', persist);
+    el.addEventListener('change', persist);
+  });
+
+  // Apply data
+  if(data){
+    const set = (sel, val) => { const el = card.querySelector(sel); if(el && val !== undefined) el.value = val; };
+    set(`[name="tp${idx}-nombre"]`, data.nombre);
+    set(`#tp${idx}-cuando`, data.cuando);
+    set(`#tp${idx}-cuando-retro`, data.cuandoRetro);
+    if(data.naturaleza){
+      const r = card.querySelector(`input[name="tp${idx}-naturaleza"][value="${data.naturaleza}"]`);
+      if(r) r.checked = true;
+    }
+    DIMENSIONS.forEach(d => {
+      const dimKey = `tp${idx}-${d.code.toLowerCase()}`;
+      const dd = (data.dims || {})[d.code] || {};
+      if(dd.estado){
+        const r = card.querySelector(`input[name="${dimKey}-estado"][value="${dd.estado}"]`);
+        if(r) r.checked = true;
+      }
+      set(`[name="${dimKey}-nota"]`, dd.nota);
+    });
+    if(data.open) card.classList.add('open');
+  } else {
+    card.classList.add('open');
+  }
+  toggleBtn.textContent = card.classList.contains('open') ? '▴' : '▾';
+
+  refreshTpCodes();
+  updateTpEmpty();
+  persist();
+}
+
+function refreshTpCodes(){
+  tpListEl.querySelectorAll('.tp-card').forEach((card, i) => {
+    const code = card.querySelector('.tp-code');
+    if(code) code.textContent = 'TP' + (i+1);
+  });
+}
+function updateTpEmpty(){
+  tpEmptyEl.style.display = tpListEl.children.length === 0 ? 'block' : 'none';
+}
+
+// ===== COLLECT / APPLY STATE =====
+function collectState(){
+  const state = {};
+  form.querySelectorAll('input[type=text],input[type=number],input[type=email],select,textarea').forEach(el => {
+    if(el.name) state[el.name] = el.value;
+  });
+  form.querySelectorAll('input[type=radio]:checked').forEach(el => { state[el.name] = el.value; });
+  form.querySelectorAll('input[type=range]').forEach(el => { state[el.id] = el.value; });
+  state['combo'] = Array.from(form.querySelectorAll('input[name=combo]:checked')).map(e => e.value);
+  state['touchpoints'] = Array.from(tpListEl.querySelectorAll('.tp-card')).map(card => {
+    const idx = card.dataset.tpId;
+    const get = sel => { const el = card.querySelector(sel); return el ? el.value : ''; };
+    const getRadio = name => { const el = card.querySelector(`input[name="${name}"]:checked`); return el ? el.value : ''; };
+    const dims = {};
+    DIMENSIONS.forEach(d => {
+      const dimKey = `tp${idx}-${d.code.toLowerCase()}`;
+      dims[d.code] = {
+        estado: getRadio(`${dimKey}-estado`),
+        nota: get(`[name="${dimKey}-nota"]`)
+      };
+    });
+    return {
+      nombre: get(`[name="tp${idx}-nombre"]`),
+      naturaleza: getRadio(`tp${idx}-naturaleza`),
+      cuando: get(`#tp${idx}-cuando`),
+      cuandoRetro: get(`#tp${idx}-cuando-retro`),
+      dims,
+      open: card.classList.contains('open')
+    };
+  });
+  return state;
+}
+
+function applyState(state){
+  if(!state) return;
+  form.querySelectorAll('input[type=text],input[type=number],input[type=email],select,textarea').forEach(el => {
+    if(el.name && state[el.name] !== undefined) el.value = state[el.name];
+  });
+  form.querySelectorAll('input[type=radio]').forEach(el => {
+    if(el.name && state[el.name] !== undefined && state[el.name] === el.value) el.checked = true;
+  });
+  form.querySelectorAll('input[type=range]').forEach(el => {
+    if(state[el.id] !== undefined){ el.value = state[el.id]; el.dispatchEvent(new Event('input')); }
+  });
+  if(Array.isArray(state['combo'])){
+    form.querySelectorAll('input[name=combo]').forEach(cb => {
+      cb.checked = state['combo'].includes(cb.value);
+      const card = cb.closest('.combo-card');
+      if(card) card.classList.toggle('selected', cb.checked);
+    });
+  }
+  // Touchpoints
+  tpListEl.innerHTML = '';
+  tpCounter = 0;
+  (state['touchpoints'] || []).forEach(d => addTouchpoint(d));
+  updateTpEmpty();
+  updateSemaforo();
+  updateProgress();
+}
+
+// ===== PERSIST =====
+let saveTimer;
+function persist(){
+  saveState.classList.remove('saved');
+  saveState.classList.add('unsaved');
+  saveState.textContent = 'Guardando…';
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(collectState()));
+      saveState.classList.remove('unsaved');
+      saveState.classList.add('saved');
+      saveState.textContent = 'Guardado localmente';
+      updateSemaforo();
+      updateProgress();
+    } catch(e){
+      saveState.textContent = 'Error al guardar';
+    }
+  }, 250);
+}
+
+// ===== SEMAFORO ECONÓMICO =====
+function updateSemaforo(){
+  const s = collectState();
+  const tps = s['touchpoints'] || [];
+  const total = tps.length;
+  const puntuales = tps.filter(t => t.naturaleza === 'Puntual').length;
+  const continuos = tps.filter(t => t.naturaleza === 'Continuo').length;
+  const estudiantes = parseInt(s['asig-estudiantes']) || 0;
+  const horasSemana = parseFloat(s['asig-horas-semana']) || 0;
+  const equipo = parseInt(s['asig-equipo']) || 1;
+
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('stat-puntuales').textContent = puntuales;
+  document.getElementById('stat-continuos').textContent = continuos;
+
+  const light = document.getElementById('semaforo-light');
+  const title = document.getElementById('semaforo-title');
+  const desc = document.getElementById('semaforo-desc');
+
+  if(total === 0 || estudiantes === 0 || horasSemana === 0){
+    light.className = 'semaforo-light gris';
+    light.textContent = '—';
+    title.textContent = 'Añade touchpoints, estudiantes y horas lectivas para calcular tu semáforo.';
+    desc.textContent = 'El semáforo es una guía orientativa: combina tu número de touchpoints con tamaño de grupo y horas lectivas semanales.';
+    return;
+  }
+
+  // Carga: puntuales pesan 1, continuos 2 (recogida continua)
+  const carga = puntuales + continuos * 2;
+  // Ajustada por tamaño de grupo (normalizada a 60) y compartida por equipo docente
+  const cargaPorDocente = (carga * (estudiantes / 60)) / equipo;
+  // Factor horas semanales: si horas bajas con grupo grande, sube el riesgo
+  const factorHoras = horasSemana < 2 ? 1.5 : horasSemana <= 4 ? 1 : 0.85;
+  const cargaFinal = cargaPorDocente * factorHoras;
+
+  let color, tituloTxt, descTxt;
+  if(cargaFinal <= 4 && total <= 5){
+    color = 'verde'; tituloTxt = 'Carga sostenible';
+    descTxt = `Con ${total} touchpoints, ${estudiantes} estudiantes y ${horasSemana} h/semana, tu diseño tiene un ritmo asumible. Buen encaje para Sprint 1.`;
+  } else if(cargaFinal <= 9 && total <= 9){
+    color = 'ambar'; tituloTxt = 'Carga tensionada · vigila la retroalimentación';
+    descTxt = `Con ${total} touchpoints y ${estudiantes} estudiantes en ${horasSemana} h/semana, la retroalimentación puede desbordarte. Considera coevaluación (C2), IA-docente (D4) o priorizar los momentos clave (D1).`;
+  } else {
+    color = 'rojo'; tituloTxt = 'Carga potencialmente inviable';
+    descTxt = `${total} touchpoints con ${estudiantes} estudiantes y ${horasSemana} h/semana apuntan a saturación. Reduce touchpoints, apóyate fuerte en coevaluación o solicita refuerzo. Llévatelo al Sprint 1 como prioridad.`;
+  }
+  light.className = 'semaforo-light ' + color;
+  light.textContent = color === 'verde' ? '✓' : color === 'ambar' ? '!' : '×';
+  title.textContent = tituloTxt;
+  desc.textContent = descTxt;
+}
+
+// ===== PROGRESS =====
+function updateProgress(){
+  const state = collectState();
+  const required = [
+    !!state['asig-nombre'], !!state['asig-titulacion'], !!state['asig-curso'],
+    !!state['asig-ects'], !!state['asig-estudiantes'], !!state['asig-formato'],
+    !!state['asig-horas-semana'],
+    state['combo']?.length > 0 || !!state['combo-otra'],
+    !!state['hoy-descripcion'],
+    !!state['d1-momentos'],
+    !!state['d2-postura'],
+    !!state['d3-ahora'] || !!state['d3-despues'],
+    !!state['d4-postura'],
+    (state['touchpoints'] || []).length > 0
+  ];
+  const pct = Math.round(required.filter(Boolean).length / required.length * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = pct + '%';
+}
+
+// ===== SLIDERS LIVE =====
+form.querySelectorAll('input[type=range]').forEach(el => {
+  el.addEventListener('input', () => {
+    const out = el.parentElement.querySelector('.slider-value output');
+    if(out) out.textContent = el.value;
+    persist();
+  });
+});
+
+// ===== COMBO CARD TOGGLE =====
+form.querySelectorAll('.combo-card input[type=checkbox]').forEach(cb => {
+  cb.addEventListener('change', () => {
+    cb.closest('.combo-card').classList.toggle('selected', cb.checked);
+    persist();
+  });
+});
+
+// ===== PERSIST LISTENERS =====
+form.addEventListener('input', persist);
+form.addEventListener('change', persist);
+
+// ===== SUMMARY =====
+function esc(s){ return (s || '').toString().replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function line(label, val){ return val ? `<div class="summary-row"><div class="summary-label">${label}</div><div class="summary-value">${val}</div></div>` : `<div class="summary-row"><div class="summary-label">${label}</div><div class="summary-value"><em>— sin rellenar —</em></div></div>`; }
+
+function generateSummary(){
+  const s = collectState();
+  const wrap = document.getElementById('summary-wrap');
+  const ejeA = ['a1','a2','a3','a4'].map(k => `A${k.slice(1)} ${s['eje-'+k] || 0}%`).join(' · ');
+  const ejeB = ['b1','b2','b3','b4'].map(k => `B${k.slice(1)} ${s['eje-'+k] || 0}%`).join(' · ');
+  const combosTxt = [...(s['combo'] || []), s['combo-otra']].filter(Boolean).join(' · ') || '—';
+
+  const tps = s['touchpoints'] || [];
+  const tpsTxt = tps.length ? tps.map((t, i) => {
+    const nat = t.naturaleza ? `<span class="badge ${t.naturaleza === 'Continuo' ? 'teal' : 'primary'}">${esc(t.naturaleza)}</span>` : '';
+    const when = [t.cuando, t.cuandoRetro && `retro ${t.cuandoRetro}`].filter(Boolean).map(esc).join(' · ');
+    const dimsActivas = Object.entries(t.dims || {})
+      .filter(([k,v]) => v.estado === 'Activa')
+      .map(([k,v]) => v.nota ? `<strong>${k}</strong> ${esc(v.nota)}` : `<strong>${k}</strong>`)
+      .join(' · ');
+    const dimsSprint = Object.entries(t.dims || {})
+      .filter(([k,v]) => v.estado === 'Lo veré en Sprint 1')
+      .map(([k]) => `<em>${k}</em>`)
+      .join(' · ');
+    return `<div style="padding:8px 0;border-bottom:1px dashed var(--gris-100);"><strong>TP${i+1} · ${esc(t.nombre) || '<em>sin nombre</em>'}</strong> ${nat}<br><span style="font-size:var(--text-xs);color:var(--gris-500);">${when || '—'}</span><br>${dimsActivas || '<em>sin dimensiones activadas</em>'}${dimsSprint ? '<br><span style="font-size:var(--text-xs);color:var(--gris-500);">Sprint 1: '+dimsSprint+'</span>' : ''}</div>`;
+  }).join('') : '<em>sin touchpoints declarados</em>';
+
+  // Semáforo snapshot
+  updateSemaforo();
+  const semColor = document.getElementById('semaforo-light').className.split(' ')[1] || 'gris';
+  const semTitle = document.getElementById('semaforo-title').textContent;
+  const total = tps.length;
+  const puntuales = tps.filter(t => t.naturaleza === 'Puntual').length;
+  const continuos = tps.filter(t => t.naturaleza === 'Continuo').length;
+  const semBadge = semColor === 'verde' ? '<span class="badge teal">Verde</span>'
+                 : semColor === 'ambar' ? '<span class="badge amber">Ámbar</span>'
+                 : semColor === 'rojo' ? '<span class="badge coral">Rojo</span>'
+                 : '<span class="badge neutral">Sin datos</span>';
+
+  wrap.innerHTML = `
+    <div class="summary-group">
+      <div class="summary-group-title">Identificación</div>
+      ${line('Asignatura', s['asig-nombre'] ? `<strong>${esc(s['asig-nombre'])}</strong>${s['asig-codigo'] ? ' · ' + esc(s['asig-codigo']) : ''}` : '')}
+      ${line('Titulación', esc(s['asig-titulacion']))}
+      ${line('Curso · ECTS', (s['asig-curso'] || '—') + ' · ' + (s['asig-ects'] || '—') + ' ECTS')}
+      ${line('Semestre', esc(s['asig-semestre']))}
+      ${line('Estudiantes · equipo', (s['asig-estudiantes'] || '—') + ' · equipo ' + (s['asig-equipo'] || '—'))}
+      ${line('Horas lectivas/semana', esc(s['asig-horas-semana']))}
+      ${line('Formato · Rol', (s['asig-formato'] || '—') + ' · ' + (s['asig-rol'] || '—'))}
+    </div>
+    <div class="summary-group">
+      <div class="summary-group-title">Arquetipo del aula</div>
+      ${line('Eje A', ejeA)}
+      ${line('Eje B', ejeB)}
+      ${line('Combinaciones dominantes', esc(combosTxt))}
+      ${line('Nota', esc(s['combo-comentario']))}
+    </div>
+    <div class="summary-group">
+      <div class="summary-group-title">Lo que ya hago hoy</div>
+      ${line('Foto actual', esc(s['hoy-descripcion']))}
+      ${line('Funciona', esc(s['hoy-funciona']))}
+      ${line('Genera fricción', esc(s['hoy-fricciona']))}
+    </div>
+    <div class="summary-group">
+      <div class="summary-group-title">D1 · Momentos clave</div>
+      ${line('2–3 momentos', esc(s['d1-momentos']))}
+      ${line('Criterio', esc(s['d1-criterio']))}
+    </div>
+    <div class="summary-group">
+      <div class="summary-group-title">D2 · IA del estudiante</div>
+      ${line('Postura global', esc(s['d2-postura']))}
+      ${line('Comunicación al estudiante', esc(s['d2-comunicacion']))}
+    </div>
+    <div class="summary-group">
+      <div class="summary-group-title">D3 · Evidencias (ahora / Sprint 1)</div>
+      ${line('Cierro ahora', esc(s['d3-ahora']))}
+      ${line('Dejo para Sprint 1', esc(s['d3-despues']))}
+      ${line('Fuera del sistema', esc(s['d3-fuera']))}
+    </div>
+    <div class="summary-group">
+      <div class="summary-group-title">D4 · IA del docente</div>
+      ${line('Postura', esc(s['d4-postura']))}
+      ${line('Dónde la uso (o no)', esc(s['d4-nota']))}
+    </div>
+    <div class="summary-group">
+      <div class="summary-group-title">C1 · Listado de touchpoints y dimensiones</div>
+      <div class="summary-row"><div class="summary-label">Touchpoints</div><div class="summary-value">${tpsTxt}</div></div>
+    </div>
+    <div class="summary-group">
+      <div class="summary-group-title">Cierre cuantitativo</div>
+      ${line('Total touchpoints', `${total} · ${puntuales} puntual(es) · ${continuos} continuo(s)`)}
+      ${line('Semáforo económico', semBadge + ' ' + esc(semTitle))}
+    </div>
+  `;
+  wrap.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function clearSummary(){
+  document.getElementById('summary-wrap').innerHTML = '<div class="summary-empty">El resumen aparece aquí cuando pulses <strong>Generar resumen</strong>.</div>';
+}
+
+// ===== EXPORT / IMPORT / CLEAR =====
+function exportJSON(){
+  const state = collectState();
+  const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const asig = (state['asig-nombre'] || 'plantilla').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40);
+  a.href = url;
+  a.download = `uc3m-plantilla-${asig}-${new Date().toISOString().slice(0,10)}.json`;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function importJSON(){ document.getElementById('file-import').click(); }
+function handleImport(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const state = JSON.parse(e.target.result);
+      applyState(state);
+      persist();
+      alert('Plantilla importada correctamente.');
+    } catch(err){
+      alert('Error al leer el archivo: no es un JSON válido.');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+function clearAll(){
+  if(!confirm('¿Seguro que quieres limpiar toda la plantilla? Esta acción no se puede deshacer.')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  location.reload();
+}
+
+// ======================================================================
+// ===== RENDER · CANVAS Y BLUEPRINT 0 ==================================
+// ======================================================================
+
+// ----- DEMO STATE · caso ejemplo "Diseño de Servicios Digitales" -----
+const DEMO_STATE = {
+  'asig-nombre':'Diseño de Servicios Digitales',
+  'asig-codigo':'ADE-3017',
+  'asig-titulacion':'Doble Grado ADE + Tecnologías',
+  'asig-curso':'3',
+  'asig-ects':'6',
+  'asig-semestre':'Primavera',
+  'asig-estudiantes':'75',
+  'asig-equipo':'2',
+  'asig-horas-semana':'4',
+  'asig-formato':'Mixta',
+  'asig-rol':'Coordinación + docencia',
+  'eje-a1':'15','eje-a2':'20','eje-a3':'45','eje-a4':'20',
+  'eje-b1':'15','eje-b2':'25','eje-b3':'10','eje-b4':'50',
+  'combo':['A1×B2','A3×B4'],
+  'combo-otra':'',
+  'comentario-arquetipo':'Grupo con mayoría curiosa y co-creadora, atravesado por tensiones relacionales en trabajos de equipo.',
+  'hoy-descripcion':'2 pruebas escritas intermedias + trabajo final de grupo con defensa oral. Hoy no uso IA de forma deliberada; los estudiantes sí la usan aunque no lo declaran.',
+  'hoy-funciona':'Los grupos se implican cuando hay entregas intermedias visibles.',
+  'hoy-fricciona':'Las correcciones se acumulan al final; el feedback llega demasiado tarde para ajustar.',
+  'd1-momentos':'3 touchpoints: explorar (TP1 · semana 3), construir (TP2 · semana 8), integrar (TP3 · semana 13).',
+  'd1-criterio':'Cada TP separa una fase cognitiva distinta y ofrece dos oportunidades de ajuste antes del cierre.',
+  'd2-postura':'Herramienta abierta con reglas',
+  'd2-comunicacion':'IA con criterio: podéis usarla para explorar y validar, pero debéis declarar siempre cómo y dónde. La IA no sustituye el criterio que os pido demostrar.',
+  'd3-ahora':'Rúbrica en cada TP · peer review en TP2 · auto-declaración de uso de IA en los tres touchpoints.',
+  'd3-despues':'Trazas de proceso del equipo · portfolio de hitos · registro longitudinal de aprendizaje (Sprint 1).',
+  'd3-fuera':'Observación informal en aula · interacciones 1-a-1 no sistematizadas.',
+  'd4-postura':'Uso cauteloso',
+  'd4-nota':'Sí para estructurar (primer borrador de rúbrica o retroalimentación que reviso siempre). No para delegar el juicio evaluativo ni generar notas finales.',
+  'touchpoints':[
+    {
+      nombre:'Checkpoint de idea',
+      naturaleza:'Puntual',
+      cuando:'Semana 3 · 45 min en clase',
+      cuandoRetro:'Misma sesión (oral) + nota escrita en 48 h',
+      dims:{
+        C2:{estado:'Activa',nota:'Autoeval 1–5 con comentario individual antes del pitch.'},
+        C3:{estado:'Activa',nota:'Libre para explorar; obligatorio declarar uso.'},
+        C4:{estado:'Activa',nota:'Entrega ½ pág. + pitch de 3 min por equipo.'},
+        C5:{estado:'Activa',nota:'Formulario breve + grabación del pitch (audio).'},
+        C6:{estado:'Activa',nota:'Feedback oral inmediato al pitch + rubricón ligero.'},
+        C7:{estado:'Lo veré en Sprint 1',nota:'Registro de dudas frecuentes post-pitch (formato por definir).'}
+      },
+      open:true
+    },
+    {
+      nombre:'Prototipo intermedio',
+      naturaleza:'Puntual',
+      cuando:'Semana 8 · sesión dedicada',
+      cuandoRetro:'Devolución 1-a-1 durante la semana 9',
+      dims:{
+        C2:{estado:'Activa',nota:'Peer review estructurada entre equipos (rúbrica corta).'},
+        C3:{estado:'Activa',nota:'Libre para validar; documentar uso en memoria de proceso.'},
+        C4:{estado:'Activa',nota:'Prototipo navegable + memoria de proceso.'},
+        C5:{estado:'Activa',nota:'Repositorio del equipo + rúbrica digital compartida.'},
+        C6:{estado:'Lo veré en Sprint 1',nota:'Calendario detallado de devolución 1-a-1 a cada equipo.'},
+        C7:{estado:'Lo veré en Sprint 1',nota:'Métricas del prototipo a observar como equipo docente.'}
+      },
+      open:false
+    },
+    {
+      nombre:'Entrega final y defensa',
+      naturaleza:'Puntual',
+      cuando:'Semana 13 · defensa pública',
+      cuandoRetro:'Rúbrica final + devolución escrita individual en 7 días',
+      dims:{
+        C2:{estado:'No aplica',nota:''},
+        C3:{estado:'Activa',nota:'Declaración final de uso de IA (apartado obligatorio del informe).'},
+        C4:{estado:'Activa',nota:'Informe final + defensa + pieza comunicativa.'},
+        C5:{estado:'Lo veré en Sprint 1',nota:'Formato de grabación y conservación de la defensa.'},
+        C6:{estado:'Activa',nota:'Rúbrica final + devolución escrita individual.'},
+        C7:{estado:'Lo veré en Sprint 1',nota:'Análisis de patrones de aprendizaje entre pares docentes al cierre.'}
+      },
+      open:false
+    }
+  ]
+};
+
+// ----- HELPERS -----
+function escC(x){ return (x===undefined||x===null?'':x.toString()).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+const DIM_NAMES = {C2:'Auto/coevaluación',C3:'IA estudiante',C4:'Evidencias',C5:'Recogida',C6:'Retroalimentación',C7:'Mejora docente'};
+
+function _dominantAxis(s, axis){
+  const vals = [1,2,3,4].map(i => parseFloat(s[`eje-${axis}${i}`]) || 0);
+  const sum = vals.reduce((a,b)=>a+b,0) || 1;
+  // Posición ponderada en el eje (0-100%) · anclas A/B en 6, 38, 62, 94
+  const pos = (vals[0]*6 + vals[1]*38 + vals[2]*62 + vals[3]*94) / sum;
+  const maxIdx = vals.indexOf(Math.max(...vals));
+  return { label: axis.toUpperCase()+(maxIdx+1), pos };
+}
+
+function computeSemaforo(s){
+  const tps = s['touchpoints'] || [];
+  const total = tps.length;
+  const puntuales = tps.filter(t => t.naturaleza === 'Puntual').length;
+  const continuos = tps.filter(t => t.naturaleza === 'Continuo').length;
+  const estudiantes = parseInt(s['asig-estudiantes']) || 0;
+  const horasSemana = parseFloat(s['asig-horas-semana']) || 0;
+  const equipo = parseInt(s['asig-equipo']) || 1;
+  if(total === 0 || estudiantes === 0 || horasSemana === 0){
+    return { color:'gris', titulo:'Datos incompletos', sub:'Completa asignatura y touchpoints en la Plantilla para ver el semáforo.', total, cargaDisplay:'—' };
+  }
+  const carga = puntuales + continuos * 2;
+  const cargaPorDocente = (carga * (estudiantes / 60)) / equipo;
+  const factorHoras = horasSemana < 2 ? 1.5 : horasSemana <= 4 ? 1 : 0.85;
+  const cargaFinal = cargaPorDocente * factorHoras;
+  let color, titulo;
+  if(cargaFinal <= 4 && total <= 5){ color='verde'; titulo='Carga sostenible'; }
+  else if(cargaFinal <= 9 && total <= 9){ color='ambar'; titulo='Carga tensionada'; }
+  else { color='rojo'; titulo='Carga potencialmente inviable'; }
+  const cargaDisplay = cargaFinal.toFixed(1).replace('.', ',');
+  return { color, titulo, sub:`${total} touchpoint${total===1?'':'s'} · ${equipo} docente${equipo===1?'':'s'} · ${estudiantes} estudiantes`, total, cargaDisplay };
+}
+
+function countDims(tps){
+  const activas = new Set(), despues = new Set();
+  (tps||[]).forEach(t => {
+    Object.entries(t.dims || {}).forEach(([c,v]) => {
+      if(v.estado === 'Activa') activas.add(c);
+      else if(v.estado === 'Lo veré en Sprint 1') despues.add(c);
+    });
+  });
+  return { activas:[...activas].sort(), despues:[...despues].sort() };
+}
+
+// ----- BUILD · CANVAS -----
+function buildCanvasHTML(s){
+  const tps = s['touchpoints'] || [];
+  const arqA = _dominantAxis(s, 'a');
+  const arqB = _dominantAxis(s, 'b');
+  const combos = [...(s['combo']||[]), s['combo-otra']].filter(Boolean);
+  const arqText = combos.length ? combos.join(' · ') : 'Declara al menos un arquetipo combinado en la Plantilla para ver la síntesis pedagógica.';
+  const sem = computeSemaforo(s);
+  const dims = countDims(tps);
+
+  const tpCards = tps.length ? tps.slice(0,3).map((t,i) => {
+    const natur = (t.naturaleza || '').toLowerCase();
+    const evid = (t.dims||{}).C4?.nota || 'Evidencia por declarar.';
+    return `
+      <div class="timeline-step">
+        <div class="step-dot">TP${i+1}</div>
+        <div class="step-card">
+          <div class="step-title">${escC(t.nombre) || 'Touchpoint sin nombre'}</div>
+          <div class="step-when">${escC(t.cuando) || '—'}${natur ? `<span class="natur-badge ${natur === 'continuo' ? 'continuo' : 'puntual'}">${escC(t.naturaleza)}</span>` : ''}</div>
+          <div class="step-evidencia"><strong>Evidencia:</strong> ${escC(evid)}</div>
+        </div>
+      </div>`;
+  }).join('') : '<div class="timeline-step"><div class="step-card"><div class="step-title">Aún sin touchpoints</div><div class="step-when">Añádelos en la Plantilla · paso 5.</div></div></div>';
+
+  const dimChips = ['C2','C3','C4','C5','C6','C7'].map(c => {
+    if(dims.activas.includes(c)) return `<span class="dim-chip"><span class="dim-code">${c}</span> ${DIM_NAMES[c]}</span>`;
+    if(dims.despues.includes(c)) return `<span class="dim-chip later"><span class="dim-code">${c}</span> ${DIM_NAMES[c]} (Sprint 1)</span>`;
+    return `<span class="dim-chip off"><span class="dim-code">${c}</span> ${DIM_NAMES[c]}</span>`;
+  }).join('');
+
+  const d1 = escC(s['d1-momentos'] || '— postura pendiente —');
+  const d1Note = escC(s['d1-criterio'] || '');
+  const d2 = escC(s['d2-postura'] || '— postura pendiente —');
+  const d2Note = escC(s['d2-comunicacion'] || '');
+  const d3Ahora = escC(s['d3-ahora'] || '');
+  const d3Despues = escC(s['d3-despues'] || '');
+  const d3Fuera = escC(s['d3-fuera'] || '');
+  const d4 = escC(s['d4-postura'] || '— postura pendiente —');
+  const d4Note = escC(s['d4-nota'] || '');
+
+  const semIcon = sem.color === 'verde' ? '✓' : sem.color === 'ambar' ? '!' : sem.color === 'rojo' ? '×' : '—';
+
+  const cierrePoints = [];
+  dims.despues.forEach(c => cierrePoints.push(`Diseño fino de ${DIM_NAMES[c]} (${c}) en los touchpoints marcados.`));
+  if(s['d3-despues']) cierrePoints.push(`Operativa de la cara "Después" de D3: ${d3Despues}.`);
+  if(!cierrePoints.length) cierrePoints.push('Sin elementos explícitamente diferidos a Sprint 1.');
+  const cierreList = cierrePoints.map(x => `<li>${x}</li>`).join('');
+
+  const equipoVal = s['asig-equipo'] || '—';
+  const equipoPlural = equipoVal === '1' ? 'Docente' : 'Docentes';
+
+  return `
+  <div class="canvas">
+    <header class="canvas-head">
+      <div>
+        <div class="kit-tag">Plan IMPULSO Docente · Ruta 3 · Sprint 0</div>
+        <h1>Canvas del proceso de evaluación</h1>
+        <div class="subtitle">Síntesis estratégica · render automático de la Plantilla v3</div>
+      </div>
+      <div class="identity-meta">
+        <div class="m"><div class="m-val">${escC(s['asig-ects']||'—')}</div><div class="m-lab">ECTS</div></div>
+        <div class="m"><div class="m-val">${escC(s['asig-estudiantes']||'—')}</div><div class="m-lab">Estudiantes</div></div>
+        <div class="m"><div class="m-val">${escC(equipoVal)}</div><div class="m-lab">${equipoPlural}</div></div>
+        <div class="m"><div class="m-val">${escC(s['asig-horas-semana']||'—')}h</div><div class="m-lab">Semanales</div></div>
+      </div>
+      <div class="identity-block">
+        <div class="asig-code">${escC(s['asig-codigo']||'—')}${s['asig-curso']?` · ${escC(s['asig-curso'])}º curso`:''}${s['asig-semestre']?` · ${escC(s['asig-semestre'])}`:''}</div>
+        <div class="asig-name">${escC(s['asig-nombre']||'Sin título')}</div>
+        <div class="asig-titulacion">${escC(s['asig-titulacion']||'Sin titulación')}${s['asig-formato']?` · ${escC(s['asig-formato'])}`:''}</div>
+      </div>
+    </header>
+
+    <div class="canvas-body">
+      <div class="row row-1">
+
+        <section class="panel">
+          <div class="panel-title"><span class="dot"></span>Identidad pedagógica</div>
+          <div class="arquetipo-box">
+            <div class="arq-axis">
+              <div class="label">Eje A<br><span style="font-size:9px;color:var(--gris-500);font-weight:400;">estructura</span></div>
+              <div class="arq-track">
+                <span class="end left">abierto</span>
+                <span class="end right">guiado</span>
+                <div class="arq-marker" style="left:${arqA.pos.toFixed(0)}%;">${arqA.label}</div>
+              </div>
+            </div>
+            <div class="arq-axis">
+              <div class="label">Eje B<br><span style="font-size:9px;color:var(--gris-500);font-weight:400;">output</span></div>
+              <div class="arq-track">
+                <span class="end left">técnico</span>
+                <span class="end right">creativo</span>
+                <div class="arq-marker" style="left:${arqB.pos.toFixed(0)}%;">${arqB.label}</div>
+              </div>
+            </div>
+            <div class="arq-summary">
+              <div class="arq-kicker">Arquetipos dominantes</div>
+              <div class="arq-text">${escC(arqText)}</div>
+            </div>
+          </div>
+          <div class="hoy-block">
+            <div class="panel-title" style="margin-bottom:var(--sp-2);"><span class="dot" style="background:var(--acento-teal);"></span>Lo que ya hago hoy</div>
+            <div class="hoy-row descripcion"><div class="hoy-label">Forma</div><div class="hoy-text">${escC(s['hoy-descripcion']||'—')}</div></div>
+            <div class="hoy-row funciona"><div class="hoy-label">Funciona</div><div class="hoy-text">${escC(s['hoy-funciona']||'—')}</div></div>
+            <div class="hoy-row fricciona"><div class="hoy-label">Fricción</div><div class="hoy-text">${escC(s['hoy-fricciona']||'—')}</div></div>
+          </div>
+        </section>
+
+        <section class="panel timeline-panel">
+          <div class="panel-title"><span class="dot"></span>Momentos clave del semestre<span class="hint">${tps.length} touchpoint${tps.length===1?'':'s'} · D1 cerrada en Sprint 0</span></div>
+          <div class="timeline-track">
+            <div class="timeline-bar"></div>
+            <div class="timeline-steps">${tpCards}</div>
+          </div>
+          <div class="dims-strip">
+            <span class="strip-label">Dimensiones activas</span>
+            <div class="dims-list">${dimChips}</div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title"><span class="dot" style="background:var(--acento-coral);"></span>Decisiones estratégicas</div>
+          <div class="dec-capsula"><div class="dec-head"><span class="dec-code">D1</span><span class="dec-label">Momentos clave</span></div><div class="dec-answer">${d1}</div>${d1Note ? `<div class="dec-note">${d1Note}</div>` : ''}</div>
+          <div class="dec-capsula d2"><div class="dec-head"><span class="dec-code">D2</span><span class="dec-label">IA · estudiante</span></div><div class="dec-answer">${d2}</div>${d2Note ? `<div class="dec-note">${d2Note}</div>` : ''}</div>
+          <div class="dec-capsula d3"><div class="dec-head"><span class="dec-code">D3</span><span class="dec-label">Evidencias</span></div><div class="dec-answer">${d3Ahora || '— por declarar —'}</div>${d3Despues ? `<div class="dec-note"><strong>Después:</strong> ${d3Despues}</div>` : ''}</div>
+          <div class="dec-capsula d4"><div class="dec-head"><span class="dec-code">D4</span><span class="dec-label">IA · docente</span></div><div class="dec-answer">${d4}</div>${d4Note ? `<div class="dec-note">${d4Note}</div>` : ''}</div>
+        </section>
+
+      </div>
+
+      <div class="row row-3">
+        <section class="semaforo-panel">
+          <div class="panel-title"><span class="dot" style="background:var(--acento-teal);"></span>Semáforo económico</div>
+          <div class="semaforo-head">
+            <div class="sem-light ${sem.color}">${semIcon}</div>
+            <div>
+              <div class="sem-title">${escC(sem.titulo)}</div>
+              <div class="sem-sub">${escC(sem.sub)}</div>
+            </div>
+          </div>
+          <div class="sem-metrics">
+            <div class="sem-metric"><div class="sem-val">${sem.total}</div><div class="sem-lab">Touchpoints</div></div>
+            <div class="sem-metric"><div class="sem-val">${sem.cargaDisplay}</div><div class="sem-lab">Carga/docente</div></div>
+            <div class="sem-metric"><div class="sem-val">${dims.activas.length}</div><div class="sem-lab">Dims. activas</div></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title"><span class="dot" style="background:var(--acento-amber);"></span>Evidencias · qué miramos y cuándo</div>
+          ${d3Ahora ? `<div class="evid-item"><div class="evid-when ahora">Ahora</div><div class="evid-text">${d3Ahora}</div></div>` : '<div class="evid-item"><div class="evid-when ahora">Ahora</div><div class="evid-text"><em>Por declarar en D3</em></div></div>'}
+          ${d3Despues ? `<div class="evid-item"><div class="evid-when despues">Después</div><div class="evid-text">${d3Despues}</div></div>` : ''}
+          ${d3Fuera ? `<div class="evid-item"><div class="evid-when fuera">Fuera</div><div class="evid-text">${d3Fuera}</div></div>` : ''}
+        </section>
+
+        <section class="cierre-panel">
+          <div class="panel-title"><span class="dot"></span>Qué se cierra en Sprint 1</div>
+          <div class="cierre-text">Este canvas cierra la <strong>política</strong>. El Sprint 1 cerrará la <strong>operativa</strong>.</div>
+          <ul class="cierre-list">${cierreList}</ul>
+        </section>
+      </div>
+
+      <section class="glosario-panel">
+        <div class="glosario-head">
+          <div class="glos-kicker">Guía rápida para lectura externa</div>
+          <div class="glos-hint">Cuatro términos para decodificar el canvas</div>
+        </div>
+        <div class="glos-grid">
+          <div class="glos-item"><div class="glos-term">Touchpoint <code>TP</code></div><div class="glos-def">Momento significativo del proceso evaluativo: algo sucede, se registra evidencia, se devuelve feedback.</div></div>
+          <div class="glos-item"><div class="glos-term">Dimensiones <code>C1–C7</code></div><div class="glos-def">Los siete componentes del proceso: touchpoints, auto/coeval, IA estudiante, evidencias, recogida, retroalimentación, mejora docente.</div></div>
+          <div class="glos-item"><div class="glos-term">Decisiones <code>D1–D4</code></div><div class="glos-def">Las cuatro decisiones estratégicas que toma el docente antes del Sprint 1: momentos, IA del estudiante, evidencias, IA del docente.</div></div>
+          <div class="glos-item"><div class="glos-term">Arquetipo</div><div class="glos-def">Posición pedagógica de la asignatura en dos ejes: grado de estructura y naturaleza del output (técnico ↔ creativo).</div></div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="canvas-foot">
+      <div><strong>UC3M · Plan IMPULSO Docente</strong> · Ruta 3 Sprint 0 · Kit de instrumentos estratégicos</div>
+      <div>Canvas · ${new Date().toLocaleDateString('es-ES', {day:'numeric',month:'long',year:'numeric'})} · Render de la Plantilla estratégica v3</div>
+    </footer>
+  </div>`;
+}
+
+// ----- BUILD · BLUEPRINT 0 -----
+function buildBlueprintHTML(s){
+  const tps = s['touchpoints'] || [];
+  const tpSlots = [0,1,2].map(i => tps[i] || null);
+
+  const colHeads = tpSlots.map((t, i) => {
+    if(!t) return `<div class="col-head"><div class="col-code">TP${i+1} · C1</div><div class="col-name">— sin declarar —</div><div class="col-when">Pendiente</div></div>`;
+    const natur = (t.naturaleza || '').toLowerCase();
+    return `
+      <div class="col-head">
+        <div class="col-code">TP${i+1} · C1</div>
+        <div class="col-name">${escC(t.nombre) || '—'}</div>
+        <div class="col-when">${escC(t.cuando) || '—'}${t.naturaleza ? `<span class="col-natur">${escC(t.naturaleza)}</span>` : ''}</div>
+      </div>`;
+  }).join('');
+
+  const d2Trans = s['d2-postura'] ? `<strong>${escC(s['d2-postura'])}.</strong>${s['d2-comunicacion']?` ${escC(s['d2-comunicacion'])}`:''}` : 'D2 sin declarar.';
+  const d3Trans = s['d3-ahora'] ? `<strong>Ahora:</strong> ${escC(s['d3-ahora'])}${s['d3-despues']?` <strong>Después:</strong> ${escC(s['d3-despues'])}`:''}` : 'D3 sin declarar.';
+  const d4Trans = s['d4-postura'] ? `<strong>${escC(s['d4-postura'])}.</strong>${s['d4-nota']?` ${escC(s['d4-nota'])}`:''}` : 'D4 sin declarar.';
+
+  const rows = [
+    { code:'C4', name:'Evidencia', hint:'qué se recoge', trans:{tag:'D3 · Política', text:d3Trans} },
+    { code:'C5', name:'Recogida', hint:'cómo se captura', trans:{tag:'Infra común', text:'Todo pasa por el aula virtual del curso; sin sistemas paralelos.'} },
+    { code:'C2', name:'Auto/coevaluación', hint:'quién valora', trans:{tag:'Principio', text:'Coevaluación <strong>solo formativa</strong>: no pondera nota final.'} },
+    { code:'C3', name:'IA estudiante', hint:'política de uso', trans:{tag:'D2 · Política', text:d2Trans} },
+    { code:'C6', name:'Retroalimentación', hint:'devolución al estudiante', trans:{tag:'Principio', text:'Feedback <strong>antes</strong> de la nota, no después. Siempre con un <em>próximo paso</em>.'} },
+    { code:'C7', name:'Mejora docente', hint:'qué aprende el equipo', trans:{tag:'D4 · Política', text:d4Trans} }
+  ];
+
+  let nCerrado = 0, nPlaceholder = 0, nSprint1 = 0;
+
+  const rowsHtml = rows.map(r => {
+    const rowCells = tpSlots.map(t => {
+      if(!t){
+        nPlaceholder++;
+        return `<div class="cell placeholder"><span class="cell-tag">Placeholder</span><div class="cell-text">Touchpoint sin declarar en la Plantilla.</div></div>`;
+      }
+      const dim = (t.dims || {})[r.code] || {};
+      const nota = escC(dim.nota || '');
+      if(dim.estado === 'Activa'){
+        nCerrado++;
+        return `<div class="cell cerrado"><span class="cell-tag">Cerrado</span><div class="cell-text">${nota || '<em>Activa sin nota.</em>'}</div></div>`;
+      }
+      if(dim.estado === 'No aplica'){
+        return `<div class="cell na"><span class="cell-tag">No aplica</span></div>`;
+      }
+      if(dim.estado === 'Lo veré en Sprint 1'){
+        nSprint1++;
+        return `<div class="cell sprint1"><span class="cell-tag">Sprint 1</span><div class="cell-text">${nota || 'Por diseñar en Sprint 1.'}</div></div>`;
+      }
+      nPlaceholder++;
+      return `<div class="cell placeholder"><span class="cell-tag">Placeholder</span><div class="cell-text">${nota || '<em>Posición reservada · sin declarar.</em>'}</div></div>`;
+    }).join('');
+
+    return `
+      <div class="row-label">
+        <div class="rl-code">${r.code}</div>
+        <div class="rl-name">${r.name}</div>
+        <div class="rl-hint">${r.hint}</div>
+      </div>
+      ${rowCells}
+      <div class="cell transversal"><span class="cell-tag">${r.trans.tag}</span><div class="cell-text">${r.trans.text}</div></div>
+    `;
+  }).join('');
+
+  // Sprint 1 panel items
+  const sprint1Items = [];
+  rows.forEach(r => {
+    tpSlots.forEach((t,i) => {
+      if(t && (t.dims||{})[r.code]?.estado === 'Lo veré en Sprint 1'){
+        sprint1Items.push({
+          lead: `${r.code} · TP${i+1}`,
+          label: r.name,
+          what: t.dims[r.code].nota || 'Detalle operativo por definir.'
+        });
+      }
+    });
+  });
+
+  const sprint1Html = sprint1Items.length
+    ? sprint1Items.map(x => `<li><strong>${x.lead} ${escC(x.label)}</strong><br><span class="what">${escC(x.what)}</span></li>`).join('')
+    : '<li><strong>Sin ítems diferidos</strong><br><span class="what">Ninguna dimensión está marcada como "Lo veré en Sprint 1".</span></li>';
+
+  const equipoVal = s['asig-equipo'] || '—';
+  const equipoSuf = equipoVal === '1' ? '' : 's';
+  const semestreTxt = [s['asig-semestre'], s['asig-formato']].filter(Boolean).map(escC).join(' · ') || '—';
+
+  return `
+  <div class="page">
+    <header class="bp-head">
+      <div>
+        <div class="kit-tag">Plan IMPULSO Docente · Ruta 3 · Pieza puente Sprint 0 → Sprint 1</div>
+        <h1>Blueprint 0 del proceso de evaluación</h1>
+        <div class="subtitle">Mapa operativo: qué está cerrado, qué queda como posición reservada y qué se diseña en el Sprint 1.</div>
+      </div>
+      <div class="identity-card">
+        <div class="asig-code">${escC(s['asig-codigo']||'—')}${s['asig-ects']?` · ${escC(s['asig-ects'])} ECTS`:''}${s['asig-curso']?` · ${escC(s['asig-curso'])}º curso`:''}</div>
+        <div class="asig-name">${escC(s['asig-nombre']||'Sin título')}</div>
+        <div class="asig-meta">${escC(s['asig-estudiantes']||'—')} estudiantes · ${escC(equipoVal)} docente${equipoSuf} · ${semestreTxt}</div>
+      </div>
+    </header>
+
+    <div class="bp-meta">
+      <div class="bp-intro">
+        El blueprint cruza los <strong>momentos del semestre</strong> (touchpoints TP1–TP3) con las <strong>capas operativas del proceso</strong> (C2–C7) y una columna <strong>transversal</strong> para las políticas que no viven en un momento concreto. Cada celda es una <em>decisión visible</em>: ya cerrada, posición reservada o por diseñar en Sprint 1.
+      </div>
+      <div class="bp-states">
+        <span class="state-legend"><span class="state-dot cerrado"></span>Cerrado · Sprint 0</span>
+        <span class="state-legend"><span class="state-dot placeholder"></span>Placeholder</span>
+        <span class="state-legend"><span class="state-dot sprint1"></span>Sprint 1 · por diseñar</span>
+      </div>
+    </div>
+
+    <div class="bp-body">
+      <div class="bp-matrix">
+        <div class="corner"></div>
+        ${colHeads}
+        <div class="col-head transversal"><div class="col-code">Transversal</div><div class="col-name">Políticas del curso</div><div class="col-when">Todo el semestre</div></div>
+        ${rowsHtml}
+      </div>
+
+      <div class="counts-strip">
+        <div class="count-card"><div class="count-dot cerrado"></div><div class="count-data"><div class="count-val">${nCerrado}</div><div class="count-lab">Celdas cerradas</div><div class="count-note">Lo que el Sprint 0 deja decidido.</div></div></div>
+        <div class="count-card"><div class="count-dot placeholder"></div><div class="count-data"><div class="count-val">${nPlaceholder}</div><div class="count-lab">Placeholders</div><div class="count-note">Posiciones reservadas sin detalle.</div></div></div>
+        <div class="count-card"><div class="count-dot sprint1"></div><div class="count-data"><div class="count-val">${nSprint1}</div><div class="count-lab">Sprint 1</div><div class="count-note">Lo que queda como diseño operativo explícito.</div></div></div>
+      </div>
+
+      <section class="sprint1-panel">
+        <div>
+          <div class="s1-title">Qué se construye en el Sprint 1</div>
+          <div class="s1-sub">El blueprint convierte el Sprint 1 en un ejercicio acotado: rellenar huecos visibles, no diseñar desde cero.</div>
+        </div>
+        <ul class="sprint1-list">${sprint1Html}</ul>
+      </section>
+    </div>
+
+    <footer class="bp-foot">
+      <div><strong>UC3M · Plan IMPULSO Docente</strong> · Ruta 3 · Pieza puente Sprint 0 → Sprint 1</div>
+      <div>Blueprint 0 · cierre de Sprint 0 · ${new Date().toLocaleDateString('es-ES', {day:'numeric',month:'long',year:'numeric'})} · Render de la Plantilla estratégica v3</div>
+    </footer>
+  </div>`;
+}
+
+// ----- RENDER + SWITCH VIEW -----
+function isStateReady(s){
+  return !!s['asig-nombre'] && (s['touchpoints']||[]).length > 0;
+}
+
+function renderCanvasView(){
+  const s = collectState();
+  document.getElementById('canvas-banner').classList.toggle('hidden', isStateReady(s));
+  document.getElementById('canvas-render').innerHTML = buildCanvasHTML(s);
+}
+
+function renderBlueprintView(){
+  const s = collectState();
+  document.getElementById('blueprint-banner').classList.toggle('hidden', isStateReady(s));
+  document.getElementById('blueprint-render').innerHTML = buildBlueprintHTML(s);
+}
+
+function switchView(name){
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.view === name));
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === 'view-' + name));
+  if(name === 'canvas') renderCanvasView();
+  else if(name === 'blueprint') renderBlueprintView();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function refreshActiveView(){
+  const active = document.querySelector('.view.active');
+  if(!active) return;
+  if(active.id === 'view-canvas') renderCanvasView();
+  else if(active.id === 'view-blueprint') renderBlueprintView();
+}
+form.addEventListener('input', refreshActiveView);
+form.addEventListener('change', refreshActiveView);
+
+function loadExample(){
+  if(!confirm('Cargar el caso ejemplo reemplazará los datos actuales de la Plantilla. ¿Continuar?')) return;
+  applyState(DEMO_STATE);
+  persist();
+  refreshActiveView();
+}
+
+// ===== INIT =====
+try {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if(raw){
+    const parsed = JSON.parse(raw);
+    // Migración silenciosa v1→v2: si no hay touchpoints pero hay m1..m7, arrancamos vacío.
+    applyState(parsed);
+  } else {
+    applyState({});
+  }
+} catch(e){ applyState({}); }
+updateSemaforo();
+updateProgress();
+</script>
+
+</body>
+</html>

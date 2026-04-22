@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Walkthrough guiado · Plantilla del plan operativo · Sprint 1 · Rediseña.Evaluacion</title>
+<style>
+/* ============ DESIGN SYSTEM · UC3M-IMPULSO ============ */
+:root{
+  --azul-reflex:#171796; --azul-deep:#0F0F6B; --azul-mid:#2D2DA8; --azul-soft:#E8E8F6;
+  --acento-teal:#1A9E7A; --acento-teal-soft:#E0F2EC;
+  --acento-amber:#E8A317; --acento-amber-soft:#FBF0D9;
+  --acento-coral:#E05555; --acento-coral-soft:#FADDDD;
+  --gris-900:#0E1116; --gris-800:#1F2329; --gris-700:#3A4049; --gris-600:#575E68;
+  --gris-500:#7A818B; --gris-400:#9DA3AB; --gris-300:#C8CCD2; --gris-200:#E2E4E8;
+  --gris-100:#F1F2F5; --gris-050:#F8F9FB; --blanco:#FFFFFF;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
+  --serif:'Iowan Old Style','Palatino Linotype','Book Antiqua',Georgia,serif;
+  --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px;
+  --sp-7:28px; --sp-8:32px; --sp-10:40px; --sp-12:48px;
+  --text-xs:11px; --text-sm:13px; --text-base:14px; --text-lg:16px;
+  --text-xl:18px; --text-2xl:22px; --text-3xl:28px; --text-4xl:36px;
+  --radio-sm:4px; --radio-md:8px; --radio-lg:12px;
+  --sombra-sm:0 1px 2px rgba(15,15,107,.06),0 1px 3px rgba(15,15,107,.04);
+  --sombra-md:0 4px 12px rgba(15,15,107,.08),0 2px 4px rgba(15,15,107,.05);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--gris-050);color:var(--gris-900);font-family:var(--sans);font-size:var(--text-base);line-height:1.6;-webkit-font-smoothing:antialiased}
+body{padding:var(--sp-10) var(--sp-6) var(--sp-12);}
+
+/* ============ CONTAINER ============ */
+.page{
+  max-width:820px;margin:0 auto;background:var(--blanco);
+  border-radius:var(--radio-lg);box-shadow:var(--sombra-md);
+  border:1px solid var(--gris-200);overflow:hidden;
+}
+
+/* ============ HEADER ============ */
+.page-head{
+  background:linear-gradient(135deg,var(--azul-deep) 0%,var(--azul-reflex) 55%,var(--azul-mid) 100%);
+  color:var(--blanco);padding:var(--sp-8) var(--sp-10) var(--sp-7);
+}
+.kit-tag{
+  font-size:var(--text-xs);letter-spacing:.14em;text-transform:uppercase;
+  opacity:.72;margin-bottom:var(--sp-2);font-weight:600;
+}
+.page-head h1{
+  font-family:var(--serif);font-size:var(--text-3xl);
+  font-weight:600;letter-spacing:-.01em;line-height:1.15;margin-bottom:var(--sp-2);
+}
+.page-head .subtitle{
+  font-size:var(--text-base);opacity:.9;font-style:italic;max-width:640px;line-height:1.5;
+}
+.head-meta{
+  display:flex;gap:var(--sp-6);margin-top:var(--sp-5);
+  padding-top:var(--sp-4);border-top:1px solid rgba(255,255,255,.18);
+  font-size:var(--text-xs);letter-spacing:.06em;flex-wrap:wrap;
+}
+.head-meta-item{opacity:.78;}
+.head-meta-item strong{opacity:1;color:var(--blanco);font-weight:600;letter-spacing:0;text-transform:none;margin-right:4px;font-size:var(--text-xs);}
+
+/* ============ BODY ============ */
+.body{padding:var(--sp-8) var(--sp-10);}
+
+/* ============ FICHA ============ */
+.ficha{
+  background:var(--gris-050);border:1px solid var(--gris-200);
+  border-radius:var(--radio-md);padding:var(--sp-5) var(--sp-6);
+  margin-bottom:var(--sp-8);
+}
+.ficha h3{
+  font-family:var(--serif);font-weight:600;font-size:var(--text-base);
+  color:var(--azul-deep);margin-bottom:var(--sp-3);
+  letter-spacing:.02em;text-transform:uppercase;font-size:var(--text-xs);
+}
+.ficha-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-3) var(--sp-5);
+}
+.ficha-row{display:grid;grid-template-columns:1fr;gap:2px;}
+.ficha-label{
+  font-size:var(--text-xs);letter-spacing:.06em;color:var(--gris-500);
+  font-weight:600;text-transform:uppercase;
+}
+.ficha-value{font-size:var(--text-sm);color:var(--gris-800);line-height:1.5;}
+.ficha-value strong{color:var(--azul-deep);}
+
+/* ============ SECTION ============ */
+.section{margin-bottom:var(--sp-10);scroll-margin-top:20px;}
+.section:last-child{margin-bottom:0;}
+.section-head{
+  display:flex;align-items:baseline;gap:var(--sp-3);
+  margin-bottom:var(--sp-5);flex-wrap:wrap;
+}
+.section-num{
+  font-family:var(--serif);font-weight:700;color:var(--azul-reflex);
+  font-size:var(--text-2xl);line-height:1;
+}
+.section-head h2{
+  font-family:var(--serif);font-weight:600;font-size:var(--text-2xl);
+  color:var(--azul-deep);letter-spacing:-.01em;line-height:1.2;
+}
+.section-hint{
+  font-size:var(--text-xs);color:var(--gris-500);font-style:italic;
+  margin-left:auto;
+}
+.lead{font-size:var(--text-lg);color:var(--gris-800);line-height:1.55;margin-bottom:var(--sp-4);}
+
+/* ============ PROSE ============ */
+.prose p{color:var(--gris-800);margin-bottom:var(--sp-3);}
+.prose p:last-child{margin-bottom:0;}
+.prose strong{color:var(--azul-deep);font-weight:600;}
+.prose em{font-style:italic;}
+.prose h3{
+  font-family:var(--serif);font-weight:600;font-size:var(--text-lg);
+  color:var(--azul-deep);margin-top:var(--sp-6);margin-bottom:var(--sp-3);
+}
+.prose ul{list-style:none;display:grid;gap:var(--sp-2);margin:var(--sp-3) 0;}
+.prose ul li{
+  padding-left:var(--sp-5);position:relative;color:var(--gris-800);
+  font-size:var(--text-sm);line-height:1.55;
+}
+.prose ul li::before{
+  content:'›';position:absolute;left:var(--sp-2);top:0;
+  color:var(--azul-reflex);font-weight:700;
+}
+
+/* ============ CALLOUTS ============ */
+.callout{
+  padding:var(--sp-4) var(--sp-5);border-radius:var(--radio-md);
+  margin:var(--sp-5) 0;font-size:var(--text-sm);line-height:1.55;
+  border-left:3px solid;
+}
+.callout p{margin-bottom:var(--sp-2);}
+.callout p:last-child{margin-bottom:0;}
+.callout strong{font-weight:700;}
+.callout-label{
+  display:block;font-size:var(--text-xs);letter-spacing:.08em;
+  text-transform:uppercase;font-weight:700;margin-bottom:var(--sp-2);
+}
+.callout.reassure{
+  background:var(--azul-soft);border-left-color:var(--azul-reflex);color:var(--azul-deep);
+}
+.callout.reassure .callout-label{color:var(--azul-reflex);}
+.callout.warn{
+  background:var(--acento-amber-soft);border-left-color:var(--acento-amber);color:#5B3D00;
+}
+.callout.warn .callout-label{color:#A46A00;}
+
+/* ============ BLOQUE TIEMPO ============ */
+.time-blocks{
+  display:grid;gap:var(--sp-4);margin:var(--sp-5) 0;
+}
+.time-block{
+  display:grid;grid-template-columns:auto 1fr;gap:var(--sp-5);
+  background:var(--blanco);border:1px solid var(--gris-200);
+  border-radius:var(--radio-md);padding:var(--sp-5) var(--sp-6);
+  border-left:3px solid var(--azul-reflex);
+}
+.time-stamp{
+  display:flex;flex-direction:column;align-items:center;
+  padding-right:var(--sp-4);border-right:1px solid var(--gris-200);
+  min-width:70px;
+}
+.time-stamp-num{
+  font-family:var(--mono);font-weight:600;font-size:var(--text-xl);
+  color:var(--azul-reflex);letter-spacing:-.02em;
+}
+.time-stamp-label{
+  font-size:var(--text-xs);color:var(--gris-500);letter-spacing:.06em;
+  text-transform:uppercase;margin-top:2px;
+}
+.time-body{min-width:0;}
+.time-body h3{
+  font-family:var(--serif);font-weight:600;font-size:var(--text-lg);
+  color:var(--azul-deep);margin:0 0 var(--sp-3) 0;letter-spacing:-.005em;
+}
+.time-screen{
+  font-size:var(--text-xs);color:var(--gris-700);
+  background:var(--gris-100);border-left:3px solid var(--gris-400);
+  padding:var(--sp-2) var(--sp-3);margin-bottom:var(--sp-3);
+  border-radius:0 var(--radio-sm) var(--radio-sm) 0;line-height:1.5;
+}
+.time-screen strong{
+  color:var(--gris-900);font-weight:700;
+  text-transform:uppercase;letter-spacing:.06em;font-size:var(--text-xs);
+}
+.narration{
+  font-family:var(--serif);font-size:var(--text-base);line-height:1.65;
+  color:var(--gris-800);padding:var(--sp-3) var(--sp-4);
+  background:var(--azul-soft);border-radius:var(--radio-sm);
+  border-left:3px solid var(--azul-reflex);
+}
+.narration p{margin-bottom:var(--sp-3);color:var(--gris-800);}
+.narration p:last-child{margin-bottom:0;}
+.narration strong{color:var(--azul-deep);font-weight:700;}
+.narration em{font-style:italic;}
+
+/* Screen block alternativo dentro de un time-block (cuando hay varios) */
+.time-body .time-screen + .narration{margin-bottom:var(--sp-3);}
+.time-body .narration + .time-screen{margin-top:var(--sp-3);}
+
+/* ============ ADAPTACIONES ============ */
+.adapt-grid{
+  display:grid;gap:var(--sp-4);margin:var(--sp-4) 0;
+}
+.adapt-card{
+  background:var(--gris-050);border:1px solid var(--gris-200);
+  border-radius:var(--radio-md);padding:var(--sp-4) var(--sp-5);
+  border-left:3px solid var(--acento-teal);
+}
+.adapt-card h3{
+  font-family:var(--serif);font-weight:600;font-size:var(--text-base);
+  color:var(--azul-deep);margin-bottom:var(--sp-3);letter-spacing:-.005em;
+}
+.adapt-card .adapt-tag{
+  font-size:var(--text-xs);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--acento-teal);font-weight:700;margin-bottom:2px;display:block;
+}
+.adapt-card ul{list-style:none;display:grid;gap:6px;}
+.adapt-card ul li{
+  padding-left:var(--sp-5);position:relative;
+  font-size:var(--text-sm);color:var(--gris-700);line-height:1.5;
+}
+.adapt-card ul li::before{
+  content:'›';position:absolute;left:var(--sp-2);top:0;
+  color:var(--acento-teal);font-weight:700;
+}
+.adapt-card ul li strong{color:var(--azul-deep);}
+
+/* ============ LINKS PANEL ============ */
+.links-panel{
+  background:var(--gris-900);color:var(--gris-100);
+  border-radius:var(--radio-md);padding:var(--sp-5) var(--sp-6);
+  margin-top:var(--sp-6);
+}
+.links-panel h3{
+  font-family:var(--serif);font-weight:600;font-size:var(--text-lg);
+  color:var(--blanco);margin-bottom:var(--sp-3);
+}
+.links-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-3);
+}
+.link-card{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radio-sm);padding:var(--sp-3) var(--sp-4);
+  text-decoration:none;color:var(--gris-100);
+  transition:all .15s ease;
+}
+.link-card:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25);}
+.link-card-label{
+  font-size:var(--text-xs);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--gris-400);margin-bottom:2px;
+}
+.link-card-title{
+  font-weight:600;color:var(--blanco);font-size:var(--text-sm);
+}
+.link-card-hint{
+  font-size:var(--text-xs);color:var(--gris-400);margin-top:4px;
+}
+
+/* ============ FOOTER ============ */
+.page-foot{
+  background:var(--gris-100);color:var(--gris-600);
+  padding:var(--sp-5) var(--sp-10);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:var(--text-xs);letter-spacing:.04em;border-top:1px solid var(--gris-200);
+}
+.page-foot strong{color:var(--gris-800);font-weight:600;}
+
+@media (max-width:720px){
+  body{padding:var(--sp-4) var(--sp-2);}
+  .page-head,.body,.page-foot{padding-left:var(--sp-5);padding-right:var(--sp-5);}
+  .page-foot{flex-direction:column;gap:var(--sp-2);align-items:flex-start;}
+  .links-grid,.ficha-grid{grid-template-columns:1fr;}
+  .time-block{grid-template-columns:1fr;gap:var(--sp-3);}
+  .time-stamp{flex-direction:row;border-right:none;border-bottom:1px solid var(--gris-200);padding-right:0;padding-bottom:var(--sp-2);gap:var(--sp-2);min-width:0;}
+}
+@media print{
+  body{padding:0;background:var(--blanco);}
+  .page{box-shadow:none;border:none;border-radius:0;}
+  .time-block,.callout,.adapt-card{page-break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+
+<main class="page">
+
+  <!-- ============ HEADER ============ -->
+  <header class="page-head">
+    <div class="kit-tag">Rediseña.Evaluacion · Sprint 1</div>
+    <h1>Walkthrough guiado · Plantilla del plan operativo</h1>
+    <p class="subtitle">Un guion de 5-7 minutos que te lleva hoja por hoja sobre el ejemplo pre-rellenado. Léelo mientras navegas por la Plantilla EJEMPLO IngeSoft, úsalo para grabar un video o para introducir la plantilla en una sesión.</p>
+    <div class="head-meta">
+      <div class="head-meta-item"><strong>Duración</strong>≈ 6 min (5-7 según ritmo)</div>
+      <div class="head-meta-item"><strong>Se recorre sobre</strong>Plantilla EJEMPLO IngeSoft</div>
+      <div class="head-meta-item"><strong>Usos</strong>Lectura, grabación o sesión</div>
+    </div>
+  </header>
+
+  <!-- ============ BODY ============ -->
+  <div class="body">
+
+    <!-- ========== FICHA ========== -->
+    <section class="section">
+      <div class="section-head">
+        <span class="section-num">·</span>
+        <h2>Ficha del walkthrough</h2>
+      </div>
+
+      <div class="ficha">
+        <h3>Para qué sirve este guion</h3>
+        <div class="ficha-grid">
+          <div class="ficha-row">
+            <span class="ficha-label">Duración objetivo</span>
+            <span class="ficha-value">6 minutos (rango 5-7 min según ritmo narrativo).</span>
+          </div>
+          <div class="ficha-row">
+            <span class="ficha-label">Audiencia</span>
+            <span class="ficha-value">Profesorado que abre la plantilla por primera vez tras el Sprint 0.</span>
+          </div>
+          <div class="ficha-row">
+            <span class="ficha-label">Punto de partida</span>
+            <span class="ficha-value">La plantilla <strong>Plantilla EJEMPLO IngeSoft</strong> abierta. Es el ejemplo pre-rellenado; no la plantilla en blanco.</span>
+          </div>
+          <div class="ficha-row">
+            <span class="ficha-label">Objetivo</span>
+            <span class="ficha-value">Que sepas qué hace cada hoja, qué se rellena y qué se lee, y que <strong>no te bloquees al abrir la tuya en blanco</strong>.</span>
+          </div>
+          <div class="ficha-row">
+            <span class="ficha-label">Tono</span>
+            <span class="ficha-value">Conversacional, cercano. No es una formación: es una visita guiada.</span>
+          </div>
+          <div class="ficha-row">
+            <span class="ficha-label">Usos alternativos</span>
+            <span class="ficha-value">Grabación en video con pantalla compartida, o introducción en sesión grupal proyectando la plantilla.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout reassure">
+        <span class="callout-label">Convenciones del guion</span>
+        <p>El <strong>tiempo (0:00)</strong> marca el inicio aproximado del bloque. <strong>Pantalla</strong> describe qué se muestra. El bloque azul sangrado es la <strong>narración literal</strong> — está pensado para leerse tal cual o adaptarse en vivo.</p>
+      </div>
+    </section>
+
+    <!-- ========== GUION ========== -->
+    <section class="section">
+      <div class="section-head">
+        <span class="section-num">·</span>
+        <h2>Guion minuto a minuto</h2>
+        <span class="section-hint">Nueve bloques</span>
+      </div>
+
+      <div class="time-blocks">
+
+        <div class="time-block">
+          <div class="time-stamp">
+            <span class="time-stamp-num">0:00</span>
+            <span class="time-stamp-label">Inicio</span>
+          </div>
+          <div class="time-body">
+            <h3>Bienvenida y propósito</h3>
+            <div class="time-screen"><strong>Pantalla</strong> · Portada de la plantilla o vista de la hoja Instrucciones.</div>
+            <div class="narration">
+              <p>Bienvenidos. Lo que vamos a ver en los próximos minutos es la plantilla de plan operativo de evaluación. Es la pieza con la que vais a diseñar y ajustar el proceso evaluativo de vuestra asignatura. <strong>No es un formulario administrativo, no se revisa, no se audita.</strong> Es una herramienta para ver lo que ya hacéis con un poco más de perspectiva, y para pensar dónde la IA os puede ayudar sin romper nada.</p>
+              <p>Os voy a enseñar la plantilla con un ejemplo: una asignatura ficticia de <strong>Ingeniería del Software</strong>, de tercero, con 40 estudiantes. Todo lo que veáis ya viene relleno, para que podáis imaginar cómo quedaría la vuestra.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-stamp">
+            <span class="time-stamp-num">0:40</span>
+            <span class="time-stamp-label">Bloque 2</span>
+          </div>
+          <div class="time-body">
+            <h3>La hoja Parámetros: configura una vez y olvídate</h3>
+            <div class="time-screen"><strong>Pantalla</strong> · Hoja <em>Parámetros</em>. Destacar filas de Estudiantes, Semanas, ECTS, Horas/ECTS.</div>
+            <div class="narration">
+              <p>Lo primero, <strong>Parámetros</strong>. Aquí cargas los datos de tu asignatura: número de estudiantes, semanas del cuatrimestre, ECTS. Nosotros ponemos 6 ECTS por 25 horas, que es el estándar europeo, así la plantilla sabe cuántas horas tiene que trabajar tu estudiantado en total y te avisa si te pasas. Esto se <strong>rellena una vez y no se vuelve a tocar</strong>.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-stamp">
+            <span class="time-stamp-num">1:10</span>
+            <span class="time-stamp-label">Bloque 3</span>
+          </div>
+          <div class="time-body">
+            <h3>Touchpoints: la hoja donde pasa todo</h3>
+            <div class="time-screen"><strong>Pantalla</strong> · Hoja <em>Touchpoints</em>. Señalar las filas TP1-TP8 (prueba diagnóstica, quiz semanal, entregas P1/P2/P3, parcial, final, tutoría).</div>
+            <div class="narration">
+              <p>Esta es la <strong>hoja principal</strong>. Cada fila es un <em>touchpoint</em>: cualquier interacción evaluativa con el estudiantado. Un examen es un touchpoint, una entrega es otro, una tutoría también. En el ejemplo tengo ocho.</p>
+            </div>
+            <div class="time-screen"><strong>Pantalla</strong> · Zoom a la fila <em>TP3 — Entrega P1</em>. Recorrer columnas de izquierda a derecha.</div>
+            <div class="narration">
+              <p>Si voy a una fila en detalle, veis lo que se rellena: nombre, tipo del catálogo, naturaleza formativo o sumativo, quién es el responsable (yo, la coordinadora, o ambos), cuántas ocurrencias tiene, semana de inicio y fin, y el peso en la nota. Hasta aquí, <strong>identificación</strong>.</p>
+            </div>
+            <div class="time-screen"><strong>Pantalla</strong> · Destacar columnas L-O (horas base por fase) y Q-T (horas con IA).</div>
+            <div class="narration">
+              <p>Después vienen las horas. Y aquí está la <strong>clave de la plantilla</strong>. Hay dos bloques: las horas base, es decir, cómo lo haces hoy sin IA, por fase — diseño, ejecución, corrección y feedback. Y justo al lado, las mismas cuatro fases pero con IA: tu <strong>hipótesis</strong> de cuánto tardarías si te apoyaras en IA. Puedes dejarlas vacías: si no pones nada, la plantilla asume que no hay cambio. Pero la idea es que aquí <em>pruebes a imaginar</em> dónde tiene sentido.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-stamp">
+            <span class="time-stamp-num">2:40</span>
+            <span class="time-stamp-label">Bloque 4</span>
+          </div>
+          <div class="time-body">
+            <h3>La columna Prácticas IA: el gesto que pide esta plantilla</h3>
+            <div class="time-screen"><strong>Pantalla</strong> · Columnas V-Y (prácticas IA por fase) en TP3 y TP5. Mostrar texto libre.</div>
+            <div class="narration">
+              <p>Fijaos en estas cuatro columnas de <strong>texto libre</strong>. Son las prácticas IA hipotetizadas. Aquí escribes, con tus palabras, qué uso concreto imaginas para la IA en esa fase. En este ejemplo, en la entrega P1 yo escribo: <em>"IA redacta primer borrador de feedback personalizado a partir de la rúbrica, yo edito antes de enviar"</em>. No hace falta estructura formal. Es <strong>materia prima para conversar</strong>. Si no se te ocurre nada, déjalo vacío — no pasa nada.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-stamp">
+            <span class="time-stamp-num">3:10</span>
+            <span class="time-stamp-label">Bloque 5</span>
+          </div>
+          <div class="time-body">
+            <h3>Resumen: la primera foto</h3>
+            <div class="time-screen"><strong>Pantalla</strong> · Hoja <em>Resumen</em>. Destacar totales: horas base, horas IA, delta %, horas estudiante.</div>
+            <div class="narration">
+              <p>Una vez rellenos los touchpoints, saltamos a <strong>Resumen</strong>. Aquí ves tu diseño en números agregados. En el ejemplo: <strong>340 horas base, 302 con IA, un 11 % de ahorro potencial</strong>. 87 horas de carga de estudiante. Peso sumativo al 100 %. Es una foto — te dice si estás más o menos donde te imaginabas.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-stamp">
+            <span class="time-stamp-num">3:45</span>
+            <span class="time-stamp-label">Bloque 6</span>
+          </div>
+          <div class="time-body">
+            <h3>Cronograma: cuándo cae cada cosa</h3>
+            <div class="time-screen"><strong>Pantalla</strong> · Hoja <em>Cronograma</em>. Bajar a ver la matriz TP × semana.</div>
+            <div class="narration">
+              <p>El <strong>Cronograma</strong> es una matriz: cada fila un touchpoint, cada columna una semana. La plantilla distribuye las horas de forma realista: el diseño cae dos semanas antes del inicio, la ejecución en la semana del TP, y la corrección y feedback dos semanas después. Hay <strong>tres bloques apilados</strong>: carga base, carga con IA, y carga del estudiante.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-stamp">
+            <span class="time-stamp-num">4:30</span>
+            <span class="time-stamp-label">Bloque 7</span>
+          </div>
+          <div class="time-body">
+            <h3>Las tres lentes</h3>
+            <div class="time-screen"><strong>Pantalla</strong> · Hoja <em>Lente 1 · Carga docente</em>. Mostrar el gráfico.</div>
+            <div class="narration">
+              <p><strong>Lente 1: tu carga semanal.</strong> Aquí hay un pico — en el ejemplo la plantilla marca ocho semanas que superan el umbral, lo que nos dice que este diseño está muy concentrado. Es exactamente lo que queremos ver: <em>la herramienta no te juzga, te muestra</em>.</p>
+            </div>
+            <div class="time-screen"><strong>Pantalla</strong> · Hoja <em>Lente 2 · Carga estudiante</em>. Mostrar curva y presupuesto ECTS.</div>
+            <div class="narration">
+              <p><strong>Lente 2: tu estudiantado.</strong> Curva semanal de horas y el consumo del presupuesto ECTS. En el ejemplo, 87 horas sobre 150 disponibles — un 58 % — con tres semanas de pico. Deja margen, pero marca acumulación.</p>
+              <p>Un aviso importante sobre esta lente: <strong>concentra toda la carga del estudiante en la semana de entrega</strong>, así que exagera los picos. En la realidad el estudiante reparte el trabajo en las semanas previas. El número fiable aquí es el <em>consumo total</em> — el 58 % — más que la forma de la curva. Si quieres ver la distribución realista, súbe tu Plantilla al <strong>Panel del plan operativo</strong> (pieza complementaria): su vista <em>Calendario semanal</em> reparte las horas 50 / 30 / 20 % en las tres semanas previas a cada entrega.</p>
+            </div>
+            <div class="time-screen"><strong>Pantalla</strong> · Hoja <em>Lente 3 · Equilibrio F-S</em>. Mostrar pie chart y solapamientos.</div>
+            <div class="narration">
+              <p><strong>Lente 3: formativo contra sumativo.</strong> Aquí ves la proporción entre feedback sin nota y pruebas que cuentan. En el ejemplo el 37 % es formativo y hay un primer formativo antes del primer sumativo — buena señal pedagógica.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-stamp">
+            <span class="time-stamp-num">5:45</span>
+            <span class="time-stamp-label">Bloque 8</span>
+          </div>
+          <div class="time-body">
+            <h3>Alertas: lo que te obliga a decidir</h3>
+            <div class="time-screen"><strong>Pantalla</strong> · Hoja <em>Alertas</em>. Recorrer la lista de estados OK / ⚠.</div>
+            <div class="narration">
+              <p>Y la última hoja: <strong>Alertas</strong>. Aquí está el resumen de chequeos. Cada fila con el triángulo ámbar es una <strong>decisión que te espera</strong>: mover una semana, bajar peso, redistribuir con tu coordinadora, o aceptar el pico porque tiene sentido.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-stamp">
+            <span class="time-stamp-num">6:15</span>
+            <span class="time-stamp-label">Cierre</span>
+          </div>
+          <div class="time-body">
+            <h3>Cierre</h3>
+            <div class="time-screen"><strong>Pantalla</strong> · Volver a la hoja <em>Instrucciones</em> o cerrar sobre el logo IMPULSO.</div>
+            <div class="narration">
+              <p>Eso es todo. Cuando abras tu plantilla en blanco, te recomiendo empezar por <strong>Parámetros</strong>, luego ir añadiendo touchpoints sin preocuparte por las horas con IA la primera vez, y después volver a abrirla unos días después <em>con cabeza más fresca</em>. Y sobre todo: úsala para <strong>conversar con alguien</strong>. Gana mucho más si la revisas con tu equipo docente o con un colega que si la cierras sola.</p>
+              <p>Si algo no cuadra o crees que sobra, escríbelo en la columna <strong>Notas</strong> de tu Touchpoints. Es la materia prima de la próxima versión. Hasta aquí. Gracias.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== ADAPTACIONES ========== -->
+    <section class="section">
+      <div class="section-head">
+        <span class="section-num">·</span>
+        <h2>Adaptaciones rápidas según contexto</h2>
+        <span class="section-hint">Si grabas, acortas o estiras</span>
+      </div>
+
+      <p class="prose">El guion está pensado para <strong>6 minutos</strong>; estos ajustes te permiten acortarlo o estirarlo sin rehacerlo.</p>
+
+      <div class="adapt-grid">
+
+        <div class="adapt-card">
+          <span class="adapt-tag">Versión 4 min</span>
+          <h3>Si necesitas comprimir</h3>
+          <ul>
+            <li>Quita el bloque <strong>2:40 (Prácticas IA)</strong>: se menciona de pasada en el bloque anterior.</li>
+            <li>Acorta las tres lentes a <strong>45 segundos totales</strong>: menciona solo qué responde cada una.</li>
+            <li>Salta el bloque final de cierre y termina directamente en <strong>Alertas</strong>.</li>
+          </ul>
+        </div>
+
+        <div class="adapt-card">
+          <span class="adapt-tag">Versión 10 min</span>
+          <h3>Para sesión con preguntas</h3>
+          <ul>
+            <li>Añade <strong>pausa de 1 minuto</strong> después del bloque Touchpoints para que los participantes miren un TP cualquiera del ejemplo.</li>
+            <li>Después de cada lente, invita a alguien a <strong>interpretar el gráfico en voz alta</strong>.</li>
+            <li>Termina con una ronda breve: <em>"¿qué alerta os preocuparía más en vuestra asignatura?"</em></li>
+          </ul>
+        </div>
+
+        <div class="adapt-card">
+          <span class="adapt-tag">Si se graba</span>
+          <h3>En video</h3>
+          <ul>
+            <li>Graba por <strong>bloques de 30-60 segundos</strong> y edita: es mucho más fácil que un take de 6 minutos seguidos.</li>
+            <li>Usa el <strong>zoom del software de captura</strong> para destacar columnas concretas cuando hables de ellas.</li>
+            <li>No leas el guion al pie de la letra: <em>dilo con tus palabras</em>, el guion te sostiene el hilo.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== ENLACES ========== -->
+    <section class="section">
+      <div class="links-panel">
+        <h3>Piezas a mano del Sprint 1</h3>
+        <div class="links-grid">
+          <a class="link-card" href="plantilla-ejemplo-ingesoft.xlsx" download>
+            <div class="link-card-label">Abre antes</div>
+            <div class="link-card-title">Plantilla EJEMPLO IngeSoft</div>
+            <div class="link-card-hint">El ejemplo sobre el que se recorre este walkthrough</div>
+          </a>
+          <a class="link-card" href="plantilla-plan-operativo.xlsx" download>
+            <div class="link-card-label">Tu plantilla</div>
+            <div class="link-card-title">Plantilla del plan operativo</div>
+            <div class="link-card-hint">XLSX en blanco · 11 hojas</div>
+          </a>
+          <a class="link-card" href="guia-breve.html">
+            <div class="link-card-label">Lectura de fondo</div>
+            <div class="link-card-title">Guía breve de uso</div>
+            <div class="link-card-hint">9 secciones · vocabulario, lentes, alertas</div>
+          </a>
+          <a class="link-card" href="panel-plan-operativo.html">
+            <div class="link-card-label">Vista derivada</div>
+            <div class="link-card-title">Panel del plan operativo</div>
+            <div class="link-card-hint">Sube tu XLSX y ve Blueprint + Calendario al instante</div>
+          </a>
+          <a class="link-card" href="mailto:juan@eutika.com">
+            <div class="link-card-label">Soporte</div>
+            <div class="link-card-title">Escríbenos</div>
+            <div class="link-card-hint">juan@eutika.com · feedback y dudas</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="page-foot">
+    <div><strong>Rediseña.Evaluacion</strong> · Un kit de Eutika · Pilotaje en Plan IMPULSO Docente UC3M</div>
+    <div>Contenidos CC BY-SA 4.0 · Código MIT</div>
+  </footer>
+
+</main>
+
+</body>
+</html>

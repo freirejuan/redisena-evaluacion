@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía breve de uso · Plantilla del plan operativo · Sprint 1 · Rediseña.Evaluacion</title>
+<style>
+/* ============ DESIGN SYSTEM · UC3M-IMPULSO ============ */
+:root{
+  --azul-reflex:#171796; --azul-deep:#0F0F6B; --azul-mid:#2D2DA8; --azul-soft:#E8E8F6;
+  --acento-teal:#1A9E7A; --acento-teal-soft:#E0F2EC;
+  --acento-amber:#E8A317; --acento-amber-soft:#FBF0D9;
+  --acento-coral:#E05555; --acento-coral-soft:#FADDDD;
+  --gris-900:#0E1116; --gris-800:#1F2329; --gris-700:#3A4049; --gris-600:#575E68;
+  --gris-500:#7A818B; --gris-400:#9DA3AB; --gris-300:#C8CCD2; --gris-200:#E2E4E8;
+  --gris-100:#F1F2F5; --gris-050:#F8F9FB; --blanco:#FFFFFF;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
+  --serif:'Iowan Old Style','Palatino Linotype','Book Antiqua',Georgia,serif;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px;
+  --sp-7:28px; --sp-8:32px; --sp-10:40px; --sp-12:48px;
+  --text-xs:11px; --text-sm:13px; --text-base:14px; --text-lg:16px;
+  --text-xl:18px; --text-2xl:22px; --text-3xl:28px; --text-4xl:36px;
+  --radio-sm:4px; --radio-md:8px; --radio-lg:12px;
+  --sombra-sm:0 1px 2px rgba(15,15,107,.06),0 1px 3px rgba(15,15,107,.04);
+  --sombra-md:0 4px 12px rgba(15,15,107,.08),0 2px 4px rgba(15,15,107,.05);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--gris-050);color:var(--gris-900);font-family:var(--sans);font-size:var(--text-base);line-height:1.6;-webkit-font-smoothing:antialiased}
+body{padding:var(--sp-10) var(--sp-6) var(--sp-12);}
+
+/* ============ CONTAINER ============ */
+.page{
+  max-width:820px;margin:0 auto;background:var(--blanco);
+  border-radius:var(--radio-lg);box-shadow:var(--sombra-md);
+  border:1px solid var(--gris-200);overflow:hidden;
+}
+
+/* ============ HEADER ============ */
+.page-head{
+  background:linear-gradient(135deg,var(--azul-deep) 0%,var(--azul-reflex) 55%,var(--azul-mid) 100%);
+  color:var(--blanco);padding:var(--sp-8) var(--sp-10) var(--sp-7);
+}
+.kit-tag{
+  font-size:var(--text-xs);letter-spacing:.14em;text-transform:uppercase;
+  opacity:.72;margin-bottom:var(--sp-2);font-weight:600;
+}
+.page-head h1{
+  font-family:var(--serif);font-size:var(--text-3xl);
+  font-weight:600;letter-spacing:-.01em;line-height:1.15;margin-bottom:var(--sp-2);
+}
+.page-head .subtitle{
+  font-size:var(--text-base);opacity:.9;font-style:italic;max-width:640px;line-height:1.5;
+}
+.head-meta{
+  display:flex;gap:var(--sp-6);margin-top:var(--sp-5);
+  padding-top:var(--sp-4);border-top:1px solid rgba(255,255,255,.18);
+  font-size:var(--text-xs);letter-spacing:.06em;flex-wrap:wrap;
+}
+.head-meta-item{opacity:.78;}
+.head-meta-item strong{opacity:1;color:var(--blanco);font-weight:600;letter-spacing:0;text-transform:none;margin-right:4px;font-size:var(--text-xs);}
+
+/* ============ BODY ============ */
+.body{padding:var(--sp-8) var(--sp-10);}
+
+/* ============ TOC ============ */
+.toc{
+  background:var(--gris-050);border:1px solid var(--gris-200);
+  border-radius:var(--radio-md);padding:var(--sp-5) var(--sp-6);
+  margin-bottom:var(--sp-8);
+}
+.toc h3{
+  font-family:var(--serif);font-weight:600;font-size:var(--text-base);
+  color:var(--azul-deep);margin-bottom:var(--sp-3);
+  letter-spacing:.02em;text-transform:uppercase;font-size:var(--text-xs);
+}
+.toc ol{list-style:none;counter-reset:toc;display:grid;gap:6px;}
+.toc ol li{counter-increment:toc;padding-left:var(--sp-6);position:relative;font-size:var(--text-sm);}
+.toc ol li::before{
+  content:counter(toc, decimal) ".";
+  position:absolute;left:0;top:0;font-family:var(--serif);font-weight:700;
+  color:var(--azul-reflex);width:20px;
+}
+.toc ol li a{color:var(--gris-800);text-decoration:none;}
+.toc ol li a:hover{color:var(--azul-reflex);text-decoration:underline;}
+
+/* ============ SECTION ============ */
+.section{margin-bottom:var(--sp-10);scroll-margin-top:20px;}
+.section:last-child{margin-bottom:0;}
+.section-head{
+  display:flex;align-items:baseline;gap:var(--sp-3);
+  margin-bottom:var(--sp-5);flex-wrap:wrap;
+}
+.section-num{
+  font-family:var(--serif);font-weight:700;color:var(--azul-reflex);
+  font-size:var(--text-2xl);line-height:1;
+}
+.section-head h2{
+  font-family:var(--serif);font-weight:600;font-size:var(--text-2xl);
+  color:var(--azul-deep);letter-spacing:-.01em;line-height:1.2;
+}
+.section-hint{
+  font-size:var(--text-xs);color:var(--gris-500);font-style:italic;
+  margin-left:auto;
+}
+.lead{font-size:var(--text-lg);color:var(--gris-800);line-height:1.55;margin-bottom:var(--sp-4);}
+
+/* ============ PROSE ============ */
+.prose p{color:var(--gris-800);margin-bottom:var(--sp-3);}
+.prose p:last-child{margin-bottom:0;}
+.prose strong{color:var(--azul-deep);font-weight:600;}
+.prose em{font-style:italic;}
+
+.prose h3{
+  font-family:var(--serif);font-weight:600;font-size:var(--text-lg);
+  color:var(--azul-deep);margin-top:var(--sp-6);margin-bottom:var(--sp-3);
+  letter-spacing:-.005em;
+}
+.prose h4{
+  font-family:var(--serif);font-weight:600;font-size:var(--text-base);
+  color:var(--azul-deep);margin-top:var(--sp-5);margin-bottom:var(--sp-2);
+}
+
+/* ============ LISTS ============ */
+.prose ul{list-style:none;display:grid;gap:var(--sp-2);margin:var(--sp-3) 0;}
+.prose ul li{
+  padding-left:var(--sp-5);position:relative;color:var(--gris-800);
+  font-size:var(--text-sm);line-height:1.55;
+}
+.prose ul li::before{
+  content:'›';position:absolute;left:var(--sp-2);top:0;
+  color:var(--azul-reflex);font-weight:700;
+}
+.prose ul li strong{color:var(--azul-deep);}
+
+.prose ul.simple li::before{content:'·';font-size:18px;top:-4px;}
+
+/* ============ CALLOUTS ============ */
+.callout{
+  padding:var(--sp-4) var(--sp-5);border-radius:var(--radio-md);
+  margin:var(--sp-5) 0;font-size:var(--text-sm);line-height:1.55;
+  border-left:3px solid;
+}
+.callout p{margin-bottom:var(--sp-2);}
+.callout p:last-child{margin-bottom:0;}
+.callout strong{font-weight:700;}
+.callout-label{
+  display:block;font-size:var(--text-xs);letter-spacing:.08em;
+  text-transform:uppercase;font-weight:700;margin-bottom:var(--sp-2);
+}
+.callout.reassure{
+  background:var(--azul-soft);border-left-color:var(--azul-reflex);color:var(--azul-deep);
+}
+.callout.reassure .callout-label{color:var(--azul-reflex);}
+.callout.success{
+  background:var(--acento-teal-soft);border-left-color:var(--acento-teal);color:#0D5C47;
+}
+.callout.success .callout-label{color:var(--acento-teal);}
+.callout.warn{
+  background:var(--acento-amber-soft);border-left-color:var(--acento-amber);color:#5B3D00;
+}
+.callout.warn .callout-label{color:#A46A00;}
+.callout.coral{
+  background:var(--acento-coral-soft);border-left-color:var(--acento-coral);color:#6B1F1F;
+}
+.callout.coral .callout-label{color:var(--acento-coral);}
+
+/* ============ DEFINITION LIST ============ */
+.defs{
+  display:grid;gap:var(--sp-3);margin:var(--sp-5) 0;
+}
+.def-item{
+  background:var(--gris-050);border:1px solid var(--gris-200);
+  border-left:3px solid var(--azul-reflex);
+  border-radius:var(--radio-md);padding:var(--sp-4) var(--sp-5);
+}
+.def-term{
+  font-family:var(--serif);font-weight:700;color:var(--azul-deep);
+  font-size:var(--text-base);margin-bottom:var(--sp-1);letter-spacing:-.005em;
+}
+.def-body{font-size:var(--text-sm);color:var(--gris-700);line-height:1.55;}
+.def-body strong{color:var(--azul-deep);}
+
+/* ============ TABLE ============ */
+.data-table{
+  width:100%;border-collapse:collapse;margin:var(--sp-5) 0;
+  font-size:var(--text-sm);line-height:1.5;
+  border:1px solid var(--gris-200);border-radius:var(--radio-md);
+  overflow:hidden;
+}
+.data-table thead tr{background:var(--azul-soft);}
+.data-table th{
+  text-align:left;padding:var(--sp-3) var(--sp-4);
+  font-family:var(--serif);font-weight:700;color:var(--azul-deep);
+  font-size:var(--text-sm);border-bottom:2px solid var(--azul-reflex);
+}
+.data-table td{
+  padding:var(--sp-3) var(--sp-4);border-bottom:1px solid var(--gris-200);
+  color:var(--gris-800);vertical-align:top;
+}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tbody tr:nth-child(even){background:var(--gris-050);}
+.data-table td strong{color:var(--azul-deep);}
+.data-table .role-rellenar{color:var(--acento-teal);font-weight:700;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em;}
+.data-table .role-leer{color:var(--gris-600);font-weight:600;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em;}
+.data-table .role-opcional{color:var(--gris-500);font-weight:600;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em;font-style:italic;}
+
+/* ============ CHECKLIST (pasos) ============ */
+.checklist{
+  list-style:none;display:grid;gap:var(--sp-3);margin:var(--sp-5) 0;
+}
+.check-item{
+  display:grid;grid-template-columns:auto 1fr;gap:var(--sp-4);
+  padding:var(--sp-4) var(--sp-5);background:var(--gris-050);
+  border:1px solid var(--gris-200);border-radius:var(--radio-md);
+  border-left:3px solid var(--azul-reflex);
+}
+.check-num{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--azul-reflex);color:var(--blanco);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-weight:700;font-size:var(--text-base);
+  flex-shrink:0;
+}
+.check-body h3{
+  font-family:var(--serif);font-weight:600;font-size:var(--text-lg);
+  color:var(--azul-deep);margin:0 0 6px 0;letter-spacing:-.005em;
+}
+.check-meta{
+  display:flex;gap:var(--sp-3);align-items:baseline;flex-wrap:wrap;
+  margin-bottom:var(--sp-2);
+}
+.check-time{
+  font-size:var(--text-xs);color:var(--gris-600);
+  padding:2px 8px;background:var(--blanco);border:1px solid var(--gris-200);
+  border-radius:10px;font-weight:600;
+}
+.check-piece{
+  font-size:var(--text-xs);color:var(--azul-reflex);font-weight:600;
+}
+.check-body p{
+  font-size:var(--text-sm);color:var(--gris-700);line-height:1.55;
+  margin-bottom:var(--sp-2);
+}
+.check-body p:last-child{margin-bottom:0;}
+.check-body ul{margin-top:var(--sp-2);}
+.check-body ul li{font-size:var(--text-sm);color:var(--gris-700);}
+
+/* ============ LENTE BLOCK ============ */
+.lente{
+  border:1px solid var(--gris-200);border-radius:var(--radio-md);
+  padding:var(--sp-5) var(--sp-6);margin:var(--sp-4) 0;
+  background:var(--blanco);
+}
+.lente-head{
+  display:flex;align-items:baseline;gap:var(--sp-3);
+  padding-bottom:var(--sp-3);margin-bottom:var(--sp-3);
+  border-bottom:1px solid var(--gris-200);flex-wrap:wrap;
+}
+.lente-tag{
+  font-size:var(--text-xs);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--azul-reflex);font-weight:700;
+}
+.lente-head h3{
+  font-family:var(--serif);font-weight:600;font-size:var(--text-lg);
+  color:var(--azul-deep);margin:0;letter-spacing:-.005em;
+}
+.lente-question{
+  font-size:var(--text-sm);color:var(--gris-600);font-style:italic;
+  margin-bottom:var(--sp-3);
+}
+.lente-question strong{color:var(--azul-deep);font-style:normal;}
+
+/* ============ LINKS PANEL ============ */
+.links-panel{
+  background:var(--gris-900);color:var(--gris-100);
+  border-radius:var(--radio-md);padding:var(--sp-5) var(--sp-6);
+  margin-top:var(--sp-6);
+}
+.links-panel h3{
+  font-family:var(--serif);font-weight:600;font-size:var(--text-lg);
+  color:var(--blanco);margin-bottom:var(--sp-3);
+}
+.links-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-3);
+}
+.link-card{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radio-sm);padding:var(--sp-3) var(--sp-4);
+  text-decoration:none;color:var(--gris-100);
+  transition:all .15s ease;
+}
+.link-card:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25);}
+.link-card-label{
+  font-size:var(--text-xs);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--gris-400);margin-bottom:2px;
+}
+.link-card-title{
+  font-weight:600;color:var(--blanco);font-size:var(--text-sm);
+}
+.link-card-hint{
+  font-size:var(--text-xs);color:var(--gris-400);margin-top:4px;
+}
+
+/* ============ FOOTER ============ */
+.page-foot{
+  background:var(--gris-100);color:var(--gris-600);
+  padding:var(--sp-5) var(--sp-10);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:var(--text-xs);letter-spacing:.04em;border-top:1px solid var(--gris-200);
+}
+.page-foot strong{color:var(--gris-800);font-weight:600;}
+
+@media (max-width:720px){
+  body{padding:var(--sp-4) var(--sp-2);}
+  .page-head,.body,.page-foot{padding-left:var(--sp-5);padding-right:var(--sp-5);}
+  .page-foot{flex-direction:column;gap:var(--sp-2);align-items:flex-start;}
+  .links-grid{grid-template-columns:1fr;}
+  .data-table{font-size:var(--text-xs);}
+  .data-table th,.data-table td{padding:var(--sp-2) var(--sp-3);}
+}
+@media print{
+  body{padding:0;background:var(--blanco);}
+  .page{box-shadow:none;border:none;border-radius:0;}
+  .check-item,.callout,.lente,.def-item{page-break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+
+<main class="page">
+
+  <!-- ============ HEADER ============ -->
+  <header class="page-head">
+    <div class="kit-tag">Rediseña.Evaluacion · Sprint 1</div>
+    <h1>Guía breve de uso · Plantilla del plan operativo</h1>
+    <p class="subtitle">Cómo diseñar, estimar y ajustar tu proceso de evaluación, solo o con apoyo de IA. Léela antes de abrir la plantilla en blanco.</p>
+    <div class="head-meta">
+      <div class="head-meta-item"><strong>Duración</strong>Lectura 10-15 min</div>
+      <div class="head-meta-item"><strong>Complemento de</strong>Plantilla del plan operativo</div>
+      <div class="head-meta-item"><strong>Formato</strong>Lectura previa</div>
+    </div>
+  </header>
+
+  <!-- ============ BODY ============ -->
+  <div class="body">
+
+    <!-- ========== TOC ========== -->
+    <nav class="toc">
+      <h3>Contenido</h3>
+      <ol>
+        <li><a href="#s1">Para qué sirve esta plantilla (y qué no es)</a></li>
+        <li><a href="#s2">Vocabulario mínimo</a></li>
+        <li><a href="#s3">Las hojas de la plantilla, de un vistazo</a></li>
+        <li><a href="#s4">Ruta de uso en 5 pasos</a></li>
+        <li><a href="#s5">Cómo leer cada lente</a></li>
+        <li><a href="#s6">La columna "Prácticas IA"</a></li>
+        <li><a href="#s7">Cómo responder a las alertas</a></li>
+        <li><a href="#s8">Errores comunes a evitar</a></li>
+        <li><a href="#s9">Después de completar — próximos pasos</a></li>
+      </ol>
+    </nav>
+
+    <!-- ========== 1 ========== -->
+    <section class="section" id="s1">
+      <div class="section-head">
+        <span class="section-num">1</span>
+        <h2>Para qué sirve esta plantilla (y qué no es)</h2>
+      </div>
+      <p class="lead">La plantilla de plan operativo es una herramienta de diseño, no de reporting. Sirve para ver, en una sola vista, cómo se distribuye tu carga como docente y la carga de tu estudiantado a lo largo del cuatrimestre, detectar picos y solapamientos antes de que ocurran, y pensar de forma explícita cómo la IA puede ayudarte a reducir tiempos o a hacer mejor algunas tareas.</p>
+      <p class="prose">No es una ficha administrativa ni un formulario de control. No se revisa nota a nota. La cifra final tiene importancia, pero mucha menos que el propio acto de pararse a pensar en fases, tiempos y prioridades.</p>
+
+      <h3>Qué puedes hacer con ella</h3>
+      <div class="prose">
+        <ul>
+          <li>Mapear todas las interacciones evaluativas de tu asignatura (pruebas, entregas, tutorías, etc.) en un único lugar.</li>
+          <li>Estimar horas por fase del ciclo evaluativo: <strong>diseño, ejecución, corrección y feedback</strong>.</li>
+          <li>Comparar tu estimación base con una <strong>hipótesis de cómo lo harías apoyándote en IA</strong>, para visualizar dónde podrías ahorrar tiempo.</li>
+          <li>Ver la carga <strong>semana a semana</strong>, tanto la tuya como la de tu estudiantado.</li>
+          <li>Detectar alertas: semanas con picos, solapamientos de pruebas sumativas, presupuesto de horas de estudiante excedido, ausencia de feedback.</li>
+        </ul>
+      </div>
+
+      <div class="callout coral">
+        <span class="callout-label">Qué NO es</span>
+        <p><strong>No es un cálculo exacto.</strong> Las horas estimadas son hipótesis útiles, no verdades.</p>
+        <p><strong>No te puntúa ni te evalúa como docente.</strong> Nadie revisa ni audita lo que pongas.</p>
+        <p><strong>No sustituye a la conversación con colegas.</strong> Su utilidad crece si la contrastas con alguien de tu área o con el equipo docente de la asignatura.</p>
+      </div>
+    </section>
+
+    <!-- ========== 2 ========== -->
+    <section class="section" id="s2">
+      <div class="section-head">
+        <span class="section-num">2</span>
+        <h2>Vocabulario mínimo</h2>
+        <span class="section-hint">Siete términos recurrentes</span>
+      </div>
+      <p class="prose">Para que la plantilla sea ligera de usar, conviene tener estos siete términos en la cabeza. Todos aparecen en las cabeceras o en los desplegables.</p>
+      <div class="defs">
+        <div class="def-item">
+          <div class="def-term">Touchpoint (TP)</div>
+          <div class="def-body">Cada interacción evaluativa con el estudiantado. Un examen parcial es un TP; una entrega de trabajo es otro; una tutoría evaluativa también. Cada fila en la hoja <strong>Touchpoints</strong> es un TP.</div>
+        </div>
+        <div class="def-item">
+          <div class="def-term">Naturaleza (F/S/M)</div>
+          <div class="def-body"><strong>Formativo</strong> (da feedback pero no pondera nota), <strong>Sumativo</strong> (ponderación en nota final), <strong>Mixto</strong> (las dos cosas). Es la distinción clave para leer la Lente 3.</div>
+        </div>
+        <div class="def-item">
+          <div class="def-term">Fases de un TP</div>
+          <div class="def-body">Todo TP tiene cuatro fases: <strong>diseño</strong> (antes de empezar, se hace una vez), <strong>ejecución</strong> (cuando ocurre el TP), <strong>corrección</strong> (una vez por estudiante y ocurrencia) y <strong>feedback</strong> (una vez por estudiante y ocurrencia).</div>
+        </div>
+        <div class="def-item">
+          <div class="def-term">Baseline</div>
+          <div class="def-body">Tu estimación de horas <strong>sin apoyo de IA</strong>. Lo que harías hoy, tal como trabajas ahora.</div>
+        </div>
+        <div class="def-item">
+          <div class="def-term">Hipótesis con IA</div>
+          <div class="def-body">Tu estimación de cuánto tardarías si apoyaras esa fase con IA. Si dejas el campo vacío, <strong>hereda automáticamente el valor base</strong> — no te exige rellenarlo todo.</div>
+        </div>
+        <div class="def-item">
+          <div class="def-term">Ocurrencias</div>
+          <div class="def-body">Cuántas veces se repite el TP en el curso (ej.: 12 entregas de laboratorio = 12 ocurrencias).</div>
+        </div>
+        <div class="def-item">
+          <div class="def-term">Responsable</div>
+          <div class="def-body">Quién carga con las horas: <strong>Coordinador, Profesor o Ambos</strong>. Sirve para separar la carga cuando hay reparto de tareas dentro del equipo docente.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 3 ========== -->
+    <section class="section" id="s3">
+      <div class="section-head">
+        <span class="section-num">3</span>
+        <h2>Las hojas de la plantilla, de un vistazo</h2>
+        <span class="section-hint">11 hojas · rellenas 2</span>
+      </div>
+      <p class="prose">La plantilla tiene once hojas. <strong>Solo rellenas dos</strong>: Parámetros (una vez) y Touchpoints (la principal). El resto se calcula y sirve para interpretar.</p>
+
+      <table class="data-table">
+        <thead>
+          <tr><th style="width:32%">Hoja</th><th style="width:18%">Rol</th><th>Qué contiene</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Instrucciones</strong></td><td><span class="role-leer">Leer</span></td><td>Resumen rápido de cómo usar la plantilla (versión corta).</td></tr>
+          <tr><td><strong>Parámetros</strong></td><td><span class="role-rellenar">Rellenar</span></td><td>Número de semanas, ECTS, horas por ECTS, umbrales de pico, tamaño del grupo. Los ajustas una sola vez por asignatura.</td></tr>
+          <tr><td><strong>Catálogo</strong></td><td><span class="role-leer">Leer</span></td><td>Listado de tipos de touchpoint con ejemplos. Úsalo como inspiración si dudas qué poner.</td></tr>
+          <tr><td><strong>Touchpoints</strong></td><td><span class="role-rellenar">Rellenar</span></td><td>Hoja principal: una fila por cada interacción evaluativa, con sus horas por fase (base y con IA), su responsable y sus prácticas IA.</td></tr>
+          <tr><td><strong>Componentes</strong></td><td><span class="role-opcional">Opcional</span></td><td>Si prefieres agrupar TPs en componentes (ej.: parciales, prácticas, proyecto), aquí registras la agrupación.</td></tr>
+          <tr><td><strong>Resumen</strong></td><td><span class="role-leer">Leer</span></td><td>Totales: horas base, horas con IA, delta, horas de estudiante, peso sumativo. Tu primera mirada tras rellenar.</td></tr>
+          <tr><td><strong>Cronograma</strong></td><td><span class="role-leer">Leer</span></td><td>Matriz TP × semana en tres bloques apilados: base docente, IA docente, estudiante. Muestra cuándo cae cada cosa.</td></tr>
+          <tr><td><strong>Lente 1 · Carga docente</strong></td><td><span class="role-leer">Leer</span></td><td>Curva semanal de horas docente (base vs IA), con picos resaltados.</td></tr>
+          <tr><td><strong>Lente 2 · Carga estudiante</strong></td><td><span class="role-leer">Leer</span></td><td>Curva semanal de horas de estudiante y consumo del presupuesto ECTS (con margen).</td></tr>
+          <tr><td><strong>Lente 3 · Equilibrio F-S</strong></td><td><span class="role-leer">Leer</span></td><td>Reparto formativo/sumativo/mixto, solapamientos de pruebas sumativas en la misma semana, secuencia F → S.</td></tr>
+          <tr><td><strong>Alertas</strong></td><td><span class="role-leer">Leer</span></td><td>Chequeos consolidados: estado OK / ⚠ por cada comprobación automática.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ========== 4 ========== -->
+    <section class="section" id="s4">
+      <div class="section-head">
+        <span class="section-num">4</span>
+        <h2>Ruta de uso en 5 pasos</h2>
+        <span class="section-hint">La primera vez, en orden</span>
+      </div>
+      <p class="prose">Sigue estos cinco pasos en orden la primera vez. En iteraciones sucesivas puedes saltar directamente al paso que necesites revisar.</p>
+
+      <ol class="checklist">
+
+        <li class="check-item">
+          <div class="check-num">1</div>
+          <div class="check-body">
+            <h3>Configura Parámetros</h3>
+            <div class="check-meta">
+              <span class="check-time">2 min</span>
+              <span class="check-piece">Hoja Parámetros</span>
+            </div>
+            <p>Abre la hoja <strong>Parámetros</strong>. Ajusta: número de semanas lectivas (por defecto 15), ECTS de la asignatura (por defecto 6), horas por ECTS (25 por defecto, estándar EEES), tamaño del grupo y umbrales de pico si quieres afinar cuándo se dispara una alerta.</p>
+          </div>
+        </li>
+
+        <li class="check-item">
+          <div class="check-num">2</div>
+          <div class="check-body">
+            <h3>Da de alta tus touchpoints</h3>
+            <div class="check-meta">
+              <span class="check-time">20-40 min</span>
+              <span class="check-piece">Hoja Touchpoints</span>
+            </div>
+            <p>Ve a la hoja <strong>Touchpoints</strong>. Añade una fila por cada interacción evaluativa que tenga tu asignatura. Para cada una rellena, al menos:</p>
+            <ul>
+              <li><strong>Nombre</strong> del TP (ej.: "Parcial 1", "Entrega P3", "Tutoría evaluativa").</li>
+              <li><strong>Tipo</strong> (elige del desplegable).</li>
+              <li><strong>Naturaleza</strong>: Formativo, Sumativo o Mixto.</li>
+              <li><strong>Formato</strong>: presencial, online, mixto.</li>
+              <li><strong>Política IA</strong>: lo que esperas del estudiante respecto al uso de IA en ese TP.</li>
+              <li><strong>Responsable</strong>: Coordinador, Profesor o Ambos.</li>
+              <li><strong>Ocurrencias</strong>: cuántas veces se repite en el curso.</li>
+              <li><strong>Semana inicio y fin</strong> (si ocurre una vez, mismo valor en ambas).</li>
+              <li><strong>Peso sumativo</strong> (0-100), solo si es sumativo o mixto.</li>
+              <li><strong>Horas base</strong> por fase: diseño, ejecución, corrección, feedback.</li>
+              <li><strong>Horas con IA</strong> por fase — solo las que creas que cambiarían con apoyo de IA. El resto se completa solo.</li>
+              <li><strong>Prácticas IA hipotetizadas</strong> — texto libre: qué uso concreto imaginas para esa fase.</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="check-item">
+          <div class="check-num">3</div>
+          <div class="check-body">
+            <h3>Revisa el Resumen</h3>
+            <div class="check-meta">
+              <span class="check-time">3 min</span>
+              <span class="check-piece">Hoja Resumen</span>
+            </div>
+            <p>Ve a la hoja <strong>Resumen</strong>. Comprueba que los totales tengan sentido. Si ves algo extraño (ej.: 400 horas docentes), vuelve a Touchpoints y revisa ocurrencias y horas por fase — casi siempre el error está en multiplicar donde no tocaba.</p>
+          </div>
+        </li>
+
+        <li class="check-item">
+          <div class="check-num">4</div>
+          <div class="check-body">
+            <h3>Lee las tres lentes</h3>
+            <div class="check-meta">
+              <span class="check-time">10 min</span>
+              <span class="check-piece">Hojas Lente 1, 2 y 3</span>
+            </div>
+            <p>Las tres lentes son <strong>independientes</strong>: cada una responde a una pregunta distinta. Recorre las tres. La sección 5 de esta guía explica cómo leer cada una.</p>
+          </div>
+        </li>
+
+        <li class="check-item">
+          <div class="check-num">5</div>
+          <div class="check-body">
+            <h3>Atiende las alertas y ajusta</h3>
+            <div class="check-meta">
+              <span class="check-time">15-30 min</span>
+              <span class="check-piece">Hoja Alertas</span>
+            </div>
+            <p>Abre la hoja <strong>Alertas</strong>. Cada fila en estado ⚠ merece una decisión: ajustar el diseño del TP, mover la semana, redistribuir la carga entre el equipo, bajar peso sumativo o aceptar el pico como riesgo consciente. La sección 7 lista las palancas más habituales.</p>
+          </div>
+        </li>
+
+      </ol>
+    </section>
+
+    <!-- ========== 5 ========== -->
+    <section class="section" id="s5">
+      <div class="section-head">
+        <span class="section-num">5</span>
+        <h2>Cómo leer cada lente</h2>
+      </div>
+
+      <div class="lente">
+        <div class="lente-head">
+          <span class="lente-tag">Lente 1</span>
+          <h3>Carga docente</h3>
+        </div>
+        <p class="lente-question"><strong>Qué responde:</strong> ¿cuándo voy a ir ahogado este cuatrimestre?</p>
+        <p class="prose"><strong>Qué miras:</strong> la curva de horas semanales (base y con IA) y la lista de semanas pico — aquellas que superan el umbral (10 h por defecto).</p>
+        <div class="prose">
+          <ul>
+            <li><strong>Curva plana y por debajo del umbral</strong> = carga sostenible.</li>
+            <li><strong>Uno o dos picos aislados</strong> = aceptables si están justificados.</li>
+            <li><strong>Varios picos seguidos</strong> = señal de que el calendario está concentrado y hay que repartir.</li>
+            <li><strong>Gran diferencia entre curva base y curva con IA</strong> = oportunidad alta de ahorro, pero recuerda que es una hipótesis hasta que la pruebes.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lente">
+        <div class="lente-head">
+          <span class="lente-tag">Lente 2</span>
+          <h3>Carga estudiante</h3>
+        </div>
+        <p class="lente-question"><strong>Qué responde:</strong> ¿mi diseño respeta el tiempo de estudio previsto por los ECTS?</p>
+        <p class="prose"><strong>Qué miras:</strong> la curva de horas de estudiante por semana y, sobre todo, el indicador de presupuesto: X horas sobre Y disponibles (6 ECTS × 25 h = 150 h, por ejemplo).</p>
+        <div class="prose">
+          <ul>
+            <li>Si el consumo se acerca al 100 % o lo supera: tu diseño pide al estudiantado <strong>más de lo que la asignatura tiene asignado</strong>.</li>
+            <li>Si hay semanas con <strong>más de 12 horas</strong> (umbral por defecto): probable acumulación. Revisa si coincide con entregas de otras asignaturas.</li>
+            <li>Si el consumo total es muy bajo (ej.: 40 %): o has estimado poco, o la asignatura está infra-cargada para el estudiante.</li>
+          </ul>
+        </div>
+        <div class="callout warn">
+          <span class="callout-label">Aviso · La Lente 2 concentra la carga en la semana de entrega</span>
+          <p>La Lente 2 asume que todas las horas de estudiante de un TP caen en la semana de entrega (sem_ini = sem_fin). En la realidad el estudiante reparte el trabajo en las 2-4 semanas previas, así que esta curva <strong>exagera los picos y los valles</strong>. Úsala para ver "cuándo tiene que entregar", no "cuánto va a trabajar exactamente esa semana".</p>
+          <p>Para ver la distribución realista, apóyate en el <strong>Panel del plan operativo</strong> (pieza complementaria del Sprint 1: lee tu XLSX y genera un Calendario semanal con reparto realista — 50 / 30 / 20 % en las semanas previas a la entrega para TPs puntuales). Aplana típicamente los picos del estudiante un 30-50 % respecto a la Lente 2. Antes de decidir "aplano el diseño porque S8 tiene 12 h", contrasta ese pico con el Calendario del Panel.</p>
+        </div>
+      </div>
+
+      <div class="lente">
+        <div class="lente-head">
+          <span class="lente-tag">Lente 3</span>
+          <h3>Equilibrio formativo / sumativo</h3>
+        </div>
+        <p class="lente-question"><strong>Qué responde:</strong> ¿el proceso genera suficientes oportunidades de feedback antes de que cuente la nota?</p>
+        <p class="prose"><strong>Qué miras:</strong> proporción F/S/M (pie chart), solapamientos sumativos por semana (dos pruebas sumativas en la misma semana), y si hay un TP formativo antes del primer sumativo.</p>
+        <div class="prose">
+          <ul>
+            <li><strong>Proporción saludable</strong> como punto de partida: al menos 40-50 % formativo, el resto sumativo o mixto. No es una regla rígida.</li>
+            <li><strong>Solapamiento sumativo</strong> en una misma semana: suele ser un error de calendario, no una decisión.</li>
+            <li><strong>Primer formativo después del primer sumativo</strong>: el estudiante llega a "examen" sin feedback previo, difícil de sostener pedagógicamente.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 6 ========== -->
+    <section class="section" id="s6">
+      <div class="section-head">
+        <span class="section-num">6</span>
+        <h2>La columna "Prácticas IA" — qué poner y cómo no bloquearse</h2>
+      </div>
+      <p class="prose">En la hoja <strong>Touchpoints</strong> hay cuatro columnas de texto libre: prácticas IA hipotetizadas para diseño, ejecución, corrección y feedback. Su propósito es doble: <strong>registrar tu pensamiento explícito</strong> sobre dónde podría entrar la IA en ese TP, y <strong>dar materia prima para conversar</strong> con colegas cuando quieras contrastar tu diseño.</p>
+
+      <h3>Cómo rellenarla sin atascarse</h3>
+      <div class="prose">
+        <ul>
+          <li><strong>No necesitas llenar las cuatro columnas.</strong> Empieza por la fase donde tengas una intuición clara (normalmente corrección o feedback).</li>
+          <li><strong>Escribe en frase</strong>, como si se lo contaras a alguien. No hace falta estructura formal.</li>
+          <li>Si no tienes idea de si IA puede ayudar en esa fase, <strong>déjala en blanco</strong>. Por diseño, el campo vacío hace que el cálculo herede tu estimación base — el total no se rompe.</li>
+          <li>Si pones una práctica pero no tienes claro el ahorro, escríbela igualmente y deja la celda de horas IA vacía. La plantilla hereda la base y tú te quedas con la nota para probarlo más adelante.</li>
+        </ul>
+      </div>
+
+      <h3>Ejemplos concretos</h3>
+      <table class="data-table">
+        <thead>
+          <tr><th style="width:22%">Fase</th><th>Ejemplo de práctica IA hipotetizada</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Diseño</strong></td><td>Generar con IA tres variantes de enunciado y elegir la mejor.</td></tr>
+          <tr><td><strong>Ejecución</strong></td><td>Tutor IA responde dudas básicas durante el examen de prácticas para liberar mi tiempo.</td></tr>
+          <tr><td><strong>Corrección</strong></td><td>IA hace primera lectura y marca errores recurrentes; yo reviso y ajusto.</td></tr>
+          <tr><td><strong>Feedback</strong></td><td>IA redacta feedback personalizado a partir de mi rúbrica; yo edito antes de enviar.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ========== 7 ========== -->
+    <section class="section" id="s7">
+      <div class="section-head">
+        <span class="section-num">7</span>
+        <h2>Cómo responder a las alertas</h2>
+      </div>
+      <p class="prose">Cuando una alerta pasa a ⚠, la pregunta no es "¿lo arreglo?" sino <strong>"¿qué palanca tengo más a mano?"</strong>. Esta tabla resume las más comunes.</p>
+
+      <table class="data-table">
+        <thead>
+          <tr><th style="width:34%">Alerta</th><th>Palancas habituales</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Picos de carga docente</strong> (&gt;10 h/semana)</td><td>Mover la semana de un TP contiguo; partir un TP en dos ocurrencias más pequeñas; reducir número de ocurrencias; repartir entre Coordinador y Profesor; hipotetizar apoyo IA en corrección/feedback.</td></tr>
+          <tr><td><strong>Solapamiento sumativo</strong> en misma semana</td><td>Reajustar calendario para separar pruebas; convertir una en formativa si el aprendizaje ya está cubierto por otras; bajar peso sumativo de una de ellas.</td></tr>
+          <tr><td><strong>Presupuesto ECTS excedido</strong> (&gt;150 h estudiante)</td><td>Reducir ocurrencias; acortar entregas; sustituir TP sumativo por formativo más ligero; reducir alcance.</td></tr>
+          <tr><td><strong>Sin formativo antes del primer sumativo</strong></td><td>Añadir un TP formativo ligero (quiz, ejercicio entregable) en las semanas previas; convertir el primer TP sumativo en mixto.</td></tr>
+          <tr><td><strong>TPs sin feedback o sin rúbrica</strong></td><td>Añadir horas en la fase de feedback aunque sea una cifra mínima; redactar rúbrica o criterios; hipotetizar apoyo IA para feedback individualizado.</td></tr>
+          <tr><td><strong>Muy pocos formativos</strong> (proporción &lt;40 %)</td><td>Convertir alguna tarea sumativa en formativa; añadir TPs formativos cortos intercalados; revisar si el peso sumativo está muy concentrado en pocas pruebas.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ========== 8 ========== -->
+    <section class="section" id="s8">
+      <div class="section-head">
+        <span class="section-num">8</span>
+        <h2>Errores comunes a evitar</h2>
+      </div>
+
+      <div class="prose">
+        <h3>Tomarse los totales como cifras exactas</h3>
+        <p>Las horas que ves son hipótesis con dos decimales. Sirven para comparar, decidir y detectar anomalías, <strong>no para reportar</strong> ni para justificar ante nadie. Si las tratas como verdad, acabas defendiendo un número en vez de iterar el diseño.</p>
+
+        <h3>Sobrestimar el ahorro con IA</h3>
+        <p>Es natural ser optimista: "con IA esto lo hago en la mitad". En la primera iteración seguramente no. La buena práctica es <strong>estimar conservadoramente</strong> y revisar al cabo de dos o tres TPs reales.</p>
+
+        <h3>Leer la Lente 2 como distribución real del trabajo del estudiante</h3>
+        <p>La Lente 2 concentra toda la carga en la semana de entrega, así que genera <strong>picos artificiales</strong>. No aplanes tu diseño basándote solo en la Lente 2: contrasta el pico con la vista <em>Calendario semanal</em> del <strong>Panel del plan operativo</strong> antes de decidir. El indicador fiable de la Lente 2 es el <strong>consumo total</strong> de horas sobre el presupuesto ECTS, no la forma exacta de la curva.</p>
+
+        <h3>Dejar la columna Responsable vacía</h3>
+        <p>Si todo queda asignado al Profesor por defecto, pierdes la oportunidad de visualizar lo que hace el Coordinador y de reequilibrar. Aunque estés solo en la asignatura, marcarlo de forma explícita te protege a futuro.</p>
+
+        <h3>Olvidar la fase de feedback</h3>
+        <p>Es la fase que más se come a los docentes y la que más silenciosamente aparece con cero horas cuando se estima deprisa. Si pones 0, asume que la alerta saltará — y tiene razón.</p>
+
+        <h3>Rellenar todo de golpe en una sola sentada</h3>
+        <p>La plantilla gana al rellenarse en <strong>dos pasadas</strong>: una primera rápida para ver la foto general, una segunda más reflexiva (con un par de días de distancia) para afinar. Intentar cerrarla a la primera suele llevar a decisiones automáticas.</p>
+      </div>
+    </section>
+
+    <!-- ========== 9 ========== -->
+    <section class="section" id="s9">
+      <div class="section-head">
+        <span class="section-num">9</span>
+        <h2>Después de completar — próximos pasos</h2>
+      </div>
+      <p class="prose">Cuando hayas hecho una primera pasada completa, lo más valioso es <strong>llevar la plantilla a una conversación</strong>, no archivarla.</p>
+      <div class="prose">
+        <ul>
+          <li><strong>Compártela con el equipo docente de la asignatura</strong> o con colegas de tu área: hace emerger patrones propios y ajenos que no verás tú solo.</li>
+          <li><strong>Busca una segunda mirada</strong>: alguien con perspectiva puede ayudarte a leer las alertas, a descartar ahorros IA poco realistas y a proponer palancas que no se te ocurren.</li>
+          <li><strong>Guarda la versión como "snapshot"</strong> antes de iterar: así puedes comparar al final del cuatrimestre cómo estimaste frente a cómo ocurrió.</li>
+          <li><strong>Registra durante el curso las desviaciones reales</strong>: dos o tres TPs con tiempos medidos a mano son suficientes para calibrar toda la plantilla la próxima vez.</li>
+        </ul>
+      </div>
+
+      <div class="callout success">
+        <span class="callout-label">¿Dudas o mejoras?</span>
+        <p>Esta guía vive con la plantilla. Si algo no te cuadra, escríbelo en la columna <strong>Notas</strong> de tu hoja Touchpoints — es la materia prima de la siguiente versión. O escríbenos directamente: <a href="mailto:juan@eutika.com" style="color:inherit;font-weight:700;">juan@eutika.com</a>.</p>
+      </div>
+    </section>
+
+    <!-- ========== ENLACES ========== -->
+    <section class="section">
+      <div class="links-panel">
+        <h3>Piezas a mano del Sprint 1</h3>
+        <div class="links-grid">
+          <a class="link-card" href="plantilla-plan-operativo.xlsx" download>
+            <div class="link-card-label">Herramienta principal</div>
+            <div class="link-card-title">Plantilla del plan operativo</div>
+            <div class="link-card-hint">XLSX · 11 hojas · descarga</div>
+          </a>
+          <a class="link-card" href="plantilla-ejemplo-ingesoft.xlsx" download>
+            <div class="link-card-label">Ejemplo</div>
+            <div class="link-card-title">Plantilla EJEMPLO IngeSoft</div>
+            <div class="link-card-hint">Caso pre-rellenado de ingeniería del software</div>
+          </a>
+          <a class="link-card" href="walkthrough.html">
+            <div class="link-card-label">Lectura complementaria</div>
+            <div class="link-card-title">Walkthrough guiado</div>
+            <div class="link-card-hint">Recorrido hoja por hoja sobre el ejemplo</div>
+          </a>
+          <a class="link-card" href="panel-plan-operativo.html">
+            <div class="link-card-label">Vista derivada</div>
+            <div class="link-card-title">Panel del plan operativo</div>
+            <div class="link-card-hint">Sube tu XLSX y ve Blueprint + Calendario al instante</div>
+          </a>
+          <a class="link-card" href="mailto:juan@eutika.com">
+            <div class="link-card-label">Soporte</div>
+            <div class="link-card-title">Escríbenos</div>
+            <div class="link-card-hint">juan@eutika.com · feedback y dudas</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="page-foot">
+    <div><strong>Rediseña.Evaluacion</strong> · Un kit de Eutika · Pilotaje en Plan IMPULSO Docente UC3M</div>
+    <div>Contenidos CC BY-SA 4.0 · Código MIT</div>
+  </footer>
+
+</main>
+
+</body>
+</html>

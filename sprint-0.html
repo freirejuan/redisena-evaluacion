@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sprint 0 · Decisiones estratégicas · Rediseña.Evaluacion</title>
+  <meta name="description" content="Sprint 0 del kit de rediseño de evaluación: cuatro decisiones estratégicas de fondo antes de entrar al detalle operativo. Plantilla estratégica, Canvas y Blueprint 0.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body data-page="sprint-0">
+
+  <header class="site">
+    <div class="shell">
+      <a href="/" class="brand">
+        <span class="brand-name">Rediseña<span class="dot">.</span>Evaluacion</span>
+        <span class="brand-attrib">Un kit de Eutika · Pilotaje en Plan IMPULSO Docente UC3M</span>
+      </a>
+      <nav class="primary">
+        <a href="/">Inicio</a>
+        <a href="/proceso" class="active">El proceso</a>
+        <a href="/kit">Kit</a>
+        <a href="/referencia">Referencia</a>
+        <a href="/acerca">Acerca</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="status-strip">
+    <div class="shell">
+      <div class="info">
+        <div class="info-item">
+          <span class="info-label">Asignatura</span>
+          <span class="info-value" id="status-course">Sin iniciar</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Estado</span>
+          <span class="info-value" id="status-step">—</span>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn ghost small" data-action="export">Exportar progreso</button>
+        <button class="btn ghost small" data-action="reset">Reiniciar</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <div class="breadcrumb"><a href="/">Inicio</a> / <a href="/proceso">El proceso</a> / Sprint 0</div>
+
+    <div class="hero">
+      <span class="chip">Sprint 0</span>
+      <h1>Decisiones estratégicas y primer rediseño</h1>
+      <p>En este sprint cierras las decisiones de fondo de tu evaluación antes de bajar a ningún detalle operativo. Son cuatro decisiones que, una vez tomadas, ordenan todo lo que viene después. Todo sucede dentro de una sola pieza — la Plantilla estratégica — que al guardarla genera automáticamente tu Canvas y tu Blueprint 0.</p>
+      <div class="hero-meta">
+        <div><strong>Duración</strong>60–90 minutos concentrados</div>
+        <div><strong>Pieza principal</strong>Plantilla estratégica</div>
+        <div><strong>Estado</strong><span id="sprint-0-state">Sin iniciar</span></div>
+      </div>
+      <div class="progress-bar" style="margin-top: var(--sp-5);"><div class="fill" id="sprint-0-progress" style="width: 0%;"></div></div>
+    </div>
+
+    <h2>Por qué un sprint solo para decidir</h2>
+    <p>Es tentador abrir directamente una hoja de cálculo y empezar a repartir pesos y fechas. La mayoría de los rediseños que no acaban bien comparten ese arranque. El Sprint 0 te fuerza a cerrar primero cuatro decisiones que, si no están resueltas, convierten cualquier plan operativo en una hoja frágil.</p>
+    <p>Las cuatro decisiones son:</p>
+    <ul>
+      <li><strong>D1 · Momentos evaluativos.</strong> Para qué quieres usar la evaluación — sumativa y formativa — y qué cadencia necesitas — una sola prueba final, evaluación continua, mezcla —. Qué importancia le das a la evaluación formativa y cómo se traduce en acompañamiento real al aprendizaje.</li>
+      <li><strong>D2 · Papel de la IA en el trabajo del estudiante.</strong> Cómo tratas el uso de IA por parte del estudiante: la prohíbes, la permites con condiciones, la exiges en ciertos componentes, la evalúas explícitamente.</li>
+      <li><strong>D3 · Evidencias.</strong> Qué información se recoge en cada momento evaluativo para que puedas retroalimentar de manera efectiva y verificar que el aprendizaje ha ocurrido.</li>
+      <li><strong>D4 · IA docente.</strong> Cómo usas tú la IA en diseño, revisión o feedback. Esta es una decisión estratégica que cambia tus flujos de trabajo y dedicación.</li>
+    </ul>
+
+    <h2>Antes de empezar</h2>
+    <p>Dedica cinco minutos a la Mini-guía de pre-trabajo. Te da el encuadre — los cinco bloques de la Plantilla y las cuatro decisiones que vas a cerrar — sin que tengas que descubrirlo por tu cuenta.</p>
+    <div class="work-panel">
+      <div class="tool-card">
+        <div class="body">
+          <div class="meta">HTML · 5 min de lectura</div>
+          <h3>Mini-guía de pre-trabajo del Sprint 0</h3>
+          <p>Encuadre del ejercicio, mapa de la Plantilla estratégica y explicación breve de las cuatro decisiones.</p>
+        </div>
+        <div class="actions">
+          <a href="/downloads/sprint-0/mini-guia-pretrabajo.html" class="btn primary small" target="_blank">Leer online</a>
+        </div>
+      </div>
+    </div>
+
+    <h2>El trabajo del Sprint 0</h2>
+    <p>Todo sucede en la Plantilla estratégica. Es un archivo HTML autocontenido: se abre en el navegador sin instalación, funciona offline y guarda tu trabajo localmente. La completas en orden — cinco bloques — y al final obtienes el Canvas y el Blueprint 0 auto-generados. Cuando termines, vuelves a esta página y marcas los pasos como hechos.</p>
+
+    <div class="step-block">
+      <div class="step-num">Paso 1 · 2 min</div>
+      <h3>Abre la Plantilla estratégica</h3>
+      <p>Archivo HTML autocontenido. Se abre en tu navegador habitual. No requiere cuenta, instalación ni conexión permanente a internet.</p>
+      <div class="tool-card">
+        <div class="body">
+          <div class="meta">HTML · 45–60 min de trabajo</div>
+          <h3>Plantilla estratégica</h3>
+          <p>Cinco bloques en orden: estado actual, cuatro decisiones estratégicas, intensidad de los siete componentes de evaluación, cierre cuantitativo, y semáforo con Blueprint 0.</p>
+        </div>
+        <div class="actions">
+          <a href="/downloads/sprint-0/plantilla-estrategica.html" class="btn primary small" target="_blank">Abrir plantilla</a>
+          <a href="/downloads/sprint-0/plantilla-estrategica.html" class="btn outline small" download>Descargar</a>
+        </div>
+      </div>
+      <div class="checkbox" data-sprint="sprint_0" data-step="paso_1" style="margin-top: var(--sp-4);">
+        <div class="box"></div>
+        <div class="label">He abierto la Plantilla estratégica</div>
+      </div>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num">Paso 2 · 45–60 min</div>
+      <h3>Completa los cinco bloques</h3>
+      <p>El orden importa: cada bloque alimenta al siguiente. La plantilla te lleva de la mano — no puedes saltarte pasos.</p>
+      <ul>
+        <li><strong>Bloque 1 · Lo que ya hago hoy.</strong> Estado actual de tu evaluación: pruebas, pesos, dedicación aproximada, qué te funciona y qué no.</li>
+        <li><strong>Bloque 2 · Las cuatro decisiones estratégicas.</strong> D1 (momentos evaluativos, sumativa/formativa) · D2 (IA en el trabajo del estudiante) · D3 (evidencias) · D4 (IA docente). Cada decisión se cierra con una posición explícita.</li>
+        <li><strong>Bloque 3 · Intensidad de los siete componentes.</strong> Asignas intensidad baja, media o alta a los siete componentes de evaluación (C1–C7). Es el puente entre el "qué" estratégico y el "cómo" operativo.</li>
+        <li><strong>Bloque 4 · Cierre cuantitativo.</strong> Número aproximado de touchpoints por componente. No hay que acertar: hay que dejar una hipótesis sobre la mesa.</li>
+        <li><strong>Bloque 5 · Semáforo y Blueprint 0.</strong> La plantilla lee tus respuestas y genera un semáforo con tres estados de cierre, y el Blueprint 0 de tu asignatura.</li>
+      </ul>
+      <div class="callout info">
+        La Plantilla guarda el trabajo en el navegador. Si cierras la pestaña y vuelves, encuentras lo que habías rellenado. Puedes exportar tu progreso como JSON en cualquier momento.
+      </div>
+      <div class="checkbox" data-sprint="sprint_0" data-step="paso_2" style="margin-top: var(--sp-4);">
+        <div class="box"></div>
+        <div class="label">He completado los cinco bloques de la Plantilla</div>
+      </div>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num">Paso 3 · 10–15 min</div>
+      <h3>Revisa tu Canvas y Blueprint 0</h3>
+      <p>Las dos vistas se generan automáticamente dentro de la plantilla, a partir de lo que has rellenado. El Canvas resume en una sola página la identidad evaluativa de tu asignatura. El Blueprint 0 es una primera matriz que ya se parece al diseño final, aunque todavía a grano grueso. Son las dos piezas que te llevas al Sprint 1 como punto de partida.</p>
+      <div class="checkbox" data-sprint="sprint_0" data-step="paso_3" style="margin-top: var(--sp-4);">
+        <div class="box"></div>
+        <div class="label">He revisado mi Canvas y mi Blueprint 0 auto-generados</div>
+      </div>
+    </div>
+
+    <h2>Cierre del Sprint 0</h2>
+    <p>Marca el sprint como completado cuando hayas hecho las tres cosas y tu Blueprint 0 esté en verde en el semáforo de la plantilla. Si el semáforo aparece en ámbar o rojo, revisa las decisiones antes de avanzar.</p>
+    <div class="work-panel">
+      <div style="margin-top: var(--sp-2);">
+        <button class="btn primary" data-action="complete-sprint" data-sprint="sprint_0">Marcar Sprint 0 como completado</button>
+      </div>
+    </div>
+
+    <h2>Qué viene después</h2>
+    <p>El Sprint 1 arranca del Blueprint 0 y lo lleva al detalle operativo: touchpoints concretos, calendario, dedicación medible. Cuando cierres el Sprint 0, la web te desbloquea la puerta del Sprint 1.</p>
+    <a href="/sprint-1" class="btn outline">Previsualizar Sprint 1 →</a>
+
+  </main>
+
+  <footer>
+    <div class="shell">
+      <div>© 2026 · Rediseña.Evaluacion · Un kit de <a href="https://eutika.com/" target="_blank" rel="noopener">Eutika</a></div>
+      <div>Contenidos CC BY-SA 4.0 · Código MIT · Contribución al Plan IMPULSO Docente UC3M</div>
+    </div>
+  </footer>
+
+
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>

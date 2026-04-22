@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rediseña.Evaluacion · Rediseña la evaluación de tu asignatura con criterio</title>
+  <meta name="description" content="Un proceso guiado y un kit de herramientas para rediseñar la evaluación de asignaturas universitarias en tres sprints, integrando la IA como eje del rediseño. De Eutika, pilotado en el Plan IMPULSO Docente UC3M. CC BY-SA 4.0.">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body data-page="inicio">
+
+  <header class="site">
+    <div class="shell">
+      <a href="/" class="brand">
+        <span class="brand-name">Rediseña<span class="dot">.</span>Evaluacion</span>
+        <span class="brand-attrib">Un kit de Eutika · Pilotaje en Plan IMPULSO Docente UC3M</span>
+      </a>
+      <nav class="primary">
+        <a href="/" class="active">Inicio</a>
+        <a href="/proceso">El proceso</a>
+        <a href="/kit">Kit</a>
+        <a href="/referencia">Referencia</a>
+        <a href="/acerca">Acerca</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="status-strip">
+    <div class="shell">
+      <div class="info">
+        <div class="info-item">
+          <span class="info-label">Asignatura</span>
+          <span class="info-value" id="status-course">Sin iniciar</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Estado</span>
+          <span class="info-value" id="status-step">—</span>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn ghost small" data-action="export">Exportar progreso</button>
+        <button class="btn ghost small" data-action="reset">Reiniciar</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- Hero primera visita -->
+    <div id="hero-first-visit">
+      <div class="hero dark">
+        <span class="chip">Rediseño de la evaluación</span>
+        <h1>Diseña la evaluación de tu asignatura con criterio</h1>
+        <p>Un proceso guiado y un kit de herramientas que te lleva desde las decisiones estratégicas hasta el plan semana a semana, con la integración de la IA como eje explícito del rediseño. Decides qué evaluación quieres tener, lo traduces a un plan operativo realista y lo pilotas con tus estudiantes. La web te acompaña paso a paso; tú marcas el ritmo.</p>
+        <div class="hero-meta">
+          <div><strong>Trabajo real</strong>2–4 horas concentradas</div>
+          <div><strong>Dispersión</strong>6–8 semanas</div>
+          <div><strong>Formato</strong>Totalmente autónomo y asíncrono</div>
+        </div>
+        <div class="hero-actions">
+          <a href="/sprint-0" class="btn primary">Empezar por el Sprint 0</a>
+          <a href="/proceso" class="btn outline" style="background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.5); color:var(--white);">Ver proceso completo</a>
+        </div>
+      </div>
+
+      <div class="callout privacy" style="margin-top: var(--sp-6); border-left: 3px solid var(--acento-teal); background: var(--acento-teal-pale, #E6F7F1); padding: var(--sp-4) var(--sp-5); border-radius: var(--radius-md);">
+        <p style="margin: 0;"><strong>Tu trabajo es 100 % tuyo y privado.</strong> No hay cuenta, no hay servidor y no guardamos ninguno de tus datos. Todo sucede en tu navegador y en los archivos que descargas. Si te apetece, al final te invitamos a compartir con nosotros qué has aprendido y cómo mejorar el kit — pero siempre de forma voluntaria.</p>
+      </div>
+
+      <h2>Cómo funciona</h2>
+      <p>Tres sprints consecutivos. Cada uno responde a una pregunta clara y tiene una pieza de trabajo principal. No hay plazos duros: avanzas cuando puedas y la web recuerda dónde lo dejaste.</p>
+
+      <div class="grid-3">
+        <a href="/sprint-0" class="card card-linkable with-accent">
+          <div class="meta">Sprint 0 · 60–90 min</div>
+          <h3>Decisiones estratégicas</h3>
+          <p>Cierras el encuadre de fondo: qué momentos evaluativos vas a tener, qué papel juega el uso que hace el estudiante de la IA, qué evidencias recoges y qué uso haces tú de la IA como docente. Terminas con un Canvas y un Blueprint 0 auto-generados.</p>
+          <span class="card-link">Entrar al Sprint 0 →</span>
+        </a>
+        <a href="/sprint-1" class="card card-linkable with-accent">
+          <div class="meta">Sprint 1 · 2–3 sesiones</div>
+          <h3>Plan de acción detallado</h3>
+          <p>Conviertes las decisiones en un plan operativo real: touchpoints, cronograma y dedicación por fase (diseño, ejecución, corrección, feedback) y donde puedes formular tus hipótesis de aumento de capacidad con IA.</p>
+          <span class="card-link">Entrar al Sprint 1 →</span>
+        </a>
+        <a href="/sprint-2" class="card card-linkable with-accent">
+          <div class="meta">Sprint 2 · 1 cuatrimestre</div>
+          <h3>Pilotaje con estudiantes</h3>
+          <p>Implementas el diseño en el aula, recalibras las hipótesis con tiempos medidos, recoges señales de estudiantes y del equipo docente, y cierras con una versión mejorada para siguientes iteraciones.</p>
+          <span class="card-link">Entrar al Sprint 2 →</span>
+        </a>
+      </div>
+
+      <h2>Para quién es</h2>
+      <p class="lead">Para profesoras y profesores universitarios que quieren rediseñar la evaluación de una de sus asignaturas con criterio, incorporando acompañamiento efectivo, optimizando los tiempos de dedicación y con un eje explícito de experimentación con IA. Funciona para cualquier asignatura, grado o máster, y en cualquier formato docente (presencial, online, híbrido).</p>
+
+      <p>Si encajas con algo de esto, este kit está pensado para ti:</p>
+      <ul>
+        <li><strong>Tu asignatura necesita una reflexión estratégica y una puesta al día.</strong> Ha heredado pruebas, ejercicios o criterios que ya no convencen, o que funcionan pero sabes que se pueden hacer mejor.</li>
+        <li><strong>Eres consciente de la necesidad de mejorar la retroalimentación</strong>, pero tu evaluación actual tiene una función esencialmente sumativa y no de acompañamiento al aprendizaje.</li>
+        <li><strong>La IA te está obligando a replantearte cosas.</strong> Quieres pasar de reaccionar (prohibir, vigilar) a diseñar con la IA dentro, tanto en lo que hacen tus estudiantes como en lo que haces tú.</li>
+        <li><strong>Tienes poco tiempo y mucha dispersión.</strong> Necesitas un proceso que no te pida bloquear una semana, sino que encaje en ratos de 45–90 minutos distribuidos en el cuatrimestre.</li>
+        <li><strong>Quieres salir con material concreto.</strong> No con un taller reflexivo, sino con un plan, un calendario y un Blueprint que puedes poner encima de la mesa en coordinación.</li>
+      </ul>
+
+      <h2>Qué vas a encontrar</h2>
+      <p>Todo lo que necesitas para hacer el trabajo, sin diseñar nada desde cero:</p>
+      <ul>
+        <li><strong>Guías de fondo</strong> para entender por qué el kit pide lo que pide (las cuatro decisiones, los siete componentes, los tres estados de cierre).</li>
+        <li><strong>Plantillas listas para usar</strong>: la Plantilla estratégica (HTML autocontenido que genera Canvas y Blueprint 0), la Plantilla del plan operativo (XLSX con once hojas) y el Panel del plan operativo (web que lee la Plantilla y genera Blueprint + Calendario semanal).</li>
+        <li><strong>Ejemplos pre-rellenados</strong> de cada plantilla, para que nunca empieces ante una hoja en blanco y veas el resultado final antes de ponerte a trabajar.</li>
+        <li><strong>Walkthroughs guiados</strong> que te llevan hoja por hoja de las plantillas más complejas, explicando cada columna y cada decisión.</li>
+        <li><strong>Kit de onboarding</strong> que te prepara para usar la Plantilla del plan operativo con soltura en unos 20 minutos, sin tener que descifrar su estructura.</li>
+      </ul>
+
+      <h2>Los principios del proceso y del kit</h2>
+      <p>Cinco ideas que atraviesan todo el proceso y explican por qué algunas cosas son como son.</p>
+
+      <div class="principle">
+        <div class="num">01</div>
+        <div>
+          <h3>Decidir antes de diseñar</h3>
+          <p>El "qué" estratégico se separa del "cómo" operativo. Antes de programar pruebas o repartir pesos, cierras cuatro decisiones de fondo. Muchos rediseños fallan por apilar cambios sin haber decidido primero qué evaluación quieres tener.</p>
+        </div>
+      </div>
+
+      <div class="principle">
+        <div class="num">02</div>
+        <div>
+          <h3>Dos escenarios por defecto</h3>
+          <p>Cada estimación de dedicación va en dos columnas: línea base (cómo lo harías sin IA) e hipótesis con IA (qué podrías hacer diferente integrándola). No es un ejercicio académico: al final del cuatrimestre recalibras las hipótesis con tiempos reales. El kit convierte la evaluación en un campo de experimentación medible.</p>
+        </div>
+      </div>
+
+      <div class="principle">
+        <div class="num">03</div>
+        <div>
+          <h3>Tres lentes de factibilidad</h3>
+          <p>Cada diseño pasa por tres lecturas antes de darse por bueno: <strong>carga docente</strong> (¿puedes sostenerlo?), <strong>carga estudiante</strong> (¿cabe en sus horas de dedicación esperadas?) y <strong>balance formativa/sumativa</strong> (¿la evaluación acompaña el aprendizaje o solo lo mide?). Si una lente falla, debes hacer ajustes antes de pasar al siguiente sprint.</p>
+        </div>
+      </div>
+
+      <div class="principle">
+        <div class="num">04</div>
+        <div>
+          <h3>Nunca empiezas en blanco</h3>
+          <p>Cada plantilla se entrega con guía breve, ejemplo pre-rellenado y walkthrough. La Plantilla del plan operativo tiene once hojas y treinta columnas: sin kit de onboarding, la probabilidad de abandono es alta. Con él, en 20 minutos estás operativo.</p>
+        </div>
+      </div>
+
+      <h2>Cómo encaja en tu calendario real</h2>
+      <p>El kit asume que no tienes una semana libre. Asume lo contrario: que lo vas a hacer a ratos.</p>
+      <ul>
+        <li><strong>2 a 4 horas de trabajo real</strong> repartidas en <strong>6 a 8 semanas</strong>. Menos de media hora por semana de media.</li>
+        <li>Sprint 0 se completa en <strong>una sesión concentrada de 60–90 minutos</strong>. Es el único tramo en el que conviene hacer en una única sesión.</li>
+        <li>Sprint 1 se reparte en <strong>dos o tres sesiones de 90 minutos</strong>, con días entre medias para dejar reposar decisiones.</li>
+        <li>Sprint 2 se vive <strong>a lo largo de un cuatrimestre</strong>: cada touchpoint genera una observación breve y el cierre es una síntesis.</li>
+      </ul>
+    </div>
+
+    <!-- Hero visita recurrente -->
+    <div id="hero-returning" style="display:none;">
+      <div class="continue-banner">
+        <div>
+          <div class="continue-chip">Continuar donde lo dejaste</div>
+          <h2 id="continue-title">Sprint 0 · Decisiones estratégicas</h2>
+          <div class="subtext">Última visita: hace unos días · <span id="continue-progress">Has completado 0 de 3 pasos</span></div>
+        </div>
+        <a id="continue-btn" href="/sprint-0" class="btn primary">Continuar →</a>
+      </div>
+
+      <h2>Tu progreso</h2>
+      <div class="grid-3">
+        <div class="card with-accent">
+          <div class="meta">Sprint 0</div>
+          <h3>Decisiones estratégicas</h3>
+          <div class="progress-bar"><div class="fill" id="s0-progress" style="width: 0%;"></div></div>
+          <p style="font-size:12px;">En progreso</p>
+        </div>
+        <div class="card muted">
+          <div class="meta">Sprint 1</div>
+          <h3>Plan de acción</h3>
+          <div class="progress-bar"><div class="fill" style="width: 0%;"></div></div>
+          <p style="font-size:12px;">Se desbloquea al cerrar Sprint 0</p>
+        </div>
+        <div class="card muted">
+          <div class="meta">Sprint 2</div>
+          <h3>Pilotaje</h3>
+          <div class="progress-bar"><div class="fill" style="width: 0%;"></div></div>
+          <p style="font-size:12px;">Próximamente</p>
+        </div>
+      </div>
+
+      <h2>Atajos</h2>
+      <div class="grid-2">
+        <a href="/kit" class="card card-linkable">
+          <h3>Kit de herramientas →</h3>
+          <p>Todas las piezas descargables, agrupadas por sprint. Acceso directo sin pasar por el proceso.</p>
+        </a>
+        <a href="/referencia" class="card card-linkable">
+          <h3>Referencia →</h3>
+          <p>Guía estratégica, glosario, preguntas frecuentes. Consulta puntual sin abrir herramientas.</p>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="shell">
+      <div>© 2026 · Rediseña.Evaluacion · Un kit de <a href="https://eutika.com/" target="_blank" rel="noopener">Eutika</a></div>
+      <div>Contenidos CC BY-SA 4.0 · Código MIT · Contribución al Plan IMPULSO Docente UC3M</div>
+    </div>
+  </footer>
+
+
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El proceso · Rediseña.Evaluacion</title>
+  <meta name="description" content="El rediseño de la evaluación se organiza en tres sprints consecutivos. Cada uno tiene una pregunta central, una pieza de trabajo principal y salidas claras.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body data-page="proceso">
+
+  <header class="site">
+    <div class="shell">
+      <a href="/" class="brand">
+        <span class="brand-name">Rediseña<span class="dot">.</span>Evaluacion</span>
+        <span class="brand-attrib">Un kit de Eutika · Pilotaje en Plan IMPULSO Docente UC3M</span>
+      </a>
+      <nav class="primary">
+        <a href="/">Inicio</a>
+        <a href="/proceso" class="active">El proceso</a>
+        <a href="/kit">Kit</a>
+        <a href="/referencia">Referencia</a>
+        <a href="/acerca">Acerca</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="status-strip">
+    <div class="shell">
+      <div class="info">
+        <div class="info-item">
+          <span class="info-label">Asignatura</span>
+          <span class="info-value" id="status-course">Sin iniciar</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Estado</span>
+          <span class="info-value" id="status-step">—</span>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn ghost small" data-action="export">Exportar progreso</button>
+        <button class="btn ghost small" data-action="reset">Reiniciar</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <div class="breadcrumb"><a href="/">Inicio</a> / El proceso</div>
+    <span class="chip">Visión de conjunto</span>
+    <h1>El proceso en tres sprints</h1>
+    <p class="lead">El rediseño se organiza en tres sprints consecutivos. Cada uno tiene una pregunta central, una pieza de trabajo principal y un conjunto claro de salidas. Entre un sprint y el siguiente no hay validación externa ni plazos impuestos: avanzas cuando cierras las piezas del sprint anterior, y la web guarda el punto donde lo dejas para que lo retomes cuando puedas.</p>
+
+    <h2>Por qué tres sprints y no uno</h2>
+    <p>Los rediseños de evaluación fracasan por dos razones típicas: o se saltan la fase estratégica (se meten directamente a reprogramar pruebas sin haber decidido qué evaluación se quiere), o se quedan en lo estratégico (mucha reflexión, ningún plan concreto que aguante el contacto con el aula). El kit separa explícitamente estas fases para que ninguna se coma a la otra.</p>
+    <ul>
+      <li><strong>Sprint 0</strong> fuerza el cierre del <em>qué</em> antes de entrar en el <em>cómo</em>.</li>
+      <li><strong>Sprint 1</strong> baja el <em>qué</em> a un plan operativo con números razonables.</li>
+      <li><strong>Sprint 2</strong> confronta el plan con la realidad del aula y cierra el ciclo con aprendizaje medido.</li>
+    </ul>
+
+    <h2>Los tres sprints</h2>
+
+    <div class="step-block">
+      <div class="step-num">Sprint 0 · 60–90 minutos</div>
+      <h3>Decisiones estratégicas y primer rediseño</h3>
+      <p><strong>Pregunta central:</strong> ¿qué evaluación quieres tener en tu asignatura y cómo puedes mejorar el acompañamiento?</p>
+      <p><strong>Pieza principal:</strong> Plantilla estratégica — un archivo HTML autocontenido que se abre en el navegador sin instalación. Tiene cinco bloques en orden y al completarlos genera automáticamente el Canvas y el Blueprint 0 de tu asignatura.</p>
+      <p><strong>Salidas:</strong> Plantilla estratégica completada, Canvas de tu asignatura y Blueprint 0 con un semáforo de tres estados de cierre (listo para Sprint 1 · necesita revisión · requiere decisiones de fondo).</p>
+      <a href="/sprint-0" class="btn outline" style="margin-top: var(--sp-3);">Entrar al Sprint 0 →</a>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num">Sprint 1 · 2–3 sesiones de 90 minutos</div>
+      <h3>Plan de acción detallado</h3>
+      <p><strong>Pregunta central:</strong> ¿cómo se materializa ese diseño semana a semana, con qué dedicación real y con qué integración concreta de la IA?</p>
+      <p><strong>Pieza principal:</strong> Plantilla del plan operativo — una hoja de cálculo con once hojas conectadas. Declaras tus touchpoints, los clasificas con una taxonomía de nueve tipos (T1–T9), estimas la dedicación por fase (diseño · ejecución · corrección · feedback) en dos escenarios (línea base e hipótesis con IA) y verificas tres lentes de factibilidad.</p>
+      <p><strong>Salidas:</strong> Plantilla completa (XLSX) y Panel del plan operativo — web que lee tu Plantilla y genera automáticamente Blueprint (matriz touchpoint × dimensiones) y Calendario semanal (heatmap de carga del estudiante), más la lectura de las tres lentes con semáforo.</p>
+      <a href="/sprint-1" class="btn outline" style="margin-top: var(--sp-3);">Entrar al Sprint 1 →</a>
+    </div>
+
+    <div class="step-block muted">
+      <div class="step-num">Sprint 2 · 1 cuatrimestre · próximamente</div>
+      <h3>Pilotaje con estudiantes y mejora del diseño</h3>
+      <p><strong>Pregunta central:</strong> ¿qué ha funcionado en el aula, qué ajusto para la próxima iteración?</p>
+      <p><strong>Pieza principal:</strong> en construcción una vez validemos y mejoremos el proceso y kit de los sprints 0 y 1. Incluirá un cuaderno de observación por touchpoint, una plantilla de informe de cierre y una guía de lectura de señales.</p>
+      <p><strong>Salidas:</strong> informe de cierre del pilotaje, recalibración de las hipótesis con IA con tiempos medidos, y una versión mejorada del Canvas, el Blueprint y el plan operativo para la siguiente edición de la asignatura.</p>
+      <a href="/sprint-2" class="btn outline" style="margin-top: var(--sp-3);">Ver alcance previsto →</a>
+    </div>
+
+    <h2>Qué vas a necesitar antes de empezar</h2>
+    <p>El kit no requiere preparación especial, pero estas cuatro cosas te ahorrarán fricción:</p>
+    <ul>
+      <li><strong>Una asignatura concreta en mente.</strong> Rediseño de una, no de todas a la vez. Si impartes varias, elige la que más te urge o la que te apetezca más.</li>
+      <li><strong>La guía docente actual de esa asignatura</strong>, para tener a mano los datos de partida: ECTS, horas de contacto, número de estudiantes, pruebas existentes y sus pesos.</li>
+      <li><strong>Una estimación honesta de tu dedicación actual</strong> por tipo de prueba. No tiene que ser exacta: una aproximación razonable basta. El kit te ayuda a refinar después.</li>
+      <li><strong>Navegador moderno</strong> (Chrome, Firefox, Safari o Edge recientes) y la posibilidad de descargar archivos XLSX y PDF. No hace falta cuenta ni instalar nada.</li>
+    </ul>
+
+  </main>
+
+  <footer>
+    <div class="shell">
+      <div>© 2026 · Rediseña.Evaluacion · Un kit de <a href="https://eutika.com/" target="_blank" rel="noopener">Eutika</a></div>
+      <div>Contenidos CC BY-SA 4.0 · Código MIT · Contribución al Plan IMPULSO Docente UC3M</div>
+    </div>
+  </footer>
+
+
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>

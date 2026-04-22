@@ -1,0 +1,29 @@
+# Rediseña.Evaluacion · Cloudflare Pages · headers de caché y seguridad
+
+# ═══════════════════════════════════════════════════
+# HTML · caché corta, permite updates rápidos
+# ═══════════════════════════════════════════════════
+/*.html
+  Cache-Control: public, max-age=300, must-revalidate
+
+# ═══════════════════════════════════════════════════
+# Assets estáticos · caché larga + immutable
+# Cuando cambien, hay que renombrar (styles.v2.css, etc.)
+# ═══════════════════════════════════════════════════
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# ═══════════════════════════════════════════════════
+# Downloads · caché moderada (1 día)
+# ═══════════════════════════════════════════════════
+/downloads/*
+  Cache-Control: public, max-age=86400
+
+# ═══════════════════════════════════════════════════
+# Seguridad base para todo el sitio
+# ═══════════════════════════════════════════════════
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()

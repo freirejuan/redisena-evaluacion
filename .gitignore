@@ -1,0 +1,30 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+
+# Editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos temporales de trabajo
+*.tmp
+*.log
+*.bak
+
+# Iteraciones del prototipo (no entran en deploy)
+Wireframe_web_v0.html
+Wireframe_web_v1.html
+Wireframe_web_v2.html
+
+# Sin dependencias de runtime, pero por si acaso
+node_modules/
+.pnpm-store/
+dist/
+build/

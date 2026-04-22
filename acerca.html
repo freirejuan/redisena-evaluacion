@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acerca de Rediseña.Evaluacion · Eutika · Plan IMPULSO Docente UC3M</title>
+  <meta name="description" content="Proceso guiado y kit de herramientas para rediseñar la evaluación de asignaturas universitarias con criterio, con la IA como eje explícito. Desarrollado por Eutika como contribución al Plan IMPULSO Docente UC3M.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body data-page="acerca">
+
+  <header class="site">
+    <div class="shell">
+      <a href="/" class="brand">
+        <span class="brand-name">Rediseña<span class="dot">.</span>Evaluacion</span>
+        <span class="brand-attrib">Un kit de Eutika · Pilotaje en Plan IMPULSO Docente UC3M</span>
+      </a>
+      <nav class="primary">
+        <a href="/">Inicio</a>
+        <a href="/proceso">El proceso</a>
+        <a href="/kit">Kit</a>
+        <a href="/referencia">Referencia</a>
+        <a href="/acerca" class="active">Acerca</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="status-strip">
+    <div class="shell">
+      <div class="info">
+        <div class="info-item">
+          <span class="info-label">Asignatura</span>
+          <span class="info-value" id="status-course">Sin iniciar</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Estado</span>
+          <span class="info-value" id="status-step">—</span>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn ghost small" data-action="export">Exportar progreso</button>
+        <button class="btn ghost small" data-action="reset">Reiniciar</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <div class="breadcrumb"><a href="/">Inicio</a> / Acerca</div>
+    <span class="chip">Sobre el proyecto</span>
+    <h1>Acerca de Rediseña.Evaluacion</h1>
+    <p class="lead">Rediseña.Evaluacion es un proceso guiado y un kit de herramientas para rediseñar la evaluación de asignaturas universitarias con criterio, con un eje explícito de experimentación con IA. Está desarrollado por <a href="https://eutika.com/" target="_blank" rel="noopener">Eutika</a> como contribución al Plan IMPULSO Docente de la Universidad Carlos III de Madrid, y publicado con licencia abierta para ser reutilizable en cualquier universidad o contexto de formación superior.</p>
+
+    <h2>Por qué existe</h2>
+    <p>El rediseño de la evaluación es una de las conversaciones más necesarias en la educación superior. La llegada de la IA generativa ha acelerado la necesidad: muchas pruebas tradicionales han perdido sentido, y al mismo tiempo se abren nuevas posibilidades didácticas y operativas. Pero el profesorado tiene poco tiempo, pocos marcos concretos y pocas herramientas que equilibren rigor y factibilidad.</p>
+    <p>Este kit responde a tres problemas operativos concretos:</p>
+    <ul>
+      <li><strong>Falta de proceso explícito.</strong> Hay mucho contenido sobre por qué rediseñar, menos sobre cómo hacerlo paso a paso. El kit ofrece una secuencia cerrada con puntos de decisión claros.</li>
+      <li><strong>Falta de herramientas a la altura del problema.</strong> Las plantillas que circulan son, o bien simplistas (matriz 2×2 en una diapositiva) o bien maximalistas (protocolos institucionales de 40 páginas). Este kit busca el punto medio útil: herramientas densas donde hace falta, ligeras donde no.</li>
+      <li><strong>Falta de marco para la IA.</strong> La IA se trata como tema aparte — "política de uso" — en lugar de integrarla como eje del rediseño. El kit la integra en la propia estructura del plan operativo (línea base / hipótesis con IA) para que la pregunta no sea "¿permito o no?" sino "¿cómo la uso para evaluar y acompañar mejor?".</li>
+    </ul>
+
+    <h2>Estado del kit</h2>
+    <p>El kit está en desarrollo activo. Las piezas disponibles hoy son:</p>
+    <ul>
+      <li><strong>Sprint 0</strong> · estable. Plantilla estratégica, Guía estratégica y Mini-guía de pre-trabajo.</li>
+      <li><strong>Sprint 1</strong> · estable. Plantilla del plan operativo, Kit de onboarding (Guía breve + Plantilla EJEMPLO IngeSoft + Walkthrough) y Panel del plan operativo (web que lee la Plantilla y genera Blueprint + Calendario semanal).</li>
+      <li><strong>Sprint 2</strong> · en diseño. Piezas previstas para junio de 2026.</li>
+    </ul>
+
+    <h2>Licencia y reutilización</h2>
+    <p>El kit se publica con licencia abierta para que pueda ser adoptado y adaptado en otras universidades y contextos de formación. Se usan dos licencias complementarias según la naturaleza del material:</p>
+    <ul>
+      <li><strong>Contenidos del kit</strong> (guías, plantillas, blueprint, documentación, textos de la web) · <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank" rel="noopener license">Creative Commons Atribución-CompartirIgual 4.0 Internacional (CC&nbsp;BY-SA&nbsp;4.0)</a>.</li>
+      <li><strong>Código de la web</strong> (HTML, CSS, JavaScript del prototipo) · <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener license">Licencia MIT</a>.</li>
+    </ul>
+    <p>En la práctica esto significa que puedes <strong>usar, copiar, modificar y redistribuir</strong> todos los materiales, también con fines comerciales, siempre que:</p>
+    <ul>
+      <li>Des <strong>atribución a Eutika</strong> (<a href="https://eutika.com/" target="_blank" rel="noopener">eutika.com</a>) como autor original del kit, e indiques que fue desarrollado como contribución al Plan IMPULSO Docente UC3M.</li>
+      <li>Si adaptas los contenidos (no el código), <strong>compartas las obras derivadas bajo la misma licencia CC&nbsp;BY-SA&nbsp;4.0</strong>.</li>
+      <li>Indiques claramente los cambios que hayas introducido respecto al original.</li>
+    </ul>
+    <p>Atribución sugerida: <em>"Basado en Rediseña.Evaluacion, kit desarrollado por Eutika (eutika.com). Publicado bajo CC&nbsp;BY-SA&nbsp;4.0."</em></p>
+    <p>Los textos legales completos están en el repositorio del proyecto: <code>LICENSE</code> (código, MIT) y <code>LICENSE-CONTENT.md</code> (contenidos, CC&nbsp;BY-SA&nbsp;4.0).</p>
+
+    <h2>Contacto y créditos</h2>
+    <p>Esta herramienta ha sido desarrollada por el equipo de <a href="https://eutika.com/" target="_blank" rel="noopener">Eutika</a>. Para cualquier consulta, propuesta de colaboración o adaptación a otros contextos, la persona de contacto es Juan Freire · <a href="mailto:juan@eutika.com">juan@eutika.com</a>.</p>
+
+    <h2>Feedback</h2>
+    <p>Si estás probando el kit y quieres compartir qué funciona, qué no, o qué te falta, escríbenos. Cada iteración del kit se alimenta del uso real: cuanto antes llegue tu feedback, antes se incorpora.</p>
+
+  </main>
+
+  <footer>
+    <div class="shell">
+      <div>© 2026 · Rediseña.Evaluacion · Un kit de <a href="https://eutika.com/" target="_blank" rel="noopener">Eutika</a></div>
+      <div>Contenidos CC BY-SA 4.0 · Código MIT · Contribución al Plan IMPULSO Docente UC3M</div>
+    </div>
+  </footer>
+
+
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>
