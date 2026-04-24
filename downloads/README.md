@@ -49,7 +49,7 @@ _Próximamente · septiembre 2026. Piezas por definir durante el verano de 2026.
 2. Si la pieza viene de un origen `.docx` o `.html` que quieres conservar editable, mantén el fuente en `Resultados/` y regenera el PDF con:
    - HTML → PDF: `libreoffice --headless --convert-to pdf archivo.html`
    - DOCX → PDF: `libreoffice --headless --convert-to pdf archivo.docx`
-3. Si el nombre cambia, actualiza los enlaces en los HTML correspondientes (`sprint-X.html`, `kit.html`, `referencia.html`) y este README.
+3. Si el nombre cambia, actualiza los enlaces en los HTML correspondientes (`sprint-X.html`, `kit.html`, `documentacion.html`) y este README.
 4. Commit + push. Cloudflare Pages redeploya en menos de un minuto.
 
 ---

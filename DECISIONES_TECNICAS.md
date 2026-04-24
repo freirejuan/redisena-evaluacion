@@ -34,7 +34,7 @@ redisena-evaluacion/
 ├── sprint-1.html                Sprint 1 · Plan de acción
 ├── sprint-2.html                Sprint 2 · Pilotaje
 ├── kit.html                     Kit de herramientas
-├── referencia.html              Referencia (glosario, FAQ)
+├── documentacion.html           Documentación (glosario, FAQ)
 ├── acerca.html                  Acerca del proyecto
 │
 ├── assets/

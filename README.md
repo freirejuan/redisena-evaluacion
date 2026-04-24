@@ -13,7 +13,7 @@ Ocho páginas HTML estáticas con URLs limpias, estado en `localStorage`, y sin 
 - **Inicio** — carta de presentación con variante de primera visita vs. visita recurrente.
 - **El proceso** — visión de conjunto de los tres sprints.
 - **Sprints 0, 1 y 2** — páginas de trabajo con pasos, checkboxes y piezas descargables.
-- **Kit, Referencia, Acerca** — biblioteca, glosario/FAQ y contexto del proyecto.
+- **Kit, Documentación, Acerca** — biblioteca, glosario/FAQ y contexto del proyecto.
 
 ---
 
@@ -44,7 +44,7 @@ Detalle completo en [DECISIONES_TECNICAS.md](./DECISIONES_TECNICAS.md).
 ├── sprint-1.html                Sprint 1 · Plan de acción
 ├── sprint-2.html                Sprint 2 · Pilotaje (próximamente)
 ├── kit.html                     Kit de herramientas
-├── referencia.html              Glosario y FAQ
+├── documentacion.html           Glosario y FAQ
 ├── acerca.html                  Sobre el proyecto
 │
 ├── assets/
