@@ -840,6 +840,32 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
       <input type="number" id="asig-horas-semana" name="asig-horas-semana" min="0" step="0.5" placeholder="4">
     </div>
   </div>
+
+  <div class="callout info" style="margin-top:var(--sp-3);">
+    <span class="callout-icon">i</span>
+    <div><strong>Dedicación esperada · marco operativo.</strong> Los siguientes cuatro campos se usan en el Sprint 1 como referencia para la lente de carga docente y la lente de carga del estudiante. La <em>dedicación promedio</em> es el presupuesto semanal sostenible; el <em>umbral de pico</em> es la frontera a partir de la cual una semana se considera saturada. Para tu propia dedicación, incluye lo que de verdad le dedicas a la asignatura (clase, diseño, corrección, tutorías, preparación y lo demás): es una estimación honesta, no contractual. Los valores por defecto son orientativos y los puedes ajustar.</div>
+  </div>
+
+  <div class="field-grid cols-4">
+    <div class="field">
+      <label for="asig-dedicacion-docente">Dedicación docente promedio (h/sem)</label>
+      <input type="number" id="asig-dedicacion-docente" name="asig-dedicacion-docente" min="0" step="0.5" placeholder="10">
+    </div>
+    <div class="field">
+      <label for="asig-pico-docente">Umbral pico docente (h/sem)</label>
+      <input type="number" id="asig-pico-docente" name="asig-pico-docente" min="0" step="0.5" placeholder="15">
+    </div>
+    <div class="field">
+      <label for="asig-dedicacion-estudiante">Dedicación estudiante promedio (h/sem)</label>
+      <input type="number" id="asig-dedicacion-estudiante" name="asig-dedicacion-estudiante" min="0" step="0.5" placeholder="10">
+    </div>
+    <div class="field">
+      <label for="asig-pico-estudiante">Umbral pico estudiante (h/sem)</label>
+      <input type="number" id="asig-pico-estudiante" name="asig-pico-estudiante" min="0" step="0.5" placeholder="12">
+    </div>
+  </div>
+  <p style="font-size:12px;color:var(--gris-500);margin-top:calc(var(--sp-2)*-1);">Orientación · estudiante: la unidad ECTS asume 25 h totales por crédito, así que con 6 ECTS y 15 semanas salen ≈ 10 h/sem. Pico estudiante por defecto: 1,2 × promedio. · docente: pico por defecto 1,5 × promedio.</p>
+
   <div class="field">
     <label for="asig-formato">Formato de la asignatura</label>
     <div class="pill-group" data-field="asig-formato">
@@ -1579,6 +1605,8 @@ function generateSummary(){
       ${line('Semestre', esc(s['asig-semestre']))}
       ${line('Estudiantes · equipo', (s['asig-estudiantes'] || '—') + ' · equipo ' + (s['asig-equipo'] || '—'))}
       ${line('Horas lectivas/semana', esc(s['asig-horas-semana']))}
+      ${line('Dedicación docente (h/sem)', (s['asig-dedicacion-docente'] || '—') + ' promedio · pico ' + (s['asig-pico-docente'] || '—'))}
+      ${line('Dedicación estudiante (h/sem)', (s['asig-dedicacion-estudiante'] || '—') + ' promedio · pico ' + (s['asig-pico-estudiante'] || '—'))}
       ${line('Formato · Rol', (s['asig-formato'] || '—') + ' · ' + (s['asig-rol'] || '—'))}
     </div>
     <div class="summary-group">
@@ -1685,6 +1713,10 @@ const DEMO_STATE = {
   'asig-estudiantes':'75',
   'asig-equipo':'2',
   'asig-horas-semana':'4',
+  'asig-dedicacion-docente':'10',
+  'asig-pico-docente':'15',
+  'asig-dedicacion-estudiante':'10',
+  'asig-pico-estudiante':'12',
   'asig-formato':'Mixta',
   'asig-rol':'Coordinación + docencia',
   'eje-a1':'15','eje-a2':'20','eje-a3':'45','eje-a4':'20',

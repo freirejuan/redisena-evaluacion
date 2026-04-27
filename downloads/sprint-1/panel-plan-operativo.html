@@ -247,6 +247,49 @@ a.kit-tag:hover{opacity:1;}
 .cal-legend-item{display:inline-flex;align-items:center;gap:4px;}
 .cal-legend-chip{display:inline-block;width:18px;height:14px;border-radius:3px;border:1px solid var(--gris-200);}
 
+.cal-toggle-row{
+  display:flex;align-items:center;gap:var(--sp-3);flex-wrap:wrap;
+  margin-bottom:var(--sp-5);padding:var(--sp-3) var(--sp-4);
+  background:var(--gris-050);border:1px solid var(--gris-200);
+  border-radius:var(--radio-md);
+}
+.cal-toggle-label{
+  font-size:var(--text-sm);font-weight:600;color:var(--azul-deep);
+}
+.cal-toggle{
+  display:inline-flex;background:var(--blanco);
+  border:1px solid var(--gris-300);border-radius:999px;padding:2px;
+}
+.cal-toggle-btn{
+  background:transparent;border:none;cursor:pointer;
+  padding:6px var(--sp-3);font-size:var(--text-xs);font-weight:600;
+  color:var(--gris-700);font-family:inherit;
+  border-radius:999px;letter-spacing:.04em;
+}
+.cal-toggle-btn.active{background:var(--azul-deep);color:var(--blanco);}
+.cal-toggle-hint{
+  font-size:var(--text-xs);color:var(--gris-600);font-style:italic;
+  flex:1;min-width:200px;
+}
+
+.cal-section{margin-top:var(--sp-6);}
+.cal-section:first-of-type{margin-top:0;}
+.cal-section-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:var(--sp-3);padding-bottom:var(--sp-2);
+  border-bottom:1px solid var(--gris-200);
+}
+.cal-section-head h3{
+  margin:0;font-family:var(--serif);font-size:var(--text-lg);
+  font-weight:600;color:var(--azul-deep);
+}
+.lente-tag{
+  display:inline-block;margin-left:var(--sp-2);
+  font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--azul-reflex);
+  background:var(--azul-soft);padding:2px 8px;border-radius:3px;
+}
+
 .cal-totals-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:var(--sp-3);
   margin-top:var(--sp-5);
@@ -373,23 +416,55 @@ a.kit-tag:hover{opacity:1;}
   <div class="tab-panel" id="panel-calendario">
 
     <div class="intro-card" id="cal-intro">
-      <p><strong>Calendario semanal · carga del estudiante.</strong> Distribución realista: las horas de cada touchpoint se reparten en las semanas previas a la entrega (no se concentran todas en la semana del TP como en la Lente 2 del XLSX). El heatmap resalta semanas por nivel de carga.</p>
+      <p><strong>Calendario semanal · doble lectura de carga.</strong> Dos heatmaps apilados: arriba la <strong>carga del estudiante</strong> (Lente 2) y debajo la <strong>carga docente</strong> (Lente 1). Las horas se distribuyen de forma realista en las semanas previas y posteriores a cada touchpoint, no concentradas en la semana del TP. El umbral de pico de cada perfil se toma de la Plantilla.</p>
     </div>
 
-    <div class="cal-legend">
-      <span>Carga estudiante por semana:</span>
-      <span class="cal-legend-item"><span class="cal-legend-chip" style="background:#EEF8F3"></span>&lt;2 h</span>
-      <span class="cal-legend-item"><span class="cal-legend-chip" style="background:#CDEADB"></span>2-4 h</span>
-      <span class="cal-legend-item"><span class="cal-legend-chip" style="background:#FBF0D9"></span>4-8 h</span>
-      <span class="cal-legend-item"><span class="cal-legend-chip" style="background:#F8D59A"></span>8-12 h</span>
-      <span class="cal-legend-item"><span class="cal-legend-chip" style="background:#FADDDD"></span>&gt;12 h</span>
+    <div class="cal-toggle-row">
+      <span class="cal-toggle-label">Escenario docente:</span>
+      <div class="cal-toggle" role="tablist">
+        <button class="cal-toggle-btn active" data-esc="base" role="tab">Base</button>
+        <button class="cal-toggle-btn" data-esc="ia" role="tab">Con IA</button>
+      </div>
+      <span class="cal-toggle-hint">El heatmap del estudiante no cambia: la carga del estudiante no depende del uso docente de IA.</span>
     </div>
 
-    <div class="cal-scroll">
-      <div class="cal-grid" id="cal-grid"></div>
+    <!-- Heatmap estudiante -->
+    <div class="cal-section">
+      <div class="cal-section-head">
+        <h3>Carga del estudiante por semana <span class="lente-tag">Lente 2</span></h3>
+      </div>
+      <div class="cal-legend">
+        <span>h estudiante por semana:</span>
+        <span class="cal-legend-item"><span class="cal-legend-chip" style="background:#EEF8F3"></span>&lt;2 h</span>
+        <span class="cal-legend-item"><span class="cal-legend-chip" style="background:#CDEADB"></span>2-4 h</span>
+        <span class="cal-legend-item"><span class="cal-legend-chip" style="background:#FBF0D9"></span>4-8 h</span>
+        <span class="cal-legend-item"><span class="cal-legend-chip" style="background:#F8D59A"></span>8-12 h</span>
+        <span class="cal-legend-item"><span class="cal-legend-chip" style="background:#FADDDD"></span>&gt;12 h</span>
+      </div>
+      <div class="cal-scroll">
+        <div class="cal-grid" id="cal-grid"></div>
+      </div>
+      <div class="cal-totals-grid" id="cal-totals"></div>
     </div>
 
-    <div class="cal-totals-grid" id="cal-totals"></div>
+    <!-- Heatmap docente -->
+    <div class="cal-section">
+      <div class="cal-section-head">
+        <h3>Carga docente por semana <span class="lente-tag">Lente 1</span></h3>
+      </div>
+      <div class="cal-legend">
+        <span>h docente por semana:</span>
+        <span class="cal-legend-item"><span class="cal-legend-chip" style="background:#EEF8F3"></span>&lt;3 h</span>
+        <span class="cal-legend-item"><span class="cal-legend-chip" style="background:#CDEADB"></span>3-6 h</span>
+        <span class="cal-legend-item"><span class="cal-legend-chip" style="background:#FBF0D9"></span>6-10 h</span>
+        <span class="cal-legend-item"><span class="cal-legend-chip" style="background:#F8D59A"></span>10-15 h</span>
+        <span class="cal-legend-item"><span class="cal-legend-chip" style="background:#FADDDD"></span>&gt;15 h</span>
+      </div>
+      <div class="cal-scroll">
+        <div class="cal-grid" id="cal-grid-docente"></div>
+      </div>
+      <div class="cal-totals-grid" id="cal-totals-docente"></div>
+    </div>
 
   </div>
 
@@ -424,7 +499,7 @@ a.kit-tag:hover{opacity:1;}
 <script>
 // ============ CONSTANTS ============
 const STATE_KEY = 'redisena_evaluacion_panel_v1';
-const SCHEMA_VERSION = 1;
+const SCHEMA_VERSION = 2;
 
 // ============ SAMPLE DATA (IngeSoft) ============
 const SAMPLE = {
@@ -439,7 +514,9 @@ const SAMPLE = {
     semanas: 15,
     ects: 6,
     horas_ects: 25,
-    umbral_pico_docente: 10,
+    dedicacion_promedio_docente: 10,
+    umbral_pico_docente: 15,
+    dedicacion_promedio_estudiante: 10,
     umbral_pico_estudiante: 12
   },
   touchpoints: [
@@ -479,17 +556,26 @@ function parseXlsx(workbook){
   const pRows = XLSX.utils.sheet_to_json(pSheet, {header:1, defval:null});
   const pMap = {};
   pRows.forEach(r => { if (r[0]) pMap[String(r[0]).trim()] = r[1]; });
+  const ects = Number(pMap['ECTS de la asignatura']) || 6;
+  const horas_ects = Number(pMap['Horas por ECTS']) || 25;
+  const semanas = Number(pMap['Semanas del cuatrimestre']) || 15;
+  const dedDocDefault = 10;
+  const dedEstDefault = (ects * horas_ects) / Math.max(semanas, 1);
+  const dedDoc = Number(pMap['Dedicación docente promedio (h/sem)']) || dedDocDefault;
+  const dedEst = Number(pMap['Dedicación estudiante promedio (h/sem)']) || dedEstDefault;
   result.parametros = {
     asignatura: pMap['Asignatura'] || 'Sin nombre',
     codigo: pMap['Código de la asignatura'] || '',
     cuatrimestre: pMap['Cuatrimestre'] || '',
     anio: pMap['Año académico'] || '',
     estudiantes: Number(pMap['Número de estudiantes']) || 0,
-    semanas: Number(pMap['Semanas del cuatrimestre']) || 15,
-    ects: Number(pMap['ECTS de la asignatura']) || 6,
-    horas_ects: Number(pMap['Horas por ECTS']) || 25,
-    umbral_pico_docente: Number(pMap['Umbral pico docente (h/sem)']) || 10,
-    umbral_pico_estudiante: Number(pMap['Umbral pico estudiante (h/sem)']) || 12
+    semanas: semanas,
+    ects: ects,
+    horas_ects: horas_ects,
+    dedicacion_promedio_docente: dedDoc,
+    umbral_pico_docente: Number(pMap['Umbral pico docente (h/sem)']) || (dedDoc * 1.5),
+    dedicacion_promedio_estudiante: dedEst,
+    umbral_pico_estudiante: Number(pMap['Umbral pico estudiante (h/sem)']) || (dedEst * 1.2)
   };
 
   // --- Touchpoints ---
@@ -607,6 +693,8 @@ function addWeek(arr, idx, h, numSemanas){
 }
 
 // ============ RENDERERS ============
+let __escenarioDocente = 'base'; // 'base' | 'ia'
+
 function renderAll(){
   if (!state || !state.touchpoints || state.touchpoints.length === 0) {
     showError('Estado vacío.');
@@ -616,7 +704,8 @@ function renderAll(){
   renderHeader();
   renderStatusBar();
   renderBlueprint();
-  renderCalendario();
+  renderCalendarioEstudiante();
+  renderCalendarioDocente();
   hideError();
 }
 
@@ -759,12 +848,13 @@ function natClassName(n){
   return '';
 }
 
-// ------ CALENDARIO ------
-function renderCalendario(){
+// ------ CALENDARIO ESTUDIANTE ------
+function renderCalendarioEstudiante(){
   const tps = state.touchpoints;
   const numSem = state.parametros.semanas || 15;
   const ectsBudget = (state.parametros.ects || 6) * (state.parametros.horas_ects || 25);
-  const umbral = state.parametros.umbral_pico_estudiante || 12;
+  const dedProm = state.parametros.dedicacion_promedio_estudiante || (ectsBudget / Math.max(numSem,1));
+  const umbral = state.parametros.umbral_pico_estudiante || (dedProm * 1.2);
 
   const grid = document.getElementById('cal-grid');
   grid.style.setProperty('--week-count', numSem);
@@ -819,15 +909,15 @@ function renderCalendario(){
       <div class="ct-value">${fmt(pctBudget,1)} %</div>
       <div class="ct-hint">${fmt(totalStudentH)} h sobre ${ectsBudget} h disponibles (${state.parametros.ects} ECTS × ${state.parametros.horas_ects} h)</div>
     </div>
+    <div class="cal-total-card">
+      <div class="ct-label">Dedicación esperada</div>
+      <div class="ct-value">${fmt(dedProm,1)} h/sem</div>
+      <div class="ct-hint">Promedio declarado en la Plantilla. Pico admitido: ${fmt(umbral,1)} h/sem.</div>
+    </div>
     <div class="cal-total-card ${peakWeeks > 2 ? 'warn' : ''}">
       <div class="ct-label">Semanas pico</div>
       <div class="ct-value">${peakWeeks}</div>
-      <div class="ct-hint">Semanas con más de ${umbral} h de estudiante. 0-2 = sostenible, 3+ = calendario concentrado.</div>
-    </div>
-    <div class="cal-total-card">
-      <div class="ct-label">Touchpoints</div>
-      <div class="ct-value">${tps.length}</div>
-      <div class="ct-hint">Total de momentos evaluativos declarados.</div>
+      <div class="ct-hint">Semanas que superan ${fmt(umbral,1)} h. 0-2 = sostenible · 3+ = calendario concentrado.</div>
     </div>
     <div class="cal-total-card">
       <div class="ct-label">Semana más cargada</div>
@@ -844,6 +934,142 @@ function cellLevel(h){
   if (h < 8) return 3;
   if (h < 12) return 4;
   return 5;
+}
+
+// ------ DOCENTE WEEKLY DISTRIBUTION ------
+// Reparto realista por fase:
+//   diseño  → 60% en sem_ini-1, 40% en sem_ini-2 (anclado al inicio del TP)
+//   ejec    → distribuido entre sem_ini y sem_fin (uniforme; serie usa una ocurrencia por semana)
+//   corr    → 100% en sem_fin+1 (la semana siguiente al cierre del TP)
+//   fback   → 60% en sem_fin+1, 40% en sem_fin+2
+function distributeDocenteWeeks(tp, numSem, escenario){
+  const weeks = new Array(numSem).fill(0);
+  const occ = tp.ocurrencias || 1;
+  const studentsCount = state.parametros.estudiantes || 0;
+  const eff = effectiveH(tp);
+  const h = (escenario === 'ia') ? eff : tp.h_base;
+
+  const hDis = h.diseno || 0;                            // único, no escala
+  const hEje = (h.ejec  || 0) * occ;                     // por ocurrencia
+  const hCor = (h.corr  || 0) * occ * studentsCount;     // por estudiante y ocurrencia
+  const hFbk = (h.fback || 0) * occ * studentsCount;     // por estudiante y ocurrencia
+
+  // diseño · 2 semanas previas a sem_ini
+  const wIni = tp.sem_ini - 1;            // 0-indexed
+  addWeek(weeks, wIni - 1, hDis * 0.60, numSem);
+  addWeek(weeks, wIni - 2, hDis * 0.40, numSem);
+
+  // ejecución · entre sem_ini y sem_fin
+  const wFin = tp.sem_fin - 1;            // 0-indexed
+  if (tp.formato === 'Serie' && tp.sem_fin > tp.sem_ini){
+    const span = tp.sem_fin - tp.sem_ini + 1;
+    const hPorOcur = (h.ejec || 0);
+    for (let k = 0; k < occ; k++){
+      const w = Math.round(tp.sem_ini + (k + 0.5) * (span / occ)) - 1;
+      addWeek(weeks, w, hPorOcur, numSem);
+    }
+  } else {
+    addWeek(weeks, wFin, hEje, numSem);
+  }
+
+  // corrección · semana siguiente al cierre
+  addWeek(weeks, wFin + 1, hCor, numSem);
+
+  // feedback · 2 semanas después del cierre
+  addWeek(weeks, wFin + 1, hFbk * 0.60, numSem);
+  addWeek(weeks, wFin + 2, hFbk * 0.40, numSem);
+
+  return weeks;
+}
+
+function cellLevelDocente(h){
+  if (h < 3) return 1;
+  if (h < 6) return 2;
+  if (h < 10) return 3;
+  if (h < 15) return 4;
+  return 5;
+}
+
+// ------ CALENDARIO DOCENTE (LENTE 1) ------
+function renderCalendarioDocente(){
+  const tps = state.touchpoints;
+  const numSem = state.parametros.semanas || 15;
+  const dedProm = state.parametros.dedicacion_promedio_docente || 10;
+  const umbral = state.parametros.umbral_pico_docente || (dedProm * 1.5);
+  const presupuestoTotal = dedProm * numSem;
+
+  const grid = document.getElementById('cal-grid-docente');
+  grid.style.setProperty('--week-count', numSem);
+  let html = '';
+
+  // Header row
+  html += '<div class="cal-head first">Touchpoint</div>';
+  for (let w = 1; w <= numSem; w++){
+    html += `<div class="cal-head">S${w}</div>`;
+  }
+
+  // Rows
+  const weekTotals = new Array(numSem).fill(0);
+  tps.forEach(tp => {
+    const natCls = natClassName(tp.naturaleza);
+    const weeks = distributeDocenteWeeks(tp, numSem, __escenarioDocente);
+    const totalTp = weeks.reduce((a,b)=>a+b,0);
+    html += `<div class="cal-tp-label ${natCls}">
+      <div class="tp-id">${escapeHtml(tp.id)}</div>
+      <div class="tp-name">${escapeHtml(tp.nombre)}</div>
+      <div class="tp-sub">total ${fmt(totalTp)} h doc</div>
+    </div>`;
+    weeks.forEach((h, idx) => {
+      const lvl = cellLevelDocente(h);
+      const cls = h > 0 ? `lvl-${lvl}` : 'empty';
+      html += `<div class="cal-cell ${cls}">${h > 0 ? fmt(h) : '·'}</div>`;
+      weekTotals[idx] += h;
+    });
+  });
+
+  // Total row
+  html += '<div class="cal-total-row">Total por semana (h doc)</div>';
+  weekTotals.forEach(total => {
+    let cls = '';
+    if (total > umbral) cls = 'over';
+    else if (total > umbral * 0.75) cls = 'warn';
+    html += `<div class="cal-total-cell ${cls}">${fmt(total)}</div>`;
+  });
+
+  grid.innerHTML = html;
+
+  // Summary cards (Lente 1)
+  const totalDocenteH = weekTotals.reduce((a,b)=>a+b,0);
+  const peakWeeks = weekTotals.filter(t => t > umbral).length;
+  const pctPresupuesto = presupuestoTotal > 0 ? (totalDocenteH / presupuestoTotal * 100) : 0;
+  const over = pctPresupuesto > 100;
+  const warn = pctPresupuesto > 85 && !over;
+  const maxIdx = weekTotals.indexOf(Math.max(...weekTotals));
+  const escenarioLabel = __escenarioDocente === 'ia' ? 'con hipótesis IA' : 'línea base';
+
+  const totalsHtml = `
+    <div class="cal-total-card ${over ? 'over' : (warn ? 'warn' : '')}">
+      <div class="ct-label">Consumo del presupuesto docente</div>
+      <div class="ct-value">${fmt(pctPresupuesto,1)} %</div>
+      <div class="ct-hint">${fmt(totalDocenteH)} h sobre ${fmt(presupuestoTotal)} h disponibles (${fmt(dedProm,1)} h/sem × ${numSem} sem · escenario ${escenarioLabel}).</div>
+    </div>
+    <div class="cal-total-card">
+      <div class="ct-label">Dedicación promedio</div>
+      <div class="ct-value">${fmt(dedProm,1)} h/sem</div>
+      <div class="ct-hint">Declarada en la Plantilla. Pico admitido: ${fmt(umbral,1)} h/sem.</div>
+    </div>
+    <div class="cal-total-card ${peakWeeks > 2 ? 'warn' : ''}">
+      <div class="ct-label">Semanas pico</div>
+      <div class="ct-value">${peakWeeks}</div>
+      <div class="ct-hint">Semanas que superan ${fmt(umbral,1)} h. 0-2 = sostenible · 3+ = calendario concentrado.</div>
+    </div>
+    <div class="cal-total-card">
+      <div class="ct-label">Semana más cargada</div>
+      <div class="ct-value">S${maxIdx + 1}</div>
+      <div class="ct-hint">${fmt(weekTotals[maxIdx])} h de docente ese pico.</div>
+    </div>
+  `;
+  document.getElementById('cal-totals-docente').innerHTML = totalsHtml;
 }
 
 // ============ UI EVENTS ============
@@ -867,6 +1093,16 @@ document.querySelectorAll('.tab').forEach(tab => {
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
     tab.classList.add('active');
     document.getElementById('panel-' + target).classList.add('active');
+  });
+});
+
+document.querySelectorAll('.cal-toggle-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const esc = btn.dataset.esc;
+    if (esc === __escenarioDocente) return;
+    __escenarioDocente = esc;
+    document.querySelectorAll('.cal-toggle-btn').forEach(b => b.classList.toggle('active', b.dataset.esc === esc));
+    if (state && state.touchpoints && state.touchpoints.length > 0) renderCalendarioDocente();
   });
 });
 

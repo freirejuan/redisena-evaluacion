@@ -559,16 +559,19 @@ a.kit-tag:hover{opacity:1;}
           <span class="lente-tag">Lente 1</span>
           <h3>Carga docente</h3>
         </div>
-        <p class="lente-question"><strong>Qué responde:</strong> ¿cuándo voy a ir ahogado este cuatrimestre?</p>
-        <p class="prose"><strong>Qué miras:</strong> la curva de horas semanales (base y con IA) y la lista de semanas pico, aquellas que superan el umbral (10 h por defecto).</p>
+        <p class="lente-question"><strong>Qué responde:</strong> ¿cuándo voy a ir ahogado este cuatrimestre y cabe mi plan en el presupuesto que me he marcado?</p>
+        <p class="prose"><strong>Qué miras:</strong> dos cosas, no solo una. Por un lado, el <strong>consumo de presupuesto</strong>: la suma de horas docente del cuatrimestre dividida entre la dedicación promedio que has declarado en el Sprint 0 (10 h/sem por defecto) multiplicada por el número de semanas. Por otro, la <strong>curva semanal</strong> y los picos que superan tu umbral de pico (15 h/sem por defecto, factor 1,5 × promedio).</p>
         <div class="prose">
           <ul>
-            <li><strong>Curva plana y por debajo del umbral</strong> = carga sostenible.</li>
+            <li><strong>Consumo &lt;85 % y curva por debajo del umbral</strong> = carga sostenible.</li>
+            <li><strong>Consumo entre 85 % y 100 %</strong> = al límite. Hay que asumirlo conscientemente o ajustar.</li>
+            <li><strong>Consumo &gt;100 %</strong> = el plan no cabe en el presupuesto declarado: se desbordan las horas que tú mismo dijiste poder sostener.</li>
             <li><strong>Uno o dos picos aislados</strong> = aceptables si están justificados.</li>
-            <li><strong>Varios picos seguidos</strong> = señal de que el calendario está concentrado y hay que repartir.</li>
+            <li><strong>Varios picos seguidos</strong> = el calendario está concentrado y hay que repartir.</li>
             <li><strong>Gran diferencia entre curva base y curva con IA</strong> = oportunidad alta de ahorro, pero recuerda que es una hipótesis hasta que la pruebes.</li>
           </ul>
         </div>
+        <p class="prose" style="font-size:14px;color:var(--gris-600);"><em>El Panel apila este heatmap docente debajo del de estudiante y permite alternar el escenario base / con IA con un toggle. La hoja Lente 1 del XLSX da la lectura numérica equivalente.</em></p>
       </div>
 
       <div class="lente">
@@ -654,7 +657,7 @@ a.kit-tag:hover{opacity:1;}
           <tr><th style="width:34%">Alerta</th><th>Palancas habituales</th></tr>
         </thead>
         <tbody>
-          <tr><td><strong>Picos de carga docente</strong> (&gt;10 h/semana)</td><td>Mover la semana de un TP contiguo; partir un TP en dos ocurrencias más pequeñas; reducir número de ocurrencias; repartir entre Coordinador y Profesor; hipotetizar apoyo IA en corrección/feedback.</td></tr>
+          <tr><td><strong>Picos de carga docente</strong> (&gt; umbral de pico declarado, 15 h/sem por defecto)</td><td>Mover la semana de un TP contiguo; partir un TP en dos ocurrencias más pequeñas; reducir número de ocurrencias; repartir entre Coordinador y Profesor; hipotetizar apoyo IA en corrección/feedback.</td></tr>
           <tr><td><strong>Solapamiento sumativo</strong> en misma semana</td><td>Reajustar calendario para separar pruebas; convertir una en formativa si el aprendizaje ya está cubierto por otras; bajar peso sumativo de una de ellas.</td></tr>
           <tr><td><strong>Presupuesto ECTS excedido</strong> (&gt;150 h estudiante)</td><td>Reducir ocurrencias; acortar entregas; sustituir TP sumativo por formativo más ligero; reducir alcance.</td></tr>
           <tr><td><strong>Sin formativo antes del primer sumativo</strong></td><td>Añadir un TP formativo ligero (quiz, ejercicio entregable) en las semanas previas; convertir el primer TP sumativo en mixto.</td></tr>

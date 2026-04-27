@@ -138,7 +138,7 @@
     <div class="step-block">
       <div class="step-num">Paso 2 · 10–15 min</div>
       <h3>Abre el Panel del plan operativo y sube tu Plantilla</h3>
-      <p>El Panel es una pequeña web que lee tu Plantilla XLSX y te devuelve <strong>dos vistas generadas automáticamente</strong>. La primera es el Blueprint, una matriz de touchpoints por dimensiones que recoge cuándo ocurre cada uno, quién es responsable, la carga docente en línea base y con IA, la carga del estudiante, la política de IA y las prácticas con IA que has declarado. La segunda es el Calendario semanal, un heatmap de horas del estudiante por semana con una distribución realista en las semanas previas a cada entrega. De este modo te ahorras el doble volcado que antes había que hacer a mano: lo único que mantienes tú es tu Plantilla.</p>
+      <p>El Panel es una pequeña web que lee tu Plantilla XLSX y te devuelve <strong>dos vistas generadas automáticamente</strong>. La primera es el Blueprint, una matriz de touchpoints por dimensiones que recoge cuándo ocurre cada uno, quién es responsable, la carga docente en línea base y con IA, la carga del estudiante, la política de IA y las prácticas con IA que has declarado. La segunda es el Calendario semanal, con dos heatmaps apilados: la carga del estudiante (Lente 2) arriba y la carga docente (Lente 1) abajo, ambas con una distribución realista en las semanas previas y posteriores a cada touchpoint y con la lectura de su propio umbral de pico. Un toggle en cabecera te permite alternar el escenario docente entre línea base e hipótesis con IA. De este modo te ahorras el doble volcado que antes había que hacer a mano: lo único que mantienes tú es tu Plantilla.</p>
       <p>La primera vez que abres el Panel verás el <strong>ejemplo IngeSoft</strong> precargado para que te orientes. Arriba a la derecha tienes un botón para subir tu propia Plantilla, aunque también puedes arrastrarla directamente sobre la página. Tus datos se guardan en tu navegador; no se sube nada a ningún servidor.</p>
       <div class="tool-card">
         <div class="body">
@@ -164,8 +164,8 @@
       <h3>Lee las tres lentes de factibilidad</h3>
       <p>La Plantilla calcula automáticamente tres lentes de factibilidad a partir de tus estimaciones:</p>
       <ul>
-        <li><strong>Lente 1 · Carga docente.</strong> ¿Las horas que acabas dedicando tú como docente caben razonablemente en tu semana real?</li>
-        <li><strong>Lente 2 · Carga del estudiante.</strong> ¿Las horas que le estás pidiendo al estudiante caben en las horas de dedicación que su ECTS le asigna a la asignatura?</li>
+        <li><strong>Lente 1 · Carga docente.</strong> ¿Las horas que acabas dedicando tú como docente caben razonablemente en tu semana real? Se calcula contra la dedicación promedio que declaras al inicio (10 h/sem por defecto) y con el umbral de pico que tú mismo fijas (15 h/sem por defecto, factor 1,5×). El Panel marca cualquier semana que supere ese umbral.</li>
+        <li><strong>Lente 2 · Carga del estudiante.</strong> ¿Las horas que le estás pidiendo al estudiante caben en las horas de dedicación que su ECTS le asigna a la asignatura? Se calcula contra el presupuesto total ECTS y contra el umbral de pico estudiante (12 h/sem por defecto, factor 1,2×).</li>
         <li><strong>Lente 3 · Balance formativa/sumativa.</strong> ¿La evaluación acompaña al estudiante durante el cuatrimestre o acaba midiendo el aprendizaje solamente al final?</li>
       </ul>
       <p>Si alguna lente sale en rojo, lo razonable es revisarla y ajustar la plantilla antes de avanzar al Sprint 2.</p>
