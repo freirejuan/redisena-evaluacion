@@ -522,9 +522,9 @@ const SAMPLE = {
   touchpoints: [
     {id:'TP1', nombre:'Prueba diagnóstica de conceptos previos', tipo:'T1', naturaleza:'Formativo', formato:'Puntual', politica_ia:'Declarada', responsable:'Profesor', ocurrencias:1, sem_ini:1, sem_fin:1, peso_sumativo:0, h_base:{diseno:2,ejec:0.5,corr:0.2,fback:0.1}, h_ia:{diseno:null,ejec:null,corr:0.1,fback:null}, practicas:{diseno:'',ejec:'',corr:'IA agrupa errores por pregunta y genera lista de conceptos a reforzar en las primeras sesiones.',fback:''}, h_est_ocur:1},
     {id:'TP2', nombre:'Quiz semanal de teoría', tipo:'T1', naturaleza:'Formativo', formato:'Serie', politica_ia:'Restringida', responsable:'Profesor', ocurrencias:10, sem_ini:2, sem_fin:14, peso_sumativo:0, h_base:{diseno:1.5,ejec:0.3,corr:0.1,fback:0.05}, h_ia:{diseno:0.5,ejec:null,corr:null,fback:null}, practicas:{diseno:'IA genera 3 variantes del quiz a partir del temario; elijo y adapto la que mejor encaja con la sesión.',ejec:'',corr:'',fback:''}, h_est_ocur:0.3},
-    {id:'TP3', nombre:'Entrega P1 — Análisis de requisitos', tipo:'T2', naturaleza:'Mixto', formato:'Puntual', politica_ia:'Declarada', responsable:'Profesor', ocurrencias:1, sem_ini:4, sem_fin:4, peso_sumativo:10, h_base:{diseno:3,ejec:0.5,corr:0.6,fback:0.3}, h_ia:{diseno:null,ejec:null,corr:null,fback:0.15}, practicas:{diseno:'',ejec:'',corr:'',fback:'IA redacta primer borrador de feedback personalizado por estudiante a partir de la rúbrica; yo edito antes de enviar.'}, h_est_ocur:10},
+    {id:'TP3', nombre:'Entrega P1 — Análisis de requisitos', tipo:'T2', naturaleza:'Mixto', formato:'Puntual', politica_ia:'Declarada', responsable:'Profesor', ocurrencias:1, sem_ini:4, sem_fin:4, peso_sumativo:10, h_base:{diseno:3,ejec:0.5,corr:0.6,fback:0.3}, h_ia:{diseno:null,ejec:null,corr:null,fback:0.15}, practicas:{diseno:'',ejec:'',corr:'',fback:'IA redacta primer borrador de retroalimentación personalizado por estudiante a partir de la rúbrica; yo edito antes de enviar.'}, h_est_ocur:10},
     {id:'TP4', nombre:'Examen parcial teórico', tipo:'T1', naturaleza:'Sumativo', formato:'Puntual', politica_ia:'Restringida', responsable:'Profesor', ocurrencias:1, sem_ini:8, sem_fin:8, peso_sumativo:25, h_base:{diseno:6,ejec:2,corr:0.4,fback:0.1}, h_ia:{diseno:null,ejec:null,corr:null,fback:null}, practicas:{diseno:'',ejec:'',corr:'',fback:''}, h_est_ocur:12},
-    {id:'TP5', nombre:'Entrega P2 — Diseño arquitectónico', tipo:'T2', naturaleza:'Mixto', formato:'Puntual', politica_ia:'Declarada', responsable:'Ambos', ocurrencias:1, sem_ini:10, sem_fin:10, peso_sumativo:10, h_base:{diseno:3,ejec:0.5,corr:0.6,fback:0.3}, h_ia:{diseno:null,ejec:null,corr:0.3,fback:0.15}, practicas:{diseno:'',ejec:'',corr:'Detección automática de inconsistencias en diagramas UML y trazabilidad; validación humana de casos frontera.',fback:'Feedback individualizado a partir de checklist arquitectónico; IA plantea sugerencias de mejora y yo las valido.'}, h_est_ocur:10},
+    {id:'TP5', nombre:'Entrega P2 — Diseño arquitectónico', tipo:'T2', naturaleza:'Mixto', formato:'Puntual', politica_ia:'Declarada', responsable:'Ambos', ocurrencias:1, sem_ini:10, sem_fin:10, peso_sumativo:10, h_base:{diseno:3,ejec:0.5,corr:0.6,fback:0.3}, h_ia:{diseno:null,ejec:null,corr:0.3,fback:0.15}, practicas:{diseno:'',ejec:'',corr:'Detección automática de inconsistencias en diagramas UML y trazabilidad; validación humana de casos frontera.',fback:'Retroalimentación individualizado a partir de checklist arquitectónico; IA plantea sugerencias de mejora y yo las valido.'}, h_est_ocur:10},
     {id:'TP6', nombre:'Entrega P3 — Implementación y pruebas', tipo:'T2', naturaleza:'Sumativo', formato:'Puntual', politica_ia:'Abierta', responsable:'Profesor', ocurrencias:1, sem_ini:13, sem_fin:13, peso_sumativo:25, h_base:{diseno:3,ejec:0.5,corr:1,fback:0.3}, h_ia:{diseno:null,ejec:null,corr:null,fback:null}, practicas:{diseno:'',ejec:'',corr:'Pendiente — evaluar si uso IA para primera lectura de código entregado.',fback:''}, h_est_ocur:25},
     {id:'TP7', nombre:'Examen final', tipo:'T1', naturaleza:'Sumativo', formato:'Puntual', politica_ia:'Restringida', responsable:'Ambos', ocurrencias:1, sem_ini:15, sem_fin:15, peso_sumativo:30, h_base:{diseno:8,ejec:2,corr:0.5,fback:0.1}, h_ia:{diseno:null,ejec:null,corr:null,fback:null}, practicas:{diseno:'',ejec:'',corr:'',fback:''}, h_est_ocur:22},
     {id:'TP8', nombre:'Tutoría 1 a 1', tipo:'T7', naturaleza:'Formativo', formato:'Serie', politica_ia:'Declarada', responsable:'Coordinador', ocurrencias:8, sem_ini:6, sem_fin:14, peso_sumativo:0, h_base:{diseno:0.5,ejec:0.5,corr:0,fback:0}, h_ia:{diseno:null,ejec:0.3,corr:null,fback:null}, practicas:{diseno:'',ejec:'Antes de cada tutoría, IA resume el rendimiento reciente del estudiante (entregas, quizzes) para preparar en 5 min.',corr:'',fback:''}, h_est_ocur:0.5}
@@ -820,7 +820,7 @@ function renderBlueprint(){
           ps.diseno && `<strong>Diseño:</strong> ${escapeHtml(ps.diseno)}`,
           ps.ejec && `<strong>Ejecución:</strong> ${escapeHtml(ps.ejec)}`,
           ps.corr && `<strong>Corrección:</strong> ${escapeHtml(ps.corr)}`,
-          ps.fback && `<strong>Feedback:</strong> ${escapeHtml(ps.fback)}`
+          ps.fback && `<strong>Retroalimentación:</strong> ${escapeHtml(ps.fback)}`
         ].filter(Boolean);
         if (all.length === 0) return '<span style="color:var(--gris-400);font-style:italic;">sin prácticas anotadas</span>';
         return `<div class="cell-sub">${all.join('<br><br>')}</div>`;
@@ -975,7 +975,7 @@ function distributeDocenteWeeks(tp, numSem, escenario){
   // corrección · semana siguiente al cierre
   addWeek(weeks, wFin + 1, hCor, numSem);
 
-  // feedback · 2 semanas después del cierre
+  // retroalimentación · 2 semanas después del cierre
   addWeek(weeks, wFin + 1, hFbk * 0.60, numSem);
   addWeek(weeks, wFin + 2, hFbk * 0.40, numSem);
 

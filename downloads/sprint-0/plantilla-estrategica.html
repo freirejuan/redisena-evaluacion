@@ -1044,8 +1044,8 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
       <label class="checkbox-item">
         <input type="radio" name="d2-postura" value="Lo veré en Sprint 1">
         <div class="checkbox-item-body">
-          <div class="checkbox-item-title">Lo veré en Sprint 1</div>
-          <div class="checkbox-item-hint">Llego con la duda declarada. Es legítimo: mejor aplazar que forzar una respuesta que no has decidido.</div>
+          <div class="checkbox-item-title">Aún no lo decido (Sprint 1)</div>
+          <div class="checkbox-item-hint">Llego con la duda declarada. Es legítimo: mejor aplazar la decisión al Sprint 1 que forzar una respuesta que no has decidido.</div>
         </div>
       </label>
     </div>
@@ -1064,20 +1064,20 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
     <div class="decision-header">
       <div class="decision-num">D3</div>
       <div class="decision-title">
-        <h4>¿Qué evidencias cierras ahora y cuáles dejas para el Sprint 1?</h4>
+        <h4>¿Qué evidencias decides ahora y cuáles dejas para el Sprint 1?</h4>
         <p>Dos preguntas acopladas. No todo tiene que estar listo en Sprint 0.</p>
       </div>
     </div>
     <div class="field-grid cols-2">
       <div class="field">
-        <label for="d3-ahora">Evidencias que cierro ahora</label>
+        <label for="d3-ahora">Evidencias que decido ahora</label>
         <textarea id="d3-ahora" name="d3-ahora" style="min-height:120px;" placeholder="p. ej.: rúbrica general del proyecto · pauta de entrega del parcial · criterios públicos de participación."></textarea>
         <div class="field-hint">Lo que el estudiante verá el día 1 o antes del primer touchpoint.</div>
       </div>
       <div class="field">
         <label for="d3-despues">Evidencias que dejo para el Sprint 1</label>
         <textarea id="d3-despues" name="d3-despues" style="min-height:120px;" placeholder="p. ej.: rúbrica de coevaluación · protocolo de observación de tutorías · plantilla de retroalimentación por IA."></textarea>
-        <div class="field-hint">Lo que cerraré con detalle en el Sprint 1, antes de su primer uso.</div>
+        <div class="field-hint">Lo que decidiré con detalle en el Sprint 1, antes de su primer uso.</div>
       </div>
     </div>
     <div class="field">
@@ -1127,7 +1127,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
       <label class="checkbox-item">
         <input type="radio" name="d4-postura" value="Lo veré en Sprint 1">
         <div class="checkbox-item-body">
-          <div class="checkbox-item-title">Lo veré en Sprint 1</div>
+          <div class="checkbox-item-title">Aún no lo decido (Sprint 1)</div>
           <div class="checkbox-item-hint">Aplazo la decisión al Sprint 1 con información adicional.</div>
         </div>
       </label>
@@ -1150,7 +1150,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 <section id="paso5" class="section">
   <div class="section-chip">Paso 5 · Listado de touchpoints y dimensiones activas</div>
   <h2>C1 · los momentos del curso, dimensión a dimensión</h2>
-  <p class="lead">El sistema de evaluación de tu asignatura se articula en <strong>touchpoints</strong> (C1 · momentos evaluativos). Cada uno se parametriza con las seis dimensiones restantes (C2–C7), activadas o no según tu diseño. La intensidad de cada componente <em>emerge</em> de cuántos touchpoints lo activan, no se declara desde fuera.</p>
+  <p class="lead">El sistema de evaluación de tu asignatura se articula en <strong>touchpoints</strong> (C1 · momentos evaluativos): a lo largo del kit usamos las dos formas indistintamente. <em>Touchpoint</em> es el identificador técnico —con la sigla <strong>TP</strong>—; <em>momento evaluativo</em> es la expresión más natural en prosa. Cada uno se parametriza con las seis dimensiones restantes (C2–C7), activadas o no según tu diseño. La intensidad de cada componente <em>emerge</em> de cuántos momentos lo activan, no se declara desde fuera.</p>
 
   <div class="callout info">
     <span class="callout-icon">i</span>
@@ -1271,7 +1271,13 @@ const DIMENSIONS = [
   { code:'C6', title:'Retroalimentación', hint:'¿Cómo, cuándo y en qué formato retroalimentas? En puntuales, posterior al evento; en continuos, puntual (p. ej. mensual).' },
   { code:'C7', title:'Mejora docente', hint:'¿Cómo alimenta este touchpoint tu ciclo de mejora docente entre ediciones?' }
 ];
-const ESTADOS = ['Activa','No aplica','Lo veré en Sprint 1'];
+// El value persiste en localStorage; el label es solo cómo se muestra al docente.
+// Cambiar los labels NO rompe datos guardados previamente.
+const ESTADOS = [
+  {value:'Activa',              label:'La incluyo'},
+  {value:'No aplica',            label:'La descarto'},
+  {value:'Lo veré en Sprint 1',  label:'Aún no lo decido'}
+];
 let tpCounter = 0;
 const tpListEl = document.getElementById('tp-list');
 const tpEmptyEl = document.getElementById('tp-empty');
@@ -1286,10 +1292,10 @@ function addTouchpoint(data){
   let dimsHtml = '';
   DIMENSIONS.forEach(d => {
     const dimKey = `tp${idx}-${d.code.toLowerCase()}`;
-    const pills = ESTADOS.map(est => `
-      <input type="radio" id="${dimKey}-${est.replace(/\s/g,'_')}" name="${dimKey}-estado" value="${est}">
-      <label for="${dimKey}-${est.replace(/\s/g,'_')}">${est}</label>
-    `).join('');
+    const pills = ESTADOS.map(({value, label}) => {
+      const safe = value.replace(/\s/g,'_');
+      return `<input type="radio" id="${dimKey}-${safe}" name="${dimKey}-estado" value="${value}"><label for="${dimKey}-${safe}">${label}</label>`;
+    }).join('');
     dimsHtml += `
       <div class="tp-dim">
         <div class="tp-dim-head">
@@ -1298,7 +1304,7 @@ function addTouchpoint(data){
         </div>
         <div class="tp-dim-hint">${d.hint}</div>
         <div class="pill-group" data-field="${dimKey}-estado">${pills}</div>
-        <textarea name="${dimKey}-nota" placeholder="Nota opcional: cómo se concreta esta dimensión en este touchpoint. Si marcas 'Lo veré en Sprint 1', puedes dejar anotada la duda." style="margin-top:8px;"></textarea>
+        <textarea name="${dimKey}-nota" placeholder="Nota opcional: cómo se concreta esta dimensión en este touchpoint. Si marcas 'Aún no lo decido', puedes dejar anotada la duda." style="margin-top:8px;"></textarea>
       </div>
     `;
   });
@@ -1608,7 +1614,7 @@ function generateSummary(){
     return `<div style="padding:8px 0;border-bottom:1px dashed var(--gris-100);"><strong>TP${i+1} · ${esc(t.nombre) || '<em>sin nombre</em>'}</strong> ${nat}<br><span style="font-size:var(--text-xs);color:var(--gris-500);">${when || '—'}</span><br>${dimsActivas || '<em>sin dimensiones activadas</em>'}${dimsSprint ? '<br><span style="font-size:var(--text-xs);color:var(--gris-500);">Sprint 1: '+dimsSprint+'</span>' : ''}</div>`;
   }).join('') : '<em>sin touchpoints declarados</em>';
 
-  // Semáforo snapshot
+  // Semáforo foto fija
   updateSemaforo();
   const semColor = document.getElementById('semaforo-light').className.split(' ')[1] || 'gris';
   const semTitle = document.getElementById('semaforo-title').textContent;
@@ -1750,29 +1756,29 @@ const DEMO_STATE = {
   'comentario-arquetipo':'Grupo con mayoría curiosa y participativa en evaluación (co-diseño y co-evaluación), atravesado por tensiones relacionales en trabajos de equipo.',
   'hoy-descripcion':'2 pruebas escritas intermedias + trabajo final de grupo con defensa oral. Hoy no uso IA de forma deliberada; los estudiantes sí la usan aunque no lo declaran.',
   'hoy-funciona':'Los grupos se implican cuando hay entregas intermedias visibles.',
-  'hoy-fricciona':'Las correcciones se acumulan al final; el feedback llega demasiado tarde para ajustar.',
+  'hoy-fricciona':'Las correcciones se acumulan al final; el retroalimentación llega demasiado tarde para ajustar.',
   'd1-momentos':'3 touchpoints: explorar (TP1 · semana 3), construir (TP2 · semana 8), integrar (TP3 · semana 13).',
   'd1-criterio':'Cada TP separa una fase cognitiva distinta y ofrece dos oportunidades de ajuste antes del cierre.',
   'd2-postura':'Herramienta abierta con reglas',
   'd2-comunicacion':'IA con criterio: podéis usarla para explorar y validar, pero debéis declarar siempre cómo y dónde. La IA no sustituye el criterio que os pido demostrar.',
-  'd3-ahora':'Rúbrica en cada TP · peer review en TP2 · auto-declaración de uso de IA en los tres touchpoints.',
+  'd3-ahora':'Rúbrica en cada TP · revisión entre pares en TP2 · auto-declaración de uso de IA en los tres touchpoints.',
   'd3-despues':'Trazas de proceso del equipo · portfolio de hitos · registro longitudinal de aprendizaje (Sprint 1).',
   'd3-fuera':'Observación informal en aula · interacciones 1-a-1 no sistematizadas.',
   'd4-postura':'Uso cauteloso',
   'd4-nota':'Sí para estructurar (primer borrador de rúbrica o retroalimentación que reviso siempre). No para delegar el juicio evaluativo ni generar notas finales.',
   'touchpoints':[
     {
-      nombre:'Checkpoint de idea',
+      nombre:'Punto de control de idea',
       naturaleza:'Puntual',
       cuando:'Semana 3 · 45 min en clase',
       cuandoRetro:'Misma sesión (oral) + nota escrita en 48 h',
       dims:{
-        C2:{estado:'Activa',nota:'Autoeval 1–5 con comentario individual antes del pitch.'},
+        C2:{estado:'Activa',nota:'Autoeval 1–5 con comentario individual antes del presentación corta.'},
         C3:{estado:'Activa',nota:'Libre para explorar; obligatorio declarar uso.'},
-        C4:{estado:'Activa',nota:'Entrega ½ pág. + pitch de 3 min por equipo.'},
-        C5:{estado:'Activa',nota:'Formulario breve + grabación del pitch (audio).'},
-        C6:{estado:'Activa',nota:'Feedback oral inmediato al pitch + rubricón ligero.'},
-        C7:{estado:'Lo veré en Sprint 1',nota:'Registro de dudas frecuentes post-pitch (formato por definir).'}
+        C4:{estado:'Activa',nota:'Entrega ½ pág. + presentación corta de 3 min por equipo.'},
+        C5:{estado:'Activa',nota:'Formulario breve + grabación del presentación corta (audio).'},
+        C6:{estado:'Activa',nota:'Retroalimentación oral inmediato al presentación corta + rubricón ligero.'},
+        C7:{estado:'Lo veré en Sprint 1',nota:'Registro de dudas frecuentes post-presentación corta (formato por definir).'}
       },
       open:true
     },
@@ -1782,7 +1788,7 @@ const DEMO_STATE = {
       cuando:'Semana 8 · sesión dedicada',
       cuandoRetro:'Devolución 1-a-1 durante la semana 9',
       dims:{
-        C2:{estado:'Activa',nota:'Peer review estructurada entre equipos (rúbrica corta).'},
+        C2:{estado:'Activa',nota:'Revisión entre pares estructurada entre equipos (rúbrica corta).'},
         C3:{estado:'Activa',nota:'Libre para validar; documentar uso en memoria de proceso.'},
         C4:{estado:'Activa',nota:'Prototipo navegable + memoria de proceso.'},
         C5:{estado:'Activa',nota:'Repositorio del equipo + rúbrica digital compartida.'},
@@ -2026,7 +2032,7 @@ function buildCanvasHTML(s){
           <div class="glos-hint">Cuatro términos para decodificar el canvas</div>
         </div>
         <div class="glos-grid">
-          <div class="glos-item"><div class="glos-term">Touchpoint <code>TP</code></div><div class="glos-def">Momento significativo del proceso evaluativo: algo sucede, se registra evidencia, se devuelve feedback.</div></div>
+          <div class="glos-item"><div class="glos-term">Touchpoint <code>TP</code></div><div class="glos-def">Momento significativo del proceso evaluativo: algo sucede, se registra evidencia, se devuelve retroalimentación.</div></div>
           <div class="glos-item"><div class="glos-term">Dimensiones <code>C1–C7</code></div><div class="glos-def">Los siete componentes del proceso: touchpoints, auto/coeval, IA estudiante, evidencias, recogida, retroalimentación, mejora docente.</div></div>
           <div class="glos-item"><div class="glos-term">Decisiones <code>D1–D4</code></div><div class="glos-def">Las cuatro decisiones estratégicas que toma el docente antes del Sprint 1: momentos, IA del estudiante, evidencias, IA del docente.</div></div>
           <div class="glos-item"><div class="glos-term">Arquetipo</div><div class="glos-def">Posición pedagógica de la asignatura en dos ejes: grado de estructura y naturaleza del output (técnico ↔ creativo).</div></div>
@@ -2067,7 +2073,7 @@ function buildBlueprintHTML(s){
     { code:'C5', name:'Recogida', hint:'cómo se captura', trans:{tag:'Infra común', text:'Todo pasa por el aula virtual del curso; sin sistemas paralelos.'} },
     { code:'C2', name:'Auto/coevaluación', hint:'quién valora', trans:{tag:'Principio', text:'Coevaluación <strong>solo formativa</strong>: no pondera nota final.'} },
     { code:'C3', name:'IA estudiante', hint:'política de uso', trans:{tag:'D2 · Política', text:d2Trans} },
-    { code:'C6', name:'Retroalimentación', hint:'devolución al estudiante', trans:{tag:'Principio', text:'Feedback <strong>antes</strong> de la nota, no después. Siempre con un <em>próximo paso</em>.'} },
+    { code:'C6', name:'Retroalimentación', hint:'devolución al estudiante', trans:{tag:'Principio', text:'Retroalimentación <strong>antes</strong> de la nota, no después. Siempre con un <em>próximo paso</em>.'} },
     { code:'C7', name:'Mejora docente', hint:'qué aprende el equipo', trans:{tag:'D4 · Política', text:d4Trans} }
   ];
 
@@ -2123,7 +2129,7 @@ function buildBlueprintHTML(s){
 
   const sprint1Html = sprint1Items.length
     ? sprint1Items.map(x => `<li><strong>${x.lead} ${escC(x.label)}</strong><br><span class="what">${escC(x.what)}</span></li>`).join('')
-    : '<li><strong>Sin ítems diferidos</strong><br><span class="what">Ninguna dimensión está marcada como "Lo veré en Sprint 1".</span></li>';
+    : '<li><strong>Sin ítems diferidos</strong><br><span class="what">Ninguna dimensión está marcada como «Aún no lo decido».</span></li>';
 
   const equipoVal = s['asig-equipo'] || '—';
   const equipoSuf = equipoVal === '1' ? '' : 's';

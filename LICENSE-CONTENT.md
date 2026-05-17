@@ -2,7 +2,7 @@
 
 **Creative Commons Atribución-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)**
 
-Los **contenidos** de este kit — guías, plantillas, blueprint, documentación, textos de la web, mini-guías, walkthroughs, calendario y cualquier material didáctico o conceptual producido en el marco del proyecto — se distribuyen bajo la licencia [Creative Commons Atribución-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.es).
+Los **contenidos** de este kit — guías, plantillas, blueprint, documentación, textos de la web, mini-guías, recorridos guiados, calendario y cualquier material didáctico o conceptual producido en el marco del proyecto — se distribuyen bajo la licencia [Creative Commons Atribución-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.es).
 
 Para el **código** de la web (HTML, CSS, JavaScript) aplica una licencia distinta: [MIT License](LICENSE).
 

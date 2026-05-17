@@ -25,7 +25,7 @@ Este directorio contiene las piezas descargables servidas desde la web. Las URLs
 | `sprint-1/plantilla-plan-operativo.xlsx` | XLSX 11 hojas | disponible | Pieza principal. Declaración de touchpoints, T1–T9, cuatro fases, dos escenarios, tres lentes. |
 | `sprint-1/plantilla-ejemplo-ingesoft.xlsx` | XLSX pre-rellenado | disponible | Caso Ingeniería del Software completo, para ver la plantilla en funcionamiento. |
 | `sprint-1/guia-breve.html` | HTML autocontenido | disponible | Guía breve de uso — léela antes que nada. Navegable con índice. |
-| `sprint-1/walkthrough.html` | HTML autocontenido | disponible | Walkthrough guiado hoja por hoja (guion 5-7 min sobre el ejemplo IngeSoft). |
+| `sprint-1/walkthrough.html` | HTML autocontenido | disponible | Recorrido guiado hoja por hoja (guion 5-7 min sobre el ejemplo IngeSoft). |
 | `sprint-1/panel-plan-operativo.html` | HTML interactivo (SheetJS) | disponible | Panel web que lee la Plantilla XLSX y genera Blueprint + Calendario semanal. Arranca con ejemplo IngeSoft; upload por botón o drag-and-drop; persistencia en localStorage. |
 
 ### Sprint 2 · Pilotaje
