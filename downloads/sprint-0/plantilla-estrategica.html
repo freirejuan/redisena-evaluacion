@@ -638,7 +638,14 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 .view-blueprint .state-dot.placeholder{background:var(--acento-amber);}
 .view-blueprint .state-dot.sprint1{background:var(--gris-400);}
 .view-blueprint .bp-body{padding:var(--sp-6) var(--sp-8);}
-.view-blueprint .bp-matrix{display:grid;grid-template-columns:190px repeat(3,1fr) 1.1fr;gap:6px;margin-bottom:var(--sp-5);}
+.view-blueprint .bp-matrix-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:var(--sp-5);padding-bottom:var(--sp-2);}
+.view-blueprint .bp-matrix{display:grid;grid-template-columns:190px repeat(var(--num-tps,3),minmax(180px,1fr)) minmax(220px,1.1fr);gap:6px;min-width:100%;}
+.view-blueprint .bp-matrix-wrap::-webkit-scrollbar{height:10px;}
+.view-blueprint .bp-matrix-wrap::-webkit-scrollbar-track{background:var(--gris-100);border-radius:5px;}
+.view-blueprint .bp-matrix-wrap::-webkit-scrollbar-thumb{background:var(--gris-400);border-radius:5px;}
+.view-blueprint .bp-matrix-wrap::-webkit-scrollbar-thumb:hover{background:var(--gris-500);}
+.view-blueprint .bp-matrix-hint{font-size:var(--text-xs);color:var(--gris-500);font-style:italic;margin-bottom:var(--sp-2);display:none;}
+.view-blueprint .bp-matrix-hint.is-visible{display:block;}
 .view-blueprint .corner{background:transparent;}
 .view-blueprint .col-head{background:var(--azul-deep);color:#fff;border-radius:var(--radius-md);padding:var(--sp-3) var(--sp-4);display:flex;flex-direction:column;gap:2px;}
 .view-blueprint .col-head.transversal{background:linear-gradient(180deg,var(--azul-reflex),var(--azul-mid));}
@@ -696,7 +703,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   .view-canvas .canvas-head{grid-template-columns:1fr;gap:var(--sp-4);}
   .view-canvas .identity-block{text-align:left;}
   .view-canvas .identity-meta{border-left:0;padding-left:0;}
-  .view-blueprint .bp-matrix{grid-template-columns:150px repeat(3,1fr) 1fr;}
+  .view-blueprint .bp-matrix{grid-template-columns:150px repeat(var(--num-tps,3),minmax(150px,1fr)) minmax(180px,1fr);}
   .view-blueprint .cell{font-size:10px;padding:var(--sp-2);}
   .view-blueprint .bp-head{grid-template-columns:1fr;}
   .view-blueprint .identity-card{text-align:left;}
@@ -771,7 +778,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 <div class="intro-card">
   <div class="intro-card-title">Cómo usar esta plantilla</div>
   <p>Esta plantilla operacionaliza la <strong>Guía estratégica</strong> en seis pasos. Al terminarla, llegas al Sprint 1 con tu posicionamiento estratégico cerrado: identidad de la asignatura, arquetipos dominantes, las <strong>cuatro decisiones de encuadre</strong> (D1–D4) y un <strong>listado de touchpoints con las dimensiones (C2–C7)</strong> activas en cada uno.</p>
-  <p><strong>No la rellenes de un tirón si no te apetece</strong>: tu progreso se guarda automáticamente en este navegador. No se envía nada al exterior. Usa <em>Exportar JSON</em> para portar tu plantilla a otro equipo, e <em>Imprimir</em> para llevarla al Sprint 1.</p>
+  <p><strong>No la rellenes de un tirón si no te apetece</strong>: tu progreso se guarda automáticamente en este navegador. No se envía nada al exterior. Usa <em>Descargar JSON</em> para portar tu plantilla a otro equipo, e <em>Imprimir</em> para llevarla al Sprint 1.</p>
   <p>Puedes dejar cualquier campo como <em>«lo veré en Sprint 1»</em>. No pasa nada. La plantilla es un mapa, no un contrato.</p>
   <div class="intro-stats">
     <div class="intro-stat"><div class="intro-stat-value">6</div><div class="intro-stat-label">Pasos</div></div>
@@ -1216,8 +1223,8 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 <div class="action-bar">
   <div class="save-state saved" id="save-state">Guardado localmente</div>
   <div class="btn-group">
-    <button type="button" class="btn ghost" onclick="exportJSON()">Exportar JSON</button>
-    <button type="button" class="btn outline" onclick="importJSON()">Importar JSON</button>
+    <button type="button" class="btn ghost" onclick="exportJSON()">Descargar JSON</button>
+    <button type="button" class="btn outline" onclick="importJSON()">Cargar JSON</button>
     <button type="button" class="btn primary" onclick="window.print()">Imprimir</button>
     <button type="button" class="btn danger" onclick="clearAll()">Limpiar todo</button>
   </div>
@@ -2017,7 +2024,8 @@ function buildCanvasHTML(s){
 // ----- BUILD · BLUEPRINT 0 -----
 function buildBlueprintHTML(s){
   const tps = s['touchpoints'] || [];
-  const tpSlots = [0,1,2].map(i => tps[i] || null);
+  const numSlots = Math.max(tps.length, 3);
+  const tpSlots = Array.from({length: numSlots}, (_, i) => tps[i] || null);
 
   const colHeads = tpSlots.map((t, i) => {
     if(!t) return `<div class="col-head"><div class="col-code">TP${i+1} · C1</div><div class="col-name">— sin declarar —</div><div class="col-when">Pendiente</div></div>`;
@@ -2118,7 +2126,7 @@ function buildBlueprintHTML(s){
 
     <div class="bp-meta">
       <div class="bp-intro">
-        El blueprint cruza los <strong>momentos del semestre</strong> (touchpoints TP1–TP3) con las <strong>capas operativas del proceso</strong> (C2–C7) y una columna <strong>transversal</strong> para las políticas que no viven en un momento concreto. Cada celda es una <em>decisión visible</em>: ya cerrada, posición reservada o por diseñar en Sprint 1.
+        El blueprint cruza los <strong>momentos del semestre</strong> (touchpoints TP1–TP${numSlots}) con las <strong>capas operativas del proceso</strong> (C2–C7) y una columna <strong>transversal</strong> para las políticas que no viven en un momento concreto. Cada celda es una <em>decisión visible</em>: ya cerrada, posición reservada o por diseñar en Sprint 1.
       </div>
       <div class="bp-states">
         <span class="state-legend"><span class="state-dot cerrado"></span>Cerrado · Sprint 0</span>
@@ -2128,11 +2136,14 @@ function buildBlueprintHTML(s){
     </div>
 
     <div class="bp-body">
-      <div class="bp-matrix">
-        <div class="corner"></div>
-        ${colHeads}
-        <div class="col-head transversal"><div class="col-code">Transversal</div><div class="col-name">Políticas del curso</div><div class="col-when">Todo el semestre</div></div>
-        ${rowsHtml}
+      <div class="bp-matrix-hint${numSlots > 4 ? ' is-visible' : ''}">Desplaza horizontalmente para ver los ${numSlots} touchpoints y la columna transversal.</div>
+      <div class="bp-matrix-wrap">
+        <div class="bp-matrix" style="--num-tps:${numSlots}">
+          <div class="corner"></div>
+          ${colHeads}
+          <div class="col-head transversal"><div class="col-code">Transversal</div><div class="col-name">Políticas del curso</div><div class="col-when">Todo el semestre</div></div>
+          ${rowsHtml}
+        </div>
       </div>
 
       <div class="counts-strip">
