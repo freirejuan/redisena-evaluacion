@@ -127,11 +127,10 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 .pill-group.amber input[type=radio]:checked + label{background:var(--acento-amber);border-color:var(--acento-amber);}
 .pill-group.coral input[type=radio]:checked + label{background:var(--acento-coral);border-color:var(--acento-coral);}
 
-.slider-row{display:grid;grid-template-columns:180px 1fr 60px;gap:var(--sp-3);align-items:center;padding:6px 0;}
+.slider-row{display:grid;grid-template-columns:220px 1fr;gap:var(--sp-3);align-items:center;padding:6px 0;}
 .slider-row label{font-size:var(--text-sm);color:var(--gris-700);font-weight:500;}
 .slider-row label strong{color:var(--ink);font-weight:700;display:block;font-size:var(--text-xs);letter-spacing:0.08em;text-transform:uppercase;color:var(--azul-reflex);margin-bottom:2px;}
 .slider-row input[type=range]{width:100%;accent-color:var(--azul-reflex);}
-.slider-row .slider-value{font-family:var(--mono);font-size:var(--text-sm);font-weight:600;color:var(--azul-reflex);text-align:right;}
 
 .checkbox-group{display:grid;gap:var(--sp-2);margin-top:var(--sp-2);}
 .checkbox-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border:1.5px solid var(--gris-200);border-radius:var(--radius-sm);background:var(--white);cursor:pointer;transition:all 0.2s;}
@@ -260,7 +259,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   .intro-stats{grid-template-columns:repeat(2,1fr);}
   .field-grid.cols-2,.field-grid.cols-3,.field-grid.cols-4{grid-template-columns:1fr;}
   .decision-header{grid-template-columns:1fr;gap:var(--sp-3);}
-  .slider-row{grid-template-columns:140px 1fr 50px;}
+  .slider-row{grid-template-columns:170px 1fr;}
   .action-bar{flex-direction:column;gap:10px;padding:12px 20px;}
   .summary-row{grid-template-columns:1fr;gap:4px;}
   .tp-head{grid-template-columns:auto 1fr;gap:var(--sp-2);}
@@ -897,7 +896,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 <section id="paso2" class="section">
   <div class="section-chip">Paso 2 · Arquetipo de tu aula</div>
   <h2>Quién está en tu clase, en dos ejes</h2>
-  <p class="lead">Los ejes A (qué ves en el aula) y B (postura ante la evaluación) capturan la diversidad del alumnado. Identifica las 2–3 combinaciones dominantes, no las 16. El diseño se optimiza para la principal y se tensa contra las otras.</p>
+  <p class="lead">Los ejes A (qué ves en el aula) y B (postura ante la evaluación) capturan la diversidad del alumnado. Identifica las 2–3 combinaciones dominantes, no las 20. El diseño se optimiza para la principal y se tensa contra las otras.</p>
 
   <div class="callout info">
     <span class="callout-icon">i</span>
@@ -905,18 +904,19 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   </div>
 
   <h3>Eje A · qué ves tú en el aula</h3>
-  <p>Ajusta el peso aproximado (%) de cada tipo en tu grupo típico. No es preciso; es orientación.</p>
-  <div class="slider-row"><label><strong>A1</strong>Brillantes</label><input type="range" min="0" max="100" value="25" id="eje-a1" data-slider-group="ejeA"><span class="slider-value"><output>25</output>%</span></div>
-  <div class="slider-row"><label><strong>A2</strong>Con dificultades de aprendizaje</label><input type="range" min="0" max="100" value="25" id="eje-a2" data-slider-group="ejeA"><span class="slider-value"><output>25</output>%</span></div>
-  <div class="slider-row"><label><strong>A3</strong>Con dificultades relacionales</label><input type="range" min="0" max="100" value="25" id="eje-a3" data-slider-group="ejeA"><span class="slider-value"><output>25</output>%</span></div>
-  <div class="slider-row"><label><strong>A4</strong>Sin interés aparente</label><input type="range" min="0" max="100" value="25" id="eje-a4" data-slider-group="ejeA"><span class="slider-value"><output>25</output>%</span></div>
+  <p>Mueve cada deslizador para indicar el peso aproximado de cada tipo en tu grupo típico. <strong>No tiene que sumar 100 ni ser exacto</strong>: es orientación, no medición.</p>
+  <div class="slider-row"><label><strong>A1</strong>Brillantes</label><input type="range" min="0" max="100" value="20" id="eje-a1" data-slider-group="ejeA"></div>
+  <div class="slider-row"><label><strong>A2</strong>Con dificultades de aprendizaje</label><input type="range" min="0" max="100" value="20" id="eje-a2" data-slider-group="ejeA"></div>
+  <div class="slider-row"><label><strong>A3</strong>Con dificultades relacionales</label><input type="range" min="0" max="100" value="20" id="eje-a3" data-slider-group="ejeA"></div>
+  <div class="slider-row"><label><strong>A4</strong>Sin interés aparente</label><input type="range" min="0" max="100" value="20" id="eje-a4" data-slider-group="ejeA"></div>
+  <div class="slider-row"><label><strong>A5</strong>Normales</label><input type="range" min="0" max="100" value="20" id="eje-a5" data-slider-group="ejeA"></div>
 
   <h3>Eje B · postura ante la evaluación</h3>
   <p>Mismo ejercicio para el Eje B.</p>
-  <div class="slider-row"><label><strong>B1</strong>Estratega · nota</label><input type="range" min="0" max="100" value="25" id="eje-b1" data-slider-group="ejeB"><span class="slider-value"><output>25</output>%</span></div>
-  <div class="slider-row"><label><strong>B2</strong>Curioso · aprendizaje</label><input type="range" min="0" max="100" value="25" id="eje-b2" data-slider-group="ejeB"><span class="slider-value"><output>25</output>%</span></div>
-  <div class="slider-row"><label><strong>B3</strong>Bajo presión</label><input type="range" min="0" max="100" value="25" id="eje-b3" data-slider-group="ejeB"><span class="slider-value"><output>25</output>%</span></div>
-  <div class="slider-row"><label><strong>B4</strong>Co-creador</label><input type="range" min="0" max="100" value="25" id="eje-b4" data-slider-group="ejeB"><span class="slider-value"><output>25</output>%</span></div>
+  <div class="slider-row"><label><strong>B1</strong>Estratega · nota</label><input type="range" min="0" max="100" value="25" id="eje-b1" data-slider-group="ejeB"></div>
+  <div class="slider-row"><label><strong>B2</strong>Curioso · aprendizaje</label><input type="range" min="0" max="100" value="25" id="eje-b2" data-slider-group="ejeB"></div>
+  <div class="slider-row"><label><strong>B3</strong>Bajo presión</label><input type="range" min="0" max="100" value="25" id="eje-b3" data-slider-group="ejeB"></div>
+  <div class="slider-row"><label><strong>B4</strong>Co-diseñador · Co-evaluador</label><input type="range" min="0" max="100" value="25" id="eje-b4" data-slider-group="ejeB"></div>
 
   <h3>Combinaciones dominantes en tu aula</h3>
   <p>Marca las <strong>2–3</strong> combinaciones A×B más presentes o críticas. Si la tuya no está en la lista, usa <em>Otra combinación</em>.</p>
@@ -925,7 +925,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
     <label class="combo-card"><input type="checkbox" name="combo" value="A2×B3"><span class="combo-code">A2 × B3</span><span class="combo-name">Dificultad + presión</span><span class="combo-signal">Bloqueo ante evaluación alta-stakes.</span></label>
     <label class="combo-card"><input type="checkbox" name="combo" value="A1×B2"><span class="combo-code">A1 × B2</span><span class="combo-name">Brillante curioso</span><span class="combo-signal">Se aburre si el diseño es reproductivo.</span></label>
     <label class="combo-card"><input type="checkbox" name="combo" value="A4×B1"><span class="combo-code">A4 × B1</span><span class="combo-name">Sin interés + estratega</span><span class="combo-signal">Mínimos para aprobar, desconexión temprana.</span></label>
-    <label class="combo-card"><input type="checkbox" name="combo" value="A3×B4"><span class="combo-code">A3 × B4</span><span class="combo-name">Relacional + co-creador</span><span class="combo-signal">Quiere participar pero le cuesta la coevaluación.</span></label>
+    <label class="combo-card"><input type="checkbox" name="combo" value="A3×B4"><span class="combo-code">A3 × B4</span><span class="combo-name">Relacional + co-eval/diseño</span><span class="combo-signal">Quiere participar en cómo se le evalúa, pero le cuesta la coevaluación con pares.</span></label>
   </div>
   <div class="field">
     <label for="combo-otra">Otra combinación dominante (opcional)</label>
@@ -1569,11 +1569,28 @@ form.addEventListener('change', persist);
 function esc(s){ return (s || '').toString().replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function line(label, val){ return val ? `<div class="summary-row"><div class="summary-label">${label}</div><div class="summary-value">${val}</div></div>` : `<div class="summary-row"><div class="summary-label">${label}</div><div class="summary-value"><em>— sin rellenar —</em></div></div>`; }
 
+// Normaliza los valores brutos de un eje (a/b) al 100% usando el método del mayor residuo.
+// Los sliders son orientativos y no se les exige sumar 100; aquí se reescalan para mostrar
+// porcentajes relativos coherentes en Canvas y Resumen.
+function _normalizedAxis(s, axis, n){
+  const keys = Array.from({length: n}, (_, i) => `${axis}${i+1}`);
+  const vals = keys.map(k => parseFloat(s['eje-'+k]) || 0);
+  const sum = vals.reduce((a,b)=>a+b, 0);
+  if(sum <= 0) return keys.map((k, i) => ({code: axis.toUpperCase()+(i+1), pct: 0}));
+  const exact = vals.map(v => v * 100 / sum);
+  const floor = exact.map(Math.floor);
+  const remainders = exact.map((v, i) => ({i, frac: v - Math.floor(v)})).sort((a,b) => b.frac - a.frac);
+  const pct = floor.slice();
+  let residue = 100 - floor.reduce((a,b)=>a+b, 0);
+  for(let j = 0; j < residue; j++) pct[remainders[j].i] += 1;
+  return keys.map((k, i) => ({code: axis.toUpperCase()+(i+1), pct: pct[i]}));
+}
+
 function generateSummary(){
   const s = collectState();
   const wrap = document.getElementById('summary-wrap');
-  const ejeA = ['a1','a2','a3','a4'].map(k => `A${k.slice(1)} ${s['eje-'+k] || 0}%`).join(' · ');
-  const ejeB = ['b1','b2','b3','b4'].map(k => `B${k.slice(1)} ${s['eje-'+k] || 0}%`).join(' · ');
+  const ejeA = _normalizedAxis(s, 'a', 5).map(({code, pct}) => `${code} ${pct}%`).join(' · ');
+  const ejeB = _normalizedAxis(s, 'b', 4).map(({code, pct}) => `${code} ${pct}%`).join(' · ');
   const combosTxt = [...(s['combo'] || []), s['combo-otra']].filter(Boolean).join(' · ') || '—';
 
   const tps = s['touchpoints'] || [];
@@ -1726,11 +1743,11 @@ const DEMO_STATE = {
   'asig-pico-estudiante':'12',
   'asig-formato':'Mixta',
   'asig-rol':'Coordinación + docencia',
-  'eje-a1':'15','eje-a2':'20','eje-a3':'45','eje-a4':'20',
+  'eje-a1':'10','eje-a2':'15','eje-a3':'35','eje-a4':'10','eje-a5':'30',
   'eje-b1':'15','eje-b2':'25','eje-b3':'10','eje-b4':'50',
   'combo':['A1×B2','A3×B4'],
   'combo-otra':'',
-  'comentario-arquetipo':'Grupo con mayoría curiosa y co-creadora, atravesado por tensiones relacionales en trabajos de equipo.',
+  'comentario-arquetipo':'Grupo con mayoría curiosa y participativa en evaluación (co-diseño y co-evaluación), atravesado por tensiones relacionales en trabajos de equipo.',
   'hoy-descripcion':'2 pruebas escritas intermedias + trabajo final de grupo con defensa oral. Hoy no uso IA de forma deliberada; los estudiantes sí la usan aunque no lo declaran.',
   'hoy-funciona':'Los grupos se implican cuando hay entregas intermedias visibles.',
   'hoy-fricciona':'Las correcciones se acumulan al final; el feedback llega demasiado tarde para ajustar.',
@@ -1798,10 +1815,13 @@ function escC(x){ return (x===undefined||x===null?'':x.toString()).replace(/[&<>
 const DIM_NAMES = {C2:'Auto/coevaluación',C3:'IA estudiante',C4:'Evidencias',C5:'Recogida',C6:'Retroalimentación',C7:'Mejora docente'};
 
 function _dominantAxis(s, axis){
-  const vals = [1,2,3,4].map(i => parseFloat(s[`eje-${axis}${i}`]) || 0);
+  // Eje A · 5 anclas (estudiantes A1–A5) · eje B · 4 anclas (postura B1–B4)
+  const isA = axis === 'a';
+  const numVals = isA ? 5 : 4;
+  const positions = isA ? [6, 28, 50, 72, 94] : [6, 38, 62, 94];
+  const vals = Array.from({length: numVals}, (_, i) => parseFloat(s[`eje-${axis}${i+1}`]) || 0);
   const sum = vals.reduce((a,b)=>a+b,0) || 1;
-  // Posición ponderada en el eje (0-100%) · anclas A/B en 6, 38, 62, 94
-  const pos = (vals[0]*6 + vals[1]*38 + vals[2]*62 + vals[3]*94) / sum;
+  const pos = vals.reduce((acc, v, i) => acc + v * positions[i], 0) / sum;
   const maxIdx = vals.indexOf(Math.max(...vals));
   return { label: axis.toUpperCase()+(maxIdx+1), pos };
 }
