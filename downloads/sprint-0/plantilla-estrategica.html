@@ -203,9 +203,13 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 .semaforo-light.ambar{background:var(--acento-amber);box-shadow:0 0 0 4px var(--acento-amber-pale);}
 .semaforo-light.rojo{background:var(--acento-coral);box-shadow:0 0 0 4px var(--acento-coral-pale);}
 .semaforo-light.gris{background:var(--gris-300);box-shadow:0 0 0 4px var(--gris-100);}
-.semaforo-body .semaforo-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--azul-reflex);font-weight:700;margin-bottom:4px;}
+.semaforo-body .semaforo-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--azul-reflex);font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .semaforo-body .semaforo-title{font-family:var(--serif);font-size:var(--text-lg);color:var(--ink);font-weight:600;margin-bottom:2px;}
 .semaforo-body .semaforo-desc{font-size:var(--text-xs);color:var(--gris-600);line-height:1.6;}
+.semaforo-fallback-badge{display:inline-block;padding:2px 8px;background:var(--azul-ghost);color:var(--azul-reflex);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;border-radius:var(--radius-sm);border:1px solid var(--azul-mid);}
+.semaforo-fallback-badge[hidden]{display:none;}
+.semaforo-fallback-note{font-size:var(--text-xs);color:var(--gris-600);line-height:1.5;margin-top:4px;font-style:italic;}
+.semaforo-fallback-note[hidden]{display:none;}
 .semaforo-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-4);text-align:center;min-width:240px;}
 .semaforo-stat-value{font-family:var(--serif);font-size:var(--text-lg);font-weight:700;color:var(--azul-reflex);line-height:1;}
 .semaforo-stat-label{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gris-500);font-weight:600;margin-top:4px;}
@@ -1165,14 +1169,18 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   <button type="button" class="tp-add" onclick="addTouchpoint()">+ Añadir touchpoint</button>
 
   <h3 style="margin-top:var(--sp-10);">Cierre cuantitativo y semáforo económico</h3>
-  <p>Una lectura orientativa de tu listado. No pide información nueva: se calcula con lo que ya declaraste en <strong>Paso 1</strong> (estudiantes · equipo docente · horas lectivas/semana) y en este <strong>Paso 5</strong> (número y naturaleza de tus touchpoints). Se actualiza automáticamente al cambiar cualquiera de esos datos. Si no ves movimiento, comprueba que has rellenado esos campos y pulsa <em>Recalcular</em>.</p>
+  <p>Una lectura orientativa de tu listado. Se calcula con lo que declaraste en <strong>Paso 1</strong> (estudiantes · equipo docente · horas lectivas/semana) y en este <strong>Paso 5</strong> (número y naturaleza de tus touchpoints). Si dejas algún campo del Paso 1 vacío, el cálculo usará el valor sugerido del propio campo y te lo indicará con una etiqueta. Para una lectura ajustada a tu asignatura, rellena los campos con tus datos reales.</p>
 
   <div class="semaforo-wrap" id="semaforo-wrap">
     <div class="semaforo-light gris" id="semaforo-light">—</div>
     <div class="semaforo-body">
-      <div class="semaforo-label">Semáforo económico · orientativo</div>
-      <div class="semaforo-title" id="semaforo-title">Añade touchpoints, estudiantes y horas lectivas para calcular tu semáforo.</div>
+      <div class="semaforo-label">
+        <span>Semáforo económico · orientativo</span>
+        <span class="semaforo-fallback-badge" id="semaforo-fallback-badge" hidden>Usando valores sugeridos</span>
+      </div>
+      <div class="semaforo-title" id="semaforo-title">Añade al menos un touchpoint para calcular tu semáforo.</div>
       <div class="semaforo-desc" id="semaforo-desc">El semáforo es una guía, no un juicio. Si sale ámbar o rojo, es una invitación a priorizar o pedir refuerzo, no a descartar tu diseño.</div>
+      <div class="semaforo-fallback-note" id="semaforo-fallback-note" hidden>Algunos campos del Paso 1 están vacíos; el cálculo está usando los valores sugeridos del placeholder. Rellénalos para una lectura ajustada a tu asignatura.</div>
     </div>
     <div class="semaforo-stats">
       <div><div class="semaforo-stat-value" id="stat-total">0</div><div class="semaforo-stat-label">Touchpoints</div></div>
@@ -1479,15 +1487,38 @@ function persist(){
 }
 
 // ===== SEMAFORO ECONÓMICO =====
+// Lee el valor numérico de un input; si está vacío, cae al placeholder.
+// Devuelve { value, fromPlaceholder } para poder avisar al usuario.
+function readNumWithPlaceholder(id, parser){
+  parser = parser || parseInt;
+  const el = document.getElementById(id);
+  if(!el) return { value: 0, fromPlaceholder: false };
+  const raw = (el.value || '').trim();
+  if(raw !== ''){
+    const v = parser(raw);
+    if(!isNaN(v)) return { value: v, fromPlaceholder: false };
+  }
+  const ph = (el.placeholder || '').trim();
+  if(ph !== ''){
+    const pv = parser(ph);
+    if(!isNaN(pv)) return { value: pv, fromPlaceholder: true };
+  }
+  return { value: 0, fromPlaceholder: false };
+}
+
 function updateSemaforo(){
   const s = collectState();
   const tps = s['touchpoints'] || [];
   const total = tps.length;
   const puntuales = tps.filter(t => t.naturaleza === 'Puntual').length;
   const continuos = tps.filter(t => t.naturaleza === 'Continuo').length;
-  const estudiantes = parseInt(s['asig-estudiantes']) || 0;
-  const horasSemana = parseFloat(s['asig-horas-semana']) || 0;
-  const equipo = parseInt(s['asig-equipo']) || 1;
+  const estR = readNumWithPlaceholder('asig-estudiantes', parseInt);
+  const hsR  = readNumWithPlaceholder('asig-horas-semana', parseFloat);
+  const eqR  = readNumWithPlaceholder('asig-equipo', parseInt);
+  const estudiantes = estR.value;
+  const horasSemana = hsR.value;
+  const equipo = eqR.value || 1;
+  const usingFallback = estR.fromPlaceholder || hsR.fromPlaceholder || eqR.fromPlaceholder;
 
   document.getElementById('stat-total').textContent = total;
   document.getElementById('stat-puntuales').textContent = puntuales;
@@ -1496,14 +1527,23 @@ function updateSemaforo(){
   const light = document.getElementById('semaforo-light');
   const title = document.getElementById('semaforo-title');
   const desc = document.getElementById('semaforo-desc');
+  const badge = document.getElementById('semaforo-fallback-badge');
+  const note  = document.getElementById('semaforo-fallback-note');
 
   if(total === 0 || estudiantes === 0 || horasSemana === 0){
     light.className = 'semaforo-light gris';
     light.textContent = '—';
-    title.textContent = 'Añade touchpoints, estudiantes y horas lectivas para calcular tu semáforo.';
+    title.textContent = total === 0
+      ? 'Añade al menos un touchpoint para activar el semáforo.'
+      : 'Datos insuficientes en el Paso 1 (estudiantes u horas lectivas) para calcular el semáforo.';
     desc.textContent = 'El semáforo es una guía orientativa: combina tu número de touchpoints con tamaño de grupo y horas lectivas semanales.';
+    if(badge) badge.hidden = true;
+    if(note)  note.hidden  = true;
     return;
   }
+
+  if(badge) badge.hidden = !usingFallback;
+  if(note)  note.hidden  = !usingFallback;
 
   // Carga: puntuales pesan 1, continuos 2 (recogida continua)
   const carga = puntuales + continuos * 2;
@@ -1837,11 +1877,16 @@ function computeSemaforo(s){
   const total = tps.length;
   const puntuales = tps.filter(t => t.naturaleza === 'Puntual').length;
   const continuos = tps.filter(t => t.naturaleza === 'Continuo').length;
-  const estudiantes = parseInt(s['asig-estudiantes']) || 0;
-  const horasSemana = parseFloat(s['asig-horas-semana']) || 0;
-  const equipo = parseInt(s['asig-equipo']) || 1;
+  // Mismo criterio que updateSemaforo(): si el campo está vacío, cae al placeholder.
+  const estR = readNumWithPlaceholder('asig-estudiantes', parseInt);
+  const hsR  = readNumWithPlaceholder('asig-horas-semana', parseFloat);
+  const eqR  = readNumWithPlaceholder('asig-equipo', parseInt);
+  const estudiantes = estR.value || parseInt(s['asig-estudiantes']) || 0;
+  const horasSemana = hsR.value  || parseFloat(s['asig-horas-semana']) || 0;
+  const equipo      = eqR.value  || parseInt(s['asig-equipo']) || 1;
+  const usingFallback = estR.fromPlaceholder || hsR.fromPlaceholder || eqR.fromPlaceholder;
   if(total === 0 || estudiantes === 0 || horasSemana === 0){
-    return { color:'gris', titulo:'Datos incompletos', sub:'Completa asignatura y touchpoints en la Plantilla para ver el semáforo.', total, cargaDisplay:'—' };
+    return { color:'gris', titulo: total === 0 ? 'Añade touchpoints' : 'Datos incompletos', sub:'Completa asignatura y touchpoints en la Plantilla para ver el semáforo.', total, cargaDisplay:'—', usingFallback:false };
   }
   const carga = puntuales + continuos * 2;
   const cargaPorDocente = (carga * (estudiantes / 60)) / equipo;
@@ -1852,7 +1897,9 @@ function computeSemaforo(s){
   else if(cargaFinal <= 9 && total <= 9){ color='ambar'; titulo='Carga tensionada'; }
   else { color='rojo'; titulo='Carga potencialmente inviable'; }
   const cargaDisplay = cargaFinal.toFixed(1).replace('.', ',');
-  return { color, titulo, sub:`${total} touchpoint${total===1?'':'s'} · ${equipo} docente${equipo===1?'':'s'} · ${estudiantes} estudiantes`, total, cargaDisplay };
+  const subBase = `${total} touchpoint${total===1?'':'s'} · ${equipo} docente${equipo===1?'':'s'} · ${estudiantes} estudiantes`;
+  const sub = usingFallback ? subBase + ' (valores sugeridos)' : subBase;
+  return { color, titulo, sub, total, cargaDisplay, usingFallback };
 }
 
 function countDims(tps){
