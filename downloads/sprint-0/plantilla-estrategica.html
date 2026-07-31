@@ -169,10 +169,10 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 .tp-card{background:var(--white);border:1.5px solid var(--gris-200);border-radius:var(--radius-lg);overflow:hidden;transition:all 0.2s;}
 .tp-card:focus-within{border-color:var(--azul-mid);box-shadow:var(--shadow-sm);}
 .tp-card.open{border-color:var(--azul-reflex);}
-.tp-head{display:grid;grid-template-columns:auto 1fr auto auto;gap:var(--sp-3);align-items:center;padding:var(--sp-4) var(--sp-5);background:var(--gris-claro);border-bottom:1px solid var(--gris-200);}
+.tp-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto auto;gap:var(--sp-3);align-items:center;padding:var(--sp-4) var(--sp-5);background:var(--gris-claro);border-bottom:1px solid var(--gris-200);}
 .tp-card.open .tp-head{background:var(--azul-ghost);}
 .tp-code{font-family:var(--mono);font-size:var(--text-xs);font-weight:700;color:var(--azul-reflex);background:var(--azul-pale);padding:4px 10px;border-radius:var(--radius-sm);letter-spacing:0.06em;}
-.tp-head .tp-nombre{border:1px solid var(--gris-200);border-radius:var(--radius-sm);padding:8px 12px;font-size:var(--text-sm);font-weight:500;background:var(--white);}
+.tp-head .tp-nombre{min-width:0;border:1px solid var(--gris-200);border-radius:var(--radius-sm);padding:8px 12px;font-size:var(--text-sm);font-weight:500;background:var(--white);}
 .tp-head .tp-nombre:focus{outline:none;border-color:var(--azul-reflex);box-shadow:0 0 0 2px rgba(23,23,150,0.1);}
 .tp-head .tp-toggle{background:transparent;border:1px solid var(--gris-200);color:var(--gris-600);width:32px;height:32px;border-radius:var(--radius-sm);cursor:pointer;font-size:16px;display:inline-flex;align-items:center;justify-content:center;transition:all 0.2s;}
 .tp-head .tp-toggle:hover{border-color:var(--azul-mid);color:var(--azul-reflex);}
@@ -180,6 +180,18 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 .tp-head .tp-remove:hover{border-color:var(--acento-coral);color:var(--acento-coral);background:var(--acento-coral-pale);}
 .tp-meta{display:grid;grid-template-columns:auto 1fr 1fr;gap:var(--sp-4);padding:var(--sp-4) var(--sp-5);border-bottom:1px solid var(--gris-100);background:var(--white);align-items:end;}
 .tp-meta .field{margin-bottom:0;min-width:0;}
+.tp-carga{padding:var(--sp-4) var(--sp-5);border-bottom:1px solid var(--gris-100);background:var(--gris-claro);}
+.tp-carga-head{display:flex;align-items:baseline;justify-content:space-between;gap:var(--sp-3);flex-wrap:wrap;margin-bottom:10px;}
+.tp-carga-title{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--azul-mid);}
+.tp-carga-total{font-size:var(--text-xs);color:var(--gris-600);font-weight:600;}
+.tp-carga-total strong{color:var(--azul-reflex);font-family:var(--mono);}
+.tp-carga-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-3);align-items:end;}
+.tp-carga-grid .field{margin-bottom:0;min-width:0;}
+.tp-carga-grid label{font-size:11px;display:block;min-height:2.4em;}
+.tp-carga-grid input[type=number]{width:100%;padding:8px 10px;font-size:var(--text-sm);}
+.tp-carga-hint{font-size:11px;color:var(--gris-500);margin-top:8px;font-style:italic;}
+.tp-head .tp-dup{background:transparent;border:1px solid var(--gris-200);color:var(--gris-600);padding:4px 10px;border-radius:var(--radius-sm);font-size:11px;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.tp-head .tp-dup:hover{border-color:var(--azul-reflex);color:var(--azul-reflex);}
 .tp-meta input[type=text]{width:100%;padding:9px 12px;font-size:var(--text-sm);}
 .tp-body{padding:var(--sp-5) var(--sp-6) var(--sp-6);display:none;}
 .tp-card.open .tp-body{display:block;}
@@ -210,7 +222,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 .semaforo-fallback-badge[hidden]{display:none;}
 .semaforo-fallback-note{font-size:var(--text-xs);color:var(--gris-600);line-height:1.5;margin-top:4px;font-style:italic;}
 .semaforo-fallback-note[hidden]{display:none;}
-.semaforo-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-4);text-align:center;min-width:240px;}
+.semaforo-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-4);text-align:center;min-width:240px;}
 .semaforo-stat-value{font-family:var(--serif);font-size:var(--text-lg);font-weight:700;color:var(--azul-reflex);line-height:1;}
 .semaforo-stat-label{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gris-500);font-weight:600;margin-top:4px;}
 
@@ -269,6 +281,9 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   .tp-head{grid-template-columns:auto 1fr;gap:var(--sp-2);}
   .tp-head .tp-toggle,.tp-head .tp-remove{grid-column:auto;}
   .tp-meta{grid-template-columns:1fr;}
+  .tp-carga-grid{grid-template-columns:repeat(2,1fr);}
+  .tp-head{grid-template-columns:auto minmax(0,1fr);grid-auto-flow:row dense;}
+  .tp-head .tp-toggle,.tp-head .tp-dup,.tp-head .tp-remove{grid-column:auto;}
   .semaforo-wrap{grid-template-columns:1fr;text-align:center;}
   .semaforo-stats{margin:0 auto;}
 }
@@ -819,6 +834,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
       <select id="asig-curso" name="asig-curso">
         <option value="">—</option>
         <option>1º</option><option>2º</option><option>3º</option><option>4º</option>
+        <option>5º</option><option>6º</option>
         <option>Máster</option><option>Doctorado</option>
       </select>
     </div>
@@ -1169,7 +1185,8 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   <button type="button" class="tp-add" onclick="addTouchpoint()">+ Añadir touchpoint</button>
 
   <h3 style="margin-top:var(--sp-10);">Cierre cuantitativo y semáforo económico</h3>
-  <p>Una lectura orientativa de tu listado. Se calcula con lo que declaraste en <strong>Paso 1</strong> (estudiantes · equipo docente · horas lectivas/semana) y en este <strong>Paso 5</strong> (número y naturaleza de tus touchpoints). Si dejas algún campo del Paso 1 vacío, el cálculo usará el valor sugerido del propio campo y te lo indicará con una etiqueta. Para una lectura ajustada a tu asignatura, rellena los campos con tus datos reales.</p>
+  <p>Una lectura orientativa de tu listado, calculada con lo que declaraste en el <strong>Paso 1</strong> (estudiantes · equipo docente · dedicación) y en este <strong>Paso 5</strong>. Si dejas algún campo del Paso 1 vacío, el cálculo usa el valor sugerido del propio campo y te lo indica con una etiqueta.</p>
+  <p>Hay dos formas de leerlo, y la plantilla elige sola. Si has estimado <strong>lo que te cuesta</strong> en al menos un touchpoint, el semáforo suma esas horas y las compara con tu dedicación declarada: es la lectura buena, porque distingue un test de diez minutos de una prueba formativa de dos horas. Si no has estimado nada, se queda en una lectura por volumen —cuántos touchpoints, de qué naturaleza, con cuántos estudiantes—, que sirve para orientarse pero trata todos los momentos como si pesaran lo mismo.</p>
 
   <div class="semaforo-wrap" id="semaforo-wrap">
     <div class="semaforo-light gris" id="semaforo-light">—</div>
@@ -1184,8 +1201,9 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
     </div>
     <div class="semaforo-stats">
       <div><div class="semaforo-stat-value" id="stat-total">0</div><div class="semaforo-stat-label">Touchpoints</div></div>
-      <div><div class="semaforo-stat-value" id="stat-puntuales">0</div><div class="semaforo-stat-label">Puntuales</div></div>
       <div><div class="semaforo-stat-value" id="stat-continuos">0</div><div class="semaforo-stat-label">Continuos</div></div>
+      <div><div class="semaforo-stat-value" id="stat-horas">—</div><div class="semaforo-stat-label">Horas docente</div></div>
+      <div><div class="semaforo-stat-value" id="stat-pct">—</div><div class="semaforo-stat-label">De tu dedicación</div></div>
     </div>
   </div>
 
@@ -1196,7 +1214,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 
   <div class="callout warning">
     <span class="callout-icon">!</span>
-    <div><strong>Lectura del semáforo.</strong> <em>Verde</em>: carga sostenible con tu equipo y horas actuales. <em>Ámbar</em>: vigila; con este volumen de retroalimentación conviene apoyarse en coevaluación o IA-docente (D4). <em>Rojo</em>: riesgo de saturación; prioriza los touchpoints clave (D1) o pide refuerzo al Sprint 1.</div>
+    <div><strong>Lectura del semáforo.</strong> <em>Verde</em>: carga sostenible con tu equipo y tu dedicación actual. <em>Ámbar</em>: vigila; con este volumen de retroalimentación conviene apoyarse en coevaluación (C2) o en IA docente (D4). <em>Rojo</em>: riesgo de saturación; prioriza los touchpoints clave (D1) o pide refuerzo. Y una advertencia sobre el porcentaje: es la parte de tu dedicación a la asignatura que se va en evaluar, no en dar clase ni en preparar contenidos. Que pase del 30&nbsp;% no es un error, pero sí algo que conviene haber decidido a propósito, porque esas horas compiten con preparar y dar la clase. Todo esto es orientativo: el Sprint 1 lo afina fase a fase.</div>
   </div>
 
   <div class="section-close">Con esto cierras el Paso 5. Tu listado de touchpoints y dimensiones activas es el mapa que el Sprint 1 convertirá en rúbricas, pautas y calendario.</div>
@@ -1322,6 +1340,7 @@ function addTouchpoint(data){
       <span class="tp-code">TP${idx}</span>
       <input type="text" class="tp-nombre" name="tp${idx}-nombre" placeholder="p. ej. Parcial 1 · Proyecto · Tutorías continuas…">
       <button type="button" class="tp-toggle" title="Abrir / cerrar" aria-label="Abrir o cerrar tarjeta">▾</button>
+      <button type="button" class="tp-dup" title="Crear una copia de este touchpoint justo debajo">Duplicar</button>
       <button type="button" class="tp-remove" title="Eliminar touchpoint">Eliminar</button>
     </div>
     <div class="tp-meta">
@@ -1341,6 +1360,31 @@ function addTouchpoint(data){
         <input type="text" id="tp${idx}-cuando-retro" name="tp${idx}-cuando-retro" placeholder="p. ej. semana 8 · mensualmente en tutoría">
       </div>
     </div>
+    <div class="tp-carga">
+      <div class="tp-carga-head">
+        <span class="tp-carga-title">Lo que te cuesta · opcional</span>
+        <span class="tp-carga-total" id="tp${idx}-carga-total">Sin estimar</span>
+      </div>
+      <div class="tp-carga-grid">
+        <div class="field">
+          <label for="tp${idx}-h-prep">Prepararlo (h)</label>
+          <input type="number" id="tp${idx}-h-prep" name="tp${idx}-h-prep" min="0" step="0.5" placeholder="0">
+        </div>
+        <div class="field">
+          <label for="tp${idx}-min-dur">Cuánto dura (min)</label>
+          <input type="number" id="tp${idx}-min-dur" name="tp${idx}-min-dur" min="0" step="5" placeholder="0">
+        </div>
+        <div class="field">
+          <label for="tp${idx}-min-corr">Corregir (min/estudiante)</label>
+          <input type="number" id="tp${idx}-min-corr" name="tp${idx}-min-corr" min="0" step="1" placeholder="0">
+        </div>
+        <div class="field">
+          <label for="tp${idx}-min-fb">Retroalimentar (min/estudiante)</label>
+          <input type="number" id="tp${idx}-min-fb" name="tp${idx}-min-fb" min="0" step="1" placeholder="0">
+        </div>
+      </div>
+      <div class="tp-carga-hint">No es lo mismo un test de diez preguntas que se resuelve en clase en diez minutos que una prueba formativa de dos horas. La duración cuenta como tiempo tuyo, porque durante el touchpoint tú también estás ahí. Déjalo en blanco si aún no lo sabes: el semáforo funciona igual. En los touchpoints continuos, estima el total del semestre, no cada ocurrencia.</div>
+    </div>
     <div class="tp-body">${dimsHtml}</div>
   `;
   tpListEl.appendChild(card);
@@ -1351,6 +1395,8 @@ function addTouchpoint(data){
     card.classList.toggle('open');
     toggleBtn.textContent = card.classList.contains('open') ? '▴' : '▾';
   });
+  // Duplicar
+  card.querySelector('.tp-dup').addEventListener('click', () => duplicateTouchpoint(card));
   // Remove
   card.querySelector('.tp-remove').addEventListener('click', () => {
     if(confirm('¿Eliminar este touchpoint? Esta acción no se puede deshacer.')){
@@ -1371,6 +1417,10 @@ function addTouchpoint(data){
     set(`[name="tp${idx}-nombre"]`, data.nombre);
     set(`#tp${idx}-cuando`, data.cuando);
     set(`#tp${idx}-cuando-retro`, data.cuandoRetro);
+    set(`#tp${idx}-h-prep`,   data.hPrep);
+    set(`#tp${idx}-min-dur`,  data.minDur);
+    set(`#tp${idx}-min-corr`, data.minCorr);
+    set(`#tp${idx}-min-fb`,   data.minFb);
     if(data.naturaleza){
       const r = card.querySelector(`input[name="tp${idx}-naturaleza"][value="${data.naturaleza}"]`);
       if(r) r.checked = true;
@@ -1395,6 +1445,48 @@ function addTouchpoint(data){
   persist();
 }
 
+// Recoge los datos de una tarjeta. Lo usan collectState y la duplicación, para
+// que ambas lean exactamente los mismos campos y no puedan divergir.
+function collectTouchpoint(card){
+  const idx = card.dataset.tpId;
+  const get = sel => { const el = card.querySelector(sel); return el ? el.value : ''; };
+  const getRadio = name => { const el = card.querySelector(`input[name="${name}"]:checked`); return el ? el.value : ''; };
+  const dims = {};
+  DIMENSIONS.forEach(d => {
+    const dimKey = `tp${idx}-${d.code.toLowerCase()}`;
+    dims[d.code] = { estado: getRadio(`${dimKey}-estado`), nota: get(`[name="${dimKey}-nota"]`) };
+  });
+  return {
+    nombre: get(`[name="tp${idx}-nombre"]`),
+    naturaleza: getRadio(`tp${idx}-naturaleza`),
+    cuando: get(`#tp${idx}-cuando`),
+    cuandoRetro: get(`#tp${idx}-cuando-retro`),
+    hPrep:   get(`#tp${idx}-h-prep`),
+    minDur:  get(`#tp${idx}-min-dur`),
+    minCorr: get(`#tp${idx}-min-corr`),
+    minFb:   get(`#tp${idx}-min-fb`),
+    dims,
+    open: card.classList.contains('open')
+  };
+}
+
+// Muchos touchpoints son variaciones del mismo: tres entregas iguales en
+// semanas distintas, dos parciales con la misma mecánica. Duplicar evita
+// volver a marcar las seis dimensiones a mano.
+function duplicateTouchpoint(card){
+  const datos = collectTouchpoint(card);
+  datos.open = true;
+  if(datos.nombre) datos.nombre = datos.nombre + ' (copia)';
+  addTouchpoint(datos);
+  const nueva = tpListEl.lastElementChild;
+  if(nueva && nueva !== card) card.after(nueva);
+  refreshTpCodes();
+  persist();
+  const campo = nueva && nueva.querySelector('.tp-nombre');
+  if(campo){ campo.focus(); campo.select(); }
+  nueva.scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
 function refreshTpCodes(){
   tpListEl.querySelectorAll('.tp-card').forEach((card, i) => {
     const code = card.querySelector('.tp-code');
@@ -1414,27 +1506,7 @@ function collectState(){
   form.querySelectorAll('input[type=radio]:checked').forEach(el => { state[el.name] = el.value; });
   form.querySelectorAll('input[type=range]').forEach(el => { state[el.id] = el.value; });
   state['combo'] = Array.from(form.querySelectorAll('input[name=combo]:checked')).map(e => e.value);
-  state['touchpoints'] = Array.from(tpListEl.querySelectorAll('.tp-card')).map(card => {
-    const idx = card.dataset.tpId;
-    const get = sel => { const el = card.querySelector(sel); return el ? el.value : ''; };
-    const getRadio = name => { const el = card.querySelector(`input[name="${name}"]:checked`); return el ? el.value : ''; };
-    const dims = {};
-    DIMENSIONS.forEach(d => {
-      const dimKey = `tp${idx}-${d.code.toLowerCase()}`;
-      dims[d.code] = {
-        estado: getRadio(`${dimKey}-estado`),
-        nota: get(`[name="${dimKey}-nota"]`)
-      };
-    });
-    return {
-      nombre: get(`[name="tp${idx}-nombre"]`),
-      naturaleza: getRadio(`tp${idx}-naturaleza`),
-      cuando: get(`#tp${idx}-cuando`),
-      cuandoRetro: get(`#tp${idx}-cuando-retro`),
-      dims,
-      open: card.classList.contains('open')
-    };
-  });
+  state['touchpoints'] = Array.from(tpListEl.querySelectorAll('.tp-card')).map(collectTouchpoint);
   return state;
 }
 
@@ -1506,68 +1578,51 @@ function readNumWithPlaceholder(id, parser){
   return { value: 0, fromPlaceholder: false };
 }
 
-function updateSemaforo(){
-  const s = collectState();
-  const tps = s['touchpoints'] || [];
-  const total = tps.length;
-  const puntuales = tps.filter(t => t.naturaleza === 'Puntual').length;
-  const continuos = tps.filter(t => t.naturaleza === 'Continuo').length;
-  const estR = readNumWithPlaceholder('asig-estudiantes', parseInt);
-  const hsR  = readNumWithPlaceholder('asig-horas-semana', parseFloat);
-  const eqR  = readNumWithPlaceholder('asig-equipo', parseInt);
-  const estudiantes = estR.value;
-  const horasSemana = hsR.value;
-  const equipo = eqR.value || 1;
-  const usingFallback = estR.fromPlaceholder || hsR.fromPlaceholder || eqR.fromPlaceholder;
+// Horas docente que cuesta un touchpoint en todo el semestre, según lo que el
+// profesor haya estimado. Devuelve null si no ha estimado nada en él.
+function cargaTouchpoint(tp, estudiantes){
+  const num = v => { const n = parseFloat(v); return isNaN(n) ? 0 : n; };
+  const prep = num(tp.hPrep), dur = num(tp.minDur), corr = num(tp.minCorr), fb = num(tp.minFb);
+  if(prep === 0 && dur === 0 && corr === 0 && fb === 0) return null;
+  // Preparar es coste único; la duración es tiempo que tú también estás ahí;
+  // corregir y retroalimentar escalan con el número de estudiantes.
+  return prep + dur / 60 + (corr + fb) * estudiantes / 60;
+}
 
-  document.getElementById('stat-total').textContent = total;
-  document.getElementById('stat-puntuales').textContent = puntuales;
-  document.getElementById('stat-continuos').textContent = continuos;
+function updateSemaforo(){
+  const sem = computeSemaforo(collectState());
+  const setStat = (id, v) => { const el = document.getElementById(id); if(el) el.textContent = v; };
+  setStat('stat-total', sem.total);
+  setStat('stat-puntuales', sem.puntuales);
+  setStat('stat-continuos', sem.continuos);
+  setStat('stat-horas', sem.horas !== null ? Math.round(sem.horas) + ' h' : '—');
+  setStat('stat-pct',   sem.pct   !== null ? sem.pct + ' %' : '—');
 
   const light = document.getElementById('semaforo-light');
-  const title = document.getElementById('semaforo-title');
-  const desc = document.getElementById('semaforo-desc');
+  light.className = 'semaforo-light ' + sem.color;
+  light.textContent = sem.color === 'verde' ? '✓' : sem.color === 'ambar' ? '!' : sem.color === 'rojo' ? '×' : '—';
+
+  document.getElementById('semaforo-title').textContent =
+    sem.modo === 'vacio'
+      ? (sem.total === 0 ? 'Añade al menos un touchpoint para calcular tu semáforo.'
+                         : 'Datos insuficientes en el Paso 1 (estudiantes u horas lectivas) para calcular el semáforo.')
+      : sem.titulo;
+  document.getElementById('semaforo-desc').textContent = sem.desc;
+
   const badge = document.getElementById('semaforo-fallback-badge');
   const note  = document.getElementById('semaforo-fallback-note');
+  if(badge) badge.hidden = !sem.usingFallback;
+  if(note)  note.hidden  = !sem.usingFallback;
 
-  if(total === 0 || estudiantes === 0 || horasSemana === 0){
-    light.className = 'semaforo-light gris';
-    light.textContent = '—';
-    title.textContent = total === 0
-      ? 'Añade al menos un touchpoint para activar el semáforo.'
-      : 'Datos insuficientes en el Paso 1 (estudiantes u horas lectivas) para calcular el semáforo.';
-    desc.textContent = 'El semáforo es una guía orientativa: combina tu número de touchpoints con tamaño de grupo y horas lectivas semanales.';
-    if(badge) badge.hidden = true;
-    if(note)  note.hidden  = true;
-    return;
-  }
-
-  if(badge) badge.hidden = !usingFallback;
-  if(note)  note.hidden  = !usingFallback;
-
-  // Carga: puntuales pesan 1, continuos 2 (recogida continua)
-  const carga = puntuales + continuos * 2;
-  // Ajustada por tamaño de grupo (normalizada a 60) y compartida por equipo docente
-  const cargaPorDocente = (carga * (estudiantes / 60)) / equipo;
-  // Factor horas semanales: si horas bajas con grupo grande, sube el riesgo
-  const factorHoras = horasSemana < 2 ? 1.5 : horasSemana <= 4 ? 1 : 0.85;
-  const cargaFinal = cargaPorDocente * factorHoras;
-
-  let color, tituloTxt, descTxt;
-  if(cargaFinal <= 4 && total <= 5){
-    color = 'verde'; tituloTxt = 'Carga sostenible';
-    descTxt = `Con ${total} touchpoints, ${estudiantes} estudiantes y ${horasSemana} h/semana, tu diseño tiene un ritmo asumible. Buen encaje para Sprint 1.`;
-  } else if(cargaFinal <= 9 && total <= 9){
-    color = 'ambar'; tituloTxt = 'Carga tensionada · vigila la retroalimentación';
-    descTxt = `Con ${total} touchpoints y ${estudiantes} estudiantes en ${horasSemana} h/semana, la retroalimentación puede desbordarte. Considera coevaluación (C2), IA-docente (D4) o priorizar los momentos clave (D1).`;
-  } else {
-    color = 'rojo'; tituloTxt = 'Carga potencialmente inviable';
-    descTxt = `${total} touchpoints con ${estudiantes} estudiantes y ${horasSemana} h/semana apuntan a saturación. Reduce touchpoints, apóyate fuerte en coevaluación o solicita refuerzo. Llévatelo al Sprint 1 como prioridad.`;
-  }
-  light.className = 'semaforo-light ' + color;
-  light.textContent = color === 'verde' ? '✓' : color === 'ambar' ? '!' : '×';
-  title.textContent = tituloTxt;
-  desc.textContent = descTxt;
+  // Total estimado junto a los campos de cada tarjeta
+  tpListEl.querySelectorAll('.tp-card').forEach((card, i) => {
+    const el = card.querySelector('[id$="-carga-total"]');
+    if(!el) return;
+    const h = sem.cargas[i];
+    el.innerHTML = (h === null || h === undefined)
+      ? 'Sin estimar'
+      : `Te costaría <strong>${h < 1 ? Math.round(h*60) + ' min' : (Math.round(h*10)/10).toFixed(1).replace('.', ',') + ' h'}</strong> en el semestre`;
+  });
 }
 
 // ===== PROGRESS =====
@@ -1872,34 +1927,101 @@ function _dominantAxis(s, axis){
   return { label: axis.toUpperCase()+(maxIdx+1), pos };
 }
 
+// Única implementación del semáforo. La consumen la propia Plantilla
+// (updateSemaforo) y las vistas de Canvas y Blueprint, para que las tres no
+// puedan devolver colores distintos del mismo diseño.
 function computeSemaforo(s){
   const tps = s['touchpoints'] || [];
   const total = tps.length;
   const puntuales = tps.filter(t => t.naturaleza === 'Puntual').length;
   const continuos = tps.filter(t => t.naturaleza === 'Continuo').length;
-  // Mismo criterio que updateSemaforo(): si el campo está vacío, cae al placeholder.
+  // Si el campo está vacío, cae al placeholder.
   const estR = readNumWithPlaceholder('asig-estudiantes', parseInt);
   const hsR  = readNumWithPlaceholder('asig-horas-semana', parseFloat);
   const eqR  = readNumWithPlaceholder('asig-equipo', parseInt);
+  const dedR = readNumWithPlaceholder('asig-dedicacion-docente', parseFloat);
   const estudiantes = estR.value || parseInt(s['asig-estudiantes']) || 0;
   const horasSemana = hsR.value  || parseFloat(s['asig-horas-semana']) || 0;
   const equipo      = eqR.value  || parseInt(s['asig-equipo']) || 1;
-  const usingFallback = estR.fromPlaceholder || hsR.fromPlaceholder || eqR.fromPlaceholder;
+  const dedicacion  = dedR.value || parseFloat(s['asig-dedicacion-docente']) || 0;
+  const semanas = (s['asig-semestre'] === 'Anual') ? 30 : 15;
+  let usingFallback = estR.fromPlaceholder || hsR.fromPlaceholder || eqR.fromPlaceholder;
+
+  const cargas = tps.map(tp => cargaTouchpoint(tp, estudiantes));
+
   if(total === 0 || estudiantes === 0 || horasSemana === 0){
-    return { color:'gris', titulo: total === 0 ? 'Añade touchpoints' : 'Datos incompletos', sub:'Completa asignatura y touchpoints en la Plantilla para ver el semáforo.', total, cargaDisplay:'—', usingFallback:false };
+    return {
+      modo:'vacio', color:'gris', cargas,
+      titulo: total === 0 ? 'Añade touchpoints' : 'Datos incompletos',
+      sub:'Completa asignatura y touchpoints en la Plantilla para ver el semáforo.',
+      desc:'El semáforo es una guía orientativa: combina tu listado de touchpoints con el tamaño de grupo, el equipo docente y tu dedicación.',
+      total, puntuales, continuos, horas:null, pct:null,
+      cargaDisplay:'—', cargaLabel:'Carga/docente', usingFallback:false
+    };
   }
-  const carga = puntuales + continuos * 2;
-  const cargaPorDocente = (carga * (estudiantes / 60)) / equipo;
-  const factorHoras = horasSemana < 2 ? 1.5 : horasSemana <= 4 ? 1 : 0.85;
-  const cargaFinal = cargaPorDocente * factorHoras;
-  let color, titulo;
-  if(cargaFinal <= 4 && total <= 5){ color='verde'; titulo='Carga sostenible'; }
-  else if(cargaFinal <= 9 && total <= 9){ color='ambar'; titulo='Carga tensionada'; }
-  else { color='rojo'; titulo='Carga potencialmente inviable'; }
-  const cargaDisplay = cargaFinal.toFixed(1).replace('.', ',');
+
+  const estimados = cargas.filter(c => c !== null);
+  const sinEstimar = total - estimados.length;
   const subBase = `${total} touchpoint${total===1?'':'s'} · ${equipo} docente${equipo===1?'':'s'} · ${estudiantes} estudiantes`;
-  const sub = usingFallback ? subBase + ' (valores sugeridos)' : subBase;
-  return { color, titulo, sub, total, cargaDisplay, usingFallback };
+  let color, titulo, desc, cargaDisplay, cargaLabel, horas = null, pct = null;
+
+  if(estimados.length > 0 && dedicacion > 0){
+    // ── Lectura por horas: pondera cada touchpoint por lo que de verdad cuesta
+    usingFallback = usingFallback || dedR.fromPlaceholder;
+    horas = estimados.reduce((a,b) => a+b, 0) / equipo;
+    const presupuesto = dedicacion * semanas;
+    pct = Math.round(horas / presupuesto * 100);
+    cargaDisplay = Math.round(horas) + ' h';
+    cargaLabel = 'Horas de evaluar';
+
+    const masCaro = tps
+      .map((tp, i) => ({ nombre: tp.nombre || 'un touchpoint sin nombre', h: cargas[i] || 0 }))
+      .sort((a,b) => b.h - a.h)[0];
+    const pista = (masCaro && masCaro.h > 0)
+      ? ` Lo que más pesa es «${masCaro.nombre}», con unas ${Math.round(masCaro.h)} h.` : '';
+    const cola = sinEstimar > 0
+      ? ` Quedan ${sinEstimar} touchpoint${sinEstimar>1?'s':''} sin estimar, así que la cifra real será algo mayor.` : '';
+
+    const lectivas = Math.round(horasSemana * semanas);
+    const contexto = lectivas > 0 ? ` De esas ${Math.round(presupuesto)} h, unas ${lectivas} se te van solo en clase.` : '';
+    if(pct <= 30){
+      color='verde'; titulo='Carga sostenible';
+      desc = `Evaluar te ocuparía unas ${Math.round(horas)} h en el semestre, el ${pct} % de las ${Math.round(presupuesto)} h que declaras dedicar a la asignatura.${contexto}${pista} Queda margen para la docencia y la preparación.${cola}`;
+    } else if(pct <= 50){
+      color='ambar'; titulo='Carga tensionada · vigila la retroalimentación';
+      desc = `Evaluar se llevaría unas ${Math.round(horas)} h, el ${pct} % de tu dedicación a la asignatura.${contexto}${pista} Es mucho para la parte evaluativa, que compite con preparar y dar la clase: mira si puedes aligerar la corrección con coevaluación (C2), retroalimentación en grupo o IA docente (D4).${cola}`;
+    } else {
+      color='rojo'; titulo='Carga potencialmente inviable';
+      desc = `Evaluar se llevaría unas ${Math.round(horas)} h, el ${pct} % de las ${Math.round(presupuesto)} h que dedicas a la asignatura, y aún tienes que darla.${contexto}${pista} Reduce touchpoints, baja el coste por estudiante de los más caros o consigue refuerzo antes del Sprint 1.${cola}`;
+    }
+  } else {
+    // ── Lectura por volumen: la de siempre, cuando no hay nada estimado
+    const carga = puntuales + continuos * 2;
+    const cargaPorDocente = (carga * (estudiantes / 60)) / equipo;
+    const factorHoras = horasSemana < 2 ? 1.5 : horasSemana <= 4 ? 1 : 0.85;
+    const cargaFinal = cargaPorDocente * factorHoras;
+    cargaDisplay = cargaFinal.toFixed(1).replace('.', ',');
+    cargaLabel = 'Carga/docente';
+    const invitacion = ' Estima lo que te cuesta cada touchpoint para una lectura en horas, que distingue los momentos caros de los baratos.';
+
+    if(cargaFinal <= 4 && total <= 5){
+      color='verde'; titulo='Carga sostenible';
+      desc = `Con ${total} touchpoints, ${estudiantes} estudiantes y ${horasSemana} h/semana, tu diseño tiene un ritmo asumible. Buen encaje para Sprint 1.` + invitacion;
+    } else if(cargaFinal <= 9 && total <= 9){
+      color='ambar'; titulo='Carga tensionada · vigila la retroalimentación';
+      desc = `Con ${total} touchpoints y ${estudiantes} estudiantes en ${horasSemana} h/semana, la retroalimentación puede desbordarte. Considera coevaluación (C2), IA docente (D4) o priorizar los momentos clave (D1).` + invitacion;
+    } else {
+      color='rojo'; titulo='Carga potencialmente inviable';
+      desc = `${total} touchpoints con ${estudiantes} estudiantes y ${horasSemana} h/semana apuntan a saturación. Reduce touchpoints, apóyate fuerte en coevaluación o solicita refuerzo.` + invitacion;
+    }
+  }
+
+  return {
+    modo: (horas !== null ? 'horas' : 'volumen'),
+    color, titulo, desc, total, puntuales, continuos, horas, pct, cargas,
+    sub: usingFallback ? subBase + ' (valores sugeridos)' : subBase,
+    cargaDisplay, cargaLabel, usingFallback
+  };
 }
 
 function countDims(tps){
@@ -2054,7 +2176,7 @@ function buildCanvasHTML(s){
           </div>
           <div class="sem-metrics">
             <div class="sem-metric"><div class="sem-val">${sem.total}</div><div class="sem-lab">Touchpoints</div></div>
-            <div class="sem-metric"><div class="sem-val">${sem.cargaDisplay}</div><div class="sem-lab">Carga/docente</div></div>
+            <div class="sem-metric"><div class="sem-val">${sem.cargaDisplay}</div><div class="sem-lab">${sem.cargaLabel}</div></div>
             <div class="sem-metric"><div class="sem-val">${dims.activas.length}</div><div class="sem-lab">Dims. activas</div></div>
           </div>
         </section>

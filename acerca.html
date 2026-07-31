@@ -10,8 +10,9 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/css/styles.v2.css">
 </head>
 <body data-page="acerca">
 
@@ -45,6 +46,7 @@
       </div>
       <div class="actions">
         <button class="btn ghost small" data-action="export">Descargar progreso</button>
+        <button class="btn ghost small" data-action="import">Cargar progreso</button>
         <button class="btn ghost small" data-action="reset">Reiniciar</button>
       </div>
     </div>
@@ -82,7 +84,7 @@
     <ul>
       <li><strong>Sprint 0</strong> · estable. Incluye la Plantilla estratégica, la Guía estratégica y la Mini-guía de pre-trabajo.</li>
       <li><strong>Sprint 1</strong> · estable. Incluye la Plantilla del plan operativo, el Kit de onboarding (con Guía breve, Plantilla EJEMPLO IngeSoft y Recorrido guiado) y el Panel del plan operativo, que lee tu Plantilla y te devuelve automáticamente el Blueprint y el Calendario semanal.</li>
-      <li><strong>Sprint 2</strong> · en diseño. Las piezas están previstas para junio de 2026, una vez hayamos tenido un cuatrimestre entero de recorrido con los otros dos sprints.</li>
+      <li><strong>Sprint 2</strong> · en producción. Las piezas llegan con el arranque del cuatrimestre, en septiembre de 2026, que es cuando el pilotaje empieza a hacer falta de verdad.</li>
     </ul>
 
     <h2>Licencia y reutilización</h2>
@@ -104,7 +106,7 @@
     <p>Esta herramienta ha sido desarrollada por el equipo de <a href="https://eutika.com/" target="_blank" rel="noopener">Eutika</a>. Para cualquier consulta, propuesta de colaboración o adaptación a otros contextos, la persona de contacto es Juan Freire · <a href="mailto:juan@eutika.com">juan@eutika.com</a>.</p>
 
     <h2>Retroalimentación</h2>
-    <p>Si estás probando el kit y quieres contarnos qué te ha funcionado, dónde te has atascado o qué te habría venido bien que estuviera y no está, escríbenos. Cada iteración del kit se alimenta de ese uso real: cuanto antes nos llega el retroalimentación, antes podemos incorporarlo al siguiente ciclo.</p>
+    <p>Si estás probando el kit y quieres contarnos qué te ha funcionado, dónde te has atascado o qué te habría venido bien que estuviera y no está, escríbenos. Cada iteración del kit se alimenta de ese uso real: cuanto antes nos llega la retroalimentación, antes podemos incorporarlo al siguiente ciclo.</p>
 
   </main>
 
@@ -116,6 +118,6 @@
   </footer>
 
 
-  <script src="/assets/js/app.js"></script>
+  <script src="/assets/js/app.v2.js"></script>
 </body>
 </html>

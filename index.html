@@ -10,8 +10,9 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/css/styles.v2.css">
 </head>
 <body data-page="inicio">
 
@@ -45,6 +46,7 @@
       </div>
       <div class="actions">
         <button class="btn ghost small" data-action="export">Descargar progreso</button>
+        <button class="btn ghost small" data-action="import">Cargar progreso</button>
         <button class="btn ghost small" data-action="reset">Reiniciar</button>
       </div>
     </div>
@@ -127,31 +129,31 @@
         <div>
           <div class="continue-chip">Continuar donde lo dejaste</div>
           <h2 id="continue-title">Sprint 0 · Decisiones estratégicas</h2>
-          <div class="subtext">Última visita: hace unos días · <span id="continue-progress">Has completado 0 de 3 pasos</span></div>
+          <div class="subtext"><span id="continue-lastvisit">Última visita: hoy</span> · <span id="continue-progress">Has completado 0 de 3 pasos</span></div>
         </div>
         <a id="continue-btn" href="/sprint-0" class="btn primary">Continuar →</a>
       </div>
 
       <h2>Tu progreso</h2>
       <div class="grid-3">
-        <div class="card with-accent">
+        <a href="/sprint-0" class="card card-linkable with-accent">
           <div class="meta">Sprint 0</div>
           <h3>Decisiones estratégicas</h3>
           <div class="progress-bar"><div class="fill" id="s0-progress" style="width: 0%;"></div></div>
-          <p style="font-size:12px;">En progreso</p>
-        </div>
-        <div class="card muted">
+          <p style="font-size:12px;" id="s0-estado">Sin iniciar</p>
+        </a>
+        <a href="/sprint-1" class="card card-linkable with-accent">
           <div class="meta">Sprint 1</div>
           <h3>Plan de acción</h3>
-          <div class="progress-bar"><div class="fill" style="width: 0%;"></div></div>
-          <p style="font-size:12px;">Se desbloquea al cerrar Sprint 0</p>
-        </div>
-        <div class="card muted">
+          <div class="progress-bar"><div class="fill" id="s1-progress" style="width: 0%;"></div></div>
+          <p style="font-size:12px;" id="s1-estado">Bloqueado · cerrar sprint anterior</p>
+        </a>
+        <a href="/sprint-2" class="card card-linkable with-accent">
           <div class="meta">Sprint 2</div>
           <h3>Pilotaje</h3>
-          <div class="progress-bar"><div class="fill" style="width: 0%;"></div></div>
-          <p style="font-size:12px;">Próximamente</p>
-        </div>
+          <div class="progress-bar"><div class="fill" id="s2-progress" style="width: 0%;"></div></div>
+          <p style="font-size:12px;" id="s2-estado">Próximamente</p>
+        </a>
       </div>
 
       <h2>Atajos</h2>
@@ -177,6 +179,6 @@
   </footer>
 
 
-  <script src="/assets/js/app.js"></script>
+  <script src="/assets/js/app.v2.js"></script>
 </body>
 </html>

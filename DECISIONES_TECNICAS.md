@@ -39,10 +39,9 @@ redisena-evaluacion/
 │
 ├── assets/
 │   ├── css/
-│   │   └── styles.css           Sistema de Diseño UC3M IMPULSO
+│   │   └── styles.v2.css        Sistema de Diseño UC3M IMPULSO
 │   └── js/
-│       ├── app.js               Estado, localStorage, inicialización
-│       └── demo-controls.js     Panel de simulación (retirar en producción)
+│       └── app.v2.js            Estado, localStorage, inicialización
 │
 ├── downloads/                   Piezas descargables del kit
 │   ├── README.md                Inventario + convenciones de archivo
@@ -122,7 +121,9 @@ Una sola clave, un solo objeto JSON. Simple de razonar, simple de exportar.
 - Sprint 1 arranca en `bloqueado`; pasa a `sin_iniciar` cuando Sprint 0 llega a `completado`.
 - Sprint 2 permanece en `proximamente` hasta la release de septiembre 2026.
 
-**Export / import.** El usuario puede descargar el objeto completo como archivo JSON (`asignatura-YYYYMMDD.json`) o importar uno previamente exportado. Este es el único mecanismo de portabilidad entre navegadores o máquinas.
+**Export / import.** El usuario puede descargar el objeto completo como archivo JSON (`redisena-{asignatura}-YYYYMMDD.json`) o cargar uno exportado antes. Es el único mecanismo de portabilidad entre navegadores o máquinas. Ambos botones viven en la barra de estado; hasta el 31 de julio de 2026 solo existía el de descarga y la función de carga no tenía forma de invocarse.
+
+**Del objeto `asignatura` solo se captura hoy el `nombre`**, editable pinchando sobre él en la barra de estado. Los campos `codigo`, `curso`, `ects` y `estudiantes` que aparecen arriba están previstos pero no los pide ninguna pantalla todavía: los datos de ECTS y número de estudiantes viven por ahora en la Plantilla del Sprint 1.
 
 **Versionado del schema.** El campo `schema_version` permite migrar estados antiguos cuando la estructura cambie. Todas las lecturas verifican el schema antes de usarlo; si el schema es superior al soportado, se muestra un aviso. Si es inferior, se migra en memoria.
 
@@ -165,7 +166,7 @@ Una sola clave, un solo objeto JSON. Simple de razonar, simple de exportar.
 
 **JavaScript.**
 - Vanilla ES2020+. Sin bundler, sin TypeScript por ahora.
-- Dos archivos: `app.js` (producción) y `demo-controls.js` (solo durante prototipado).
+- Un único archivo, `app.js`. El `demo-controls.js` del prototipado se retiró y no queda rastro suyo en el código.
 - Módulos por convención: funciones en el scope global con prefijo semántico (`state_*`, `ui_*`, `sprint_*`).
 - Sin dependencias externas. Si más adelante hace falta una utilidad concreta, se incluye como archivo local, no por CDN.
 
@@ -226,7 +227,7 @@ Archivo `_headers` en la raíz — Cloudflare Pages lo interpreta automáticamen
   Referrer-Policy: strict-origin-when-cross-origin
 ```
 
-Cuando se publique una nueva versión de un asset, se cambia su nombre (e.g. `styles.v2.css`) para bust de caché. Por ahora basta con `styles.css` — es un prototipo y el volumen de tráfico no lo exige.
+Cuando se publique una nueva versión de un asset **hay que cambiarle el nombre**. No es opcional: `immutable` con un año de caducidad significa que un navegador que ya cargó la versión anterior no vuelve a preguntar por ella, así que una corrección publicada sobre el mismo nombre no llega a quien ya ha entrado alguna vez. El 31 de julio de 2026, al corregir los fallos de estado de la aplicación, se pasó a `styles.v2.css` y `app.v2.js` por esta razón.
 
 ---
 

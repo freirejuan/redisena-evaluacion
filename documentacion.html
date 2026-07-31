@@ -10,8 +10,9 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/css/styles.v2.css">
 </head>
 <body data-page="documentacion">
 
@@ -45,6 +46,7 @@
       </div>
       <div class="actions">
         <button class="btn ghost small" data-action="export">Descargar progreso</button>
+        <button class="btn ghost small" data-action="import">Cargar progreso</button>
         <button class="btn ghost small" data-action="reset">Reiniciar</button>
       </div>
     </div>
@@ -94,7 +96,7 @@
       </div>
       <div class="glossary-item">
         <dt>Taxonomía T1–T9</dt>
-        <dd>Nueve tipos de touchpoint según el papel pedagógico que juegan (diagnóstico, formativo intermedio, sumativo parcial, producto integrador, etc.). Se asigna un tipo a cada touchpoint en la Plantilla del plan operativo.</dd>
+        <dd>Nueve tipos de touchpoint según la forma que adopta el encuentro evaluativo: T1 examen, T2 entrega, T3 presentación, T4 observación, T5 autoevaluación, T6 evaluación entre pares, T7 tutoría uno a uno, T8 checkpoint y T9 canal de comunicación continua. Hay además una categoría abierta, T-Otro, para lo que no encaje en ninguna. Cada tipo llega con unos atributos por defecto (naturaleza, formato, uso de IA, evidencia) que puedes sobrescribir. Se asigna un tipo a cada touchpoint en la Plantilla del plan operativo.</dd>
       </div>
       <div class="glossary-item">
         <dt>Cuatro fases</dt>
@@ -118,7 +120,7 @@
 
     <div class="faq-item">
       <h3>¿Cuánto tiempo de verdad me llevará?</h3>
-      <p>Entre 2 y 4 horas de trabajo real, distribuidas a lo largo de 6 a 8 semanas. El Sprint 0 es el único tramo denso, con 60 a 90 minutos seguidos. Los Sprints 1 y 2 se reparten en sesiones de 45 a 90 minutos con días entre medias para que las decisiones puedan reposar.</p>
+      <p>Entre 2 y 4 horas de trabajo real para dejar el rediseño preparado, distribuidas a lo largo de 6 a 8 semanas. El Sprint 0 es el único tramo denso, con 60 a 90 minutos seguidos. El Sprint 1 se reparte en dos o tres sesiones de 45 a 90 minutos, con días entre medias para que las decisiones reposen. El Sprint 2 es de otra naturaleza: no son sesiones de trabajo sino el cuatrimestre entero, con unos minutos de observación por semana mientras impartes la asignatura.</p>
     </div>
 
     <div class="faq-item">
@@ -164,6 +166,6 @@
   </footer>
 
 
-  <script src="/assets/js/app.js"></script>
+  <script src="/assets/js/app.v2.js"></script>
 </body>
 </html>

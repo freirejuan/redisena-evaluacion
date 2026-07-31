@@ -10,8 +10,9 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/css/styles.v2.css">
 </head>
 <body data-page="sprint-1">
 
@@ -45,6 +46,7 @@
       </div>
       <div class="actions">
         <button class="btn ghost small" data-action="export">Descargar progreso</button>
+        <button class="btn ghost small" data-action="import">Cargar progreso</button>
         <button class="btn ghost small" data-action="reset">Reiniciar</button>
       </div>
     </div>
@@ -74,7 +76,7 @@
       <li><strong>La lectura de tres lentes de factibilidad.</strong> Un semáforo que cubre carga docente, carga del estudiante y balance entre formativa y sumativa. Si alguna aparece en rojo, conviene ajustar antes de pasar al Sprint 2.</li>
     </ul>
 
-    <h2>Antes de empezar · Kit de onboarding</h2>
+    <h2 id="onboarding">Antes de empezar · Kit de onboarding</h2>
     <p>La Plantilla del plan operativo es una pieza densa: once hojas, alrededor de treinta columnas y unas cuantas mecánicas nuevas que conviene conocer antes de abrirla (la taxonomía T1–T9, las cuatro fases de dedicación, las tres lentes de factibilidad y los dos escenarios en paralelo). <strong>No la abras sola.</strong> El Kit de onboarding te deja listo para usarla con soltura en unos veinte minutos, y lo hemos ordenado en tres piezas que conviene leer en este orden:</p>
 
     <div class="tool-card">
@@ -102,8 +104,8 @@
     <div class="tool-card">
       <div class="body">
         <div class="meta">HTML · 5-7 min · recorrido guiado</div>
-        <h3>Recorrido guiado guiado</h3>
-        <p>Recorrido hoja por hoja de la Plantilla EJEMPLO, explicando cada columna y cada decisión con el caso IngeSoft delante. Es el recorrido guiado que evita que pases media hora descifrando qué te pide la columna 22 de la hoja 7.</p>
+        <h3>Recorrido guiado</h3>
+        <p>Recorrido hoja por hoja de la Plantilla EJEMPLO, explicando cada columna y cada decisión con el caso IngeSoft delante. Es el recorrido que evita que pases media hora descifrando qué te pide la columna 22 de la hoja 7.</p>
       </div>
       <div class="actions">
         <a href="/downloads/sprint-1/walkthrough.html" class="btn ghost small" target="_blank">Leer online</a>
@@ -177,14 +179,14 @@
 
     <h2>Cierre del Sprint 1</h2>
     <div class="work-panel">
-      <p style="margin-bottom: var(--sp-3);">Cuando tengas los cuatro pasos cerrados y tu plan en verde o ámbar razonable en las tres lentes, marca el sprint como completado.</p>
+      <p style="margin-bottom: var(--sp-3);">Cuando tengas los tres pasos cerrados y tu plan en verde o ámbar razonable en las tres lentes, marca el sprint como completado.</p>
       <div style="margin-top: var(--sp-2);">
         <button class="btn primary" data-action="complete-sprint" data-sprint="sprint_1">Marcar Sprint 1 como completado</button>
       </div>
     </div>
 
     <h2>Qué viene después</h2>
-    <p>El Sprint 2 empieza cuando arranca el cuatrimestre con tus estudiantes. Hasta entonces, tu Plantilla y el Panel del plan operativo son las dos herramientas de preparación que tienes a mano. El Sprint 2 estará disponible en junio de 2026.</p>
+    <p>El Sprint 2 empieza cuando arranca el cuatrimestre con tus estudiantes. Hasta entonces, tu Plantilla y el Panel del plan operativo son las dos herramientas de preparación que tienes a mano. El Sprint 2 se abre con el arranque del cuatrimestre, en septiembre de 2026.</p>
     <a href="/sprint-2" class="btn outline">Ver alcance del Sprint 2 →</a>
 
   </main>
@@ -197,6 +199,6 @@
   </footer>
 
 
-  <script src="/assets/js/app.js"></script>
+  <script src="/assets/js/app.v2.js"></script>
 </body>
 </html>

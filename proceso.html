@@ -10,8 +10,9 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/css/styles.v2.css">
 </head>
 <body data-page="proceso">
 
@@ -45,6 +46,7 @@
       </div>
       <div class="actions">
         <button class="btn ghost small" data-action="export">Descargar progreso</button>
+        <button class="btn ghost small" data-action="import">Cargar progreso</button>
         <button class="btn ghost small" data-action="reset">Reiniciar</button>
       </div>
     </div>
@@ -113,7 +115,7 @@
     </div>
 
     <div class="step-block muted">
-      <div class="step-num">Sprint 2 · 1 cuatrimestre · próximamente</div>
+      <div class="step-num">Sprint 2 · 1 cuatrimestre · desde septiembre de 2026</div>
       <h3>Pilotaje con estudiantes y mejora del diseño</h3>
       <p><strong>Pregunta central:</strong> ¿qué ha funcionado en el aula tal como lo habíamos imaginado, qué no, y qué hay que ajustar para la siguiente iteración?</p>
       <p><strong>Pieza principal:</strong> todavía en construcción. Queremos terminarla cuando tengamos recorrido suficiente con los sprints 0 y 1 y sepamos qué funciona bien y qué no en la práctica — no antes. Lo que sí sabemos es que incluirá un cuaderno de observación por touchpoint, una plantilla de informe de cierre y una guía de lectura de señales para no confundir ruido con señal.</p>
@@ -149,6 +151,6 @@
   </footer>
 
 
-  <script src="/assets/js/app.js"></script>
+  <script src="/assets/js/app.v2.js"></script>
 </body>
 </html>

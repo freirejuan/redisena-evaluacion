@@ -42,14 +42,14 @@ Detalle completo en [DECISIONES_TECNICAS.md](./DECISIONES_TECNICAS.md).
 ├── proceso.html                 El proceso en tres sprints
 ├── sprint-0.html                Sprint 0 · Decisiones estratégicas
 ├── sprint-1.html                Sprint 1 · Plan de acción
-├── sprint-2.html                Sprint 2 · Pilotaje (próximamente)
+├── sprint-2.html                Sprint 2 · Pilotaje (desde septiembre de 2026)
 ├── kit.html                     Kit de herramientas
 ├── documentacion.html           Glosario y FAQ
 ├── acerca.html                  Sobre el proyecto
 │
 ├── assets/
-│   ├── css/styles.css           Sistema de Diseño UC3M IMPULSO
-│   └── js/app.js                Estado, localStorage, interacciones
+│   ├── css/styles.v2.css        Sistema de Diseño UC3M IMPULSO
+│   └── js/app.v2.js             Estado, localStorage, interacciones
 │
 ├── downloads/                   Piezas descargables del kit, por sprint
 │
@@ -98,11 +98,17 @@ Detalle completo: [DECISIONES_TECNICAS.md § 5](./DECISIONES_TECNICAS.md).
 
 ## Pendientes antes de publicar en producción
 
-- [ ] Retirar el panel *Simular estado del profesor* (eliminar `demo-controls.js` de cada página o dejarlo solo tras un feature flag).
-- [ ] Poblar `downloads/` con las piezas reales (hoy hay README con inventario).
-- [ ] Conectar el botón de reserva de sesión 1:1 (Cal.com / Calendly).
-- [ ] Decidir analytics (Cloudflare Web Analytics o Plausible).
-- [ ] Auditoría Lighthouse + axe.
+Verificado contra el código el 31 de julio de 2026. Lo que sigue abierto:
+
+- [ ] **Publicar las piezas del Sprint 2** en `downloads/sprint-2/`. Las de los sprints 0 y 1 ya están.
+- [ ] **Decidir qué se hace con la reserva de sesión 1:1.** Hoy no existe ni el botón ni la integración, y conviene decidir antes si tiene sitio en un kit reutilizable o si es acompañamiento propio de cada implantación.
+- [ ] **Auditoría de accesibilidad y rendimiento** (Lighthouse + axe). Los pasos marcables ya son operables con teclado; falta pasar la revisión completa.
+
+Resueltos:
+
+- [x] ~~Retirar el panel *Simular estado del profesor*~~ — no existe en el código: ni el panel ni `demo-controls.js`. El pendiente estaba caducado.
+- [x] ~~Poblar `downloads/` con las piezas reales~~ — poblado para los sprints 0 y 1 desde el 22 de abril de 2026, y es la fuente canónica de las piezas.
+- [x] ~~Decidir analytics~~ — **decidido: sin analítica ni telemetría.** La promesa del kit es anonimato total para el profesor; el estado vive en su navegador y se exporta como JSON que él controla. Revisable en el futuro, no pendiente de resolver.
 
 ---
 
