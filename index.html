@@ -7,14 +7,12 @@
   <meta name="description" content="Un proceso guiado y un kit de herramientas para rediseñar la evaluación de asignaturas universitarias en tres sprints, integrando la IA como eje del rediseño. De Eutika. CC BY-SA 4.0.">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">  <link rel="stylesheet" href="/assets/css/fuentes.v1.css">
   <link rel="stylesheet" href="/assets/css/styles.v2.css">
 </head>
 <body data-page="inicio">
+
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
   <header class="site">
     <div class="shell">
@@ -22,7 +20,7 @@
         <span class="brand-name">Rediseña<span class="dot">.</span>Evaluacion</span>
         <span class="brand-attrib">Un kit de Eutika</span>
       </a>
-      <nav class="primary">
+      <nav class="primary" aria-label="Principal">
         <a href="/" class="active">Inicio</a>
         <a href="/proceso">El proceso</a>
         <a href="/kit">Kit</a>
@@ -32,7 +30,7 @@
     </div>
   </header>
 
-  <div class="status-strip">
+  <section class="status-strip" aria-label="Tu progreso en el kit">
     <div class="shell">
       <div class="info">
         <div class="info-item">
@@ -45,25 +43,26 @@
         </div>
       </div>
       <div class="actions">
+        <button class="btn ghost small" data-action="detalle" aria-pressed="false">Ver todo el detalle</button>
         <button class="btn ghost small" data-action="export">Descargar progreso</button>
         <button class="btn ghost small" data-action="import">Cargar progreso</button>
         <button class="btn ghost small" data-action="reset">Reiniciar</button>
       </div>
     </div>
-  </div>
+  </section>
 
-  <main>
+  <main id="contenido" tabindex="-1">
 
     <!-- Hero primera visita -->
     <div id="hero-first-visit">
       <div class="hero dark">
         <span class="chip">Rediseño de la evaluación</span>
         <h1>Diseña la evaluación de tu asignatura con criterio</h1>
-        <p>Un proceso guiado y un kit de herramientas que te acompañan desde las decisiones estratégicas hasta el plan semana a semana, con la integración de la IA como eje explícito del rediseño. Primero decides qué evaluación quieres tener, después lo traduces a un plan operativo que se pueda sostener, y por último lo pilotas con tus estudiantes. La web te va llevando paso a paso, pero el ritmo lo marcas tú.</p>
+        <p>Primero decides qué evaluación quieres tener. Después la traduces a un plan que se pueda sostener. Por último la pruebas con tus estudiantes. Tres sprints, con la IA integrada en el diseño y no al margen. El ritmo lo marcas tú.</p>
         <div class="hero-meta">
-          <div><strong>Trabajo real</strong>2–4 horas concentradas</div>
+          <div><strong>Trabajo real</strong>5–7 horas concentradas</div>
           <div><strong>Dispersión</strong>6–8 semanas</div>
-          <div><strong>Formato</strong>Totalmente autónomo y asíncrono</div>
+          <div><strong>Formato</strong>Autónomo y asíncrono</div>
         </div>
         <div class="hero-actions">
           <a href="/sprint-0" class="btn primary">Empezar por el Sprint 0</a>
@@ -72,29 +71,29 @@
       </div>
 
       <div class="callout privacy" style="margin-top: var(--sp-6); border-left: 3px solid var(--acento-teal); background: var(--acento-teal-pale, #E6F7F1); padding: var(--sp-4) var(--sp-5); border-radius: var(--radius-md);">
-        <p style="margin: 0;"><strong>Tu trabajo es 100 % tuyo y privado.</strong> No hay cuenta que crear, no hay servidor que reciba nada, y no guardamos ninguno de tus datos en ningún sitio. Todo sucede en tu navegador y en los archivos que tú mismo te descargas. Al final del proceso, si te apetece, te invitaremos a compartir con nosotros qué has aprendido y cómo podríamos mejorar el kit, pero siempre con la opción clara de no contestar.</p>
+        <p style="margin: 0;"><strong>Tu trabajo es tuyo y es privado.</strong> No hay cuenta que crear, no hay servidor que reciba nada, no guardamos ningún dato en ningún sitio. Todo sucede en tu navegador y en los archivos que tú te descargas. <a href="/acerca#privacidad">Cómo lo garantizamos →</a></p>
       </div>
 
       <h2>Cómo funciona</h2>
-      <p>Son tres sprints consecutivos. Cada uno tiene una pregunta que lo guía y una pieza de trabajo alrededor de la cual se organiza todo. No hay plazos duros que cumplir: avanzas cuando puedas y tu navegador se encarga de conservar el progreso, así que puedes volver al kit otro día y retomar donde lo hayas dejado.</p>
+      <p>Tres sprints consecutivos. Sin plazos duros: avanzas cuando puedas y tu navegador conserva el progreso.</p>
 
       <div class="grid-3">
         <a href="/sprint-0" class="card card-linkable with-accent">
-          <div class="meta">Sprint 0 · 60–90 min</div>
+          <div class="meta">Sprint 0 · 45–75 min</div>
           <h3>Decisiones estratégicas</h3>
-          <p>Cierras el encuadre de fondo de la asignatura: qué momentos evaluativos vas a tener, qué papel juega el uso que hace el estudiante de la IA, qué evidencias recoges y cómo la utilizas tú como docente. Salen de ahí un Canvas de la asignatura y una primera versión del Blueprint, generados automáticamente a partir de tus respuestas.</p>
+          <p>Cierras cuatro decisiones de fondo: qué momentos evaluativos tendrás, qué papel juega la IA en el trabajo del estudiante, qué evidencias recoges y cómo la usas tú. Salen de ahí tu Canvas y una primera versión del Blueprint.</p>
           <span class="card-link">Entrar al Sprint 0 →</span>
         </a>
         <a href="/sprint-1" class="card card-linkable with-accent">
           <div class="meta">Sprint 1 · 2–3 sesiones</div>
           <h3>Plan de acción detallado</h3>
-          <p>Conviertes las decisiones del Sprint 0 en un plan operativo de verdad, con sus touchpoints, su cronograma y la dedicación por fase (diseño, ejecución, corrección, retroalimentación). Es también donde formulas tus hipótesis sobre cómo la IA puede aumentar tu capacidad docente.</p>
+          <p>Conviertes esas decisiones en un plan de verdad: touchpoints, dedicación por fase y calendario semanal. Dos piezas: una plantilla de cálculo que rellenas tú y un Panel que la lee y te devuelve el Blueprint y el calendario.</p>
           <span class="card-link">Entrar al Sprint 1 →</span>
         </a>
         <a href="/sprint-2" class="card card-linkable with-accent">
           <div class="meta">Sprint 2 · 1 cuatrimestre</div>
           <h3>Pilotaje con estudiantes</h3>
-          <p>Implementas el diseño en el aula y vas observando qué pasa. Recalibras las hipótesis con los tiempos realmente medidos, recoges señales de estudiantes y del equipo docente, y al cierre tienes una versión mejorada para la siguiente iteración de la asignatura.</p>
+          <p>Implementas el diseño en el aula y observas qué pasa. Recalibras las hipótesis con los tiempos medidos y cierras con una versión mejorada para la siguiente edición.</p>
           <span class="card-link">Entrar al Sprint 2 →</span>
         </a>
       </div>
@@ -118,9 +117,11 @@
         </a>
       </div>
 
-      <h2>Para quién es</h2>
-      <p class="lead">Para profesoras y profesores universitarios que quieren rediseñar la evaluación de una de sus asignaturas con criterio —con tiempos que se sostengan y con la IA integrada en el diseño, no al margen—. Funciona en cualquier asignatura de grado o máster y en cualquier formato docente.</p>
-      <p><a href="/acerca#para-quien">¿Es para ti? Ver en qué casos encaja →</a></p>
+      <details class="capa">
+        <summary>Para quién es <span class="capa-pista">· y en qué casos encaja</span></summary>
+        <p>Para profesoras y profesores universitarios que quieren rediseñar la evaluación de una de sus asignaturas con criterio: con tiempos que se sostengan y con la IA integrada en el diseño, no al margen. Funciona en cualquier asignatura de grado o máster y en cualquier formato docente.</p>
+        <p><a href="/acerca#para-quien">Ver en qué casos encaja, y en cuáles no →</a></p>
+      </details>
     </div>
 
     <!-- Hero visita recurrente -->
@@ -152,7 +153,7 @@
           <div class="meta">Sprint 2</div>
           <h3>Pilotaje</h3>
           <div class="progress-bar"><div class="fill" id="s2-progress" style="width: 0%;"></div></div>
-          <p style="font-size:12px;" id="s2-estado">Próximamente</p>
+          <p style="font-size:12px;" id="s2-estado">Bloqueado · cerrar sprint anterior</p>
         </a>
       </div>
 
@@ -173,7 +174,7 @@
 
   <footer>
     <div class="shell">
-      <div>© 2026 · Rediseña.Evaluacion · Un kit de <a href="https://eutika.com/" target="_blank" rel="noopener">Eutika</a></div>
+      <div>© 2026 · Rediseña.Evaluacion · Un kit de <a href="https://eutika.com/" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>Eutika</a></div>
       <div>Contenidos CC BY-SA 4.0 · Código MIT</div>
     </div>
   </footer>

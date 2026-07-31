@@ -7,14 +7,12 @@
   <meta name="description" content="Sprint 1 del kit: convertir el Blueprint 0 en un plan operativo real touchpoint a touchpoint, con taxonomía T1–T9, cuatro fases de dedicación y tres lentes de factibilidad.">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">  <link rel="stylesheet" href="/assets/css/fuentes.v1.css">
   <link rel="stylesheet" href="/assets/css/styles.v2.css">
 </head>
 <body data-page="sprint-1">
+
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
   <header class="site">
     <div class="shell">
@@ -22,7 +20,7 @@
         <span class="brand-name">Rediseña<span class="dot">.</span>Evaluacion</span>
         <span class="brand-attrib">Un kit de Eutika</span>
       </a>
-      <nav class="primary">
+      <nav class="primary" aria-label="Principal">
         <a href="/">Inicio</a>
         <a href="/proceso" class="active">El proceso</a>
         <a href="/kit">Kit</a>
@@ -32,7 +30,7 @@
     </div>
   </header>
 
-  <div class="status-strip">
+  <section class="status-strip" aria-label="Tu progreso en el kit">
     <div class="shell">
       <div class="info">
         <div class="info-item">
@@ -45,45 +43,42 @@
         </div>
       </div>
       <div class="actions">
+        <button class="btn ghost small" data-action="detalle" aria-pressed="false">Ver todo el detalle</button>
         <button class="btn ghost small" data-action="export">Descargar progreso</button>
         <button class="btn ghost small" data-action="import">Cargar progreso</button>
         <button class="btn ghost small" data-action="reset">Reiniciar</button>
       </div>
     </div>
-  </div>
+  </section>
 
-  <main>
+  <main id="contenido" tabindex="-1">
 
     <div class="breadcrumb"><a href="/">Inicio</a> / <a href="/proceso">El proceso</a> / Sprint 1</div>
 
     <div class="hero">
       <span class="chip">Sprint 1</span>
       <h1>Plan de acción detallado</h1>
-      <p>Aquí es donde conviertes el Blueprint 0 en un plan operativo de verdad, touchpoint a touchpoint. Cada touchpoint lleva sus atributos, una clasificación por tipo dentro de la taxonomía T1–T9 y una estimación de dedicación repartida en cuatro fases: diseño, ejecución, corrección y retroalimentación. También es aquí donde formulas tus hipótesis sobre cómo la IA puede aumentar tu capacidad docente, para que la evaluación se convierta en un campo de experimentación con resultados medibles.</p>
+      <p>Conviertes el Blueprint 0 en un plan operativo de verdad, touchpoint a touchpoint, con su tipo, su peso, sus evidencias y la dedicación que te va a costar en cada fase. Y formulas tus hipótesis sobre en qué te puede ayudar la IA, para poder comprobarlas después.</p>
       <div class="hero-meta">
         <div><strong>Duración</strong>2–3 sesiones de 90 min</div>
-        <div><strong>Pieza principal</strong>Plantilla del plan operativo</div>
+        <div><strong>Piezas</strong>Plantilla XLSX + Panel</div>
         <div><strong>Estado</strong><span id="sprint-1-state">Bloqueado · cerrar Sprint 0</span></div>
       </div>
       <div class="progress-bar" style="margin-top: var(--sp-5);"><div class="fill" id="sprint-1-progress" style="width: 0%;"></div></div>
     </div>
 
-    <h2>Qué produces en este sprint</h2>
-    <p>El Sprint 1 no termina con un único documento sino con tres piezas conectadas entre sí, cada una pensada para una conversación distinta:</p>
-    <ul>
-      <li><strong>La Plantilla del plan operativo completa.</strong> Tu hoja de trabajo, con todos los touchpoints descritos, clasificados y estimados. La editas tú, se guarda en tu ordenador y la custodias tú. El Panel y la lectura de las tres lentes se generan a partir de la Plantilla, no se rellenan a mano.</li>
-      <li><strong>El Panel del plan operativo.</strong> Una pequeña web que lee tu Plantilla y te devuelve dos vistas derivadas: el <em>Blueprint</em> (una matriz por touchpoint con las decisiones clave) y el <em>Calendario semanal</em> (un heatmap de carga del estudiante por semana). Si cambias algo en la Plantilla y la vuelves a subir, el Panel se actualiza automáticamente.</li>
-      <li><strong>La lectura de tres lentes de factibilidad.</strong> Un semáforo que cubre carga docente, carga del estudiante y balance entre formativa y sumativa. Si alguna aparece en rojo, conviene ajustar antes de pasar al Sprint 2.</li>
-    </ul>
+    <div class="en-corto">
+      <p><strong>En corto.</strong> Rellenas una plantilla de cálculo con tus touchpoints, la subes al Panel y el Panel te devuelve el Blueprint y el calendario semana a semana. La Plantilla es tuya y la editas tú; el Panel sólo la lee. Antes de abrirla, veinte minutos de onboarding te ahorran una hora de descifrado.</p>
+    </div>
 
-    <h2 id="onboarding">Antes de empezar · Kit de onboarding</h2>
-    <p>La Plantilla del plan operativo es una pieza densa: diez hojas, alrededor de treinta columnas y unas cuantas mecánicas nuevas que conviene conocer antes de abrirla (la taxonomía T1–T9, las cuatro fases de dedicación, las tres lentes de factibilidad y los dos escenarios en paralelo). <strong>No la abras sola.</strong> El Kit de onboarding te deja listo para usarla con soltura en unos veinte minutos, y lo hemos ordenado en tres piezas que conviene leer en este orden:</p>
+    <h2 id="onboarding">Antes de empezar · veinte minutos que ahorran una hora</h2>
+    <p>La Plantilla es densa —diez hojas, alrededor de treinta columnas—. <strong>No la abras sola:</strong> estas tres piezas, en este orden, te dejan listo.</p>
 
     <div class="tool-card">
       <div class="body">
-        <div class="meta">HTML · 10-15 min · guía breve</div>
+        <div class="meta">HTML · 10–15 min · guía breve</div>
         <h3>Guía breve de uso</h3>
-        <p>Mapa general de la Plantilla, las decisiones que te va a pedir y cómo se conectan las diez hojas. Léela antes de descargar nada.</p>
+        <p>Mapa de la Plantilla y de cómo se conectan sus diez hojas. Léela antes de descargar nada.</p>
       </div>
       <div class="actions">
         <a href="/downloads/sprint-1/guia-breve.html" class="btn ghost small" target="_blank">Leer online</a>
@@ -94,7 +89,7 @@
       <div class="body">
         <div class="meta">XLSX · pre-rellenada · caso IngeSoft</div>
         <h3>Plantilla EJEMPLO</h3>
-        <p>La Plantilla completa con un caso realista (asignatura tipo Ingeniería del Software, 8 touchpoints). Ábrela antes que la tuya: te orienta sobre cómo se rellena cada celda, qué profundidad esperamos y qué pinta tiene el resultado cerrado.</p>
+        <p>Un caso realista ya rellenado —Ingeniería del Software, ocho touchpoints—. Ábrela antes que la tuya.</p>
       </div>
       <div class="actions">
         <a href="/downloads/sprint-1/plantilla-ejemplo-ingesoft.xlsx" class="btn outline small" download>Descargar XLSX</a>
@@ -103,9 +98,9 @@
 
     <div class="tool-card">
       <div class="body">
-        <div class="meta">HTML · 5-7 min · recorrido guiado</div>
+        <div class="meta">HTML · 5–7 min · recorrido guiado</div>
         <h3>Recorrido guiado</h3>
-        <p>Recorrido hoja por hoja de la Plantilla EJEMPLO, explicando cada columna y cada decisión con el caso IngeSoft delante. Es el recorrido que evita que pases media hora descifrando qué te pide la columna 22 de la hoja 7.</p>
+        <p>Hoja por hoja del ejemplo, explicando cada columna con el caso delante.</p>
       </div>
       <div class="actions">
         <a href="/downloads/sprint-1/walkthrough.html" class="btn ghost small" target="_blank">Leer online</a>
@@ -117,19 +112,26 @@
     <div class="step-block">
       <div class="step-num">Paso 1 · 2–3 sesiones de 90 min</div>
       <h3>Descarga y completa tu Plantilla</h3>
-      <p>Empiezas con tu Blueprint 0 del Sprint 0 delante. Vas declarando los touchpoints uno a uno y a cada uno le asignas su tipo dentro de T1–T9, las competencias que trabaja, su peso aproximado en la nota y las evidencias que vas a recoger. Después estimas la dedicación en cuatro fases (diseño, ejecución, corrección y retroalimentación), y lo haces por duplicado: una columna con la línea base de cómo trabajas hoy y otra con la hipótesis de cómo podría cambiar si integras IA.</p>
+      <p>Con tu Blueprint 0 delante, vas declarando los touchpoints uno a uno.</p>
+
+      <details class="capa">
+        <summary>Qué se declara en cada touchpoint <span class="capa-pista">· y por qué por duplicado</span></summary>
+        <p>A cada touchpoint le asignas su tipo dentro de la taxonomía T1–T9, las competencias que trabaja, su peso aproximado en la nota y las evidencias que vas a recoger. Después estimas la dedicación en cuatro fases —diseño, ejecución, corrección y retroalimentación—.</p>
+        <p>Y lo haces <strong>por duplicado</strong>: una columna con la línea base de cómo trabajas hoy y otra con la hipótesis de cómo cambiaría si integras IA. No es burocracia: es lo que permite que en el Sprint 2 puedas comparar la hipótesis con el tiempo realmente medido, en vez de quedarte con la impresión de que fue mejor o peor.</p>
+      </details>
+
       <div class="tool-card">
         <div class="body">
           <div class="meta">XLSX · 10 hojas · 2–3 sesiones</div>
           <h3>Plantilla del plan operativo</h3>
-          <p>La pieza principal del Sprint 1. Está pensada para rellenarse en tramos, no del tirón.</p>
+          <p>La pieza principal del Sprint 1. Pensada para rellenarse en tramos, no del tirón.</p>
         </div>
         <div class="actions">
           <a href="/downloads/sprint-1/plantilla-plan-operativo.xlsx" class="btn primary small" download>Descargar XLSX</a>
         </div>
       </div>
       <div class="callout info">
-        Si te bloqueas en una hoja, vuelve al Recorrido guiado. Está indexado por hoja para que no tengas que releerlo entero.
+        Si te bloqueas en una hoja, vuelve al Recorrido guiado: está indexado por hoja para que no tengas que releerlo entero.
       </div>
       <div class="checkbox" data-sprint="sprint_1" data-step="paso_1" style="margin-top: var(--sp-4);">
         <div class="box"></div>
@@ -139,38 +141,50 @@
 
     <div class="step-block">
       <div class="step-num">Paso 2 · 10–15 min</div>
-      <h3>Abre el Panel del plan operativo y sube tu Plantilla</h3>
-      <p>El Panel es una pequeña web que lee tu Plantilla XLSX y te devuelve <strong>dos vistas generadas automáticamente</strong>. La primera es el Blueprint, una matriz de touchpoints por dimensiones que recoge cuándo ocurre cada uno, quién es responsable, la carga docente en línea base y con IA, la carga del estudiante, la política de IA y las prácticas con IA que has declarado. La segunda es el Calendario semanal, con dos heatmaps apilados: la carga del estudiante (Lente 2) arriba y la carga docente (Lente 1) abajo, ambas con una distribución realista en las semanas previas y posteriores a cada touchpoint y con la lectura de su propio umbral de pico. Un toggle en cabecera te permite alternar el escenario docente entre línea base e hipótesis con IA. De este modo te ahorras el doble volcado que antes había que hacer a mano: lo único que mantienes tú es tu Plantilla.</p>
-      <p>La primera vez que abres el Panel verás el <strong>ejemplo IngeSoft</strong> precargado para que te orientes. Arriba a la derecha tienes un botón para subir tu propia Plantilla, aunque también puedes arrastrarla directamente sobre la página. Tus datos se guardan en tu navegador; no se sube nada a ningún servidor.</p>
+      <h3>Sube tu Plantilla al Panel</h3>
+      <p>El Panel lee tu XLSX y devuelve dos vistas: el <strong>Blueprint</strong> y el <strong>Calendario semanal</strong>. Nada sale de tu navegador.</p>
+
+      <details class="capa">
+        <summary>Qué hay exactamente en cada vista <span class="capa-pista">· y qué son las semanas C1, C2 y C3</span></summary>
+        <p><strong>Blueprint.</strong> Una matriz de touchpoints por dimensión: cuándo ocurre cada uno, quién es responsable, la carga docente en línea base y con IA, la carga del estudiante, la política de IA y las prácticas con IA que has declarado.</p>
+        <p><strong>Calendario semanal.</strong> Dos mapas de calor apilados —la carga del estudiante arriba (Lente 2) y la carga docente abajo (Lente 1)—, cada uno con su umbral de pico. Un conmutador en cabecera alterna el escenario docente entre línea base e hipótesis con IA.</p>
+        <p>El calendario dibuja <strong>tres columnas más que semanas tiene tu cuatrimestre</strong>, rotuladas C1, C2 y C3. Son las semanas de cierre: la corrección de un examen de la semana 15 ocurre de verdad, y suele ser el trabajo más duro del semestre. Antes esas horas se descartaban en silencio o se apilaban en la última semana; ahora se ven donde ocurren.</p>
+      </details>
+
       <div class="tool-card">
         <div class="body">
           <div class="meta">Web interactiva · sin instalación</div>
           <h3>Panel del plan operativo</h3>
-          <p>Sube tu Plantilla XLSX y el Panel genera Blueprint + Calendario al instante. Sustituye a las dos piezas estáticas de la iteración anterior (Blueprint PDF y Calendario XLSX manual).</p>
+          <p>Genera Blueprint y Calendario al instante. La primera vez trae el ejemplo IngeSoft cargado.</p>
         </div>
         <div class="actions">
           <a href="/downloads/sprint-1/panel-plan-operativo.html" class="btn primary small" target="_blank">Abrir Panel</a>
         </div>
       </div>
       <div class="callout info">
-        Si cambias algo en tu Plantilla, vuelve a subirla y el Panel se reconstruye. El Panel es derivado: la verdad sigue en tu XLSX.
+        El Panel es derivado: la verdad sigue en tu XLSX. Puedes arrastrar el fichero directamente sobre la página.
       </div>
       <div class="checkbox" data-sprint="sprint_1" data-step="paso_2" style="margin-top: var(--sp-4);">
         <div class="box"></div>
-        <div class="label">He abierto el Panel del plan operativo con mi Plantilla cargada</div>
+        <div class="label">He abierto el Panel con mi Plantilla cargada</div>
       </div>
     </div>
 
     <div class="step-block">
       <div class="step-num">Paso 3 · 20 min</div>
       <h3>Lee las tres lentes de factibilidad</h3>
-      <p>La Plantilla calcula automáticamente tres lentes de factibilidad a partir de tus estimaciones:</p>
-      <ul>
-        <li><strong>Lente 1 · Carga docente.</strong> ¿Las horas que acabas dedicando tú como docente caben razonablemente en tu semana real? Se calcula contra la dedicación promedio que declaras al inicio (10 h/sem por defecto) y con el umbral de pico que tú mismo fijas (15 h/sem por defecto, factor 1,5×). El Panel marca cualquier semana que supere ese umbral.</li>
-        <li><strong>Lente 2 · Carga del estudiante.</strong> ¿Las horas que le estás pidiendo al estudiante caben en las horas de dedicación que su ECTS le asigna a la asignatura? Se calcula contra el presupuesto total ECTS y contra el umbral de pico estudiante (12 h/sem por defecto, factor 1,2×).</li>
-        <li><strong>Lente 3 · Balance formativa/sumativa.</strong> ¿La evaluación acompaña al estudiante durante el cuatrimestre o acaba midiendo el aprendizaje solamente al final?</li>
-      </ul>
-      <p>Si alguna lente sale en rojo, lo razonable es revisarla y ajustar la plantilla antes de avanzar al Sprint 2.</p>
+      <p>Viven en tu Plantilla, en sus propias hojas, y se calculan solas. Si alguna sale en rojo, ajusta antes de avanzar.</p>
+
+      <details class="capa">
+        <summary>Qué pregunta cada lente <span class="capa-pista">· y con qué umbrales</span></summary>
+        <ul>
+          <li><strong>Lente 1 · Carga docente.</strong> ¿Las horas que acabas dedicando tú caben en tu semana real? Se calcula contra la dedicación promedio que declaras al inicio —10 h/sem por defecto— y contra el umbral de pico que tú fijas —15 h/sem, factor 1,5×—. El Panel marca las semanas que lo superan.</li>
+          <li><strong>Lente 2 · Carga del estudiante.</strong> ¿Lo que le pides cabe en las horas que su ECTS asigna a la asignatura? Se calcula contra el presupuesto total de ECTS y contra el umbral de pico del estudiante —12 h/sem, factor 1,2×—.</li>
+          <li><strong>Lente 3 · Equilibrio F-S</strong> (formativa / sumativa). ¿La evaluación acompaña al estudiante durante el cuatrimestre, o acaba midiendo el aprendizaje sólo al final?</li>
+        </ul>
+        <p>Los mapas de calor del Panel usan una escala de color fija —tramos de 8-12 h para el estudiante y de 10-15 h para el docente—; lo que sí se ajusta a tu umbral declarado es el marcado de las semanas de pico.</p>
+      </details>
+
       <div class="checkbox" data-sprint="sprint_1" data-step="paso_3" style="margin-top: var(--sp-4);">
         <div class="box"></div>
         <div class="label">He leído las tres lentes y mi plan está en verde o ámbar razonable</div>
@@ -185,15 +199,26 @@
       </div>
     </div>
 
+    <details class="capa">
+      <summary>Qué te llevas del Sprint 1 <span class="capa-pista">· tres piezas conectadas</span></summary>
+      <ul>
+        <li><strong>Tu Plantilla del plan operativo completa.</strong> Tu hoja de trabajo, con todos los touchpoints descritos, clasificados y estimados. La editas tú, se guarda en tu ordenador y la custodias tú.</li>
+        <li><strong>El Panel, con tu plan cargado.</strong> Blueprint y calendario semanal, derivados de la Plantilla. No se rellena a mano: se regenera cada vez que subes una versión nueva.</li>
+        <li><strong>La lectura de las tres lentes.</strong> Carga docente, carga del estudiante y equilibrio formativa/sumativa, en las hojas correspondientes de tu Plantilla.</li>
+      </ul>
+    </details>
+
+    <div id="siguiente-paso" hidden></div>
+
     <h2>Qué viene después</h2>
-    <p>El Sprint 2 empieza cuando arranca el cuatrimestre con tus estudiantes. Hasta entonces, tu Plantilla y el Panel del plan operativo son las dos herramientas de preparación que tienes a mano. El Sprint 2 se abre con el arranque del cuatrimestre, en septiembre de 2026.</p>
+    <p>El Sprint 2 empieza cuando arranca el cuatrimestre con tus estudiantes, en septiembre de 2026. Hasta entonces, tu Plantilla y el Panel son las dos herramientas de preparación que tienes a mano.</p>
     <a href="/sprint-2" class="btn outline">Ver alcance del Sprint 2 →</a>
 
   </main>
 
   <footer>
     <div class="shell">
-      <div>© 2026 · Rediseña.Evaluacion · Un kit de <a href="https://eutika.com/" target="_blank" rel="noopener">Eutika</a></div>
+      <div>© 2026 · Rediseña.Evaluacion · Un kit de <a href="https://eutika.com/" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>Eutika</a></div>
       <div>Contenidos CC BY-SA 4.0 · Código MIT</div>
     </div>
   </footer>

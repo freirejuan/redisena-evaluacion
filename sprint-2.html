@@ -7,14 +7,12 @@
   <meta name="description" content="Sprint 2 del kit: pilotaje del diseño con estudiantes durante un cuatrimestre, con observación ligera por touchpoint y cierre con informe. Disponible en septiembre de 2026, con el arranque del cuatrimestre.">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">  <link rel="stylesheet" href="/assets/css/fuentes.v1.css">
   <link rel="stylesheet" href="/assets/css/styles.v2.css">
 </head>
 <body data-page="sprint-2">
+
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
   <header class="site">
     <div class="shell">
@@ -22,7 +20,7 @@
         <span class="brand-name">Rediseña<span class="dot">.</span>Evaluacion</span>
         <span class="brand-attrib">Un kit de Eutika</span>
       </a>
-      <nav class="primary">
+      <nav class="primary" aria-label="Principal">
         <a href="/">Inicio</a>
         <a href="/proceso" class="active">El proceso</a>
         <a href="/kit">Kit</a>
@@ -32,7 +30,7 @@
     </div>
   </header>
 
-  <div class="status-strip">
+  <section class="status-strip" aria-label="Tu progreso en el kit">
     <div class="shell">
       <div class="info">
         <div class="info-item">
@@ -45,47 +43,153 @@
         </div>
       </div>
       <div class="actions">
+        <button class="btn ghost small" data-action="detalle" aria-pressed="false">Ver todo el detalle</button>
         <button class="btn ghost small" data-action="export">Descargar progreso</button>
         <button class="btn ghost small" data-action="import">Cargar progreso</button>
         <button class="btn ghost small" data-action="reset">Reiniciar</button>
       </div>
     </div>
-  </div>
+  </section>
 
-  <main>
+  <main id="contenido" tabindex="-1">
 
     <div class="breadcrumb"><a href="/">Inicio</a> / <a href="/proceso">El proceso</a> / Sprint 2</div>
 
     <div class="hero">
-      <span class="chip">Sprint 2 · septiembre 2026</span>
+      <span class="chip">Sprint 2</span>
       <h1>Pilotaje con estudiantes y mejora del diseño</h1>
-      <p>El tercer sprint se vive con tus estudiantes en el aula a lo largo de un cuatrimestre completo. Implementas el plan que cerraste en el Sprint 1 y vas recogiendo señales ligeras en cada touchpoint; a medida que avanza el curso, recalibras las hipótesis con IA a partir de los tiempos que vas midiendo de verdad. Al final del cuatrimestre cierras con una versión mejorada del diseño, lista para la siguiente edición de la asignatura.</p>
+      <p>El tercer sprint se vive con tus estudiantes, a lo largo de un cuatrimestre completo. Implementas el plan del Sprint 1, observas qué ocurre con tres instrumentos ligeros y recalibras tus hipótesis con los tiempos que mides de verdad. Al cerrar tienes un informe de pilotaje y una versión mejorada del diseño.</p>
+      <div class="hero-meta">
+        <div><strong>Duración</strong>Un cuatrimestre</div>
+        <div><strong>Pieza principal</strong>Cuaderno de pilotaje</div>
+        <div><strong>Estado</strong><span id="sprint-2-state">Próximamente</span></div>
+      </div>
+      <div class="progress-bar" style="margin-top: var(--sp-5);"><div class="fill" id="sprint-2-progress" style="width: 0%;"></div></div>
     </div>
 
-    <h2>La lógica del sprint</h2>
-    <p>El Sprint 2 no se plantea como un ciclo reflexivo a posteriori, sino como un pilotaje en vivo con tres capas de observación que se activan en momentos distintos del cuatrimestre:</p>
-    <ul>
-      <li><strong>Observación por touchpoint.</strong> Al cerrar cada touchpoint evaluativo te tomas unos minutos para registrar qué pasó: el tiempo real que has dedicado, las incidencias que hayan surgido y las señales que te ha devuelto el grupo. Esta capa se integra directamente en la propia Plantilla del plan operativo.</li>
-      <li><strong>Retrospectivas puntuales.</strong> Dos o tres momentos de parada a lo largo del cuatrimestre (habitualmente tras la primera entrega, en el ecuador y al cierre) en los que te haces unas preguntas breves a ti y al grupo.</li>
-      <li><strong>Cierre global.</strong> Al acabar el cuatrimestre, un informe de pilotaje que sintetiza qué ha funcionado, qué habría que ajustar, cómo recalibrar las hipótesis con IA y qué partes del Canvas y del Blueprint conviene revisar.</li>
-    </ul>
+    <div class="en-corto">
+      <p><strong>En corto.</strong> Eliges tres instrumentos de observación —uno de lo que ves en el aula, uno de lo que dicen tus estudiantes y uno de los datos que tu asignatura ya produce—, los sostienes catorce semanas y paras dos veces a leer lo que has recogido. El Cuaderno de pilotaje registra las decisiones y genera el informe.</p>
+    </div>
 
-    <h2>Alcance previsto de las herramientas</h2>
-    <p>Las piezas concretas del Sprint 2 las vamos a construir una vez hayamos validado y mejorado el proceso y el kit de los sprints 0 y 1 con el uso real. Lo que ya sabemos que incluirá el set es:</p>
-    <ul>
-      <li><strong>Un cuaderno de observación por touchpoint</strong>, en formato ligero (2 o 3 minutos por touchpoint) e integrado en la propia Plantilla.</li>
-      <li><strong>Encuestas breves al grupo</strong> en tres momentos del cuatrimestre, diseñadas para no cansar al estudiante.</li>
-      <li><strong>Una guía de lectura de señales</strong> para interpretar lo que emerge del pilotaje sin sobreinterpretar.</li>
-      <li><strong>Una plantilla de informe de cierre</strong> con síntesis estructurada por touchpoint, por lente y por hipótesis con IA.</li>
-      <li><strong>Una plantilla de mejora del diseño</strong>, con registro de ajustes y actualización del Canvas, el Blueprint 0 y la Plantilla del plan operativo para la siguiente edición.</li>
-      <li><strong>Algunas piezas diferidas del Sprint 1</strong> que se activan en esta fase: la Guía de rúbricas, las Plantillas de retroalimentación, el Catálogo expandido T1–T9 y la Ficha autónoma de política IA.</li>
-    </ul>
+    <h2>El trabajo del Sprint 2</h2>
+
+    <div class="step-block">
+      <div class="step-num">Paso 1 · antes de empezar · 45 min</div>
+      <h3>Elige qué vas a observar y escríbelo</h3>
+      <p>Tres instrumentos, no cinco, y escritos antes de que arranque el cuatrimestre. En el Cuaderno se anota también qué esperas que ocurra: sin hipótesis escritas, en enero no hay nada que confirmar ni refutar.</p>
+
+      <details class="capa">
+        <summary>La regla que decide qué eliges <span class="capa-pista">· quince minutos a la semana</span></summary>
+        <p>Si un instrumento te cuesta más de quince minutos a la semana, no lo vas a sostener catorce semanas. Y un instrumento abandonado en la semana seis es peor que no haber empezado: te deja con datos de un tramo y con la sensación de haber fracasado en algo accesorio.</p>
+        <p>Elige tres: uno de lo que ves en el aula, uno de lo que dicen los estudiantes y uno de los datos que tu asignatura ya produce. Con eso se triangula. Con seis instrumentos no se triangula mejor, se abandona antes.</p>
+      </details>
+
+      <div class="tool-card">
+        <div class="body">
+          <div class="meta">HTML · guarda en tu navegador</div>
+          <h3>Cuaderno de pilotaje</h3>
+          <p>Siete apartados que se rellenan a lo largo del cuatrimestre: punto de partida, hipótesis, qué observas, registro de tiempos, las dos lecturas y el cierre. Genera solo el informe de pilotaje.</p>
+        </div>
+        <div class="actions">
+          <a href="/downloads/sprint-2/cuaderno-pilotaje.html" class="btn primary small" target="_blank">Abrir cuaderno</a>
+          <a href="/downloads/sprint-2/cuaderno-pilotaje.html" class="btn outline small" download>Descargar</a>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="body">
+          <div class="meta">HTML · 40 min de lectura, en dos veces</div>
+          <h3>Observar y leer lo que ocurre</h3>
+          <p>Los cinco instrumentos con sus ejemplos rellenos y el calendario mínimo; y, para más adelante, cómo distinguir una señal del ruido y qué se puede tocar a mitad de cuatrimestre sin romper nada.</p>
+        </div>
+        <div class="actions">
+          <a href="/downloads/sprint-2/guia-observar-y-leer.html" class="btn primary small" target="_blank">Leer online</a>
+        </div>
+      </div>
+      <div class="checkbox" data-sprint="sprint_2" data-step="paso_1" style="margin-top: var(--sp-4);">
+        <div class="box"></div>
+        <div class="label">He elegido mis tres instrumentos y escrito mis hipótesis</div>
+      </div>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num">Paso 2 · durante el cuatrimestre · 15 min/semana</div>
+      <h3>Observa, registra tiempos y lee a mitad de cuatrimestre</h3>
+      <p>Los instrumentos se usan de la semana 3 en adelante —la 1 y la 2 sólo miden el desconcierto inicial— y a mitad de cuatrimestre se paran cuarenta minutos a leer lo recogido, en una sola sentada y con todo delante.</p>
+
+      <details class="capa">
+        <summary>Qué convierte una observación en señal <span class="capa-pista">· tres pruebas</span></summary>
+        <p><strong>¿Se repite?</strong> Aparece en más de un momento o en más de una fuente. Un comentario aislado no es una señal, por muy bien dicho que esté.</p>
+        <p><strong>¿Es específica?</strong> Se puede señalar qué la produce: una actividad, un enunciado, una semana concreta. «La asignatura es dura» no es específica; «el enunciado de la entrega 2 no dejaba claro el formato» sí.</p>
+        <p><strong>¿Te sorprende?</strong> Si sólo confirma lo que ya creías, probablemente estás viendo lo que buscabas. Lo que no encaja con tu hipótesis es lo que más información contiene.</p>
+        <p>Las tres: es una señal. Dos: merece más observación. Una: es ruido. El Cuaderno lo calcula por ti al marcarlas.</p>
+      </details>
+
+      <details class="capa">
+        <summary>Qué se puede tocar a mitad de cuatrimestre y qué no <span class="capa-pista">· el criterio no es la gravedad</span></summary>
+        <p>El criterio no es lo grave que sea lo detectado: es si el cambio rompe el acuerdo implícito con el grupo. Tus estudiantes organizaron su semestre con las reglas que les diste en septiembre.</p>
+        <p><strong>Se puede tocar ahora:</strong> las instrucciones y los enunciados; el andamiaje —una plantilla, un caso resuelto, una lista de comprobación—; el ritmo dentro de la clase; la retroalimentación, darla antes o más específica; y fusionar o aligerar entregas, si el resultado es menos trabajo y no más.</p>
+        <p><strong>Se anota para la próxima edición:</strong> los pesos de la evaluación —cambiarlos en noviembre es lo que más deteriora la confianza del grupo, incluso cuando les favorece—; la secuencia de contenidos ya anunciada; añadir entregas o pruebas no previstas; y cambiar el tipo de examen final.</p>
+        <p>Anotar no es renunciar. Una decisión bien registrada, con la evidencia que la motivó al lado, vale más para el curso siguiente que un cambio precipitado que además contamina lo que estabas midiendo.</p>
+      </details>
+
+      <div class="callout info">
+        Si trabajaste con la Plantilla del plan operativo del Sprint 1, súbela al Cuaderno y el registro de tiempos se rellena solo con lo que estimaste por fase y por touchpoint. Tú sólo anotas lo que ha costado de verdad.
+      </div>
+      <div class="checkbox" data-sprint="sprint_2" data-step="paso_2" style="margin-top: var(--sp-4);">
+        <div class="box"></div>
+        <div class="label">He hecho la lectura de mitad de cuatrimestre</div>
+      </div>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num">Paso 3 · al cerrar · 1–2 h</div>
+      <h3>Cierra el pilotaje y genera el informe</h3>
+      <p>Con la docencia terminada, la segunda lectura; con las actas cerradas, los resultados. El informe de pilotaje se genera solo a partir de lo que hayas ido registrando: no hay que volver a escribir nada.</p>
+
+      <details class="capa">
+        <summary>Qué contiene el informe <span class="capa-pista">· seis apartados</span></summary>
+        <ol>
+          <li><strong>Qué probaba.</strong> Tus hipótesis, con su veredicto: confirmada, refutada o todavía no lo sé.</li>
+          <li><strong>Cómo lo he observado.</strong> Los instrumentos elegidos, con su cadencia y su coste.</li>
+          <li><strong>Qué me ha costado.</strong> Estimado frente a real, y dónde se concentra la diferencia.</li>
+          <li><strong>Qué he visto y qué he decidido.</strong> Las señales de las dos lecturas, con su destino.</li>
+          <li><strong>Resultados.</strong> Qué dicen los datos de evaluación y si el diseño es sostenible.</li>
+          <li><strong>Qué hago la próxima vez.</strong> Qué repites, qué cambias, qué abandonas y qué has aprendido sobre la IA en tu trabajo.</li>
+        </ol>
+      </details>
+
+      <div class="checkbox" data-sprint="sprint_2" data-step="paso_3" style="margin-top: var(--sp-4);">
+        <div class="box"></div>
+        <div class="label">He cerrado el pilotaje y tengo mi informe</div>
+      </div>
+    </div>
+
+    <h2>Cierre del Sprint 2</h2>
+    <div class="work-panel">
+      <p style="margin-bottom: var(--sp-3);">Cuando tengas los tres pasos cerrados y tu informe de pilotaje generado, marca el sprint como completado.</p>
+      <div style="margin-top: var(--sp-2);">
+        <button class="btn primary" data-action="complete-sprint" data-sprint="sprint_2">Marcar Sprint 2 como completado</button>
+      </div>
+    </div>
+
+    <div id="siguiente-paso" hidden></div>
+
+    <details class="capa">
+      <summary>Qué se recoge y qué no <span class="capa-pista">· la promesa de privacidad sigue en pie</span></summary>
+      <p>Todo lo que registres en el Cuaderno de pilotaje se queda donde se queda hoy tu trabajo: en tu navegador y en los archivos que tú te descargas. No hay servidor que reciba nada, no hay cuenta, no hay analítica ni telemetría de ningún tipo.</p>
+      <p>Y lo mismo con lo que respondan tus estudiantes: el kit no recoge sus respuestas ni te pide que las subas a ninguna parte. Los instrumentos son de papel, de formulario propio o de conversación; lo que llega al Cuaderno es lo que tú has leído en ellos.</p>
+      <p><a href="/acerca#privacidad">Cómo lo garantizamos →</a></p>
+    </details>
+
+    <h2>Qué viene después</h2>
+    <p>Nada, y esa es la idea: al terminar el Sprint 2 tienes una versión mejorada de tu diseño y la evidencia que la sostiene. Si vuelves al Sprint 0 con ella, la segunda vuelta cuesta una fracción de la primera.</p>
+    <a href="/sprint-0" class="btn outline">Volver al Sprint 0 con lo aprendido →</a>
 
   </main>
 
   <footer>
     <div class="shell">
-      <div>© 2026 · Rediseña.Evaluacion · Un kit de <a href="https://eutika.com/" target="_blank" rel="noopener">Eutika</a></div>
+      <div>© 2026 · Rediseña.Evaluacion · Un kit de <a href="https://eutika.com/" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>Eutika</a></div>
       <div>Contenidos CC BY-SA 4.0 · Código MIT</div>
     </div>
   </footer>

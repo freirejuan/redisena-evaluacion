@@ -7,14 +7,12 @@
   <meta name="description" content="Todas las piezas del kit de rediseño de evaluación, agrupadas por sprint. Plantilla estratégica, Plantilla del plan operativo, Panel del plan operativo y más.">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">  <link rel="stylesheet" href="/assets/css/fuentes.v1.css">
   <link rel="stylesheet" href="/assets/css/styles.v2.css">
 </head>
 <body data-page="kit">
+
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
   <header class="site">
     <div class="shell">
@@ -22,7 +20,7 @@
         <span class="brand-name">Rediseña<span class="dot">.</span>Evaluacion</span>
         <span class="brand-attrib">Un kit de Eutika</span>
       </a>
-      <nav class="primary">
+      <nav class="primary" aria-label="Principal">
         <a href="/">Inicio</a>
         <a href="/proceso">El proceso</a>
         <a href="/kit" class="active">Kit</a>
@@ -32,7 +30,7 @@
     </div>
   </header>
 
-  <div class="status-strip">
+  <section class="status-strip" aria-label="Tu progreso en el kit">
     <div class="shell">
       <div class="info">
         <div class="info-item">
@@ -45,14 +43,15 @@
         </div>
       </div>
       <div class="actions">
+        <button class="btn ghost small" data-action="detalle" aria-pressed="false">Ver todo el detalle</button>
         <button class="btn ghost small" data-action="export">Descargar progreso</button>
         <button class="btn ghost small" data-action="import">Cargar progreso</button>
         <button class="btn ghost small" data-action="reset">Reiniciar</button>
       </div>
     </div>
-  </div>
+  </section>
 
-  <main>
+  <main id="contenido" tabindex="-1">
 
     <div class="breadcrumb"><a href="/">Inicio</a> / Kit</div>
     <span class="chip">Biblioteca</span>
@@ -63,15 +62,18 @@
       Todas las plantillas se descargan y se trabajan en local, bien en el navegador o bien en una hoja de cálculo. La web no guarda nada de tu contenido; lo único que guarda es tu progreso de proceso (qué pasos tienes marcados), y lo hace en tu propio navegador y en un formato que puedes descargar cuando quieras.
     </div>
 
-    <h2>Tipos de piezas del kit</h2>
-    <p>El kit combina cinco tipos de pieza, pensados para que no tengas que diseñar nada desde cero:</p>
-    <ul>
-      <li><strong>Guías de fondo</strong>: textos que explican por qué el kit te pide lo que te pide. Las cuatro decisiones estratégicas, los siete componentes del Blueprint y los tres estados con los que se cierra cada sprint.</li>
-      <li><strong>Plantillas listas para usar</strong>: la Plantilla estratégica, un HTML autocontenido que genera el Canvas y una primera versión del Blueprint; la Plantilla del plan operativo, un XLSX con diez hojas conectadas entre sí; y el Panel del plan operativo, una pequeña web que lee tu Plantilla y te devuelve el Blueprint completo y el Calendario semanal.</li>
-      <li><strong>Ejemplos pre-rellenados</strong> de cada plantilla, para que no arranques ante una hoja en blanco y puedas ver a dónde se llega antes de ponerte tú a trabajar.</li>
-      <li><strong>Recorridos guiados</strong> que recorren hoja por hoja las plantillas más complejas y explican qué hacer en cada columna y por qué.</li>
-      <li><strong>Un kit de onboarding</strong> que deja usando la Plantilla del plan operativo con soltura en unos 20 minutos, sin tener que descifrar por tu cuenta toda su estructura.</li>
-    </ul>
+    <details class="capa">
+      <summary>Los cinco tipos de pieza <span class="capa-pista">· qué es cada cosa</span></summary>
+      <ul>
+        <li><strong>Guías de fondo</strong>: textos que explican por qué el kit te pide lo que te pide. Las cuatro decisiones estratégicas, los siete componentes de la evaluación y cómo se lee un Blueprint.</li>
+        <li><strong>Plantillas listas para usar</strong>: la Plantilla estratégica —HTML autocontenido que genera el Canvas y el Blueprint 0—; la Plantilla del plan operativo —XLSX de diez hojas conectadas—; y el Panel del plan operativo, que lee esa Plantilla y devuelve Blueprint y calendario.</li>
+        <li><strong>Ejemplos pre-rellenados</strong>, para no arrancar ante una hoja en blanco y ver a dónde se llega.</li>
+        <li><strong>Recorridos guiados</strong> hoja por hoja de las plantillas más complejas.</li>
+        <li><strong>Un kit de onboarding</strong> que deja usando la Plantilla del plan operativo con soltura en unos veinte minutos.</li>
+      </ul>
+    </details>
+
+    <div id="siguiente-paso" hidden></div>
 
     <h2>Sprint 0 · Decisiones estratégicas</h2>
 
@@ -79,7 +81,7 @@
       <div class="body">
         <div class="meta">HTML autocontenido · pieza principal</div>
         <h3>Plantilla estratégica</h3>
-        <p>Cinco bloques de trabajo por los que vas pasando en orden: estado actual, las cuatro decisiones estratégicas (D1–D4), intensidad de los siete componentes, cierre cuantitativo y, al final, el Canvas y el Blueprint 0 generados automáticamente. Se abre en el navegador sin necesidad de instalar nada.</p>
+        <p>Seis pasos en orden: ficha de la asignatura, arquetipos de tu aula, la foto de lo que haces hoy, las cuatro decisiones (D1–D4), tus touchpoints con sus dimensiones y el resumen. Genera solo el Canvas y el Blueprint 0. Admite además varios escenarios de la misma asignatura, con vista de comparación, y trae cinco asignaturas de ejemplo de modelos pedagógicos distintos.</p>
       </div>
       <div class="actions">
         <a href="/downloads/sprint-0/plantilla-estrategica.html" class="btn ghost small" target="_blank">Abrir</a>
@@ -91,7 +93,7 @@
       <div class="body">
         <div class="meta">HTML · marco conceptual</div>
         <h3>Guía estratégica</h3>
-        <p>La explicación extendida de las cuatro decisiones, los siete componentes de evaluación, los arquetipos de asignatura que hemos identificado y los tres estados con los que se cierra el sprint. Es la lectura de fondo que da sustento a la Plantilla estratégica.</p>
+        <p>La explicación extendida de las cuatro decisiones, los siete componentes de la evaluación, los arquetipos de estudiante y dos ejemplos resueltos de extremo a extremo. Es la lectura de fondo de la Plantilla estratégica.</p>
       </div>
       <div class="actions">
         <a href="/downloads/sprint-0/guia-estrategica.html" class="btn ghost small" target="_blank">Leer online</a>
@@ -101,9 +103,9 @@
 
     <div class="tool-card">
       <div class="body">
-        <div class="meta">HTML · 5 min de lectura</div>
+        <div class="meta">HTML · 15–20 min de lectura</div>
         <h3>Mini-guía de pre-trabajo</h3>
-        <p>Un encuadre breve que te conviene leer antes de abrir la Plantilla estratégica. Incluye un mapa de la plantilla y un resumen de las decisiones que vas a cerrar en este sprint.</p>
+        <p>Cuatro pasos de preparación y un mapa de los seis pasos de la Plantilla. Lo más corto que puedes leer antes de abrirla.</p>
       </div>
       <div class="actions">
         <a href="/downloads/sprint-0/mini-guia-pretrabajo.html" class="btn primary small" target="_blank">Leer online</a>
@@ -127,10 +129,12 @@
       <div class="body">
         <div class="meta">Paquete · 3 piezas · 20 min</div>
         <h3>Kit de onboarding de la Plantilla</h3>
-        <p>Tres piezas que van juntas: una Guía breve en HTML (10-15 min de lectura), la Plantilla EJEMPLO pre-rellenada con el caso IngeSoft (en XLSX) y un Recorrido guiado hoja por hoja (HTML, 5-7 min). Conviene recorrerlas antes de abrir la Plantilla en blanco, para no tener que descifrar su estructura sobre la marcha.</p>
+        <p>Tres piezas que van juntas y conviene recorrer antes de abrir la Plantilla en blanco: la Guía breve (10–15 min), la Plantilla EJEMPLO con el caso IngeSoft y el Recorrido guiado hoja por hoja (5–7 min).</p>
       </div>
       <div class="actions">
-        <a href="/sprint-1#onboarding" class="btn outline small">Ver paquete</a>
+        <a href="/downloads/sprint-1/guia-breve.html" class="btn ghost small" target="_blank">Guía breve</a>
+        <a href="/downloads/sprint-1/plantilla-ejemplo-ingesoft.xlsx" class="btn outline small" download>Ejemplo XLSX</a>
+        <a href="/downloads/sprint-1/walkthrough.html" class="btn ghost small" target="_blank">Recorrido</a>
       </div>
     </div>
 
@@ -138,7 +142,7 @@
       <div class="body">
         <div class="meta">Web interactiva · sin instalación</div>
         <h3>Panel del plan operativo</h3>
-        <p>Una pequeña web que lee tu Plantilla XLSX y te devuelve automáticamente el <strong>Blueprint</strong> (una matriz de touchpoints por dimensiones) y el <strong>Calendario semanal</strong> (un heatmap de carga del estudiante). Arranca con el ejemplo IngeSoft precargado para que puedas curiosear antes de subir la tuya. Todo se guarda en tu navegador y nada se sube a ningún servidor.</p>
+        <p>Lee tu Plantilla XLSX y devuelve el <strong>Blueprint</strong> —matriz de touchpoints por dimensión— y el <strong>Calendario semanal</strong>, con dos mapas de calor apilados (carga del estudiante y carga docente) y conmutador entre línea base e hipótesis con IA. El calendario añade tres semanas de cierre, C1 a C3, para que la corrección posterior al final de la docencia no se pierda. Arranca con el ejemplo IngeSoft cargado. Nada se sube a ningún servidor.</p>
       </div>
       <div class="actions">
         <a href="/downloads/sprint-1/panel-plan-operativo.html" class="btn primary small" target="_blank">Abrir Panel</a>
@@ -146,13 +150,36 @@
     </div>
 
     <h2>Sprint 2 · Pilotaje</h2>
-    <p style="color: var(--gris-500);">Próximamente. Las herramientas aparecerán aquí en cuanto tengamos recorrido suficiente con los sprints 0 y 1 y podamos terminarlas con lo aprendido.</p>
+
+    <div class="tool-card">
+      <div class="body">
+        <div class="meta">HTML · pieza principal · guarda en tu navegador</div>
+        <h3>Cuaderno de pilotaje</h3>
+        <p>Siete apartados que se rellenan a lo largo del cuatrimestre: punto de partida, hipótesis, qué observas, registro de tiempos, las dos lecturas y el cierre. Sube tu Plantilla del plan operativo y el registro de tiempos se rellena solo con lo que estimaste. Genera el informe de pilotaje sin que tengas que reescribir nada.</p>
+      </div>
+      <div class="actions">
+        <a href="/downloads/sprint-2/cuaderno-pilotaje.html" class="btn primary small" target="_blank">Abrir</a>
+        <a href="/downloads/sprint-2/cuaderno-pilotaje.html" class="btn outline small" download>Descargar</a>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <div class="body">
+        <div class="meta">HTML · 2 × 20 min de lectura</div>
+        <h3>Observar y leer lo que ocurre</h3>
+        <p>Los cinco instrumentos de observación con sus ejemplos rellenos, la regla para elegir tres y el calendario mínimo de catorce semanas. Y una segunda parte, para más adelante: qué convierte una observación en señal, los diez patrones que más se repiten y qué se puede tocar a mitad de cuatrimestre sin romper el acuerdo con el grupo.</p>
+      </div>
+      <div class="actions">
+        <a href="/downloads/sprint-2/guia-observar-y-leer.html" class="btn primary small" target="_blank">Leer online</a>
+        <a href="/downloads/sprint-2/guia-observar-y-leer.html" class="btn outline small" download>Descargar HTML</a>
+      </div>
+    </div>
 
   </main>
 
   <footer>
     <div class="shell">
-      <div>© 2026 · Rediseña.Evaluacion · Un kit de <a href="https://eutika.com/" target="_blank" rel="noopener">Eutika</a></div>
+      <div>© 2026 · Rediseña.Evaluacion · Un kit de <a href="https://eutika.com/" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>Eutika</a></div>
       <div>Contenidos CC BY-SA 4.0 · Código MIT</div>
     </div>
   </footer>

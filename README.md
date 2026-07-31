@@ -42,14 +42,17 @@ Detalle completo en [DECISIONES_TECNICAS.md](./DECISIONES_TECNICAS.md).
 ├── proceso.html                 El proceso en tres sprints
 ├── sprint-0.html                Sprint 0 · Decisiones estratégicas
 ├── sprint-1.html                Sprint 1 · Plan de acción
-├── sprint-2.html                Sprint 2 · Pilotaje (desde septiembre de 2026)
+├── sprint-2.html                Sprint 2 · Pilotaje
 ├── kit.html                     Kit de herramientas
 ├── documentacion.html           Glosario y FAQ
 ├── acerca.html                  Sobre el proyecto
 │
 ├── assets/
-│   ├── css/styles.v2.css        Sistema de Diseño UC3M IMPULSO
-│   └── js/app.v2.js             Estado, localStorage, interacciones
+│   ├── css/styles.v2.css        Sistema de diseño
+│   ├── css/fuentes.v1.css       @font-face de las tres familias
+│   ├── js/app.v2.js             Estado, localStorage, capas, guiado
+│   ├── fonts/                   19 woff2, subconjunto latino (SIL OFL 1.1)
+│   └── vendor/                  SheetJS CE (Apache-2.0) + su licencia
 │
 ├── downloads/                   Piezas descargables del kit, por sprint
 │
@@ -100,12 +103,14 @@ Detalle completo: [DECISIONES_TECNICAS.md § 5](./DECISIONES_TECNICAS.md).
 
 Verificado contra el código el 31 de julio de 2026. Lo que sigue abierto:
 
-- [ ] **Publicar las piezas del Sprint 2** en `downloads/sprint-2/`. Las de los sprints 0 y 1 ya están.
 - [ ] **Decidir qué se hace con la reserva de sesión 1:1.** Hoy no existe ni el botón ni la integración, y conviene decidir antes si tiene sitio en un kit reutilizable o si es acompañamiento propio de cada implantación.
-- [ ] **Auditoría de accesibilidad y rendimiento** (Lighthouse + axe). Los pasos marcables ya son operables con teclado; falta pasar la revisión completa.
+- [ ] **Una prueba con lector de pantalla real** (VoiceOver o NVDA, con una persona usándolo). La comprobación automática verifica que la información esté ahí, no que la experiencia sea buena.
 
 Resueltos:
 
+- [x] ~~Publicar las piezas del Sprint 2~~ — publicadas el 31 de julio de 2026: `cuaderno-pilotaje.html` y `guia-observar-y-leer.html`. El Sprint 2 deja de estar «próximamente» y tiene sus tres pasos marcables como los otros dos.
+- [x] ~~Auditoría de accesibilidad~~ — las quince piezas pasan axe-core (WCAG 2.0 A/AA, 2.1 A/AA y buenas prácticas) sin incumplimientos, incluidas las vistas que sólo existen al usarlas.
+- [x] ~~Dependencias de terceros~~ — retiradas el 31 de julio de 2026. Tipografías y SheetJS se sirven desde el propio dominio y una `Content-Security-Policy` impide al navegador cargar cualquier recurso externo, abrir conexiones fuera del dominio o enviar formularios a ninguna parte.
 - [x] ~~Retirar el panel *Simular estado del profesor*~~ — no existe en el código: ni el panel ni `demo-controls.js`. El pendiente estaba caducado.
 - [x] ~~Poblar `downloads/` con las piezas reales~~ — poblado para los sprints 0 y 1 desde el 22 de abril de 2026, y es la fuente canónica de las piezas.
 - [x] ~~Decidir analytics~~ — **decidido: sin analítica ni telemetría.** La promesa del kit es anonimato total para el profesor; el estado vive en su navegador y se exporta como JSON que él controla. Revisable en el futuro, no pendiente de resolver.

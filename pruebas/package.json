@@ -1,0 +1,16 @@
+{
+  "name": "redisena-evaluacion-pruebas",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Batería de comprobación del kit Rediseña.Evaluacion: accesibilidad, comportamiento y privacidad.",
+  "scripts": {
+    "servidor": "node servidor.js",
+    "todo": "bash todo.sh"
+  },
+  "devDependencies": {
+    "axe-core": "^4.10.0",
+    "playwright": "1.56.0",
+    "xlsx": "^0.18.5"
+  },
+  "license": "MIT"
+}

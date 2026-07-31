@@ -4,18 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guía estratégica · Rediseño de la evaluación</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Tipografías servidas desde el propio kit. Antes se pedían a Google, que
+     recibía la IP de cada profesor que abriese esta pieza. Si guardas este
+     archivo en tu equipo y lo abres sin conexión, el texto se ve igual con las
+     tipografías del sistema: no se pierde nada. -->
+<link rel="stylesheet" href="/assets/css/fuentes.css">
 <style>
 :root {
   --azul-reflex:#171796; --azul-deep:#0F0F6B; --azul-mid:#3A3AB8;
   --azul-light:#6868D4; --azul-pale:#E8E8F7; --azul-ghost:#F2F2FB;
   --white:#FFFFFF; --gris-claro:#F7F6F6; --gris-100:#EFEFEF;
   --gris-200:#E0E0E0; --gris-300:#C4C4C4; --gris-400:#9E9E9E;
-  --gris-500:#757575; --gris-600:#545454; --gris-700:#3A3A3A;
+  --gris-500:#6B6B6B; --gris-600:#545454; --gris-700:#3A3A3A;
   --ink:#1A1A1A; --ink-soft:#4A4A4A;
-  --acento-teal:#1A9E7A; --acento-teal-pale:#E6F7F1;
+  --acento-teal:#1A9E7A;
+  /* Variantes oscurecidas para TEXTO. Los acentos de marca se mantienen para
+     fondos, bordes y superficies; en texto pequeño no llegaban a 4,5:1. */
+  --texto-teal:#0F6F55;
+  --texto-coral:#B81F1F;
+  --texto-ambar:#8A5A00;
+ --acento-teal-pale:#E6F7F1;
   --acento-amber:#E8A317; --acento-amber-pale:#FFF7E6;
   --acento-coral:#E05555; --acento-coral-pale:#FDECEC;
   --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
@@ -54,6 +62,10 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 .section strong{color:var(--ink);font-weight:600;}
 .section em{color:var(--gris-600);}
 .section h3{font-family:var(--sans);font-size:var(--text-md);font-weight:700;color:var(--ink);margin:var(--sp-8) 0 var(--sp-3);padding-bottom:6px;border-bottom:2px solid var(--azul-reflex);display:inline-block;}
+/* Estos titulares eran h4/h5 colgando directamente de un h2: el salto de
+   nivel dejaba fuera de la lista a quien navega por encabezados. Pasan a h3
+   y aquí se les quita el subrayado que .section h3 aplica a los de sección. */
+.principle h3,.card h3,.signpost h3,.numbered li>h3,.journey-node h3{display:block;border-bottom:none;padding-bottom:0;margin:0;}
 .section h4{font-family:var(--sans);font-size:var(--text-base);font-weight:700;color:var(--azul-reflex);margin:var(--sp-5) 0 var(--sp-2);}
 
 .cover{background:linear-gradient(135deg,var(--azul-reflex) 0%,var(--azul-deep) 100%);color:#fff;padding:80px 48px 56px;margin:0 -24px;position:relative;overflow:hidden;}
@@ -94,7 +106,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 
 .badge{display:inline-flex;align-items:center;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 12px;border-radius:var(--radius-pill);margin-right:6px;}
 .badge.primary{background:var(--azul-pale);color:var(--azul-reflex);}
-.badge.teal{background:var(--acento-teal-pale);color:var(--acento-teal);}
+.badge.teal{background:var(--acento-teal-pale);color:var(--texto-teal);}
 .badge.amber{background:var(--acento-amber-pale);color:#7A5200;}
 .badge.neutral{background:var(--gris-100);color:var(--gris-600);}
 
@@ -107,10 +119,14 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 .numbered li{counter-increment:num;display:grid;grid-template-columns:52px 1fr;gap:var(--sp-4);padding:var(--sp-4) 0;border-bottom:1px solid var(--gris-200);}
 .numbered li:last-child{border-bottom:none;}
 .numbered li::before{content:counter(num,decimal-leading-zero);font-family:var(--serif);font-size:var(--text-2xl);font-weight:700;color:var(--azul-light);line-height:1;grid-column:1;grid-row:1;}
-.numbered li > h4{grid-column:2;grid-row:1;margin:0 0 4px;font-size:var(--text-base);color:var(--ink);font-weight:700;}
+.numbered li > h3,.numbered li > h4{grid-column:2;grid-row:1;margin:0 0 4px;font-size:var(--text-base);color:var(--ink);font-weight:700;}
 .numbered li > p{grid-column:2;grid-row:2;margin:0;font-size:var(--text-sm);color:var(--gris-600);line-height:1.7;}
 
-.table-wrap{background:var(--white);border-radius:var(--radius-md);box-shadow:var(--shadow-sm);overflow:hidden;margin:var(--sp-5) 0;}
+/* overflow-x:auto y no hidden: a 360 px estas tablas medían 355 px de
+   contenido en 312 px de ancho útil y los 43 px sobrantes se recortaban sin
+   posibilidad de recuperarlos. Ahora la tabla se desplaza dentro de su caja. */
+.table-wrap{background:var(--white);border-radius:var(--radius-md);box-shadow:var(--shadow-sm);overflow-x:auto;margin:var(--sp-5) 0;}
+.table-wrap:focus-visible{outline:3px solid var(--azul-reflex,#0F0F6B);outline-offset:2px;}
 .tbl{width:100%;border-collapse:collapse;font-size:var(--text-sm);}
 .tbl th{background:var(--azul-reflex);color:#fff;padding:12px 16px;text-align:left;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;}
 .tbl td{padding:12px 16px;border-bottom:1px solid var(--gris-100);color:var(--gris-700);vertical-align:top;line-height:1.6;}
@@ -124,14 +140,14 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 .card-accent{height:4px;background:var(--azul-reflex);}
 .card-body{padding:20px 22px;}
 .card-overline{font-size:var(--text-xs);font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--azul-mid);margin-bottom:8px;}
-.card h4{font-family:var(--serif);font-size:var(--text-md);font-weight:600;color:var(--ink);margin-bottom:6px;line-height:1.25;}
+.card h3,.card h4{font-family:var(--serif);font-size:var(--text-md);font-weight:600;color:var(--ink);margin-bottom:6px;line-height:1.25;}
 .card p{font-size:var(--text-sm);color:var(--gris-600);line-height:1.6;margin:0;}
 
 .principles{display:grid;gap:var(--sp-6);margin:var(--sp-6) 0;}
 .principle{display:grid;grid-template-columns:72px 1fr;gap:var(--sp-6);padding:var(--sp-5) 0;border-bottom:1px solid var(--gris-200);}
 .principle:last-child{border-bottom:none;}
 .principle-num{font-family:var(--serif);font-size:var(--text-3xl);font-weight:700;color:var(--azul-light);line-height:1;}
-.principle h4{font-size:var(--text-lg);font-weight:600;color:var(--ink);margin-bottom:6px;font-family:var(--sans);}
+.principle h3,.principle h4{font-size:var(--text-lg);font-weight:600;color:var(--ink);margin-bottom:6px;font-family:var(--sans);}
 .principle p{font-size:var(--text-sm);color:var(--gris-600);line-height:1.75;margin:0;}
 .principle-because{display:block;font-size:var(--text-xs);color:var(--azul-mid);font-weight:600;margin-top:8px;text-transform:uppercase;letter-spacing:0.15em;}
 
@@ -140,12 +156,12 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 .journey-track::before{content:'';position:absolute;top:22px;left:28px;right:28px;height:2px;background:linear-gradient(90deg,var(--azul-pale),var(--azul-reflex),var(--azul-pale));z-index:0;}
 .journey-node{position:relative;z-index:1;text-align:center;}
 .journey-dot{width:44px;height:44px;border-radius:50%;background:var(--azul-reflex);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:var(--text-base);margin:0 auto 12px;box-shadow:0 0 0 6px var(--white),var(--shadow-sm);}
-.journey-node h5{font-family:var(--sans);font-size:var(--text-xs);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--azul-reflex);margin-bottom:6px;}
+.journey-node h3,.journey-node h5{font-family:var(--sans);font-size:var(--text-xs);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--azul-reflex);margin-bottom:6px;}
 .journey-node p{font-size:var(--text-xs);color:var(--gris-600);line-height:1.5;margin:0;}
 
 .signpost{background:var(--azul-reflex);color:#fff;border-radius:var(--radius-lg);padding:var(--sp-6) var(--sp-8);margin:var(--sp-8) 0;display:grid;grid-template-columns:auto 1fr auto;gap:var(--sp-6);align-items:center;}
 .signpost-num{font-family:var(--serif);font-size:var(--text-3xl);font-weight:700;color:rgba(255,255,255,0.45);line-height:1;}
-.signpost h4{font-family:var(--serif);font-size:var(--text-lg);color:#fff;margin-bottom:4px;font-weight:600;}
+.signpost h3,.signpost h4{font-family:var(--serif);font-size:var(--text-lg);color:#fff;margin-bottom:4px;font-weight:600;}
 .signpost p{color:rgba(255,255,255,0.8);font-size:var(--text-sm);margin:0;}
 .signpost strong{color:#fff;font-weight:700;}
 .signpost em{color:rgba(255,255,255,0.9);}
@@ -193,6 +209,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 </nav>
 
 <div class="doc">
+<main id="contenido" tabindex="-1">
 
 <section id="cover" class="cover">
   <div class="cover-inner">
@@ -270,7 +287,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
     <div class="principle">
       <div class="principle-num">01</div>
       <div>
-        <h4>Reforzamos el carácter formativo de la evaluación</h4>
+        <h3>Reforzamos el carácter formativo de la evaluación</h3>
         <p>El rediseño se mide por su capacidad de producir aprendizaje en el estudiante y mejora docente en ti, no por la granularidad del sistema de notas. La función sumativa sigue existiendo, pero deja de ser el único propósito del proceso. Y, en el plano formativo, la retroalimentación no es un añadido: es parte constitutiva del acto evaluativo. Sin retroalimentación, no hay función formativa.</p>
         <span class="principle-because">Por qué · sin esta convicción, el rediseño se reduce a redistribuir porcentajes.</span>
       </div>
@@ -278,7 +295,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
     <div class="principle">
       <div class="principle-num">02</div>
       <div>
-        <h4>La carga de trabajo docente no puede aumentar</h4>
+        <h3>La carga de trabajo docente no puede aumentar</h3>
         <p>Añadir más evaluaciones no es el objetivo: lo es rediseñar los procesos para que sean más útiles para acompañar el aprendizaje. La autoevaluación, la coevaluación y la IA son palancas para sostener este compromiso.</p>
         <span class="principle-because">Por qué · el profesorado ha dejado patente esta necesidad como no negociable.</span>
       </div>
@@ -286,7 +303,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
     <div class="principle">
       <div class="principle-num">03</div>
       <div>
-        <h4>La evaluación es un trayecto, no una suma de hitos</h4>
+        <h3>La evaluación es un trayecto, no una suma de hitos</h3>
         <p>Los momentos evaluativos se diseñan como estaciones conectadas: cada una prepara la siguiente y aprovecha lo que la anterior dejó. Un examen final suelto es un fallo de arquitectura, no una decisión de diseño.</p>
         <span class="principle-because">Por qué · sin conexión entre momentos, la evaluación no acompaña el aprendizaje; solo lo mide a posteriori.</span>
       </div>
@@ -294,7 +311,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
     <div class="principle">
       <div class="principle-num">04</div>
       <div>
-        <h4>La mejora continua de la docencia no es aspiracional, es imprescindible</h4>
+        <h3>La mejora continua de la docencia no es aspiracional, es imprescindible</h3>
         <p>El rediseño incluye explícitamente cómo la información generada por la evaluación alimenta la mejora de tu docencia a lo largo del tiempo (en el mismo curso y en cursos posteriores). Sin ese circuito, la evaluación del aprendizaje queda incompleta.</p>
         <span class="principle-because">Por qué · sin el ciclo de mejora, la evaluación solo mide al estudiante; con él, también mide al diseño.</span>
       </div>
@@ -302,7 +319,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
     <div class="principle">
       <div class="principle-num">05</div>
       <div>
-        <h4>La IA es una herramienta; la decisión es tuya y del estudiante</h4>
+        <h3>La IA es una herramienta; la decisión es tuya y del estudiante</h3>
         <p>La IA puede asistir en la generación de evidencias, el análisis y la retroalimentación, tanto del lado del estudiante como del lado del profesor. Este kit no asume su uso por defecto ni lo rechaza: te pedirá declarar explícitamente qué papel tiene en cada uno de esos planos, y comunicárselo al estudiante desde el primer día.</p>
         <span class="principle-because">Por qué · la ambigüedad sobre el uso de la IA es lo que más desgasta en la práctica.</span>
       </div>
@@ -314,26 +331,26 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   <div class="section-chip">§3 · Marco estratégico</div>
   <h2>La evaluación como trayecto</h2>
   <p class="lead">Diseñar la evaluación como un itinerario de cuatro momentos, cada uno con un propósito distinto y evidencias trazables. No es una secuencia rígida: es una estructura para asegurarte de que ningún propósito queda huérfano.</p>
-  <div class="trayecto">
-    <div class="trayecto-track">
-      <div class="trayecto-node">
-        <div class="trayecto-dot">01</div>
-        <h5>Antes</h5>
+  <div class="journey">
+    <div class="journey-track">
+      <div class="journey-node">
+        <div class="journey-dot">01</div>
+        <h3>Antes</h3>
         <p>Evaluación diagnóstica: qué trae el estudiante, dónde está el punto de partida real, qué esperas que logre.</p>
       </div>
-      <div class="trayecto-node">
-        <div class="trayecto-dot">02</div>
-        <h5>Durante</h5>
+      <div class="journey-node">
+        <div class="journey-dot">02</div>
+        <h3>Durante</h3>
         <p>Evaluación formativa continua: retroalimentación regular, auto y coevaluación, ajuste de la enseñanza en tiempo real.</p>
       </div>
-      <div class="trayecto-node">
-        <div class="trayecto-dot">03</div>
-        <h5>En transiciones</h5>
+      <div class="journey-node">
+        <div class="journey-dot">03</div>
+        <h3>En transiciones</h3>
         <p>Hitos de integración: momentos donde el estudiante demuestra síntesis y tú identificas si el diseño funciona.</p>
       </div>
-      <div class="trayecto-node">
-        <div class="trayecto-dot">04</div>
-        <h5>Al final · y después</h5>
+      <div class="journey-node">
+        <div class="journey-dot">04</div>
+        <h3>Al final · y después</h3>
         <p>Evaluación sumativa + cierre del ciclo de mejora docente: qué se califica y qué aprendizaje queda para la próxima edición.</p>
       </div>
     </div>
@@ -350,7 +367,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   <div class="section-chip">§4 · Usuario doble</div>
   <h2>Tú y tu estudiante</h2>
   <p class="lead">La evaluación tiene dos usuarios que no pueden fundirse en uno solo. Diseñar solo para el profesor produce sistemas burocráticos; diseñar solo para el estudiante produce sistemas complacientes. Este enfoque asume ambos, con sus asimetrías explícitas.</p>
-  <div class="table-wrap">
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Tabla: Tú y tu estudiante (desplazable en horizontal)">
     <table class="tbl">
       <thead><tr><th style="width:22%;">Dimensión</th><th style="width:39%;">Tú · Profesor</th><th style="width:39%;">Tu estudiante</th></tr></thead>
       <tbody>
@@ -400,7 +417,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   </ol>
 
   <h3>Combinaciones recurrentes a vigilar</h3>
-  <div class="table-wrap">
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Tabla: Combinaciones recurrentes a vigilar (desplazable en horizontal)">
     <table class="tbl">
       <thead><tr><th style="width:18%;">Combinación</th><th style="width:44%;">Señal en el aula</th><th style="width:38%;">Qué exige del diseño</th></tr></thead>
       <tbody>
@@ -431,13 +448,13 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
     <div><strong>Cómo se articulan los componentes.</strong><p><strong>C1, Touchpoints, son los momentos donde realmente ocurre la evaluación</strong>: el esqueleto del sistema. Los otros seis (C2 a C7) son las <strong>dimensiones con las que se parametriza cada touchpoint</strong>: si hay autoevaluación o coevaluación, qué rol juega la IA del estudiante, qué criterios y evidencias se producen, qué información se recoge, cómo se retroalimenta y qué alimenta la mejora docente.</p><p>Por eso, al diseñar, no se decide componente por componente en abstracto: se decide <strong>touchpoint por touchpoint</strong>, activando las dimensiones que cada uno requiere. La intensidad de un componente en tu asignatura <em>emerge</em> de cuántos touchpoints lo activan y con qué profundidad, no se declara por separado.</p></div>
   </div>
   <div class="cards">
-    <div class="card"><div class="card-accent"></div><div class="card-body"><div class="card-overline">C1 · Touchpoints</div><h4>Momentos evaluativos · el articulador</h4><p>Hitos distribuidos a lo largo del semestre. Cada uno declara propósito (formativo / sumativo / diagnóstico), audiencia, peso y <strong>naturaleza temporal</strong> (puntual o continuo). Los demás componentes se activan en función de cada touchpoint.</p></div></div>
-    <div class="card"><div class="card-accent"></div><div class="card-body"><div class="card-overline">C2 · Autoevaluación + coevaluación</div><h4>Bloque con estatuto propio</h4><p>No es un apéndice: el estudiante evalúa su aprendizaje y el de sus pares con criterios compartidos. Escala la retroalimentación.</p></div></div>
-    <div class="card"><div class="card-accent"></div><div class="card-body"><div class="card-overline">C3 · IA y tecnología</div><h4>Posición explícita</h4><p>Declaras qué papel tiene la IA en generación, análisis y retroalimentación, tanto para el estudiante como en tu propio trabajo docente. Las reglas del juego se comunican al estudiante.</p></div></div>
-    <div class="card"><div class="card-accent"></div><div class="card-body"><div class="card-overline">C4 · Evidencias y criterios</div><h4>Qué se evalúa, con qué criterio</h4><p>Las evidencias son trazables, los criterios son públicos, las rúbricas están compartidas antes del hito.</p></div></div>
-    <div class="card"><div class="card-accent"></div><div class="card-body"><div class="card-overline">C5 · Recogida de información</div><h4>Doble propósito</h4><p>La información del proceso alimenta dos canales: retroalimentación al estudiante y diagnóstico para tu rediseño futuro.</p></div></div>
-    <div class="card"><div class="card-accent"></div><div class="card-body"><div class="card-overline">C6 · Retroalimentación</div><h4>Parte constitutiva de la evaluación formativa</h4><p>Sustantiva, oportuna y conectada al siguiente paso. Sin retroalimentación, el acto evaluativo no tiene valor formativo. El estudiante conoce con antelación qué ve, cuándo y en qué formato.</p></div></div>
-    <div class="card"><div class="card-accent"></div><div class="card-body"><div class="card-overline">C7 · Mejora docente</div><h4>El circuito se cierra</h4><p>Análisis sistemático durante y al terminar el curso. Qué cambias y por qué. La mejora docente es componente obligatorio, no opcional.</p></div></div>
+    <div class="card"><div class="card-accent"></div><div class="card-body"><div class="card-overline">C1 · Touchpoints</div><h3>Momentos evaluativos · el articulador</h3><p>Hitos distribuidos a lo largo del semestre. Cada uno declara propósito (formativo / sumativo / diagnóstico), audiencia, peso y <strong>naturaleza temporal</strong> (puntual o continuo). Los demás componentes se activan en función de cada touchpoint.</p></div></div>
+    <div class="card"><div class="card-accent"></div><div class="card-body"><div class="card-overline">C2 · Autoevaluación + coevaluación</div><h3>Bloque con estatuto propio</h3><p>No es un apéndice: el estudiante evalúa su aprendizaje y el de sus pares con criterios compartidos. Escala la retroalimentación.</p></div></div>
+    <div class="card"><div class="card-accent"></div><div class="card-body"><div class="card-overline">C3 · IA y tecnología</div><h3>Posición explícita</h3><p>Declaras qué papel tiene la IA en generación, análisis y retroalimentación, tanto para el estudiante como en tu propio trabajo docente. Las reglas del juego se comunican al estudiante.</p></div></div>
+    <div class="card"><div class="card-accent"></div><div class="card-body"><div class="card-overline">C4 · Evidencias y criterios</div><h3>Qué se evalúa, con qué criterio</h3><p>Las evidencias son trazables, los criterios son públicos, las rúbricas están compartidas antes del hito.</p></div></div>
+    <div class="card"><div class="card-accent"></div><div class="card-body"><div class="card-overline">C5 · Recogida de información</div><h3>Doble propósito</h3><p>La información del proceso alimenta dos canales: retroalimentación al estudiante y diagnóstico para tu rediseño futuro.</p></div></div>
+    <div class="card"><div class="card-accent"></div><div class="card-body"><div class="card-overline">C6 · Retroalimentación</div><h3>Parte constitutiva de la evaluación formativa</h3><p>Sustantiva, oportuna y conectada al siguiente paso. Sin retroalimentación, el acto evaluativo no tiene valor formativo. El estudiante conoce con antelación qué ve, cuándo y en qué formato.</p></div></div>
+    <div class="card"><div class="card-accent"></div><div class="card-body"><div class="card-overline">C7 · Mejora docente</div><h3>El circuito se cierra</h3><p>Análisis sistemático durante y al terminar el curso. Qué cambias y por qué. La mejora docente es componente obligatorio, no opcional.</p></div></div>
   </div>
   <div class="callout success">
     <span class="callout-icon">&#10003;</span>
@@ -458,22 +475,22 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   <p class="lead">Hay cuatro decisiones estratégicas que, una vez tomadas, permiten abordar el diseño de detalle de forma efectiva. Si llegas al diseño operativo con ellas claras, el proceso fluye; si llegas sin ellas, se consume en estrategia. La Plantilla estratégica está organizada alrededor de estas cuatro. Las preguntas están formuladas para arrancar desde lo que ya haces, no desde un catálogo ideal.</p>
   <div class="signpost">
     <div class="signpost-num">D1</div>
-    <div><h4>En tu asignatura, ¿cuáles son los dos o tres momentos en los que realmente se juega si el estudiante está aprendiendo?</h4><p>No se trata de inventariar todas las evaluaciones que haces, sino de identificar los <strong>dos o tres momentos clave</strong> en los que se decide si el aprendizaje ha ocurrido. Una vez nombrados, decides cuáles conservas, cuáles transformas y qué momentos nuevos necesitas incorporar.</p></div>
+    <div><h3>En tu asignatura, ¿cuáles son los dos o tres momentos en los que realmente se juega si el estudiante está aprendiendo?</h3><p>No se trata de inventariar todas las evaluaciones que haces, sino de identificar los <strong>dos o tres momentos clave</strong> en los que se decide si el aprendizaje ha ocurrido. Una vez nombrados, decides cuáles conservas, cuáles transformas y qué momentos nuevos necesitas incorporar.</p></div>
     <span class="tag">Plantilla · D1</span>
   </div>
   <div class="signpost">
     <div class="signpost-num">D2</div>
-    <div><h4>¿Dónde vale la pena que el estudiante use IA y dónde no?</h4><p>La postura hacia la IA puede ser <strong>mixta por componente</strong>: eliges una postura por defecto (rechazo explícito · uso invisible · herramienta abierta con reglas · coautora declarada) y después la modulas en los componentes donde proceda. Lo que se declara se comunica al estudiante el día 1.</p></div>
+    <div><h3>¿Dónde vale la pena que el estudiante use IA y dónde no?</h3><p>La postura hacia la IA puede ser <strong>mixta por componente</strong>: eliges una postura por defecto (rechazo explícito · uso invisible · herramienta abierta con reglas · coautora declarada) y después la modulas en los componentes donde proceda. Lo que se declara se comunica al estudiante el día 1.</p></div>
     <span class="tag">Plantilla · D2</span>
   </div>
   <div class="signpost">
     <div class="signpost-num">D3</div>
-    <div><h4>Evidencias: ¿qué te deja ver hoy si tus estudiantes aprenden, y qué querrías cambiar?</h4><p>Dos preguntas acopladas. Primero, <strong>de lo que tus estudiantes entregan hoy, ¿qué te deja ver realmente si están aprendiendo?</strong> Segundo, <strong>¿qué tipos de evidencia querrías priorizar en el rediseño?</strong> Además, decides qué información del proceso será trazable y accesible dentro del sistema, y para quién (estudiante · mejora docente · institución).</p></div>
+    <div><h3>Evidencias: ¿qué te deja ver hoy si tus estudiantes aprenden, y qué querrías cambiar?</h3><p>Dos preguntas acopladas. Primero, <strong>de lo que tus estudiantes entregan hoy, ¿qué te deja ver realmente si están aprendiendo?</strong> Segundo, <strong>¿qué tipos de evidencia querrías priorizar en el rediseño?</strong> Además, decides qué información del proceso será trazable y accesible dentro del sistema, y para quién (estudiante · mejora docente · institución).</p></div>
     <span class="tag">Plantilla · D3</span>
   </div>
   <div class="signpost">
     <div class="signpost-num">D4</div>
-    <div><h4>¿Cómo usas tú la IA como profesor para evaluar, analizar y retroalimentar?</h4><p>Decisión operativa sobre tu propio trabajo: qué tareas evaluativas delegas o agilizas con IA (generación de ítems, análisis de patrones, primeros borradores de retroalimentación, detección de señales en evidencias). Es el complemento interno de D2: la viabilidad de sostener el rediseño sin aumentar carga depende, en gran parte, de esta decisión.</p></div>
+    <div><h3>¿Cómo usas tú la IA como profesor para evaluar, analizar y retroalimentar?</h3><p>Decisión operativa sobre tu propio trabajo: qué tareas evaluativas delegas o agilizas con IA (generación de ítems, análisis de patrones, primeros borradores de retroalimentación, detección de señales en evidencias). Es el complemento interno de D2: la viabilidad de sostener el rediseño sin aumentar carga depende, en gran parte, de esta decisión.</p></div>
     <span class="tag">Plantilla · D4</span>
   </div>
   <div class="callout info">
@@ -489,11 +506,11 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 
   <h3>Ejemplo 1 · Asignatura intensiva en trabajo autónomo</h3>
   <p style="font-size:var(--text-sm);color:var(--gris-500);margin-top:-4px;">Arquetipo dominante A1 (brillantes) + postura B1/B2 (estratega / curioso) · grupo de 40 · 4.5 h semanales dedicación docente</p>
-  <div class="table-wrap">
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Tabla: Ejemplo 1 · Asignatura intensiva en trabajo autónomo (desplazable en horizontal)">
     <table class="tbl">
       <thead><tr><th style="width:140px;">Encuadre</th><th>Contenido declarado</th></tr></thead>
       <tbody>
-        <tr><td><strong>Lo que ya hago hoy</strong></td><td>Tres exámenes parciales y un trabajo final. Retroalimentación concentrada al final. Los estudiantes avanzan rápido pero trabajan por rentabilidad: el retroalimentación no se usa porque llega tarde.</td></tr>
+        <tr><td><strong>Lo que ya hago hoy</strong></td><td>Tres exámenes parciales y un trabajo final. Retroalimentación concentrada al final. Los estudiantes avanzan rápido pero trabajan por rentabilidad: la retroalimentación no se usa porque llega tarde.</td></tr>
         <tr><td><strong>D1 · Momentos clave</strong></td><td>Dos momentos donde realmente se juega el aprendizaje: (1) la integración conceptual de las primeras semanas; (2) la síntesis final del curso. Conservo el trabajo final rediseñado como síntesis. Transformo los parciales en checkpoints ligeros. Elimino el examen final clásico.</td></tr>
         <tr><td><strong>D2 · Postura IA-estudiante</strong></td><td>Postura general: <em>Herramienta abierta con reglas</em>. Matización por touchpoint: en el trabajo final de síntesis (TP6) la IA se declara como <em>coautora declarada</em>; en los checkpoints conversacionales (TP1) no se usa.</td></tr>
         <tr><td><strong>D3 · Evidencias</strong></td><td>Hoy entregan trabajos escritos y exámenes: me deja ver comprensión conceptual pero no proceso. A partir de ahora priorizo síntesis escritas breves y presentaciones cortas con preguntas abiertas, además de registros agregados del aula.</td></tr>
@@ -503,7 +520,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   </div>
 
   <h4 style="margin-top:var(--sp-6);">Touchpoints declarados · 6 en total</h4>
-  <div class="table-wrap">
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Tabla: Touchpoints declarados · 6 en total (desplazable en horizontal)">
     <table class="tbl">
       <thead><tr><th style="width:60px;">#</th><th style="width:32%;">Touchpoint · naturaleza · tiempo</th><th>Dimensiones activas</th></tr></thead>
       <tbody>
@@ -541,19 +558,19 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
     </table>
   </div>
 
-  <div class="table-wrap">
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Tabla: lectura del ejemplo 1 (desplazable en horizontal)">
     <table class="tbl">
       <tbody>
         <tr><td style="width:140px;"><strong>Total touchpoints</strong></td><td><strong>6</strong> (4 puntuales · 2 continuos en periodos)</td></tr>
         <tr><td><strong>Semáforo</strong></td><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--acento-amber);vertical-align:middle;"></span> <strong>Ámbar.</strong> El número de touchpoints es razonable, pero la concentración de dimensiones en TP3-TP6 exige desagregar cómo se escala la retroalimentación individual antes del Sprint 1.</td></tr>
-        <tr><td><strong>Lectura</strong></td><td>El rediseño es viable sin aumentar carga si la coevaluación de TP3 asume parte del retroalimentación rutinario y la IA-profesor sostiene los primeros borradores en TP5. El Sprint 1 afinará el calendario y la escala de la retroalimentación.</td></tr>
+        <tr><td><strong>Lectura</strong></td><td>El rediseño es viable sin aumentar carga si la coevaluación de TP3 asume parte de la retroalimentación rutinaria y la IA-profesor sostiene los primeros borradores en TP5. El Sprint 1 afinará el calendario y la escala de la retroalimentación.</td></tr>
       </tbody>
     </table>
   </div>
 
   <h3 style="margin-top:var(--sp-10);">Ejemplo 2 · Asignatura intensiva en supervisión</h3>
   <p style="font-size:var(--text-sm);color:var(--gris-500);margin-top:-4px;">Arquetipo dominante A3 (dificultades relacionales) + postura B3/B4 (bajo presión / co-diseñador · co-evaluador) · grupo de 25 · 5 h semanales dedicación docente</p>
-  <div class="table-wrap">
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Tabla: Ejemplo 2 · Asignatura intensiva en supervisión (desplazable en horizontal)">
     <table class="tbl">
       <thead><tr><th style="width:140px;">Encuadre</th><th>Contenido declarado</th></tr></thead>
       <tbody>
@@ -567,7 +584,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   </div>
 
   <h4 style="margin-top:var(--sp-6);">Touchpoints declarados · 8 en total</h4>
-  <div class="table-wrap">
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Tabla: Touchpoints declarados · 8 en total (desplazable en horizontal)">
     <table class="tbl">
       <thead><tr><th style="width:60px;">#</th><th style="width:32%;">Touchpoint · naturaleza · tiempo</th><th>Dimensiones activas</th></tr></thead>
       <tbody>
@@ -615,7 +632,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
     </table>
   </div>
 
-  <div class="table-wrap">
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Tabla: lectura del ejemplo 2 (desplazable en horizontal)">
     <table class="tbl">
       <tbody>
         <tr><td style="width:140px;"><strong>Total touchpoints</strong></td><td><strong>8</strong> (6 puntuales · 2 continuos en periodos)</td></tr>
@@ -636,11 +653,11 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   <h2>Cómo pasar de estrategia a diseño</h2>
   <p class="lead">El kit articula una secuencia clara: cuatro estaciones conectadas que llevan desde el marco estratégico hasta el diseño operativo de tu asignatura, y luego a su puesta a prueba en el aula. El Sprint 0 produce el encuadre y un primer espejo cuantitativo; el Sprint 1 lo afina.</p>
   <ol class="numbered">
-    <li><h4>Lees la Guía estratégica · ~45 min</h4><p>Entiendes el marco, las convicciones y las cuatro decisiones pendientes. Marcas los puntos donde tu contexto difiere del marco general: ese choque es información valiosa.</p></li>
-    <li><h4>Rellenas la Plantilla estratégica · 45-75 min</h4><p>Tomas las cuatro decisiones (D1-D4), declaras tus touchpoints con su naturaleza temporal (puntual o continuo) y los parametrizas activando las dimensiones C2-C7 que cada uno requiere, y cierras con un total orientativo y un semáforo de factibilidad económica. La Plantilla es tu decisión ejecutiva, no un ejercicio de rellenar; si algo aún no está decidido, marcarlo como <em>"lo veré en Sprint 1"</em> también es una decisión válida.</p></li>
-    <li><h4>Pasas tu Plantilla al Canvas · ~30 min</h4><p>Una página con tu estrategia de evaluación visible de un golpe de vista, incluyendo total de touchpoints y semáforo. Es el artefacto que puedes compartir con colegas, coordinación o contigo mismo dentro de unos meses.</p></li>
-    <li><h4>Entras al Sprint 1 como refinamiento, no como nuevo ejercicio</h4><p>El Sprint 1 <strong>parte</strong> del listado de touchpoints y sus dimensiones activas que has dejado en la Plantilla. Su trabajo es desagregar cada touchpoint en instrumentos concretos con rúbricas aplicadas, afinar la factibilidad económica con herramientas más finas, resolver lo que quedó marcado como <em>"lo veré en Sprint 1"</em> y distribuir todo en un calendario semanal. No se reabre la estrategia: se afina.</p></li>
-    <li><h4>Implementas y pilotas durante el semestre</h4><p>El diseño se prueba en uso (Sprint 2). Recoges datos, ajustas sobre la marcha, cierras el ciclo de mejora al terminar el curso. Tu rediseño es una hipótesis que se valida enseñando; las mejoras alimentan una siguiente versión.</p></li>
+    <li><h3>Lees la Guía estratégica · ~45 min</h3><p>Entiendes el marco, las convicciones y las cuatro decisiones pendientes. Marcas los puntos donde tu contexto difiere del marco general: ese choque es información valiosa.</p></li>
+    <li><h3>Rellenas la Plantilla estratégica · 45-75 min</h3><p>Tomas las cuatro decisiones (D1-D4), declaras tus touchpoints con su naturaleza temporal (puntual o continuo) y los parametrizas activando las dimensiones C2-C7 que cada uno requiere, y cierras con un total orientativo y un semáforo de factibilidad económica. La Plantilla es tu decisión ejecutiva, no un ejercicio de rellenar; si algo aún no está decidido, marcarlo como <em>"lo veré en Sprint 1"</em> también es una decisión válida.</p></li>
+    <li><h3>Pasas tu Plantilla al Canvas · ~30 min</h3><p>Una página con tu estrategia de evaluación visible de un golpe de vista, incluyendo total de touchpoints y semáforo. Es el artefacto que puedes compartir con colegas, coordinación o contigo mismo dentro de unos meses.</p></li>
+    <li><h3>Entras al Sprint 1 como refinamiento, no como nuevo ejercicio</h3><p>El Sprint 1 <strong>parte</strong> del listado de touchpoints y sus dimensiones activas que has dejado en la Plantilla. Su trabajo es desagregar cada touchpoint en instrumentos concretos con rúbricas aplicadas, afinar la factibilidad económica con herramientas más finas, resolver lo que quedó marcado como <em>"lo veré en Sprint 1"</em> y distribuir todo en un calendario semanal. No se reabre la estrategia: se afina.</p></li>
+    <li><h3>Implementas y pilotas durante el semestre</h3><p>El diseño se prueba en uso (Sprint 2). Recoges datos, ajustas sobre la marcha, cierras el ciclo de mejora al terminar el curso. Tu rediseño es una hipótesis que se valida enseñando; las mejoras alimentan una siguiente versión.</p></li>
   </ol>
 </section>
 
@@ -667,9 +684,9 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   <h2>Tu primer paso concreto</h2>
   <p class="lead">Esta guía no es un fin, es la entrada al trabajo. Antes de abordar el diseño necesitamos algo concreto de tu parte: ni demasiado, ni demasiado poco.</p>
   <ol class="numbered">
-    <li><h4>Lee esta guía completa, en una sola sesión si es posible</h4><p>Anota los puntos donde tu contexto difiere del marco. Esos puntos son oro: son las conversaciones a tener durante el diseño y los ajustes a considerar en tu primer rediseño.</p></li>
-    <li><h4>Abre la Plantilla estratégica y empieza por "lo que ya hago hoy"</h4><p>No hace falta que la termines de una sentada. Arrancar por describir en tres o cuatro líneas cómo evalúas hoy te prepara para avanzar con criterio por las decisiones D1-D4 y la estimación de touchpoints.</p></li>
-    <li><h4>Lee la Mini-guía de pre-trabajo</h4><p>Es la pieza más operativa del kit: te dice exactamente qué preparar antes de sentarte a decidir, cuánto tiempo invertir y qué esperar. Unos 20 minutos de lectura.</p></li>
+    <li><h3>Lee esta guía completa, en una sola sesión si es posible</h3><p>Anota los puntos donde tu contexto difiere del marco. Esos puntos son oro: son las conversaciones a tener durante el diseño y los ajustes a considerar en tu primer rediseño.</p></li>
+    <li><h3>Abre la Plantilla estratégica y empieza por "lo que ya hago hoy"</h3><p>No hace falta que la termines de una sentada. Arrancar por describir en tres o cuatro líneas cómo evalúas hoy te prepara para avanzar con criterio por las decisiones D1-D4 y la estimación de touchpoints.</p></li>
+    <li><h3>Lee la Mini-guía de pre-trabajo</h3><p>Es la pieza más operativa del kit: te dice exactamente qué preparar antes de sentarte a decidir, cuánto tiempo invertir y qué esperar. Unos 20 minutos de lectura.</p></li>
   </ol>
   <div class="callout success">
     <span class="callout-icon">&#10003;</span>
@@ -680,6 +697,8 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
     <div><strong>Si algo no te cuadra.</strong> Esta es una primera versión del kit. Cuéntanos lo que no funciona, antes, durante o después del uso. El kit se afinará con varias iteraciones. Tu resistencia es información, no problema.</div>
   </div>
 </section>
+
+</main>
 
 <footer class="inst-footer">
   <div class="footer-brand">Kit metodológico · Rediseño de la evaluación de una asignatura</div>

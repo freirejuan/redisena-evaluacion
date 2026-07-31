@@ -7,14 +7,12 @@
   <meta name="description" content="Proceso guiado y kit de herramientas para rediseñar la evaluación de asignaturas universitarias con criterio, con la IA como eje explícito. Desarrollado por Eutika.">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">  <link rel="stylesheet" href="/assets/css/fuentes.v1.css">
   <link rel="stylesheet" href="/assets/css/styles.v2.css">
 </head>
 <body data-page="acerca">
+
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
   <header class="site">
     <div class="shell">
@@ -22,7 +20,7 @@
         <span class="brand-name">Rediseña<span class="dot">.</span>Evaluacion</span>
         <span class="brand-attrib">Un kit de Eutika</span>
       </a>
-      <nav class="primary">
+      <nav class="primary" aria-label="Principal">
         <a href="/">Inicio</a>
         <a href="/proceso">El proceso</a>
         <a href="/kit">Kit</a>
@@ -32,7 +30,7 @@
     </div>
   </header>
 
-  <div class="status-strip">
+  <section class="status-strip" aria-label="Tu progreso en el kit">
     <div class="shell">
       <div class="info">
         <div class="info-item">
@@ -45,19 +43,20 @@
         </div>
       </div>
       <div class="actions">
+        <button class="btn ghost small" data-action="detalle" aria-pressed="false">Ver todo el detalle</button>
         <button class="btn ghost small" data-action="export">Descargar progreso</button>
         <button class="btn ghost small" data-action="import">Cargar progreso</button>
         <button class="btn ghost small" data-action="reset">Reiniciar</button>
       </div>
     </div>
-  </div>
+  </section>
 
-  <main>
+  <main id="contenido" tabindex="-1">
 
     <div class="breadcrumb"><a href="/">Inicio</a> / Acerca</div>
     <span class="chip">Sobre el proyecto</span>
     <h1>Acerca de Rediseña.Evaluacion</h1>
-    <p class="lead">Rediseña.Evaluacion es un proceso guiado y un kit de herramientas pensados para rediseñar la evaluación de asignaturas universitarias con criterio, y con la experimentación con IA como uno de los ejes del trabajo. Lo desarrollamos desde <a href="https://eutika.com/" target="_blank" rel="noopener">Eutika</a> y lo publicamos con licencia abierta para que pueda reutilizarse en cualquier universidad o contexto de formación superior.</p>
+    <p class="lead">Rediseña.Evaluacion es un proceso guiado y un kit de herramientas pensados para rediseñar la evaluación de asignaturas universitarias con criterio, y con la experimentación con IA como uno de los ejes del trabajo. Lo desarrollamos desde <a href="https://eutika.com/" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>Eutika</a> y lo publicamos con licencia abierta para que pueda reutilizarse en cualquier universidad o contexto de formación superior.</p>
 
     <h2 id="para-quien">Para quién está pensado</h2>
     <p>Está pensado para profesoras y profesores universitarios que quieren rediseñar con criterio la evaluación de una de sus asignaturas, mejorando el acompañamiento al estudiante y afinando los tiempos de dedicación, con la IA integrada como eje explícito de experimentación. Funciona en cualquier asignatura de grado o máster y en cualquier formato docente (presencial, online o híbrido).</p>
@@ -82,10 +81,24 @@
     <h2>Estado del kit</h2>
     <p>El kit está en desarrollo activo, lo cual quiere decir que algunas piezas están ya estables y otras las iremos incorporando a medida que vayamos aprendiendo del uso real. Así está el mapa hoy:</p>
     <ul>
-      <li><strong>Sprint 0</strong> · estable. Incluye la Plantilla estratégica, la Guía estratégica y la Mini-guía de pre-trabajo.</li>
+      <li><strong>Sprint 0</strong> · estable. Incluye la Plantilla estratégica —con comparación de escenarios y cinco asignaturas de ejemplo—, la Guía estratégica y la Mini-guía de pre-trabajo.</li>
       <li><strong>Sprint 1</strong> · estable. Incluye la Plantilla del plan operativo, el Kit de onboarding (con Guía breve, Plantilla EJEMPLO IngeSoft y Recorrido guiado) y el Panel del plan operativo, que lee tu Plantilla y te devuelve automáticamente el Blueprint y el Calendario semanal.</li>
-      <li><strong>Sprint 2</strong> · en producción. Las piezas llegan con el arranque del cuatrimestre, en septiembre de 2026, que es cuando el pilotaje empieza a hacer falta de verdad.</li>
+      <li><strong>Sprint 2</strong> · primera versión publicada. Incluye el Cuaderno de pilotaje y la guía «Observar y leer lo que ocurre». Es la pieza más joven del kit: se ha construido después de los sprints 0 y 1 a propósito, y se afinará con el primer cuatrimestre de uso real.</li>
     </ul>
+
+    <h2 id="privacidad">Privacidad</h2>
+    <p>El kit no tiene cuenta de usuario, no envía nada a ningún servidor y no recoge ninguna analítica ni telemetría. Tu trabajo vive en el almacenamiento de tu navegador y en los archivos que tú te descargas. Es una decisión de diseño, no una funcionalidad pendiente.</p>
+
+    <details class="capa">
+      <summary>Cómo lo garantizamos, y no sólo lo prometemos <span class="capa-pista">· lo comprobable</span></summary>
+      <p>Una promesa de privacidad que sólo se sostiene en la buena fe de quien la hace vale poco. Estas son las tres cosas concretas que la respaldan:</p>
+      <ul>
+        <li><strong>Ninguna pieza del kit contacta con ningún dominio ajeno.</strong> Ni una. Las tipografías y el lector de hojas de cálculo se sirven desde este mismo sitio; antes venían de Google y de un CDN, que recibían tu dirección IP cada vez que abrías una página.</li>
+        <li><strong>El navegador lo impide, no sólo nosotros.</strong> El sitio se sirve con una <em>Content-Security-Policy</em> que bloquea cualquier carga de recursos de terceros, cualquier conexión fuera de este dominio y el envío de cualquier formulario a ninguna parte. Si alguien introdujera mañana una llamada externa, tu navegador la bloquearía.</li>
+        <li><strong>El código es abierto y se puede comprobar.</strong> Licencia MIT. Lo que aquí se afirma se puede verificar leyéndolo, o abriendo el inspector de tu navegador y mirando la pestaña de red.</li>
+      </ul>
+      <p>Como contrapartida honesta: si borras los datos del sitio, usas navegación privada o cambias de equipo, tu trabajo no viaja contigo solo. Descárgatelo con «Descargar progreso» y guárdalo donde tú quieras. Es el precio de que no haya nadie custodiándolo.</p>
+    </details>
 
     <h2>Licencia y reutilización</h2>
     <p>El kit se publica con licencia abierta para que pueda ser adoptado y adaptado en otras universidades y contextos de formación. Se usan dos licencias complementarias según la naturaleza del material:</p>
@@ -95,7 +108,7 @@
     </ul>
     <p>En la práctica esto significa que puedes <strong>usar, copiar, modificar y redistribuir</strong> todos los materiales, también con fines comerciales, siempre que:</p>
     <ul>
-      <li>Des <strong>atribución a Eutika</strong> (<a href="https://eutika.com/" target="_blank" rel="noopener">eutika.com</a>) como autor original del kit.</li>
+      <li>Des <strong>atribución a Eutika</strong> (<a href="https://eutika.com/" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>eutika.com</a>) como autor original del kit.</li>
       <li>Si adaptas los contenidos (no el código), <strong>compartas las obras derivadas bajo la misma licencia CC&nbsp;BY-SA&nbsp;4.0</strong>.</li>
       <li>Indiques claramente los cambios que hayas introducido respecto al original.</li>
     </ul>
@@ -103,7 +116,7 @@
     <p>Los textos legales completos están en el repositorio del proyecto: <code>LICENSE</code> (código, MIT) y <code>LICENSE-CONTENT.md</code> (contenidos, CC&nbsp;BY-SA&nbsp;4.0).</p>
 
     <h2>Contacto y créditos</h2>
-    <p>Esta herramienta ha sido desarrollada por el equipo de <a href="https://eutika.com/" target="_blank" rel="noopener">Eutika</a>. Para cualquier consulta, propuesta de colaboración o adaptación a otros contextos, la persona de contacto es Juan Freire · <a href="mailto:juan@eutika.com">juan@eutika.com</a>.</p>
+    <p>Esta herramienta ha sido desarrollada por el equipo de <a href="https://eutika.com/" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>Eutika</a>. Para cualquier consulta, propuesta de colaboración o adaptación a otros contextos, la persona de contacto es Juan Freire · <a href="mailto:juan@eutika.com">juan@eutika.com</a>.</p>
 
     <h2>Retroalimentación</h2>
     <p>Si estás probando el kit y quieres contarnos qué te ha funcionado, dónde te has atascado o qué te habría venido bien que estuviera y no está, escríbenos. Cada iteración del kit se alimenta de ese uso real: cuanto antes nos llega la retroalimentación, antes podemos incorporarlo al siguiente ciclo.</p>
@@ -112,7 +125,7 @@
 
   <footer>
     <div class="shell">
-      <div>© 2026 · Rediseña.Evaluacion · Un kit de <a href="https://eutika.com/" target="_blank" rel="noopener">Eutika</a></div>
+      <div>© 2026 · Rediseña.Evaluacion · Un kit de <a href="https://eutika.com/" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>Eutika</a></div>
       <div>Contenidos CC BY-SA 4.0 · Código MIT</div>
     </div>
   </footer>

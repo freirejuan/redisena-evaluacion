@@ -39,7 +39,7 @@ const ESTADO_LABELS_CORTOS = {
 // Número de pasos marcables de cada sprint. Debe coincidir con los [data-step]
 // de la página correspondiente; dentro de una página de sprint se recuenta
 // desde el DOM para que ambas cosas no puedan divergir.
-const SPRINT_STEPS = { sprint_0: 3, sprint_1: 3, sprint_2: 0 };
+const SPRINT_STEPS = { sprint_0: 3, sprint_1: 3, sprint_2: 3 };
 
 // ═══════════════════════════════════════════════════
 // ESTADO POR DEFECTO
@@ -53,8 +53,11 @@ function state_default() {
     sprints: {
       sprint_0: { estado: 'sin_iniciar', pasos_completados: [], completado_en: null },
       sprint_1: { estado: 'bloqueado',  pasos_completados: [], completado_en: null },
-      sprint_2: { estado: 'proximamente', pasos_completados: [], completado_en: null }
+      sprint_2: { estado: 'bloqueado', pasos_completados: [], completado_en: null }
     },
+    // Preferencias de lectura. La única que hay por ahora: si el profesor
+    // quiere ver siempre el detalle o prefiere la versión corta (por defecto).
+    prefs: { detalle: false },
     creado_en: now,
     actualizado_en: now,
     ultima_visita: now,
@@ -90,6 +93,32 @@ function state_normalize(state) {
   SPRINT_IDS.forEach(id => {
     if (!state.sprints[id]) state.sprints[id] = base.sprints[id];
     if (!Array.isArray(state.sprints[id].pasos_completados)) state.sprints[id].pasos_completados = [];
+  });
+  if (!state.prefs || typeof state.prefs !== 'object') state.prefs = { detalle: false };
+  if (typeof state.prefs.detalle !== 'boolean') state.prefs.detalle = false;
+
+  // Un estado que no reconocemos —de una versión anterior, o de un archivo
+  // manipulado— pintaba «Sprint 0 · undefined» en la barra.
+  SPRINT_IDS.forEach(id => {
+    if (!ESTADO_LABELS[state.sprints[id].estado]) {
+      state.sprints[id].estado = base.sprints[id].estado;
+    }
+    // El Sprint 2 estuvo en «próximamente» hasta que existieron sus piezas.
+    // Quien tenga ese estado guardado pasa a bloqueado, que es lo que ahora
+    // significa: disponible en cuanto cierres el anterior.
+    if (state.sprints[id].estado === 'proximamente') state.sprints[id].estado = 'bloqueado';
+  });
+
+  // Un sprint no puede seguir bloqueado si el anterior está cerrado. Pasaba con
+  // el progreso de quien cerró el Sprint 0 antes de que existiera el desbloqueo
+  // automático: la aplicación le mandaba al Sprint 0 a cerrar algo ya cerrado.
+  SPRINT_IDS.forEach((id, i) => {
+    if (i === 0) return;
+    const anterior = state.sprints[SPRINT_IDS[i - 1]];
+    const sprint = state.sprints[id];
+    if (anterior.estado === 'completado' && sprint.estado === 'bloqueado') {
+      sprint.estado = sprint.pasos_completados.length > 0 ? 'en_progreso' : 'sin_iniciar';
+    }
   });
   return state;
 }
@@ -253,7 +282,7 @@ function ui_bindCourseName() {
     const cerrar = (guardar) => {
       if (cerrado) return;
       cerrado = true;
-      if (guardar) {
+      if (guardar) {   // 'tab' también guarda: solo cambia a dónde va el foco
         const s = state_ensure();
         const valor = input.value.trim();
         s.asignatura = valor ? { nombre: valor } : null;
@@ -262,14 +291,17 @@ function ui_bindCourseName() {
       input.replaceWith(courseEl);
       courseEl.dataset.editing = 'false';
       ui_updateStatusStrip(state_ensure());
-      courseEl.focus();
+      // Solo se devuelve el foco si el usuario cerró a propósito. Hacerlo
+      // siempre significaba que tabular hacia el siguiente botón te traía de vuelta.
+      if (guardar !== 'tab') courseEl.focus();
     };
 
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') { e.preventDefault(); cerrar(true); }
       if (e.key === 'Escape') { e.preventDefault(); cerrar(false); }
+      if (e.key === 'Tab') { cerrar('tab'); }
     });
-    input.addEventListener('blur', () => cerrar(true));
+    input.addEventListener('blur', () => cerrar('tab'));
   };
 
   courseEl.addEventListener('click', abrirEdicion);
@@ -307,19 +339,33 @@ function ui_showHomeVariant(state) {
 function ui_updateContinueBanner(state) {
   const titleEl = document.getElementById('continue-title');
   const progressEl = document.getElementById('continue-progress');
-  const continueBtn = document.getElementById('continue-btn');
   const lastVisitEl = document.getElementById('continue-lastvisit');
 
-  const activeSprint = sprint_getActive(state) || { id: 'sprint_2', data: state.sprints.sprint_2 };
-  if (titleEl) titleEl.textContent = SPRINT_LABELS[activeSprint.id];
-  if (progressEl) {
-    const total = SPRINT_STEPS[activeSprint.id] || 0;
-    const done = activeSprint.data.pasos_completados.length;
-    progressEl.textContent = total > 0
-      ? `Has completado ${done} de ${total} pasos`
-      : 'Sin pasos que marcar todavía';
+  const activeSprint = sprint_getActive(state);
+  const btn = document.getElementById('continue-btn');
+
+  // La portada decía «Continuar → Sprint 1» mientras las demás páginas decían
+  // que el Sprint 1 estaba bloqueado. Ahora las dos leen lo mismo.
+  const paso = guia_siguientePaso(state);
+
+  if (!activeSprint) {
+    if (titleEl) titleEl.textContent = 'Has cerrado los tres sprints';
+    if (progressEl) progressEl.textContent = 'Lo que queda es el aula';
+    if (btn) { btn.href = '/kit'; btn.textContent = 'Volver al kit →'; }
+  } else {
+    if (titleEl) titleEl.textContent = SPRINT_LABELS[activeSprint.id];
+    if (progressEl) {
+      const total = SPRINT_STEPS[activeSprint.id] || 0;
+      const done = activeSprint.data.pasos_completados.length;
+      progressEl.textContent = total > 0
+        ? `Has completado ${done} de ${total} pasos`
+        : 'Sin pasos que marcar todavía';
+    }
+    if (btn) {
+      btn.href = paso.destino || `/${activeSprint.id.replace('_', '-')}`;
+      btn.textContent = (paso.rotulo || 'Continuar') + ' →';
+    }
   }
-  if (continueBtn) continueBtn.href = `/${activeSprint.id.replace('_', '-')}`;
   if (lastVisitEl) lastVisitEl.textContent = ui_formatLastVisit(state.visita_previa);
 
   // Progreso visual de cada tarjeta. Antes solo se actualizaba la del Sprint 0
@@ -356,14 +402,35 @@ function ui_renderSprintPage(state, sprintId) {
   const stateEl = document.getElementById(`${sprintId.replace('_', '-')}-state`);
   if (stateEl) stateEl.textContent = ESTADO_LABELS[sprint.estado];
 
+  const pct = sprint_progressPct(sprint, sprintId);
   const progressEl = document.getElementById(`${sprintId.replace('_', '-')}-progress`);
-  if (progressEl) progressEl.style.width = sprint_progressPct(sprint, sprintId) + '%';
+  if (progressEl) {
+    progressEl.style.width = pct + '%';
+    const barra = progressEl.parentElement;
+    if (barra) {
+      barra.setAttribute('role', 'progressbar');
+      barra.setAttribute('aria-valuemin', '0');
+      barra.setAttribute('aria-valuemax', '100');
+      barra.setAttribute('aria-valuenow', String(pct));
+      barra.setAttribute('aria-label', `Progreso del ${SPRINT_LABELS[sprintId].split(' · ')[0]}`);
+    }
+  }
 
-  document.querySelectorAll(`[data-step][data-sprint="${sprintId}"]`).forEach(el => {
+  const bloqueado = sprint.estado === 'bloqueado' || sprint.estado === 'proximamente';
+  const casillas = [...document.querySelectorAll(`[data-step][data-sprint="${sprintId}"]`)];
+  casillas.forEach(el => {
     const isDone = sprint.pasos_completados.includes(el.dataset.step);
     el.classList.toggle('done', isDone);
     el.setAttribute('aria-checked', isDone ? 'true' : 'false');
+    // Un paso de un sprint bloqueado recibía el foco y no hacía nada, sin decir
+    // por qué: era indistinguible de uno que sí funciona.
+    el.setAttribute('aria-disabled', bloqueado ? 'true' : 'false');
+    el.setAttribute('tabindex', bloqueado ? '-1' : '0');
   });
+
+  // Los tres pasos se veían exactamente igual, tanto el que tocaba ahora como
+  // los que ya estaban hechos. Aquí se señala uno solo: el siguiente sin marcar.
+  ui_marcaPasoEnCurso(sprint, casillas, bloqueado);
 
   // El botón de cierre solo tiene sentido con todos los pasos marcados.
   const completeBtn = document.querySelector(`[data-action="complete-sprint"][data-sprint="${sprintId}"]`);
@@ -380,7 +447,9 @@ function ui_renderSprintPage(state, sprintId) {
     if (!hint) {
       hint = document.createElement('span');
       hint.className = 'complete-hint';
+      hint.id = `${sprintId}-hint`;
       completeBtn.insertAdjacentElement('afterend', hint);
+      completeBtn.setAttribute('aria-describedby', hint.id);
     }
     if (cerrado) {
       hint.textContent = 'Sprint cerrado. Desmarca cualquier paso si necesitas reabrirlo.';
@@ -394,6 +463,95 @@ function ui_renderSprintPage(state, sprintId) {
   }
 }
 
+// ═══════════════════════════════════════════════════
+// GUIADO
+// La aplicación no observa a nadie ni envía nada: lo único que sabe es lo que
+// el propio profesor ha marcado en este navegador. Con eso basta para dejar de
+// ser un documento y proponerle el siguiente paso concreto.
+// ═══════════════════════════════════════════════════
+
+function ui_marcaPasoEnCurso(sprint, casillas, bloqueado) {
+  let enCurso = null;
+  if (!bloqueado && sprint.estado !== 'completado') {
+    enCurso = casillas.find(el => !sprint.pasos_completados.includes(el.dataset.step)) || null;
+  }
+  casillas.forEach(el => {
+    const bloque = el.closest('.step-block');
+    if (!bloque) return;
+    const activo = el === enCurso;
+    bloque.classList.toggle('en-curso', activo);
+    bloque.classList.toggle('ya-hecho', sprint.pasos_completados.includes(el.dataset.step));
+    let marca = bloque.querySelector('.marca-en-curso');
+    if (activo && !marca) {
+      marca = document.createElement('span');
+      marca.className = 'marca-en-curso';
+      marca.textContent = 'Vas por aquí';
+      const num = bloque.querySelector('.step-num');
+      if (num) num.appendChild(marca);
+    } else if (!activo && marca) {
+      marca.remove();
+    }
+  });
+  return enCurso;
+}
+
+// Qué toca ahora, dicho en una frase y con su botón. Se calcula sólo con el
+// estado guardado en este navegador.
+function guia_siguientePaso(state) {
+  const activo = sprint_getActive(state);
+  if (!activo) {
+    return { texto: 'Has cerrado los tres sprints. Lo que queda es el aula.', destino: null, rotulo: null };
+  }
+  const id = activo.id;
+  const sprint = activo.data;
+  const ruta = '/' + id.replace('_', '-');
+  const nombre = (SPRINT_LABELS[id] || '').split(' · ')[0];
+
+  if (sprint.estado === 'bloqueado') {
+    // El anterior, sea cual sea, no el Sprint 0 siempre.
+    const previo = SPRINT_IDS[SPRINT_IDS.indexOf(id) - 1] || 'sprint_0';
+    const nombrePrevio = (SPRINT_LABELS[previo] || '').split(' · ')[0];
+    return { texto: `Para abrir el ${nombre} hay que cerrar antes el ${nombrePrevio}.`,
+             destino: '/' + previo.replace('_', '-'), rotulo: `Ir al ${nombrePrevio}` };
+  }
+  if (sprint.estado === 'proximamente') {
+    return { texto: `El ${nombre} arranca en septiembre de 2026, con el cuatrimestre.`, destino: ruta, rotulo: 'Ver su alcance' };
+  }
+
+  const total = SPRINT_STEPS[id] || 0;
+  const hechos = sprint.pasos_completados.length;
+  if (total > 0 && hechos >= total) {
+    return { texto: `Tienes los ${total} pasos del ${nombre} marcados: sólo falta cerrarlo.`, destino: ruta, rotulo: `Cerrar el ${nombre}` };
+  }
+  if (hechos === 0) {
+    return { texto: `Lo siguiente es empezar el ${nombre}.`, destino: ruta, rotulo: `Empezar el ${nombre}` };
+  }
+  return { texto: `Vas por el paso ${hechos + 1} de ${total} del ${nombre}.`, destino: ruta, rotulo: 'Continuar' };
+}
+
+// Una sola llamada a la acción, al final de la página, en todas las páginas que
+// la declaren con <div id="siguiente-paso">.
+function ui_pintaSiguientePaso(state) {
+  const caja = document.getElementById('siguiente-paso');
+  if (!caja) return;
+  const p = guia_siguientePaso(state);
+  const enEstaPagina = p.destino && location.pathname.replace(/\.html$/, '').replace(/\/$/, '') === p.destino;
+  caja.innerHTML = '';
+  const t = document.createElement('div');
+  t.className = 'sp-texto';
+  t.appendChild(Object.assign(document.createElement('strong'), { textContent: 'Lo siguiente' }));
+  t.appendChild(document.createTextNode(p.texto));
+  caja.appendChild(t);
+  if (p.destino && p.rotulo && !enEstaPagina) {
+    const a = document.createElement('a');
+    a.href = p.destino;
+    a.className = 'btn primary small';
+    a.textContent = p.rotulo + ' →';
+    caja.appendChild(a);
+  }
+  caja.hidden = false;
+}
+
 // Engancha los eventos una sola vez. Antes esto vivía dentro de la función de
 // render, que se llamaba a sí misma desde el propio handler: cada clic
 // duplicaba los listeners y a partir del segundo el paso se conmutaba un
@@ -403,6 +561,7 @@ function ui_bindSprintPage(sprintId) {
     const s = state_ensure();
     ui_renderSprintPage(s, sprintId);
     ui_updateStatusStrip(s);
+    ui_pintaSiguientePaso(s);
   };
 
   document.querySelectorAll(`[data-step][data-sprint="${sprintId}"]`).forEach(el => {
@@ -415,6 +574,10 @@ function ui_bindSprintPage(sprintId) {
       if (estado === 'bloqueado' || estado === 'proximamente') return;
       sprint_toggleStep(s, sprintId, el.dataset.step);
       refrescar();
+      const marcado = state_ensure().sprints[sprintId].pasos_completados.includes(el.dataset.step);
+      const total = sprint_totalSteps(sprintId);
+      const hechos = state_ensure().sprints[sprintId].pasos_completados.length;
+      anuncia(`${marcado ? 'Paso marcado' : 'Paso desmarcado'}. ${hechos} de ${total} completados.`);
     };
 
     el.addEventListener('click', toggle);
@@ -498,10 +661,88 @@ function ui_bindImport() {
 // INICIALIZACIÓN POR PÁGINA
 // ═══════════════════════════════════════════════════
 
+// Zona donde se anuncian los cambios que ocurren sin recargar. Sin esto, quien
+// usa lector de pantalla marcaba un paso y no recibía ninguna confirmación.
+function ui_prepararAnuncios() {
+  if (document.getElementById('anuncios')) return;
+  const el = document.createElement('div');
+  el.id = 'anuncios';
+  el.className = 'visually-hidden';
+  el.setAttribute('role', 'status');
+  el.setAttribute('aria-live', 'polite');
+  document.body.appendChild(el);
+}
+function anuncia(texto) {
+  const el = document.getElementById('anuncios');
+  if (el) { el.textContent = ''; setTimeout(() => { el.textContent = texto; }, 60); }
+}
+
+// ═══════════════════════════════════════════════════
+// CAPAS DE INFORMACIÓN
+// La primera capa dice qué es esto, qué toca ahora y cuánto cuesta. El resto
+// vive en <details class="capa">. Quien prefiera verlo todo lo dice una vez y
+// se le recuerda en todas las páginas.
+// ═══════════════════════════════════════════════════
+
+function ui_aplicaDetalle(abrir) {
+  document.querySelectorAll('details.capa').forEach(d => { d.open = abrir; });
+}
+
+// El navegador no despliega un <details> cerrado al imprimir, así que en papel
+// se perdía hasta el 65 % del texto de la página, sin ninguna señal de que
+// faltara algo. Se abren antes de imprimir y se dejan como estaban después.
+function ui_prepararImpresion() {
+  let cerradas = [];
+  const antes = () => {
+    cerradas = [...document.querySelectorAll('details.capa')].filter(d => !d.open);
+    cerradas.forEach(d => { d.open = true; });
+  };
+  const despues = () => { cerradas.forEach(d => { d.open = false; }); cerradas = []; };
+  window.addEventListener('beforeprint', antes);
+  window.addEventListener('afterprint', despues);
+  if (window.matchMedia) {
+    const mq = window.matchMedia('print');
+    const escucha = (e) => (e.matches ? antes() : despues());
+    if (mq.addEventListener) mq.addEventListener('change', escucha);
+    else if (mq.addListener) mq.addListener(escucha);
+  }
+}
+
+function ui_bindDetalle(state) {
+  const botones = document.querySelectorAll('[data-action="detalle"]');
+  if (!botones.length) return;
+  const hayCapas = document.querySelectorAll('details.capa').length > 0;
+  if (!hayCapas) { botones.forEach(b => b.hidden = true); return; }
+
+  const pinta = (activo) => {
+    botones.forEach(b => {
+      b.setAttribute('aria-pressed', activo ? 'true' : 'false');
+      b.textContent = activo ? 'Ver menos detalle' : 'Ver todo el detalle';
+    });
+  };
+
+  let activo = !!(state.prefs && state.prefs.detalle);
+  if (activo) ui_aplicaDetalle(true);
+  pinta(activo);
+
+  botones.forEach(b => b.addEventListener('click', () => {
+    activo = !activo;
+    ui_aplicaDetalle(activo);
+    pinta(activo);
+    const s = state_ensure();
+    s.prefs = s.prefs || {};
+    s.prefs.detalle = activo;
+    state_save(s);
+    anuncia(activo ? 'Detalle desplegado en toda la página.' : 'Detalle recogido. Se abre apartado a apartado.');
+  }));
+}
+
 function app_init() {
   const state = state_touchVisit();
+  ui_prepararAnuncios();
 
   ui_updateStatusStrip(state);
+  ui_pintaSiguientePaso(state);
   ui_bindCourseName();
   ui_bindImport();
 
@@ -509,6 +750,8 @@ function app_init() {
   document.querySelectorAll('[data-action="export"]').forEach(btn => {
     btn.addEventListener('click', state_export);
   });
+  ui_bindDetalle(state);
+  ui_prepararImpresion();
   document.querySelectorAll('[data-action="reset"]').forEach(btn => {
     btn.addEventListener('click', () => {
       if (confirm('¿Seguro que quieres reiniciar? Perderás todo el progreso de esta asignatura en este navegador.')) {

@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Observar y leer lo que ocurre · Sprint 2 · Rediseña.Evaluacion</title>
+<meta name="description" content="Los cinco instrumentos con los que observar tu asignatura mientras pilotas el rediseño, y el procedimiento para leer después lo que hayas visto. Pieza del Sprint 2 del kit Rediseña.Evaluacion.">
+<!-- Tipografías servidas desde el propio kit. Si guardas este archivo en tu
+     equipo y lo abres sin conexión, el texto se ve igual con las tipografías
+     del sistema: no se pierde nada. -->
+<link rel="stylesheet" href="/assets/css/fuentes.v1.css">
+<style>
+/* ============ SISTEMA DE DISEÑO · Rediseña.Evaluacion ============ */
+:root{
+  --azul-reflex:#171796; --azul-deep:#0F0F6B; --azul-mid:#2D2DA8; --azul-soft:#E8E8F6;
+  --acento-teal:#1A9E7A;
+  /* Variantes oscurecidas para TEXTO. Los acentos de marca se mantienen para
+     fondos, bordes y superficies; en texto pequeño no llegaban a 4,5:1. */
+  --texto-teal:#0F6F55;
+  --texto-coral:#B81F1F;
+  --texto-ambar:#8A5A00;
+  --acento-teal-soft:#E0F2EC;
+  --acento-amber:#E8A317; --acento-amber-soft:#FBF0D9;
+  --acento-coral:#E05555; --acento-coral-soft:#FADDDD;
+  --gris-900:#0E1116; --gris-800:#1F2329; --gris-700:#3A4049; --gris-600:#575E68;
+  --gris-500:#666D76; --gris-400:#9DA3AB; --gris-300:#C8CCD2; --gris-200:#E2E4E8;
+  --gris-100:#F1F2F5; --gris-050:#F8F9FB; --blanco:#FFFFFF;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
+  --serif:'Source Serif 4','Iowan Old Style','Palatino Linotype','Book Antiqua',Georgia,serif;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px;
+  --sp-7:28px; --sp-8:32px; --sp-10:40px; --sp-12:48px;
+  --text-xs:11px; --text-sm:13px; --text-base:14px; --text-lg:16px;
+  --text-xl:18px; --text-2xl:22px; --text-3xl:28px; --text-4xl:36px;
+  --radio-sm:4px; --radio-md:8px; --radio-lg:12px;
+  --sombra-sm:0 1px 2px rgba(15,15,107,.06),0 1px 3px rgba(15,15,107,.04);
+  --sombra-md:0 4px 12px rgba(15,15,107,.08),0 2px 4px rgba(15,15,107,.05);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--gris-050);color:var(--gris-900);font-family:var(--sans);font-size:var(--text-base);line-height:1.6;-webkit-font-smoothing:antialiased}
+body{padding:var(--sp-10) var(--sp-6) var(--sp-12);overflow-wrap:break-word;}
+
+/* ============ CONTENEDOR ============ */
+.page{
+  max-width:820px;margin:0 auto;background:var(--blanco);
+  border-radius:var(--radio-lg);box-shadow:var(--sombra-md);
+  border:1px solid var(--gris-200);overflow:hidden;
+}
+
+/* ============ CABECERA ============ */
+.page-head{
+  background:linear-gradient(135deg,var(--azul-deep) 0%,var(--azul-reflex) 55%,var(--azul-mid) 100%);
+  color:var(--blanco);padding:var(--sp-8) var(--sp-10) var(--sp-7);
+}
+.kit-tag{
+  font-size:var(--text-xs);letter-spacing:.14em;text-transform:uppercase;
+  opacity:.78;margin-bottom:var(--sp-2);font-weight:600;
+}
+a.kit-tag{color:inherit;text-decoration:none;display:inline-block;transition:opacity .15s ease;}
+a.kit-tag:hover,a.kit-tag:focus-visible{opacity:1;text-decoration:underline;}
+.page-head h1{
+  font-family:var(--serif);font-size:var(--text-3xl);
+  font-weight:600;letter-spacing:-.01em;line-height:1.15;margin-bottom:var(--sp-2);
+}
+.page-head .subtitle{
+  font-size:var(--text-base);opacity:.92;font-style:italic;max-width:640px;line-height:1.5;
+}
+.head-meta{
+  display:flex;gap:var(--sp-6);margin-top:var(--sp-5);
+  padding-top:var(--sp-4);border-top:1px solid rgba(255,255,255,.18);
+  font-size:var(--text-xs);letter-spacing:.06em;flex-wrap:wrap;
+}
+.head-meta-item{opacity:.85;}
+.head-meta-item strong{opacity:1;color:var(--blanco);font-weight:600;letter-spacing:0;text-transform:none;margin-right:4px;font-size:var(--text-xs);}
+
+/* ============ CUERPO ============ */
+.body{padding:var(--sp-8) var(--sp-10);}
+
+/* ============ ÍNDICE ============ */
+.toc{
+  background:var(--gris-050);border:1px solid var(--gris-200);
+  border-radius:var(--radio-md);padding:var(--sp-5) var(--sp-6);
+  margin-bottom:var(--sp-8);counter-reset:toc;
+}
+.toc h2,.toc h3{
+  font-family:var(--serif);font-weight:700;
+  color:var(--azul-deep);margin-bottom:var(--sp-3);
+  letter-spacing:.08em;text-transform:uppercase;font-size:var(--text-xs);
+}
+.toc h3{color:var(--azul-reflex);margin-top:var(--sp-4);}
+.toc ol{list-style:none;display:grid;gap:6px;}
+.toc ol li{counter-increment:toc;padding-left:var(--sp-6);position:relative;font-size:var(--text-sm);}
+.toc ol li::before{
+  content:counter(toc, decimal) ".";
+  position:absolute;left:0;top:0;font-family:var(--serif);font-weight:700;
+  color:var(--azul-reflex);width:20px;
+}
+.toc ol li a{color:var(--gris-800);text-decoration:none;}
+.toc ol li a:hover,.toc ol li a:focus-visible{color:var(--azul-reflex);text-decoration:underline;}
+
+/* ============ BANDA DE PARTE ============ */
+.part-band{
+  background:var(--azul-soft);border-radius:var(--radio-md);
+  border-left:4px solid var(--azul-reflex);
+  padding:var(--sp-6) var(--sp-6);margin:var(--sp-12) 0 var(--sp-8);
+  scroll-margin-top:20px;
+}
+.part-band:first-of-type{margin-top:var(--sp-10);}
+.part-band h2{
+  font-family:var(--serif);font-size:var(--text-3xl);font-weight:600;
+  color:var(--azul-deep);line-height:1.15;letter-spacing:-.01em;
+}
+.part-when{
+  font-size:var(--text-xs);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--azul-reflex);font-weight:700;margin-top:var(--sp-2);
+}
+.part-band p.part-lead{color:var(--azul-deep);margin-top:var(--sp-4);line-height:1.55;}
+.part-band p.part-lead + p.part-lead{margin-top:var(--sp-2);}
+
+/* ============ SECCIÓN ============ */
+.section{margin-bottom:var(--sp-10);scroll-margin-top:20px;}
+.section:last-child{margin-bottom:0;}
+.section-head{
+  display:flex;align-items:baseline;gap:var(--sp-3);
+  margin-bottom:var(--sp-5);flex-wrap:wrap;
+}
+.section-num{
+  font-family:var(--serif);font-weight:700;color:var(--azul-reflex);
+  font-size:var(--text-2xl);line-height:1;
+}
+.section-head h2,.section-head h3{
+  font-family:var(--serif);font-weight:600;font-size:var(--text-2xl);
+  color:var(--azul-deep);letter-spacing:-.01em;line-height:1.2;
+}
+.section-hint{
+  font-size:var(--text-xs);color:var(--gris-500);font-style:italic;
+  margin-left:auto;
+}
+.lead{font-size:var(--text-lg);color:var(--gris-800);line-height:1.55;margin-bottom:var(--sp-4);}
+
+/* ============ PROSA ============ */
+.prose p{color:var(--gris-800);margin-bottom:var(--sp-3);}
+.prose p:last-child{margin-bottom:0;}
+.prose strong{color:var(--azul-deep);font-weight:600;}
+.prose em{font-style:italic;}
+.prose h4,.section > h4,.section > h3.sub-titulo{
+  font-family:var(--serif);font-weight:600;font-size:var(--text-lg);
+  color:var(--azul-deep);margin-top:var(--sp-6);margin-bottom:var(--sp-3);
+  letter-spacing:-.005em;
+}
+
+/* ============ LISTAS ============ */
+.prose ul{list-style:none;display:grid;gap:var(--sp-2);margin:var(--sp-3) 0;}
+.prose ul li{
+  padding-left:var(--sp-5);position:relative;color:var(--gris-800);
+  font-size:var(--text-sm);line-height:1.55;
+}
+.prose ul li::before{
+  content:'›';position:absolute;left:var(--sp-2);top:0;
+  color:var(--azul-reflex);font-weight:700;
+}
+.prose ul li strong{color:var(--azul-deep);}
+.prose ul.simple li::before{content:'·';font-size:18px;top:-4px;}
+
+/* ============ LISTA NUMERADA DE ÍTEMS ============ */
+.items{list-style:none;counter-reset:item;display:grid;gap:var(--sp-2);margin:var(--sp-4) 0;}
+.items li{
+  counter-increment:item;position:relative;padding:var(--sp-3) var(--sp-4) var(--sp-3) var(--sp-10);
+  background:var(--gris-050);border:1px solid var(--gris-200);border-radius:var(--radio-sm);
+  font-size:var(--text-sm);color:var(--gris-800);line-height:1.5;
+}
+.items li::before{
+  content:counter(item);position:absolute;left:var(--sp-4);top:var(--sp-3);
+  font-family:var(--serif);font-weight:700;color:var(--azul-reflex);
+}
+.pregunta-abierta{
+  font-family:var(--serif);font-size:var(--text-lg);color:var(--azul-deep);
+  background:var(--acento-teal-soft);border-left:3px solid var(--acento-teal);
+  border-radius:var(--radio-md);padding:var(--sp-4) var(--sp-5);margin:var(--sp-4) 0;
+  line-height:1.4;
+}
+
+/* ============ AVISOS ============ */
+.callout{
+  padding:var(--sp-4) var(--sp-5);border-radius:var(--radio-md);
+  margin:var(--sp-5) 0;font-size:var(--text-sm);line-height:1.55;
+  border-left:3px solid;
+}
+.callout p{margin-bottom:var(--sp-2);}
+.callout p:last-child{margin-bottom:0;}
+.callout strong{font-weight:700;}
+.callout-label{
+  display:block;font-size:var(--text-xs);letter-spacing:.08em;
+  text-transform:uppercase;font-weight:700;margin-bottom:var(--sp-2);
+}
+.callout.reassure{background:var(--azul-soft);border-left-color:var(--azul-reflex);color:var(--azul-deep);}
+.callout.reassure .callout-label{color:var(--azul-reflex);}
+.callout.success{background:var(--acento-teal-soft);border-left-color:var(--acento-teal);color:#0D5C47;}
+.callout.success .callout-label{color:var(--texto-teal);}
+.callout.warn{background:var(--acento-amber-soft);border-left-color:var(--acento-amber);color:#5B3D00;}
+.callout.warn .callout-label{color:var(--texto-ambar);}
+.callout.coral{background:var(--acento-coral-soft);border-left-color:var(--acento-coral);color:#6B1F1F;}
+.callout.coral .callout-label{color:var(--texto-coral);}
+
+/* ============ DEFINICIONES ============ */
+.defs{display:grid;gap:var(--sp-3);margin:var(--sp-5) 0;}
+.def-item{
+  background:var(--gris-050);border:1px solid var(--gris-200);
+  border-left:3px solid var(--azul-reflex);
+  border-radius:var(--radio-md);padding:var(--sp-4) var(--sp-5);
+}
+.def-term{
+  font-family:var(--serif);font-weight:700;color:var(--azul-deep);
+  font-size:var(--text-base);margin-bottom:var(--sp-1);letter-spacing:-.005em;
+}
+.def-body{font-size:var(--text-sm);color:var(--gris-700);line-height:1.55;}
+.def-body strong{color:var(--azul-deep);}
+
+/* ============ FICHA DE INSTRUMENTO ============ */
+.ficha{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:var(--sp-3);margin:var(--sp-4) 0 var(--sp-5);
+}
+.ficha-item{
+  background:var(--gris-050);border:1px solid var(--gris-200);
+  border-top:3px solid var(--azul-reflex);
+  border-radius:var(--radio-sm);padding:var(--sp-3) var(--sp-4);
+}
+.ficha-label{
+  display:block;font-size:var(--text-xs);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--azul-reflex);font-weight:700;margin-bottom:var(--sp-1);
+}
+.ficha-valor{display:block;font-size:var(--text-sm);color:var(--gris-800);line-height:1.45;}
+
+/* ============ EJEMPLO RELLENO ============ */
+.ejemplo{
+  background:var(--gris-050);border:1px solid var(--gris-200);
+  border-left:3px solid var(--acento-teal);
+  border-radius:var(--radio-md);padding:var(--sp-4) var(--sp-5);margin:var(--sp-5) 0;
+}
+.ejemplo-label{
+  display:block;font-size:var(--text-xs);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--texto-teal);font-weight:700;margin-bottom:var(--sp-2);
+}
+.ejemplo p{font-size:var(--text-sm);color:var(--gris-800);line-height:1.55;margin-bottom:var(--sp-2);}
+.ejemplo p:last-child{margin-bottom:0;}
+.ejemplo .caso{color:var(--gris-700);font-style:italic;}
+.ejemplo strong{color:var(--azul-deep);font-weight:700;}
+
+/* ============ TABLAS ============ */
+.table-scroll{overflow-x:auto;margin:var(--sp-5) 0;}
+.table-scroll:focus-visible{outline:3px solid var(--azul-reflex);outline-offset:3px;}
+.table-scroll .data-table{margin:0;}
+.data-table{
+  width:100%;border-collapse:collapse;margin:var(--sp-5) 0;
+  font-size:var(--text-sm);line-height:1.5;
+  border:1px solid var(--gris-200);border-radius:var(--radio-md);
+  overflow:hidden;
+}
+/* La nota de las tablas para rellenar va FUERA del contenedor con scroll: dentro
+   de un <caption> quedaba cortada a 360 px, porque la tabla es más ancha que la
+   pantalla y había que arrastrar en horizontal para leerla. */
+.tabla-nota{
+  font-size:var(--text-xs);color:var(--gris-600);font-style:italic;
+  margin:var(--sp-5) 0 calc(var(--sp-2) * -1);
+}
+.data-table thead tr{background:var(--azul-soft);}
+.data-table th{
+  text-align:left;padding:var(--sp-3) var(--sp-4);
+  font-family:var(--serif);font-weight:700;color:var(--azul-deep);
+  font-size:var(--text-sm);border-bottom:2px solid var(--azul-reflex);
+}
+.data-table td{
+  padding:var(--sp-3) var(--sp-4);border-bottom:1px solid var(--gris-200);
+  color:var(--gris-800);vertical-align:top;
+}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tbody tr:nth-child(even){background:var(--gris-050);}
+.data-table td strong{color:var(--azul-deep);}
+.data-table.ancha{min-width:560px;}
+.data-table.media{min-width:440px;}
+.tabla-rellenar td{height:2.4em;}
+.data-table .coste{white-space:nowrap;color:var(--gris-700);}
+
+/* ============ PASOS ============ */
+.checklist{list-style:none;display:grid;gap:var(--sp-3);margin:var(--sp-5) 0;}
+.check-item{
+  display:grid;grid-template-columns:auto 1fr;gap:var(--sp-4);
+  padding:var(--sp-4) var(--sp-5);background:var(--gris-050);
+  border:1px solid var(--gris-200);border-radius:var(--radio-md);
+  border-left:3px solid var(--azul-reflex);
+}
+.check-num{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--azul-reflex);color:var(--blanco);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-weight:700;font-size:var(--text-base);
+  flex-shrink:0;
+}
+.check-body h4{
+  font-family:var(--serif);font-weight:600;font-size:var(--text-lg);
+  color:var(--azul-deep);margin:0 0 6px 0;letter-spacing:-.005em;
+}
+.check-body p{font-size:var(--text-sm);color:var(--gris-700);line-height:1.55;margin-bottom:var(--sp-2);}
+.check-body p:last-child{margin-bottom:0;}
+.check-body strong{color:var(--azul-deep);}
+
+/* ============ PANEL DE ENLACES ============ */
+.links-panel{
+  background:var(--gris-900);color:var(--gris-100);
+  border-radius:var(--radio-md);padding:var(--sp-5) var(--sp-6);
+  margin-top:var(--sp-6);
+}
+.links-panel h2{
+  font-family:var(--serif);font-weight:600;font-size:var(--text-lg);
+  color:var(--blanco);margin-bottom:var(--sp-3);
+}
+.links-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-3);}
+.link-card{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--radio-sm);padding:var(--sp-3) var(--sp-4);
+  text-decoration:none;color:var(--gris-100);transition:all .15s ease;
+}
+.link-card:hover,.link-card:focus-visible{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3);}
+.link-card-label{font-size:var(--text-xs);letter-spacing:.08em;text-transform:uppercase;color:var(--gris-400);margin-bottom:2px;}
+.link-card-title{font-weight:600;color:var(--blanco);font-size:var(--text-sm);}
+.link-card-hint{font-size:var(--text-xs);color:var(--gris-400);margin-top:4px;}
+
+/* ============ PIE ============ */
+.page-foot{
+  background:var(--gris-100);color:var(--gris-600);
+  padding:var(--sp-5) var(--sp-10);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:var(--text-xs);letter-spacing:.04em;border-top:1px solid var(--gris-200);
+  gap:var(--sp-3);flex-wrap:wrap;
+}
+.page-foot strong{color:var(--gris-800);font-weight:600;}
+
+@media (max-width:720px){
+  body{padding:var(--sp-4) var(--sp-2);}
+  .page-head,.body,.page-foot{padding-left:var(--sp-5);padding-right:var(--sp-5);}
+  .page-head{padding-top:var(--sp-6);}
+  .page-foot{flex-direction:column;gap:var(--sp-2);align-items:flex-start;}
+  .links-grid{grid-template-columns:1fr;}
+  .part-band h2{font-size:var(--text-2xl);}
+  .page-head h1{font-size:var(--text-2xl);}
+  .data-table{font-size:var(--text-xs);}
+  .data-table th,.data-table td{padding:var(--sp-2) var(--sp-3);}
+  .check-item{padding:var(--sp-4);gap:var(--sp-3);}
+}
+@media print{
+  body{padding:0;background:var(--blanco);}
+  .page{box-shadow:none;border:none;border-radius:0;}
+  .check-item,.callout,.def-item,.ejemplo,.ficha-item,.part-band{page-break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+
+<main class="page">
+
+  <!-- ============ CABECERA ============ -->
+  <header class="page-head">
+    <a class="kit-tag" href="/sprint-2" title="Volver al Sprint 2 de Rediseña.Evaluacion">← Rediseña.Evaluacion · Sprint 2 · Pilotaje</a>
+    <h1>Observar y leer lo que ocurre</h1>
+    <p class="subtitle">Los instrumentos con los que mirar lo que pasa en tu aula mientras pilotas el rediseño, y cómo interpretar después lo que hayas visto.</p>
+    <div class="head-meta">
+      <div class="head-meta-item"><strong>Duración</strong>Dos partes · 20 + 20 min de lectura</div>
+      <div class="head-meta-item"><strong>Complemento de</strong>Cuaderno de pilotaje</div>
+      <div class="head-meta-item"><strong>Cuándo</strong>Parte 1 antes de empezar · Parte 2 a mitad de cuatrimestre</div>
+    </div>
+  </header>
+
+  <!-- ============ CUERPO ============ -->
+  <div class="body">
+
+    <!-- ========== ÍNDICE ========== -->
+    <nav class="toc" aria-labelledby="toc-titulo">
+      <h2 id="toc-titulo">Contenido</h2>
+      <ol>
+        <li><a href="#s1">Cómo está organizado esto</a></li>
+      </ol>
+      <h3>Parte 1 · Observar</h3>
+      <ol>
+        <li><a href="#s2">Cómo se eligen los instrumentos</a></li>
+        <li><a href="#s3">Instrumento 1 · La pregunta de cierre de clase</a></li>
+        <li><a href="#s4">Instrumento 2 · El pulso al estudiantado</a></li>
+        <li><a href="#s5">Instrumento 3 · Lo que tu asignatura ya produce</a></li>
+        <li><a href="#s6">Instrumento 4 · El registro de tiempos</a></li>
+        <li><a href="#s7">Instrumento 5 · Una mirada ajena</a></li>
+        <li><a href="#s8">El calendario mínimo</a></li>
+      </ol>
+      <h3>Parte 2 · Leer</h3>
+      <ol>
+        <li><a href="#s9">Qué convierte una observación en señal</a></li>
+        <li><a href="#s10">El procedimiento: cuatro pasos, cuarenta minutos</a></li>
+        <li><a href="#s11">Patrones frecuentes y qué suelen significar</a></li>
+        <li><a href="#s12">Ajustar ahora o anotar para la próxima edición</a></li>
+        <li><a href="#s13">Cómo se deja escrito</a></li>
+      </ol>
+    </nav>
+
+    <!-- ========== 1 ========== -->
+    <section class="section" id="s1">
+      <div class="section-head">
+        <span class="section-num">1</span>
+        <h2>Cómo está organizado esto</h2>
+      </div>
+      <p class="lead">Observar y leer son dos tareas distintas y se hacen en momentos distintos, pero son la misma cosa partida en dos: no sirve de nada un instrumento cuyos resultados no sabes interpretar, ni una guía de interpretación sin nada que interpretar. Por eso van juntas en una sola pieza, y por eso la pieza tiene dos partes.</p>
+
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Tabla: las dos partes de esta pieza (desplazable en horizontal)"><table class="data-table ancha">
+        <thead>
+          <tr><th style="width:16%">Parte</th><th style="width:40%">Qué contiene</th><th style="width:28%">Cuándo se usa</th><th>Cuánto lleva</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Parte 1 · Observar</strong></td>
+            <td>Cinco instrumentos con sus ejemplos rellenos, la tabla para elegir, el calendario mínimo del cuatrimestre y las cinco maneras de que esto no funcione.</td>
+            <td>Se eligen antes de empezar y se usan durante todo el cuatrimestre.</td>
+            <td class="coste">20 min de lectura</td>
+          </tr>
+          <tr>
+            <td><strong>Parte 2 · Leer</strong></td>
+            <td>Qué convierte una observación en señal, el procedimiento de cuarenta minutos, diez patrones frecuentes y el criterio para decidir qué se ajusta y qué se anota.</td>
+            <td>Desde la mitad del cuatrimestre. Antes no hay nada que leer.</td>
+            <td class="coste">20 min de lectura</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="callout reassure">
+        <span class="callout-label">No hace falta leerlo entero ahora</span>
+        <p>La Parte 2 no sirve de nada al arrancar el cuatrimestre: se lee hacia la mitad, cuando ya tengas material delante. Si estás preparando el comienzo, con la Parte 1 vas sobrado.</p>
+        <p>Y una cosa que conviene saber desde el principio: el <strong>Cuaderno de pilotaje</strong> es el que te dice, apartado a apartado, cuándo toca cada cosa. Esta pieza es la caja de herramientas; el Cuaderno es el mapa.</p>
+      </div>
+
+      <h3 class="sub-titulo">Tres palabras del kit que van a aparecer aquí</h3>
+      <div class="prose">
+        <p>Vienen del Sprint 1 y se usan en toda esta pieza sin volver a explicarlas.</p>
+      </div>
+
+      <div class="defs">
+        <div class="def-item">
+          <div class="def-term">Touchpoint (o momento evaluativo)</div>
+          <div class="def-body">Cada interacción evaluativa de tu asignatura: un parcial, una entrega, una tutoría con nota. Es la unidad con la que trabajaste en el <strong>Sprint 1</strong>, y la que sigue ordenando lo que observas ahora.</div>
+        </div>
+        <div class="def-item">
+          <div class="def-term">Lentes</div>
+          <div class="def-body">Las tres lecturas de factibilidad del Sprint 1: <strong>carga docente</strong>, <strong>carga del estudiante</strong> y <strong>equilibrio entre lo formativo y lo sumativo</strong>. El pilotaje sirve, entre otras cosas, para comprobar si lo que decían se cumplió.</div>
+        </div>
+        <div class="def-item">
+          <div class="def-term">Línea base e hipótesis con IA</div>
+          <div class="def-body">Las dos estimaciones de horas que declaraste, fase a fase y touchpoint a touchpoint, en la <strong>Plantilla del plan operativo</strong>. El Instrumento 4 de esta pieza es exactamente su recalibración con lo que de verdad te cueste.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== BANDA PARTE 1 ========== -->
+    <div class="part-band" id="parte-1">
+      <h2>Parte 1 · Observar</h2>
+      <p class="part-when">Desde antes de empezar y durante todo el cuatrimestre</p>
+      <p class="part-lead">Un rediseño sin observación es una intuición. Puedes terminar el cuatrimestre convencido de que ha funcionado, o de que no, y no tener con qué sostenerlo.</p>
+      <p class="part-lead">Cinco instrumentos, de los que hay que elegir tres. Ninguno se entrega en blanco: todos vienen con un ejemplo de cómo se ven rellenos y de qué se leyó en ellos.</p>
+    </div>
+
+    <!-- ========== 2 ========== -->
+    <section class="section" id="s2">
+      <div class="section-head">
+        <span class="section-num">2</span>
+        <h3>Cómo se eligen los instrumentos</h3>
+      </div>
+      <div class="prose">
+        <p>Un rediseño sin observación es una intuición. Estos instrumentos existen para que, con las actas cerradas, puedas decir algo con fundamento.</p>
+        <p>El <strong>Cuaderno de pilotaje</strong> recoge tus decisiones —qué vas a observar, qué has leído en ello, qué ajustas—. Esta pieza te da los instrumentos con los que observar. No hace falta que copies en el Cuaderno lo que produzcan: basta con que anotes dónde viven y qué has concluido.</p>
+        <p>En el apartado <strong>«Punto de partida»</strong> del Cuaderno dejaste escrito de dónde vienes, y en <strong>«Mis hipótesis»</strong>, qué esperabas que pasara con el rediseño. Lo que elijas aquí es lo que después te permitirá responder a esas hipótesis con algo más que una impresión.</p>
+
+        <h4>La regla que decide qué eliges</h4>
+        <p>Si un instrumento te cuesta más de quince minutos a la semana, no lo vas a sostener un cuatrimestre entero. Y un instrumento abandonado en la semana seis es peor que no haber empezado: te deja con datos de un tramo y con la sensación de haber fracasado en algo accesorio.</p>
+        <p>Elige tres: uno de lo que ves en el aula, uno de lo que dicen los estudiantes y uno de los datos que tu asignatura ya produce. Con eso se triangula. Con seis instrumentos no se triangula mejor, se abandona antes.</p>
+
+        <h4>Qué quieres saber y con qué mirarlo</h4>
+      </div>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Tabla: qué quieres saber y con qué mirarlo (desplazable en horizontal)"><table class="data-table media">
+        <thead>
+          <tr><th style="width:40%">Si tu pregunta es…</th><th style="width:38%">Mira con…</th><th>Te cuesta</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>¿Están entendiendo lo que creo que están entendiendo?</td><td><a href="#s3">Instrumento 1 · La pregunta de cierre</a></td><td class="coste">3 min / clase</td></tr>
+          <tr><td>¿Cómo están viviendo la asignatura rediseñada?</td><td><a href="#s4">Instrumento 2 · El pulso al estudiantado</a></td><td class="coste">2 × 20 min</td></tr>
+          <tr><td>¿Qué dicen los hechos, más allá de las impresiones?</td><td><a href="#s5">Instrumento 3 · Lo que tu asignatura ya produce</a></td><td class="coste">30 min × 3</td></tr>
+          <tr><td>¿Me está costando lo que yo pensaba que iba a costar?</td><td><a href="#s6">Instrumento 4 · El registro de tiempos</a></td><td class="coste">1 min / tarea</td></tr>
+          <tr><td>¿Qué hago yo en el aula que no soy capaz de ver?</td><td><a href="#s7">Instrumento 5 · Una mirada ajena</a></td><td class="coste">1 h, una vez</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- ========== 3 ========== -->
+    <section class="section" id="s3">
+      <div class="section-head">
+        <span class="section-num">3</span>
+        <h3>Instrumento 1 · La pregunta de cierre de clase</h3>
+      </div>
+
+      <div class="ficha">
+        <div class="ficha-item"><span class="ficha-label">Qué te dice</span><span class="ficha-valor">Si lo que has explicado ha llegado</span></div>
+        <div class="ficha-item"><span class="ficha-label">Lo que cuesta</span><span class="ficha-valor">Tres minutos al final de la clase</span></div>
+        <div class="ficha-item"><span class="ficha-label">Cuándo</span><span class="ficha-valor">Semanal o quincenal</span></div>
+      </div>
+
+      <div class="prose">
+        <p>Los últimos tres minutos de clase, cada estudiante responde a una sola pregunta en una tarjeta, en un papel o en un formulario. Sin nombre. Tú te llevas veinte respuestas de cuarenta palabras y las lees en el trayecto de vuelta.</p>
+        <p>Es el instrumento más barato del kit y el que más rápido corrige el rumbo, porque lo que revela se puede arreglar en la clase siguiente.</p>
+
+        <h4>El banco de preguntas</h4>
+        <p>Una por sesión de clase. Cambiar de pregunta cada vez mantiene el interés; repetir la misma tres veces seguidas permite ver una evolución. Ambas cosas sirven, pero no a la vez.</p>
+      </div>
+
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Tabla: banco de preguntas de cierre (desplazable en horizontal)"><table class="data-table media">
+        <thead>
+          <tr><th style="width:26%">Para saber…</th><th>Pregunta</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Si ha llegado</strong></td><td>¿Qué es lo más importante que te llevas de hoy? Dilo en una frase.</td></tr>
+          <tr><td><strong>Dónde se atasca</strong></td><td>¿Qué ha quedado turbio? Si tuvieras que preguntarme una cosa, ¿cuál sería?</td></tr>
+          <tr><td><strong>Si conecta</strong></td><td>¿Con qué de lo que ya sabías se relaciona lo de hoy?</td></tr>
+          <tr><td><strong>Si pueden aplicarlo</strong></td><td>Pon un ejemplo propio de lo que hemos visto. Uno que no haya salido en clase.</td></tr>
+          <tr><td><strong>Cómo lo han vivido</strong></td><td>¿En qué momento de la clase has estado más metido? ¿Y en cuál te has descolgado?</td></tr>
+          <tr><td><strong>Qué van a hacer</strong></td><td>¿Qué vas a hacer distinto esta semana a partir de lo de hoy?</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="prose">
+        <h4>Cómo se lee</h4>
+        <p>No cuentes respuestas: agrúpalas. Tres montones —lo esperado, lo que no esperabas, lo que no entiendo—. El montón interesante es siempre el segundo. Si el primero ocupa el noventa por ciento, la pregunta era demasiado fácil.</p>
+        <p>Y devuélvelo. Empezar la clase siguiente con «la semana pasada varios dijisteis que X no había quedado claro, así que empezamos por ahí» es lo que hace que la segunda vez respondan en serio.</p>
+      </div>
+
+      <div class="ejemplo">
+        <span class="ejemplo-label">Cómo se ve relleno</span>
+        <p class="caso">Pregunta: «¿Qué ha quedado turbio?» · 22 respuestas · semana 4</p>
+        <p>Nueve respuestas apuntan a lo mismo con palabras distintas: no distinguen cuándo aplicar el método A y cuándo el B. Cuatro dicen que nada. Tres preguntan por el examen. Dos por el trabajo en grupo. Cuatro son ilegibles o irónicas.</p>
+        <p><strong>Lectura:</strong> creía que el problema era el cálculo y el problema es el criterio de elección. La clase siguiente empieza con dos casos y la pregunta «¿cuál de los dos métodos y por qué?». Coste del ajuste: quince minutos de preparación.</p>
+      </div>
+    </section>
+
+    <!-- ========== 4 ========== -->
+    <section class="section" id="s4">
+      <div class="section-head">
+        <span class="section-num">4</span>
+        <h3>Instrumento 2 · El pulso al estudiantado</h3>
+      </div>
+
+      <div class="ficha">
+        <div class="ficha-item"><span class="ficha-label">Qué te dice</span><span class="ficha-valor">Cómo se está viviendo tu rediseño</span></div>
+        <div class="ficha-item"><span class="ficha-label">Lo que cuesta</span><span class="ficha-valor">Veinte minutos, dos veces</span></div>
+        <div class="ficha-item"><span class="ficha-label">Cuándo</span><span class="ficha-valor">Semanas 5-6 y 12-13</span></div>
+      </div>
+
+      <div class="prose">
+        <p>Seis preguntas cerradas y una abierta, dos veces en el cuatrimestre: la primera pasada llega a tiempo de corregir y la segunda a tiempo de documentar. Seis y no veinte porque una encuesta larga tiene la mitad de respuestas y el triple de respuestas mecánicas.</p>
+      </div>
+
+      <div class="callout warn">
+        <span class="callout-label">Decisión del kit · dos pasadas, no tres</span>
+        <p>El pulso se pasa <strong>dos veces</strong> —semanas 5-6 y 12-13—, y es a propósito. Una encuesta en las primeras semanas mide sobre todo el desconcierto inicial de un grupo que aún no sabe cómo funciona la asignatura, y cada pasada de más es tiempo que se le pide al estudiante. Si tu cuatrimestre no dura catorce semanas, desplaza esas dos ventanas proporcionalmente.</p>
+      </div>
+
+      <div class="prose">
+        <h4>Los seis ítems</h4>
+        <p>Escala de 1 a 5. Pregunta por la experiencia, no por tu desempeño: lo segundo ya lo hace la encuesta institucional de tu universidad.</p>
+      </div>
+      <ol class="items">
+        <li>Tengo claro qué se espera de mí en esta asignatura.</li>
+        <li>Las actividades de clase me ayudan a entender la materia.</li>
+        <li>Sé cómo voy: recibo información sobre mi aprendizaje a tiempo de usarla.</li>
+        <li>El trabajo que me pide la asignatura es asumible en el tiempo del que dispongo.</li>
+        <li>Lo que hacemos en clase se conecta con lo que se me va a evaluar.</li>
+        <li>Me siento cómodo preguntando o interviniendo cuando no entiendo algo.</li>
+      </ol>
+
+      <div class="prose">
+        <p>Y la abierta, la que de verdad sirve:</p>
+      </div>
+      <p class="pregunta-abierta">¿Qué cambiarías de cómo funciona la asignatura, si pudieras cambiar una sola cosa?</p>
+
+      <div class="prose">
+        <h4>Cómo se lee</h4>
+        <p>En los cerrados no mires la media: mira la dispersión y el ítem más bajo. Un 3,4 repartido entre 1 y 5 significa que la asignatura funciona muy distinto para unos y para otros; un 3,4 con todos en 3 y 4, que va tirando para todos. En la abierta, agrupa por tema y cuenta. Y compara las dos pasadas ítem a ítem: que algo baje en la segunda suele ser saturación de final de cuatrimestre; que suba sí es tuyo.</p>
+      </div>
+
+      <div class="ejemplo">
+        <span class="ejemplo-label">Cómo se ve relleno</span>
+        <p class="caso">Primera pasada, semana 6, 31 respuestas de 44.</p>
+        <p>Ítems 1, 2 y 5 entre 4,1 y 4,4. Ítem 4 —carga de trabajo— en 2,6, con doce respuestas en 1 o 2. Ítem 3 —saber cómo voy— en 3,0. En la abierta, nueve de treinta y una piden menos entregas o más espaciadas.</p>
+        <p><strong>Lectura:</strong> el diseño se entiende y se conecta, pero la carga está mal calibrada y la retroalimentación llega tarde. Las dos cosas son mías y las dos se pueden tocar sin romper nada: fusiono dos entregas menores y devuelvo la corrección de la primera antes de pedir la segunda.</p>
+      </div>
+    </section>
+
+    <!-- ========== 5 ========== -->
+    <section class="section" id="s5">
+      <div class="section-head">
+        <span class="section-num">5</span>
+        <h3>Instrumento 3 · Lo que tu asignatura ya produce</h3>
+      </div>
+
+      <div class="ficha">
+        <div class="ficha-item"><span class="ficha-label">Qué te dice</span><span class="ficha-valor">Hechos, no impresiones</span></div>
+        <div class="ficha-item"><span class="ficha-label">Lo que cuesta</span><span class="ficha-valor">Media hora, tres veces</span></div>
+        <div class="ficha-item"><span class="ficha-label">Cuándo</span><span class="ficha-valor">Semanas 6 y 11, y con las actas cerradas</span></div>
+      </div>
+
+      <div class="prose">
+        <p>Este instrumento no hay que construirlo: ya existe. Tu asignatura genera entregas, calificaciones parciales, mensajes, accesos a materiales, preguntas repetidas en tutoría. Casi nadie lo mira mientras el curso está en marcha, y es lo único que no depende de que alguien conteste una encuesta. El trabajo aquí no es recoger: es decidir de antemano qué vas a mirar y con qué lo vas a comparar, porque un dato sin término de comparación no dice nada.</p>
+      </div>
+
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Tabla: datos que tu asignatura ya produce (desplazable en horizontal)"><table class="data-table ancha">
+        <thead>
+          <tr><th style="width:26%">Dato</th><th style="width:40%">Qué pregunta responde</th><th>Compáralo con…</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Entregas: cuántas, cuándo llegan</strong></td><td>¿La carga está donde yo creía? ¿Hay un cuello de botella?</td><td>Ediciones anteriores, o entre tus propias entregas</td></tr>
+          <tr><td><strong>Calificaciones parciales</strong></td><td>¿Dónde se rompe el grupo? ¿Es el contenido o el formato de la prueba?</td><td>La distribución que esperabas al diseñarla</td></tr>
+          <tr><td><strong>Preguntas que se repiten</strong></td><td>¿Qué no está claro en el enunciado?</td><td>Lo que tú creías que era obvio</td></tr>
+          <tr><td><strong>Acceso a materiales</strong></td><td>¿Se usa lo que preparaste? ¿Cuándo: antes de clase o la víspera del examen?</td><td>El uso que el diseño presupone</td></tr>
+          <tr><td><strong>Tu tiempo de corrección</strong></td><td>¿El rediseño te está costando lo previsto?</td><td>La línea base de la Plantilla del plan operativo, vía <a href="#s6">Instrumento 4</a></td></tr>
+          <tr><td><strong>Abandono y asistencia</strong></td><td>¿En qué semana se descuelga la gente?</td><td>La curva típica de tu titulación</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="prose">
+        <h4>Tu selección</h4>
+        <p>Elige dos o tres filas y déjalo escrito ahora, no en la semana once: anotarlo cuesta un minuto y es lo que hace que en la semana once lo mires.</p>
+      </div>
+
+      <p class="tabla-nota">Para rellenar: dos o tres filas bastan.</p>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Tabla para rellenar: tu selección de datos (desplazable en horizontal)"><table class="data-table ancha tabla-rellenar">
+        <thead>
+          <tr><th style="width:30%">Qué miro</th><th style="width:30%">Con qué lo comparo</th><th style="width:22%">Dónde está</th><th>Cuándo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="ejemplo">
+        <span class="ejemplo-label">Cómo se ve relleno</span>
+        <p class="caso">Distribución de la primera entrega frente a la del curso pasado.</p>
+        <p>El año pasado: media 6,2, con una cola larga por debajo del 4. Este año: media 6,4, sin cola. Pero han entregado 38 de 44 frente a 41 de 45.</p>
+        <p><strong>Lectura:</strong> quien entrega, entrega mejor —el andamiaje nuevo funciona—, pero hay tres personas más que directamente no entran. El rediseño sirve a quien ya estaba dentro y no ha enganchado a quien estaba fuera. Es exactamente lo que no se ve mirando solo la media.</p>
+      </div>
+    </section>
+
+    <!-- ========== 6 ========== -->
+    <section class="section" id="s6">
+      <div class="section-head">
+        <span class="section-num">6</span>
+        <h3>Instrumento 4 · El registro de tiempos</h3>
+      </div>
+
+      <div class="ficha">
+        <div class="ficha-item"><span class="ficha-label">Qué te dice</span><span class="ficha-valor">Si tu rediseño es sostenible</span></div>
+        <div class="ficha-item"><span class="ficha-label">Lo que cuesta</span><span class="ficha-valor">Un minuto por tarea</span></div>
+        <div class="ficha-item"><span class="ficha-label">Cuándo</span><span class="ficha-valor">Cada vez que corriges o preparas</span></div>
+      </div>
+
+      <div class="prose">
+        <p>Un rediseño que funciona pero que te cuesta el doble no lo vas a repetir el curso que viene. La sostenibilidad es un resultado del pilotaje tan legítimo como el aprendizaje de los estudiantes, y es el que más se olvida documentar.</p>
+        <p>Este instrumento es <strong>la recalibración de lo que estimaste en el Sprint 1</strong>. En la <strong>Plantilla del plan operativo</strong> declaraste, para cada fase de cada touchpoint —diseño, ejecución, corrección y retroalimentación—, una estimación de línea base, y en muchos casos una segunda hipótesis suponiendo apoyo de IA. Aquí solo anotas lo que ha pasado de verdad, y al cerrar el cuatrimestre tienes con qué corregir aquellas cifras para la próxima edición. Si no usaste la Plantilla, sirve igual: pon la estimación de memoria antes de empezar la tarea, no después.</p>
+        <p>El registro vive en el apartado <strong>«Registro de tiempos»</strong> del Cuaderno de pilotaje, que es donde conviene ir dejándolo mientras ocurre.</p>
+      </div>
+
+      <p class="tabla-nota">Para rellenar: una línea por tarea, en el momento, no al final del cuatrimestre.</p>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Tabla para rellenar: registro de tiempos (desplazable en horizontal)"><table class="data-table ancha tabla-rellenar">
+        <thead>
+          <tr><th style="width:30%">Tarea</th><th style="width:13%">Estimado</th><th style="width:13%">Real</th><th style="width:13%">¿Con IA?</th><th>Qué concluyo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="prose">
+        <h4>Cómo se lee</h4>
+        <p>Lo que interesa no es el total de horas: es la diferencia entre lo que estimaste y lo que te costó, y sobre todo dónde se concentra esa diferencia. Casi siempre está en una sola tarea, y casi siempre es la de dar retroalimentación individual.</p>
+        <p>Sobre la IA, la pregunta no es si ahorra tiempo en abstracto: es si te lo ahorró en esta tarea y qué hiciste con el tiempo ahorrado. Una hora que se convierte en retroalimentación más específica es un resultado; una hora que no se convierte en nada, también, pero es otro.</p>
+      </div>
+
+      <div class="ejemplo">
+        <span class="ejemplo-label">Cómo se ve relleno</span>
+        <p class="caso">Corrección de la entrega 2, 44 trabajos. Estimado: 6 h. Real: 9 h 30. Sin IA.</p>
+        <p class="caso">Rediseño de la rúbrica tras la entrega 1. Estimado: 1 h. Real: 40 min. Con IA para generar descriptores, revisados a mano.</p>
+        <p><strong>Lectura:</strong> la corrección se me va a las diez horas por entrega y tengo tres. Con la rúbrica afinada la entrega 3 debería bajar. Si no baja, el número de entregas es insostenible para un grupo de cuarenta y cuatro, y eso va al informe de pilotaje como una restricción de diseño, no como un fallo mío.</p>
+      </div>
+    </section>
+
+    <!-- ========== 7 ========== -->
+    <section class="section" id="s7">
+      <div class="section-head">
+        <span class="section-num">7</span>
+        <h3>Instrumento 5 · Una mirada ajena</h3>
+      </div>
+
+      <div class="ficha">
+        <div class="ficha-item"><span class="ficha-label">Qué te dice</span><span class="ficha-valor">Lo que haces y no puedes ver</span></div>
+        <div class="ficha-item"><span class="ficha-label">Lo que cuesta</span><span class="ficha-valor">Una hora, una vez</span></div>
+        <div class="ficha-item"><span class="ficha-label">Cuándo</span><span class="ficha-valor">Entre las semanas 5 y 10</span></div>
+      </div>
+
+      <div class="prose">
+        <p>Mientras facilitas no puedes observar: estás ocupado facilitando. Hay cosas que solo se ven desde fuera —a quién das turno, cuánto esperas tras preguntar, qué parte del aula no miras nunca— y ninguna encuesta te las va a decir.</p>
+        <p>Tres versiones, y la tercera solo aplica si tienes equipo docente. Con cualquiera de ellas basta.</p>
+
+        <h4>Versión con colega</h4>
+        <p>Un compañero se sienta veinte minutos en tu clase con tres preguntas fijas. Veinte minutos, no la clase entera: lo que buscas es una muestra, y una hora entera hace que nadie te diga que sí.</p>
+        <p>Las tres preguntas son siempre las mismas, y conviene dárselas por escrito para que no improvise una valoración global:</p>
+        <ul>
+          <li>¿Quién habla y quién no? Cuenta cuántas personas distintas intervienen.</li>
+          <li>¿Cuánto tiempo dejo entre que pregunto y que alguien responde? Mídelo un par de veces.</li>
+          <li>¿En qué momento se ha desenganchado el grupo, si es que lo ha hecho?</li>
+        </ul>
+        <p>Y una regla para que sirva: quien observa no opina sobre si la clase fue buena. Solo describe lo que vio. La valoración la haces tú.</p>
+
+        <h4>Versión sin colega</h4>
+        <p>Grábate. Con el móvil apoyado al fondo del aula basta, y si la sesión es en línea, la grabación ya existe. Después ves diez minutos a velocidad rápida con las mismas tres preguntas.</p>
+        <p>Es menos cómodo que la versión con colega y bastante más revelador. Casi todo el mundo descubre lo mismo la primera vez: que espera dos segundos donde creía esperar diez.</p>
+        <p>Si grabas con estudiantes en plano, avísales y usa la grabación solo para ti. No hace falta enfocar al aula: el audio y tu propia imagen ya contienen casi todo lo que necesitas mirar.</p>
+      </div>
+
+      <div class="ejemplo">
+        <span class="ejemplo-label">Cómo se ve relleno</span>
+        <p class="caso">Observación de una colega, 20 minutos, semana 7.</p>
+        <p>Intervinieron 6 personas distintas de 31 presentes; tres de ellas, cinco veces cada una. El tiempo de espera medio tras una pregunta abierta fue de 2,5 segundos. El grupo se desenganchó visiblemente en el minuto 12, coincidiendo con una explicación seguida de once minutos sin interacción.</p>
+        <p><strong>Lectura:</strong> no es que no participen, es que no les da tiempo. Dos cambios que no cuestan nada: contar hasta siete antes de aceptar la primera respuesta y no encadenar más de ocho minutos sin devolver la palabra.</p>
+      </div>
+
+      <div class="prose">
+        <h4>Y si tienes equipo docente: la retrospectiva</h4>
+        <p>Media hora de retrospectiva conjunta a mitad de cuatrimestre rinde más que cualquier observación individual, porque saca a la superficie lo que cada uno ve en su grupo y los demás no. Tres preguntas, en este orden:</p>
+        <ul>
+          <li>¿Qué está funcionando en vuestros grupos que no esperábamos?</li>
+          <li>¿Dónde estáis viendo la misma fricción? Lo que coincide en varios grupos es del diseño, no del grupo.</li>
+          <li>¿Qué cambiaríamos ya, y qué anotamos para la próxima edición?</li>
+        </ul>
+        <p>Una regla que evita que degenere en una reunión de coordinación: se habla de lo observado, no de lo que habría que hacer. Las decisiones se toman en los últimos cinco minutos y se escriben.</p>
+      </div>
+
+      <div class="callout reassure">
+        <span class="callout-label">Decisión del kit · esta retrospectiva es opcional y se declara como tal</span>
+        <p>En muchas asignaturas no hay equipo docente con el que trabajar. Si es tu caso, en el Cuaderno de pilotaje marcas esta retrospectiva como <strong>no aplica</strong> y no pasa absolutamente nada: los dos instrumentos anteriores cubren lo esencial por sí solos. Declararlo tiene una ventaja sobre dejarlo en blanco: al leer el informe de pilotaje se distingue lo que decidiste no hacer de lo que se te quedó a medias.</p>
+      </div>
+    </section>
+
+    <!-- ========== 8 ========== -->
+    <section class="section" id="s8">
+      <div class="section-head">
+        <span class="section-num">8</span>
+        <h3>El calendario mínimo</h3>
+        <span class="section-hint">Para que sea sostenible</span>
+      </div>
+
+      <div class="prose">
+        <p>Catorce semanas dan para mucho menos de lo que parece antes de empezar. Esto es lo que cabe sin que se coma tiempo de docencia, distribuido para que cada instrumento llegue cuando aún sirve para algo.</p>
+        <p>Las semanas de abajo son las de un <strong>cuatrimestre típico de catorce semanas</strong>. Si el tuyo dura doce, dieciséis o lo que sea, desplaza las semanas proporcionalmente: lo que importa no es el número exacto, sino el orden y las distancias —nada en las dos primeras, una primera lectura algo antes de la mitad, la segunda encuesta antes de que el grupo se disperse—.</p>
+      </div>
+
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Tabla: calendario mínimo del cuatrimestre (desplazable en horizontal)"><table class="data-table ancha">
+        <thead>
+          <tr><th style="width:20%">Cuándo</th><th style="width:38%">Qué haces</th><th>Para qué llega a tiempo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Semanas 1-2</strong></td><td>Nada. Deja que la asignatura arranque.</td><td>Observar la primera semana solo mide el desconcierto inicial</td></tr>
+          <tr><td><strong>Semanas 3-5</strong></td><td>Pregunta de cierre, dos o tres veces</td><td>Corregir enunciados y ritmo mientras aún da igual</td></tr>
+          <tr><td><strong>Semana 6</strong></td><td>Primer pulso · primera mirada a los datos</td><td>Llegas a la <strong>lectura de mitad de cuatrimestre</strong> con material, no con impresiones</td></tr>
+          <tr><td><strong>Semanas 7-10</strong></td><td>Pregunta de cierre quincenal · mirada ajena</td><td>Ver el efecto de lo que ajustaste tras esa lectura</td></tr>
+          <tr><td><strong>Semana 11</strong></td><td>Segunda mirada a los datos</td><td>Saber qué evidencia te falta <strong>al terminar la docencia</strong>, cuando aún hay grupo</td></tr>
+          <tr><td><strong>Semanas 12-13</strong></td><td>Segundo pulso</td><td>La única ocasión de preguntarles antes de que se dispersen</td></tr>
+          <tr><td><strong>Con las actas cerradas</strong></td><td>Resultados finales y registro de tiempos completo</td><td>La lectura de cierre y el informe de pilotaje</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="prose">
+        <h4>Cinco maneras de que esto no funcione</h4>
+        <p>Todas frecuentes, todas evitables:</p>
+        <ul>
+          <li><strong>Medirlo todo.</strong> Con cinco instrumentos a la vez, en la semana ocho no queda ninguno.</li>
+          <li><strong>Encuestas largas.</strong> Veinte ítems dan la mitad de respuestas y el triple de respuestas automáticas.</li>
+          <li><strong>Empezar en la semana uno.</strong> Lo que se observa entonces es el desconcierto de un grupo que aún no sabe cómo funciona la asignatura.</li>
+          <li><strong>Cambiar de instrumento a mitad.</strong> Pierdes la comparación, que es de donde sale casi toda la información.</li>
+          <li><strong>Recoger y no devolver.</strong> Si los estudiantes no ven ningún efecto de lo que contestaron, la segunda vez contestan cualquier cosa.</li>
+        </ul>
+      </div>
+
+      <div class="callout success">
+        <span class="callout-label">Y de aquí al Cuaderno</span>
+        <p>Lo que elijas se anota en el apartado <strong>«Qué voy a observar»</strong> del Cuaderno de pilotaje: qué observas, qué datos genera tu asignatura, cómo preguntas al estudiante, cuándo y con quién lo compartes. No copies allí los resultados: anota dónde viven y qué has leído en ellos.</p>
+        <p>Para leerlos, la Parte 2 de esta pieza. Pero no al principio: hacia la mitad del cuatrimestre, cuando tengas algo delante.</p>
+      </div>
+    </section>
+
+    <!-- ========== BANDA PARTE 2 ========== -->
+    <div class="part-band" id="parte-2">
+      <h2>Parte 2 · Leer</h2>
+      <p class="part-when">Desde la mitad del cuatrimestre</p>
+      <p class="part-lead">Observar es la parte fácil. Lo difícil es distinguir lo que significa algo de lo que no significa nada, y decidir qué se toca a mitad de cuatrimestre y qué se anota para la próxima edición.</p>
+      <p class="part-lead">Se usa con lo que hayan producido los instrumentos de la Parte 1.</p>
+    </div>
+
+    <!-- ========== 9 ========== -->
+    <section class="section" id="s9">
+      <div class="section-head">
+        <span class="section-num">9</span>
+        <h3>Qué convierte una observación en señal</h3>
+      </div>
+
+      <div class="prose">
+        <p>A mitad de cuatrimestre vas a tener material: respuestas de cierre de clase, un pulso al estudiantado, algún dato de entregas, tu propia impresión de cómo va el grupo. Y vas a tener que decidir qué haces con todo eso.</p>
+        <p>Los dos errores son simétricos y los dos son frecuentes. Uno es <strong>reaccionar al ruido</strong>: cambiar el diseño porque tres personas se quejaron el día siguiente a un examen de otra asignatura. El otro es <strong>no reaccionar a la señal</strong>: registrar durante semanas que algo no funciona y no tocarlo, porque tocarlo daba pereza o porque parecía tarde.</p>
+        <p>Esta parte es un procedimiento para no caer en ninguno de los dos. No sustituye tu criterio: lo ordena.</p>
+
+        <h4>Tres pruebas</h4>
+        <p>Una observación que pasa las tres es una señal; una que pasa dos merece más observación; una que pasa una es ruido.</p>
+      </div>
+
+      <div class="defs">
+        <div class="def-item">
+          <div class="def-term">¿Se repite?</div>
+          <div class="def-body">Aparece en más de un momento o en más de una fuente. Un comentario aislado no es una señal, por muy bien dicho que esté.</div>
+        </div>
+        <div class="def-item">
+          <div class="def-term">¿Es específica?</div>
+          <div class="def-body">Se puede señalar qué la produce: una actividad, un enunciado, una semana concreta. «La asignatura es dura» no es específica; «el enunciado de la entrega 2 no dejaba claro el formato» sí.</div>
+        </div>
+        <div class="def-item">
+          <div class="def-term">¿Te sorprende?</div>
+          <div class="def-body">Si solo confirma lo que ya creías, probablemente estás viendo lo que buscabas. Lo que no encaja con tu hipótesis es lo que más información contiene.</div>
+        </div>
+      </div>
+
+      <div class="callout warn">
+        <span class="callout-label">Una salvedad importante</span>
+        <p>Una sola voz muy articulada no es una señal, pero tampoco es ruido: es una <strong>hipótesis</strong>. Trátala como tal —búscale confirmación en otra fuente— en vez de descartarla o de actuar sobre ella directamente.</p>
+      </div>
+    </section>
+
+    <!-- ========== 10 ========== -->
+    <section class="section" id="s10">
+      <div class="section-head">
+        <span class="section-num">10</span>
+        <h3>El procedimiento: cuatro pasos, cuarenta minutos</h3>
+      </div>
+
+      <div class="prose">
+        <p>Antes de sentarte a hacer la <strong>lectura de mitad de cuatrimestre</strong>, con todo lo que hayas recogido delante. Cuarenta minutos bastan, y hacerlo en una sola sentada es mejor que repartirlo: lo que se busca son coincidencias entre fuentes, y para verlas hay que tenerlas juntas.</p>
+      </div>
+
+      <ol class="checklist">
+        <li class="check-item">
+          <div class="check-num">1</div>
+          <div class="check-body">
+            <h4>Junta lo que tienes sin interpretarlo</h4>
+            <p>Lista lo observado en frases planas, sin explicación ni valoración: «nueve de veintidós no distinguen cuándo aplicar cada método», «el ítem de carga de trabajo sale en 2,6», «tres personas más que el año pasado no entregan». Cuesta más de lo que parece, porque la tentación de explicar mientras se anota es fuerte, y una vez que has escrito la explicación ya no ves otra.</p>
+          </div>
+        </li>
+        <li class="check-item">
+          <div class="check-num">2</div>
+          <div class="check-body">
+            <h4>Busca lo que se repite</h4>
+            <p>Agrupa lo que apunte al mismo sitio aunque venga de fuentes distintas. Aquí es donde aparece casi toda la información: que el pulso diga que la carga es alta y que las entregas lleguen tarde no son dos hallazgos, es uno.</p>
+            <p>Y anota también lo que aparece en una sola fuente. No para actuar, sino para mirarlo específicamente en las siguientes semanas.</p>
+          </div>
+        </li>
+        <li class="check-item">
+          <div class="check-num">3</div>
+          <div class="check-body">
+            <h4>Contrasta con lo que esperabas</h4>
+            <p>Ve a tus hipótesis del apartado <strong>«Mis hipótesis»</strong> del Cuaderno de pilotaje, una por una. Para cada una, solo tres respuestas posibles: confirmada con lo que tienes, refutada con lo que tienes, o todavía no lo sé. La tercera es una respuesta legítima y a mitad de cuatrimestre será la más frecuente.</p>
+            <p>Es también el momento de mirar de reojo las <strong>lentes</strong> del Sprint 1: si el plan salía ajustado en carga docente y el registro de tiempos lo confirma, eso ya no es una hipótesis.</p>
+            <p>Lo importante es no saltarse este paso. Sin él, lo observado se convierte en una lista de quejas e ideas sueltas; con él, en el cuerpo de tu informe de pilotaje.</p>
+          </div>
+        </li>
+        <li class="check-item">
+          <div class="check-num">4</div>
+          <div class="check-body">
+            <h4>Decide qué haces con cada señal</h4>
+            <p>Tres destinos, y solo tres: <strong>ajustar ahora</strong>, <strong>seguir observando</strong> o <strong>dejar constancia para la próxima edición</strong>. Cuál de los tres corresponde no es una cuestión de importancia, sino de qué se puede tocar sin romper nada, que es lo que trata el apartado siguiente.</p>
+          </div>
+        </li>
+      </ol>
+
+      <div class="ejemplo">
+        <span class="ejemplo-label">Cómo se ve hecho</span>
+        <p><strong>Observado:</strong> nueve de veintidós no distinguen cuándo aplicar cada método. El ítem de carga sale en 2,6. Nueve de treinta y una piden menos entregas. La entrega 2 llega con retraso en la mitad de los casos.</p>
+        <p><strong>Se repite:</strong> la carga aparece en el pulso, en la abierta y en los retrasos. Tres fuentes, una señal.</p>
+        <p><strong>Contra mis hipótesis:</strong> la hipótesis 2 —«con el andamiaje nuevo entregarán más y mejor»— está confirmada en el «mejor» y refutada en el «más». La hipótesis 3 sigue sin poder responderse.</p>
+        <p><strong>Decisión:</strong> fusiono dos entregas menores (ajusto ahora, no rompe nada). El criterio de elección de método lo trabajo en la clase siguiente (ajusto ahora). El número total de entregas del curso queda anotado para la próxima edición.</p>
+      </div>
+    </section>
+
+    <!-- ========== 11 ========== -->
+    <section class="section" id="s11">
+      <div class="section-head">
+        <span class="section-num">11</span>
+        <h3>Patrones frecuentes y qué suelen significar</h3>
+        <span class="section-hint">Lo que ya sabemos</span>
+      </div>
+
+      <div class="prose">
+        <p>Estas lecturas no son leyes: son las explicaciones que más a menudo resultan ser la correcta, y que casi nunca son la primera que a uno se le ocurre. Sirven para no saltar a la conclusión evidente antes de haber comprobado la probable.</p>
+      </div>
+
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Tabla: diez patrones frecuentes y qué suelen significar (desplazable en horizontal)"><table class="data-table ancha">
+        <thead>
+          <tr><th style="width:26%">Lo que ves</th><th style="width:42%">Lo que suele significar</th><th>Antes de tocar nada</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>La participación cae hacia la semana 6</strong></td><td>Rara vez es desmotivación con tu asignatura: suele ser la acumulación de entregas de todo el curso</td><td>Mira el calendario conjunto de la titulación</td></tr>
+          <tr><td><strong>Responden siempre las mismas tres personas</strong></td><td>El formato favorece a quien ya está cómodo hablando, no falta de preparación del resto</td><td>Cronometra tu tiempo de espera tras preguntar</td></tr>
+          <tr><td><strong>Dicen que «está bien» pero los resultados no mejoran</strong></td><td>La encuesta mide satisfacción, no aprendizaje. Son cosas distintas y pueden ir en direcciones opuestas</td><td>Contrasta con entregas y calificaciones</td></tr>
+          <tr><td><strong>Una actividad nueva no funciona la primera vez</strong></td><td>Casi siempre son las instrucciones, no el diseño. La segunda vez que se hace algo sale distinto</td><td>Repítela con el enunciado reescrito antes de descartarla</td></tr>
+          <tr><td><strong>Te está costando mucho más tiempo del previsto</strong></td><td>Es un resultado del pilotaje, no un fracaso personal. La sostenibilidad es parte de lo que estás probando</td><td>Anótalo con el número, no con el adjetivo</td></tr>
+          <tr><td><strong>Cada uno interpreta la rúbrica de forma distinta</strong></td><td>Los descriptores no discriminan. El problema está en el instrumento, no en quien lo lee</td><td>Prueba a calificar dos trabajos con un colega</td></tr>
+          <tr><td><strong>Aparece uso de IA donde no lo esperabas</strong></td><td>La tarea es automatizable tal como está formulada. Es información sobre la tarea</td><td>Rediseña la tarea antes de plantear prohibirla</td></tr>
+          <tr><td><strong>Silencio tras una pregunta abierta</strong></td><td>Tiempo de espera insuficiente. La media real ronda los dos segundos y hacen falta siete</td><td>Cuenta hasta siete antes de reformular</td></tr>
+          <tr><td><strong>Los buenos van mejor y los demás igual que siempre</strong></td><td>El rediseño sirve a quien ya estaba dentro. Es el patrón más fácil de no ver, porque la media mejora</td><td>Mira la distribución, no la media</td></tr>
+          <tr><td><strong>Todo va razonablemente bien y no hay señales</strong></td><td>O el diseño funciona, o los instrumentos no están mirando donde pasa algo</td><td>Revisa qué preguntas estás haciendo</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- ========== 12 ========== -->
+    <section class="section" id="s12">
+      <div class="section-head">
+        <span class="section-num">12</span>
+        <h3>Ajustar ahora o anotar para la próxima edición</h3>
+        <span class="section-hint">La decisión que más importa</span>
+      </div>
+
+      <div class="prose">
+        <p>A mitad de cuatrimestre no se puede cambiar todo, y el criterio no es la gravedad de lo detectado: es si el cambio rompe o no el acuerdo implícito con el grupo. Los estudiantes organizaron su cuatrimestre con las reglas que les diste el primer día.</p>
+
+        <h4>Se puede tocar ahora</h4>
+        <p>Todo lo que depende solo de ti y no altera lo que los estudiantes ya han planificado:</p>
+        <ul>
+          <li><strong>Las instrucciones y los enunciados:</strong> reescribirlos, añadir un ejemplo, aclarar el formato de entrega.</li>
+          <li><strong>El andamiaje:</strong> dar una plantilla, un caso resuelto, una lista de comprobación que antes no existía.</li>
+          <li><strong>El ritmo dentro de la clase:</strong> cuánto hablas seguido, cuánto esperas, cuándo devuelves la palabra.</li>
+          <li><strong>La retroalimentación:</strong> darla antes, darla más específica, darla en grupo en vez de individual.</li>
+          <li><strong>Fusionar o aligerar entregas</strong>, si el resultado es menos trabajo y no más.</li>
+        </ul>
+
+        <h4>Se anota para la próxima edición</h4>
+        <p>Todo lo que cambia las reglas del juego a mitad de partida:</p>
+        <ul>
+          <li><strong>Los pesos de la evaluación.</strong> Cambiarlos a mitad de cuatrimestre es lo que más deteriora la confianza del grupo, incluso cuando el cambio les favorece.</li>
+          <li><strong>La secuencia de contenidos</strong>, si ya has anunciado un calendario.</li>
+          <li><strong>Añadir entregas o pruebas</strong> que no estaban previstas.</li>
+          <li><strong>Cambiar el tipo de examen final.</strong></li>
+        </ul>
+        <p>Anotar no es renunciar. Una decisión bien registrada a mitad de cuatrimestre, con la evidencia que la motivó al lado, vale más para el curso siguiente que un cambio precipitado que además contamina lo que estabas midiendo.</p>
+
+        <h4>Y una tercera opción que se usa poco</h4>
+        <p><strong>Seguir observando.</strong> Si la señal es débil pero podría ser importante, lo correcto no es actuar ni descartar: es mirar específicamente eso durante dos semanas con una pregunta dirigida. Es lo que convierte una intuición de mitad de cuatrimestre en una afirmación con fundamento al cerrar el curso.</p>
+      </div>
+    </section>
+
+    <!-- ========== 13 ========== -->
+    <section class="section" id="s13">
+      <div class="section-head">
+        <span class="section-num">13</span>
+        <h3>Cómo se deja escrito</h3>
+        <span class="section-hint">Para que no se pierda</span>
+      </div>
+
+      <div class="prose">
+        <p>Tres líneas por señal, y no más. Es exactamente lo que pide el apartado <strong>«Lectura de mitad de cuatrimestre»</strong> del Cuaderno de pilotaje, y lo que después se convierte en informe sin reescribirlo.</p>
+      </div>
+
+      <div class="defs">
+        <div class="def-item">
+          <div class="def-term">Señal</div>
+          <div class="def-body">Qué observé y en cuántas fuentes aparece. Sin explicación.</div>
+        </div>
+        <div class="def-item">
+          <div class="def-term">Lectura</div>
+          <div class="def-body">Qué creo que significa, y contra qué hipótesis lo estoy contrastando.</div>
+        </div>
+        <div class="def-item">
+          <div class="def-term">Decisión</div>
+          <div class="def-body">Ajusto ahora / sigo observando / anoto para la próxima edición. Y desde cuándo.</div>
+        </div>
+      </div>
+
+      <div class="prose">
+        <h4>Errores de lectura que conviene conocer</h4>
+        <p>Los cinco que más aparecen, en orden de frecuencia:</p>
+        <ul>
+          <li><strong>Ver lo que se buscaba.</strong> Si tu hipótesis era que la nueva actividad funcionaría, encontrarás pruebas de que funciona. El antídoto es preguntarse explícitamente qué tendría que haber visto para concluir lo contrario.</li>
+          <li><strong>Atribuir al grupo lo que es del diseño.</strong> «Este año son más flojos» es la explicación más disponible y casi nunca la que resiste una comprobación.</li>
+          <li><strong>Sobrerreaccionar a la voz más fuerte.</strong> Quien más protesta no representa al grupo, ni para bien ni para mal.</li>
+          <li><strong>Esperar a tener datos suficientes.</strong> Nunca hay datos suficientes en el pilotaje de una asignatura. Se decide con lo que hay y se deja escrito qué grado de confianza tiene cada conclusión.</li>
+          <li><strong>Confundir «no ha funcionado» con «no ha funcionado a la primera».</strong> Una actividad nueva rara vez sale bien la primera vez que se pone en práctica, y eso no dice casi nada sobre la actividad.</li>
+        </ul>
+      </div>
+
+      <div class="callout success">
+        <span class="callout-label">De aquí al Cuaderno y al informe</span>
+        <p>Lo que salga de esta lectura va al apartado <strong>«Lectura de mitad de cuatrimestre»</strong> del Cuaderno de pilotaje: hipótesis revisadas, qué se ha atascado, qué ajustas y desde cuándo. Al terminar la docencia, el apartado <strong>«Lectura de cierre»</strong> repite el ejercicio con la asignatura ya impartida, y con las actas cerradas el apartado <strong>«Resultados y cierre»</strong> lo remata con los resultados de evaluación.</p>
+        <p>Los tres alimentan el <strong>informe de pilotaje</strong>, que el Cuaderno genera solo a partir de lo que hayas ido escribiendo. No hay que redactarlo aparte: si has ido dejando tres líneas por señal, ya está escrito.</p>
+      </div>
+    </section>
+
+    <!-- ========== ENLACES ========== -->
+    <section class="section" id="enlaces">
+      <div class="links-panel">
+        <h2>Piezas a mano</h2>
+        <div class="links-grid">
+          <a class="link-card" href="/sprint-2">
+            <div class="link-card-label">Dónde encaja</div>
+            <div class="link-card-title">Sprint 2 · Pilotaje</div>
+            <div class="link-card-hint">El alcance del sprint y las piezas que lo acompañan</div>
+          </a>
+          <a class="link-card" href="/downloads/sprint-1/plantilla-plan-operativo.xlsx" download>
+            <div class="link-card-label">Sprint 1</div>
+            <div class="link-card-title">Plantilla del plan operativo</div>
+            <div class="link-card-hint">Donde declaraste tu línea base y tu hipótesis con IA</div>
+          </a>
+          <a class="link-card" href="/downloads/sprint-1/guia-breve.html">
+            <div class="link-card-label">Sprint 1</div>
+            <div class="link-card-title">Guía breve de la Plantilla</div>
+            <div class="link-card-hint">Vocabulario, fases y las tres lentes</div>
+          </a>
+          <a class="link-card" href="/downloads/sprint-1/panel-plan-operativo.html">
+            <div class="link-card-label">Sprint 1</div>
+            <div class="link-card-title">Panel del plan operativo</div>
+            <div class="link-card-hint">Blueprint y calendario semanal a partir de tu XLSX</div>
+          </a>
+          <a class="link-card" href="mailto:juan@eutika.com">
+            <div class="link-card-label">Soporte</div>
+            <div class="link-card-title">Escríbenos</div>
+            <div class="link-card-hint">juan@eutika.com · comentarios y dudas</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ============ PIE ============ -->
+  <footer class="page-foot">
+    <div><strong>Rediseña.Evaluacion</strong> · Un kit de Eutika</div>
+    <div>Contenidos CC BY-SA 4.0 · Código MIT</div>
+  </footer>
+
+</main>
+
+</body>
+</html>

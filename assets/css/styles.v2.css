@@ -106,7 +106,7 @@ a.brand:hover { text-decoration: none; }
   font-size: 9.5px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--gris-400);
+  color: var(--gris-600);   /* era --gris-400: 2,68:1 sobre blanco, por debajo del mínimo */
   margin-top: 3px;
   font-weight: 500;
 }
@@ -160,7 +160,7 @@ nav.primary a.active { background: var(--azul-reflex); color: var(--white); font
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
-.status-strip .info-value.placeholder { color: var(--gris-500); font-weight: 400; font-style: italic; }
+.status-strip .info-value.placeholder { color: var(--gris-600); font-weight: 400; font-style: italic; }
 .status-strip .course-input {
   font-family: var(--sans); font-size: var(--text-sm); color: var(--ink);
   border: 1px solid var(--azul-reflex); border-radius: var(--radius-sm);
@@ -208,10 +208,10 @@ main {
 /* Breadcrumb */
 .breadcrumb {
   font-family: var(--mono); font-size: 11px;
-  color: var(--gris-500); margin-bottom: var(--sp-3);
+  color: var(--gris-600); margin-bottom: var(--sp-3);
   letter-spacing: 0.02em;
 }
-.breadcrumb a { color: var(--gris-500); text-decoration: none; }
+.breadcrumb a { color: var(--gris-600); text-decoration: none; }
 .breadcrumb a:hover { color: var(--azul-reflex); }
 
 /* Section chip (kicker) */
@@ -380,7 +380,10 @@ ul li { margin-bottom: var(--sp-2); color: var(--gris-700); }
   color: var(--azul-mid); font-weight: 600; margin-bottom: var(--sp-1);
 }
 .step-block h3 { margin-top: 0; font-family: var(--serif); font-size: var(--text-lg); font-weight: 600; }
-.step-block.muted { border-left-color: var(--gris-300); opacity: 0.7; }
+/* Se atenúa el borde, no el texto: el opacity global bajaba el contraste del
+   rótulo del paso a 4,1:1. */
+.step-block.muted { border-left-color: var(--gris-300); background: var(--gris-050, #FAFAFA); }
+.step-block.muted .step-num { color: var(--gris-600); }
 
 /* ═══════════════════════════════════════════════════
    PRINCIPLE · bloque de principio numerado
@@ -480,7 +483,7 @@ ul li { margin-bottom: var(--sp-2); color: var(--gris-700); }
 }
 .checkbox .box {
   width: 18px; height: 18px;
-  border: 1.5px solid var(--gris-400);
+  border: 1.5px solid var(--gris-500);   /* elemento de interfaz: necesita 3:1 */
   border-radius: var(--radius-sm);
   flex-shrink: 0; margin-top: 2px; background: var(--white);
   position: relative;
@@ -504,7 +507,7 @@ ul li { margin-bottom: var(--sp-2); color: var(--gris-700); }
   display: inline-block;
   margin-left: var(--sp-3);
   font-size: var(--text-xs);
-  color: var(--gris-500);
+  color: var(--gris-600);
 }
 .complete-hint:empty { display: none; }
 
@@ -577,4 +580,197 @@ footer a:hover { color: var(--azul-reflex); }
   .hero-meta { gap: var(--sp-5); }
   .tool-card { flex-direction: column; }
   .principle { grid-template-columns: 1fr; }
+}
+
+
+/* ═══════════════════════════════════════════════════
+   ACCESIBILIDAD
+   ═══════════════════════════════════════════════════ */
+
+/* Saltar la cabecera y la barra de estado: eran 11 tabulaciones antes de
+   llegar al contenido, en cada carga de página. */
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 999;
+  background: var(--azul-reflex); color: var(--white);
+  padding: 10px 18px; border-radius: 0 0 var(--radius-md) 0;
+  font-size: var(--text-sm); font-weight: 600; text-decoration: none;
+}
+.skip-link:focus { left: 0; }
+
+/* Texto que solo existe para quien usa lector de pantalla. */
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Objetivos táctiles: los botones pequeños se quedaban en 28 px de alto. */
+.btn.small { min-height: 32px; }
+.status-strip .actions .btn { min-height: 32px; }
+
+/* Quien pide menos movimiento, menos movimiento. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .card-linkable:hover { transform: none; }
+}
+
+/* Un paso de un sprint bloqueado se ve bloqueado, y no solo al intentarlo. */
+.checkbox[aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
+.checkbox[aria-disabled="true"]:hover .box { border-color: var(--gris-500); }
+
+/* ═══════════════════════════════════════════════════
+   CAPAS DE INFORMACIÓN
+   Varios profesores dicen que la aplicación es prolija. Lo es a propósito:
+   el detalle está porque hace falta cuando hace falta. Lo que no puede ser
+   es que esté siempre delante. La primera capa —lo que se lee al abrir—
+   dice qué es esto, qué toca hacer ahora y cuánto cuesta; el resto se abre
+   a un clic. Se usa <details>, que ya funciona con teclado y con lector
+   de pantalla sin que tengamos que reconstruirlo.
+   ═══════════════════════════════════════════════════ */
+
+.capa {
+  border-top: 1px solid var(--gris-200);
+  margin: var(--sp-5) 0;
+}
+.capa > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: var(--sp-4) 0;
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+  font-family: var(--sans);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--azul-reflex);
+}
+.capa > summary::-webkit-details-marker { display: none; }
+.capa > summary::before {
+  content: '+';
+  font-family: var(--mono);
+  font-size: var(--text-md);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--azul-mid);
+  width: 1em;
+  flex: none;
+}
+.capa[open] > summary::before { content: '−'; }
+.capa > summary:hover { color: var(--azul-deep); }
+.capa > summary:focus-visible {
+  outline: 3px solid var(--azul-reflex);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+.capa > summary .capa-pista {
+  font-weight: 400;
+  font-size: var(--text-sm);
+  color: var(--gris-600);
+}
+.capa > *:not(summary) { margin-left: calc(1em + var(--sp-3)); }
+.capa > :last-child { margin-bottom: var(--sp-5); }
+
+/* Resumen de una línea: lo mínimo que hay que leer para saber si esto va contigo. */
+.en-corto {
+  background: var(--azul-pale);
+  border-left: 3px solid var(--azul-reflex);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: var(--sp-4) var(--sp-5);
+  margin: var(--sp-5) 0;
+  font-size: var(--text-md);
+  line-height: 1.6;
+}
+.en-corto strong { color: var(--azul-deep); }
+.en-corto p:last-child { margin-bottom: 0; }
+
+/* Conmutador de capas, en la barra de estado. En las páginas sin apartados
+   plegables el botón se esconde con [hidden], y .btn{display:inline-flex}
+   ganaba: se veía un botón que no hacía nada. */
+.btn[hidden] { display: none !important; }
+
+
+.btn[data-action="detalle"][aria-pressed="true"] {
+  background: var(--azul-reflex);
+  border-color: var(--azul-reflex);
+  color: var(--white);
+}
+
+/* En papel no hay clics: todo abierto. El CSS por sí solo no basta —el
+   navegador oculta el contenido de un <details> cerrado desde su propia hoja
+   de estilos—, así que app.v2.js los abre en 'beforeprint' y los deja como
+   estaban en 'afterprint'. Esto de aquí es el respaldo por si el JavaScript
+   no llegara a ejecutarse. */
+@media print {
+  .capa > summary::before { content: ''; }
+  .capa[open] > summary::before { content: ''; }
+  .capa > *:not(summary) { margin-left: 0; display: revert; }
+  .capa { display: block; }
+  .skip-link, .status-strip .actions { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════
+   GUIADO
+   La aplicación era un documento: el profesor tenía que decidir por su cuenta
+   qué tocaba ahora. Estas dos piezas lo dicen —una en la página, la otra en el
+   propio paso— usando sólo lo que él mismo ha marcado en este navegador.
+   ═══════════════════════════════════════════════════ */
+
+/* Sin esto, la regla de abajo (especificidad de id) gana al [hidden] del
+   navegador y, sin JavaScript, quedaba una barra azul vacía en seis páginas. */
+#siguiente-paso[hidden] { display: none; }
+#siguiente-paso {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+  background: var(--azul-reflex);
+  color: var(--white);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4) var(--sp-5);
+  margin: var(--sp-8) 0 var(--sp-4);
+}
+#siguiente-paso .sp-texto { font-size: var(--text-md); line-height: 1.5; }
+#siguiente-paso .sp-texto strong {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  display: block;
+  margin-bottom: 2px;
+}
+#siguiente-paso .btn.primary {
+  background: var(--white);
+  color: var(--azul-deep);
+  border-color: var(--white);
+  flex: none;
+}
+#siguiente-paso .btn.primary:hover { background: var(--gris-100); }
+
+/* El paso que toca ahora se distingue de los que ya están hechos. */
+.step-block.en-curso { border-left-color: var(--azul-reflex); border-left-width: 4px; }
+.step-block.ya-hecho { opacity: 0.72; }
+.step-block.ya-hecho:hover { opacity: 1; }
+.marca-en-curso {
+  margin-left: var(--sp-3);
+  background: var(--azul-reflex);
+  color: var(--white);
+  border-radius: var(--radius-pill);
+  padding: 2px 10px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@media print {
+  #siguiente-paso { background: none; color: var(--ink); border: 1px solid var(--gris-300); }
+  #siguiente-paso .btn { display: none; }
+  .step-block.ya-hecho { opacity: 1; }
 }

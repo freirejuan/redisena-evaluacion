@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect width="64" height="64" rx="12" fill="#171796"/>
-  <text x="32" y="44" text-anchor="middle"
-        font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif"
-        font-size="36" font-weight="800" fill="#FFFFFF" letter-spacing="-1">R</text>
-  <circle cx="50" cy="44" r="3.5" fill="#00C2A8"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Rediseña.Evaluacion">
+  <rect width="64" height="64" rx="12" fill="#1E1E99"/>
+  <path d="M18 44V20h11.5c5.2 0 8.5 2.9 8.5 7.5 0 3.4-1.8 5.9-4.8 7L40 44h-6.4l-5.9-8.4H24V44h-6Zm6-13.2h4.8c2.3 0 3.7-1.2 3.7-3.2s-1.4-3.2-3.7-3.2H24v6.4Z" fill="#fff"/>
+  <circle cx="46" cy="41" r="3.4" fill="#1A9E7A"/>
 </svg>

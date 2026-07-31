@@ -9,11 +9,17 @@
 /* ============ DESIGN SYSTEM · UC3M-IMPULSO ============ */
 :root{
   --azul-reflex:#171796; --azul-deep:#0F0F6B; --azul-mid:#2D2DA8; --azul-soft:#E8E8F6;
-  --acento-teal:#1A9E7A; --acento-teal-soft:#E0F2EC;
+  --acento-teal:#1A9E7A;
+  /* Variantes oscurecidas para TEXTO. Los acentos de marca se mantienen para
+     fondos, bordes y superficies; en texto pequeño no llegaban a 4,5:1. */
+  --texto-teal:#0F6F55;
+  --texto-coral:#B81F1F;
+  --texto-ambar:#8A5A00;
+ --acento-teal-soft:#E0F2EC;
   --acento-amber:#E8A317; --acento-amber-soft:#FBF0D9;
   --acento-coral:#E05555; --acento-coral-soft:#FADDDD;
   --gris-900:#0E1116; --gris-800:#1F2329; --gris-700:#3A4049; --gris-600:#575E68;
-  --gris-500:#7A818B; --gris-400:#9DA3AB; --gris-300:#C8CCD2; --gris-200:#E2E4E8;
+  --gris-500:#666D76; --gris-400:#9DA3AB; --gris-300:#C8CCD2; --gris-200:#E2E4E8;
   --gris-100:#F1F2F5; --gris-050:#F8F9FB; --blanco:#FFFFFF;
   --sans:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
   --serif:'Iowan Old Style','Palatino Linotype','Book Antiqua',Georgia,serif;
@@ -138,6 +144,7 @@ a.kit-tag:hover{opacity:1;}
 .bp-legend-dot.sumativo{background:var(--acento-coral);}
 .bp-legend-dot.mixto{background:var(--acento-amber);}
 
+.gr{display:contents;}
 .bp-matrix{
   display:grid;gap:6px;margin-bottom:var(--sp-6);
   grid-template-columns:160px repeat(var(--tp-count,8),minmax(120px,1fr));
@@ -179,20 +186,31 @@ a.kit-tag:hover{opacity:1;}
   font-size:var(--text-xs);line-height:1.4;color:var(--gris-800);
   display:flex;flex-direction:column;gap:2px;min-height:46px;
 }
-.cell.empty{background:var(--gris-050);border-style:dashed;border-color:var(--gris-300);color:var(--gris-400);justify-content:center;align-items:center;font-style:italic;}
+.cell.empty{background:var(--gris-050);border-style:dashed;border-color:var(--gris-300);color:#5C636D;justify-content:center;align-items:center;font-style:italic;}
 .cell .cell-main{font-weight:600;color:var(--azul-deep);font-size:var(--text-sm);}
 .cell .cell-sub{font-size:10px;color:var(--gris-600);line-height:1.35;}
 .cell .cell-delta{font-family:var(--mono);font-size:10px;font-weight:600;}
-.cell .cell-delta.down{color:var(--acento-teal);}
+.cell .cell-delta.down{color:var(--texto-teal);}
 .cell .cell-delta.none{color:var(--gris-500);}
 .cell.policy-abierta{border-left:3px solid var(--acento-teal);}
 .cell.policy-declarada{border-left:3px solid var(--acento-amber);}
 .cell.policy-restringida{border-left:3px solid var(--acento-coral);}
 .cell.practica{background:var(--azul-soft);border-color:var(--azul-soft);color:var(--azul-deep);}
-.cell.practica.empty{background:var(--gris-050);border-style:dashed;border-color:var(--gris-300);color:var(--gris-400);}
+.cell.practica.empty{background:var(--gris-050);border-style:dashed;border-color:var(--gris-300);color:#5C636D;}
 
 /* ============ CALENDARIO ============ */
 .cal-scroll{overflow-x:auto;margin:var(--sp-4) 0;border:1px solid var(--gris-200);border-radius:var(--radio-md);}
+.aviso-descartadas{margin:0 auto var(--sp-4);max-width:1180px;padding:12px 16px;
+  background:var(--acento-amber-soft);border:1px solid var(--acento-amber);border-left-width:4px;
+  border-radius:var(--radius-md);font-size:var(--text-xs);color:#5B3D00;line-height:1.5;}
+.aviso-descartadas[hidden]{display:none;}
+@media print{ .aviso-descartadas{border-color:var(--gris-400);} }
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
+}
 .cal-grid{
   display:grid;gap:2px;padding:2px;background:var(--gris-200);
   grid-template-columns:200px repeat(var(--week-count,15),minmax(46px,1fr));
@@ -230,7 +248,7 @@ a.kit-tag:hover{opacity:1;}
 /* heatmap levels for student hours (per week per TP) */
 .cal-cell.lvl-1{background:#EEF8F3;color:#0D5C47;font-weight:600;}
 .cal-cell.lvl-2{background:#CDEADB;color:#0D5C47;font-weight:700;}
-.cal-cell.lvl-3{background:#FBF0D9;color:#A46A00;font-weight:700;}
+.cal-cell.lvl-3{background:#FBF0D9;color:#7A4600;font-weight:700;}
 .cal-cell.lvl-4{background:#F8D59A;color:#7A4D00;font-weight:700;}
 .cal-cell.lvl-5{background:#FADDDD;color:#6B1F1F;font-weight:700;}
 
@@ -243,7 +261,7 @@ a.kit-tag:hover{opacity:1;}
   font-family:var(--mono);font-size:var(--text-xs);font-weight:700;color:var(--azul-deep);
 }
 .cal-total-cell.over{background:var(--acento-coral-soft);color:#6B1F1F;}
-.cal-total-cell.warn{background:var(--acento-amber-soft);color:#A46A00;}
+.cal-total-cell.warn{background:var(--acento-amber-soft);color:var(--texto-ambar);}
 .cal-total-cell.over::after{content:" ▲";font-size:9px;}
 .cal-total-cell.warn::after{content:" ·";font-size:9px;}
 
@@ -286,7 +304,7 @@ a.kit-tag:hover{opacity:1;}
   margin-bottom:var(--sp-3);padding-bottom:var(--sp-2);
   border-bottom:1px solid var(--gris-200);
 }
-.cal-section-head h3{
+.cal-section-head h2,.cal-section-head h3{
   margin:0;font-family:var(--serif);font-size:var(--text-lg);
   font-weight:600;color:var(--azul-deep);
 }
@@ -317,6 +335,9 @@ a.kit-tag:hover{opacity:1;}
 .cal-total-card.warn .ct-value{color:#5B3D00;}
 .cal-total-card.over{background:var(--acento-coral-soft);border-color:var(--acento-coral);}
 .cal-total-card.over .ct-value{color:#6B1F1F;}
+/* Sobre el fondo coral de la tarjeta, el gris de la etiqueta se quedaba en 4,09:1. */
+.cal-total-card.over .ct-label,.cal-total-card.warn .ct-label{color:#4F565F;}
+.cal-total-card.over .ct-hint,.cal-total-card.warn .ct-hint{color:#4F565F;}
 
 /* ============ FOOTER ============ */
 .page-foot{
@@ -332,7 +353,8 @@ a.kit-tag:hover{opacity:1;}
 
 @media (max-width:960px){
   .page-head{grid-template-columns:1fr;}
-  .bp-matrix{grid-template-columns:140px repeat(var(--tp-count,8),minmax(110px,1fr));}
+  .gr{display:contents;}
+.bp-matrix{grid-template-columns:140px repeat(var(--tp-count,8),minmax(110px,1fr));}
 }
 @media (max-width:720px){
   body{padding:var(--sp-3) var(--sp-2);}
@@ -390,11 +412,13 @@ a.kit-tag:hover{opacity:1;}
       </div>
     </div>
     <div class="status-actions">
-      <label class="btn" for="file-input">Subir mi Plantilla XLSX</label>
-      <input type="file" id="file-input" accept=".xlsx,.xlsm" hidden>
+      <button type="button" class="btn" id="btn-subir">Subir mi Plantilla XLSX</button>
+      <input type="file" id="file-input" accept=".xlsx,.xlsm" class="visually-hidden" tabindex="-1" aria-hidden="true">
       <button class="btn-ghost btn" id="btn-sample">Volver al ejemplo</button>
     </div>
   </div>
+
+  <div class="aviso-descartadas" id="aviso-descartadas" role="status" hidden></div>
 
   <!-- ============ TABS ============ -->
   <div class="tabs">
@@ -415,7 +439,7 @@ a.kit-tag:hover{opacity:1;}
       <div class="bp-legend-item"><span class="bp-legend-dot mixto"></span>Mixto</div>
     </div>
 
-    <div class="bp-matrix" id="bp-matrix"></div>
+    <div class="bp-matrix" id="bp-matrix" role="table" aria-label="Blueprint: touchpoints por dimensión"></div>
 
   </div>
 
@@ -440,7 +464,7 @@ a.kit-tag:hover{opacity:1;}
     <!-- Heatmap estudiante -->
     <div class="cal-section">
       <div class="cal-section-head">
-        <h3>Carga del estudiante por semana <span class="lente-tag">Lente 2</span></h3>
+        <h2>Carga del estudiante por semana <span class="lente-tag">Lente 2</span></h2>
       </div>
       <div class="cal-legend">
         <span>h estudiante por semana:</span>
@@ -451,7 +475,7 @@ a.kit-tag:hover{opacity:1;}
         <span class="cal-legend-item"><span class="cal-legend-chip" style="background:#FADDDD"></span>&gt;12 h</span>
       </div>
       <div class="cal-scroll">
-        <div class="cal-grid" id="cal-grid"></div>
+        <div class="cal-grid" id="cal-grid" role="table" aria-label="Carga semanal del estudiante por touchpoint"></div>
       </div>
       <div class="cal-totals-grid" id="cal-totals"></div>
     </div>
@@ -459,7 +483,7 @@ a.kit-tag:hover{opacity:1;}
     <!-- Heatmap docente -->
     <div class="cal-section">
       <div class="cal-section-head">
-        <h3>Carga docente por semana <span class="lente-tag">Lente 1</span></h3>
+        <h2>Carga docente por semana <span class="lente-tag">Lente 1</span></h2>
       </div>
       <div class="cal-legend">
         <span>h docente por semana:</span>
@@ -470,7 +494,7 @@ a.kit-tag:hover{opacity:1;}
         <span class="cal-legend-item"><span class="cal-legend-chip" style="background:#FADDDD"></span>&gt;15 h</span>
       </div>
       <div class="cal-scroll">
-        <div class="cal-grid" id="cal-grid-docente"></div>
+        <div class="cal-grid" id="cal-grid-docente" role="table" aria-label="Carga semanal docente por touchpoint"></div>
       </div>
       <div class="cal-totals-grid" id="cal-totals-docente"></div>
     </div>
@@ -480,11 +504,11 @@ a.kit-tag:hover{opacity:1;}
   <!-- ============ UPLOAD HELPER (shown on file load error) ============ -->
   <div class="tab-panel" id="panel-error" style="display:none;">
     <div class="upload-drop" id="drop-zone">
-      <h3>No se pudo leer el archivo</h3>
+      <h2>No se pudo leer el archivo</h2>
       <p id="error-msg">Revisa que estés subiendo la Plantilla XLSX tal como la descargaste.</p>
       <div class="up-actions">
-        <label class="btn" for="file-input-2">Subir otro archivo</label>
-        <input type="file" id="file-input-2" accept=".xlsx,.xlsm" hidden>
+        <button type="button" class="btn btn-outline" id="btn-subir-2">Subir otro archivo</button>
+        <input type="file" id="file-input-2" accept=".xlsx,.xlsm" class="visually-hidden" tabindex="-1" aria-hidden="true">
         <button class="btn-outline btn" id="btn-back-sample">Volver al ejemplo</button>
       </div>
     </div>
@@ -503,7 +527,24 @@ a.kit-tag:hover{opacity:1;}
 </main>
 
 <!-- SheetJS desde CDN para parsear XLSX -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<!-- SheetJS servido desde el propio kit. Antes se cargaba de un CDN de terceros:
+     era un tercero recibiendo la IP de cada profesor, y un script externo con acceso
+     al libro que el profesor sube. SheetJS CE, licencia Apache-2.0; copia de la
+     licencia en /assets/vendor/LICENSE-sheetjs.txt. -->
+<script src="/assets/vendor/xlsx-0.18.5.min.js"></script>
+<script>
+// Si por lo que sea la biblioteca no carga, hay que decirlo: sin ella la subida
+// falla en silencio y el profesor no entiende por qué su libro no hace nada.
+window.addEventListener('load', () => {
+  if (typeof XLSX === 'undefined') {
+    const aviso = document.getElementById('aviso-descartadas');
+    if (aviso) {
+      aviso.textContent = 'No se ha podido cargar el lector de hojas de cálculo, así que subir tu Plantilla no va a funcionar. Recarga la página; si sigue igual, ábrela desde la web del kit en vez de desde una copia guardada.';
+      aviso.hidden = false;
+    }
+  }
+});
+</script>
 
 <script>
 // ============ CONSTANTS ============
@@ -596,9 +637,31 @@ function parseXlsx(workbook){
   //                      11=h_d 12=h_e 13=h_c 14=h_f (base)  15=total_base
   //                      16=h_d 17=h_e 18=h_c 19=h_f (ia)    20=total_ia
   //                      21..24 practicas                     27=h_est/ocur
+  const descartadas = [];
   for (let i = 5; i < tRows.length; i++){
     const r = tRows[i];
-    if (!r || !r[0] || !r[1]) continue; // Need ID and name
+    const fila = i + 1;   // número de fila tal como lo ve el profesor en el Excel
+    // Antes se descartaba en silencio cualquier fila sin ID o sin nombre, así que
+    // borrar una sola celda hacía desaparecer un touchpoint del plan —y sus horas—
+    // sin que nada lo advirtiera.
+    if (!r || (!r[0] && !r[1])) continue;                  // fila vacía: se ignora
+    if (/^total/i.test(String(r[0] || '').trim())) break;  // pie de la tabla: aquí acaban los touchpoints
+    if (!r[0] || !r[1]) {
+      // La plantilla trae los ID prenumerados (TP1…TP25), así que una fila con
+      // ID y nada más es simplemente una fila sin usar. Solo avisamos cuando hay
+      // contenido de verdad y falta el ID o el nombre: eso sí es un touchpoint
+      // que se cae del plan llevándose sus horas.
+      // Solo las columnas que el profesor escribe (tipo … h fback base). Las de
+      // totales son fórmulas que en una fila sin usar valen 0, y contarlas hacía
+      // que las 18 filas prenumeradas del libro salieran como descartadas.
+      const conDatos = r.slice(2, 15).some(v => {
+        if (v === null || v === undefined) return false;
+        const s = String(v).trim();
+        return s !== '' && s !== '0';
+      });
+      if (conDatos) descartadas.push(fila);
+      continue;
+    }
     const tp = {
       id: String(r[0]).trim(),
       nombre: String(r[1]).trim(),
@@ -635,6 +698,7 @@ function parseXlsx(workbook){
   }
 
   if (result.touchpoints.length === 0) throw new Error('No se encontraron touchpoints con ID y nombre en la hoja "Touchpoints".');
+  result.descartadas = descartadas;
   return result;
 }
 
@@ -735,7 +799,22 @@ function nombreColumna(idx, numSem){
 // ============ RENDERERS ============
 let __escenarioDocente = 'base'; // 'base' | 'ia'
 
+// Filas a medias: se leen igual pero se dicen, porque un touchpoint que
+// desaparece del plan se lleva sus horas y su peso en la nota con él.
+function avisaDescartadas(){
+  const caja = document.getElementById('aviso-descartadas');
+  if(!caja) return;
+  const d = (state && state.descartadas) || [];
+  if(!d.length){ caja.hidden = true; caja.innerHTML = ''; return; }
+  const filas = d.join(', ');
+  caja.hidden = false;
+  caja.innerHTML = `<strong>${d.length} fila${d.length>1?'s':''} de la hoja Touchpoints ${d.length>1?'se han quedado':'se ha quedado'} fuera del plan.</strong> ` +
+    `${d.length>1?'Las filas':'La fila'} ${filas} ${d.length>1?'tienen':'tiene'} datos pero ${d.length>1?'les':'le'} falta el ID o el nombre, ` +
+    `y sin esos dos campos no se pueden identificar. Compruébal${d.length>1?'as':'a'} en tu Plantilla: sus horas y su peso en la nota no están contados aquí.`;
+}
+
 function renderAll(){
+  avisaDescartadas();
   if (!state || !state.touchpoints || state.touchpoints.length === 0) {
     showError('Estado vacío.');
     return;
@@ -800,11 +879,11 @@ function renderBlueprint(){
   matrix.style.setProperty('--tp-count', tps.length);
   let html = '';
   // Top-left corner
-  html += '<div class="corner"></div>';
+  html += '<div class="gr" role="row"><div class="corner" role="columnheader"><span class="visually-hidden">Dimensión</span></div>';
   // Column headers (TPs)
   tps.forEach(tp => {
     const natClass = natClassName(tp.naturaleza);
-    html += `<div class="col-head">
+    html += `<div class="col-head" role="columnheader">
       <div class="col-id">${escapeHtml(tp.id)} · ${escapeHtml(tp.tipo||'')}</div>
       <div class="col-name">${escapeHtml(tp.nombre)}</div>
       <div class="col-pills">
@@ -813,6 +892,7 @@ function renderBlueprint(){
       </div>
     </div>`;
   });
+  html += '</div>';
 
   // Row definitions
   const rows = [
@@ -862,7 +942,7 @@ function renderBlueprint(){
           ps.corr && `<strong>Corrección:</strong> ${escapeHtml(ps.corr)}`,
           ps.fback && `<strong>Retroalimentación:</strong> ${escapeHtml(ps.fback)}`
         ].filter(Boolean);
-        if (all.length === 0) return '<span style="color:var(--gris-400);font-style:italic;">sin prácticas anotadas</span>';
+        if (all.length === 0) return '<span style="color:#5C636D;font-style:italic;">sin prácticas anotadas</span>';
         return `<div class="cell-sub">${all.join('<br><br>')}</div>`;
       },
       cellCls: () => 'practica'
@@ -870,11 +950,12 @@ function renderBlueprint(){
   ];
 
   rows.forEach(row => {
-    html += `<div class="row-label"><div class="rl-title">${row.title}</div><div class="rl-sub">${row.sub}</div></div>`;
+    html += `<div class="gr" role="row"><div class="row-label" role="rowheader"><div class="rl-title">${row.title}</div><div class="rl-sub">${row.sub}</div></div>`;
     tps.forEach(tp => {
       const extra = row.cellCls ? row.cellCls(tp) : '';
-      html += `<div class="cell ${extra}">${row.cell(tp)}</div>`;
+      html += `<div class="cell ${extra}" role="cell" aria-label="${escapeHtml(tp.id + ' ' + tp.nombre + ' · ' + row.title)}">${row.cell(tp)}</div>`;
     });
+    html += '</div>';
   });
 
   matrix.innerHTML = html;
@@ -902,11 +983,12 @@ function renderCalendarioEstudiante(){
   let html = '';
 
   // Cabecera: semanas de docencia y, tras ellas, las de cierre
-  html += '<div class="cal-head first">Touchpoint</div>';
+  html += '<div class="gr" role="row"><div class="cal-head first" role="columnheader">Touchpoint</div>';
   for (let i = 0; i < cols; i++){
     const cierre = i >= numSem;
-    html += `<div class="cal-head${cierre ? ' cierre' : ''}"${cierre ? ' title="Semana de cierre: posterior al final de la docencia"' : ''}>${nombreColumna(i, numSem)}</div>`;
+    html += `<div class="cal-head${cierre ? ' cierre' : ''}" role="columnheader"${cierre ? ' title="Semana de cierre: posterior al final de la docencia"' : ''}>${nombreColumna(i, numSem)}</div>`;
   }
+  html += '</div>';
 
   // Filas
   const weekTotals = new Array(cols).fill(0);
@@ -914,7 +996,7 @@ function renderCalendarioEstudiante(){
     const natCls = natClassName(tp.naturaleza);
     const weeks = distributeStudentWeeks(tp, numSem);
     const totalTp = weeks.reduce((a,b)=>a+b,0);
-    html += `<div class="cal-tp-label ${natCls}">
+    html += `<div class="gr" role="row"><div class="cal-tp-label ${natCls}" role="rowheader">
       <div class="tp-id">${escapeHtml(tp.id)}</div>
       <div class="tp-name">${escapeHtml(tp.nombre)}</div>
       <div class="tp-sub">total ${fmt(totalTp)} h est</div>
@@ -922,20 +1004,25 @@ function renderCalendarioEstudiante(){
     weeks.forEach((h, idx) => {
       const lvl = cellLevel(h);
       const cls = (h > 0 ? `lvl-${lvl}` : 'empty') + (idx >= numSem ? ' cierre' : '');
-      html += `<div class="cal-cell ${cls}">${h > 0 ? fmt(h) : '·'}</div>`;
+      // Sin esto, un lector de pantalla recibía una ristra de números sin poder
+      // relacionar ninguno con su semana ni con su touchpoint.
+      const etiqueta = `${tp.id} ${tp.nombre}, ${nombreColumna(idx, numSem)}: ${h > 0 ? fmt(h) + ' horas de estudiante' : 'sin carga'}`;
+      html += `<div class="cal-cell ${cls}" role="cell" aria-label="${escapeHtml(etiqueta)}">${h > 0 ? fmt(h) : '·'}</div>`;
       weekTotals[idx] += h;
     });
+    html += '</div>';
   });
 
   // Total row
-  html += '<div class="cal-total-row">Total por semana (h est)</div>';
+  html += '<div class="gr" role="row"><div class="cal-total-row" role="rowheader">Total por semana (h est)</div>';
   weekTotals.forEach((total, idx) => {
     let cls = idx >= numSem ? 'cierre' : '';
     if (total > umbral) cls += ' over';
     else if (total > umbral * 0.75) cls += ' warn';
     const aviso = total > umbral ? ' title="Por encima del umbral de pico"' : (total > umbral * 0.75 ? ' title="Cerca del umbral de pico"' : '');
-    html += `<div class="cal-total-cell ${cls}"${aviso}>${fmt(total)}</div>`;
+    html += `<div class="cal-total-cell ${cls}" role="cell" aria-label="${escapeHtml(nombreColumna(idx, numSem))}: ${fmt(total)} horas">${fmt(total)}</div>`;
   });
+  html += '</div>';
 
   grid.innerHTML = html;
 
@@ -1034,11 +1121,12 @@ function renderCalendarioDocente(){
   let html = '';
 
   // Cabecera: semanas de docencia y, tras ellas, las de cierre
-  html += '<div class="cal-head first">Touchpoint</div>';
+  html += '<div class="gr" role="row"><div class="cal-head first" role="columnheader">Touchpoint</div>';
   for (let i = 0; i < cols; i++){
     const cierre = i >= numSem;
-    html += `<div class="cal-head${cierre ? ' cierre' : ''}"${cierre ? ' title="Semana de cierre: posterior al final de la docencia"' : ''}>${nombreColumna(i, numSem)}</div>`;
+    html += `<div class="cal-head${cierre ? ' cierre' : ''}" role="columnheader"${cierre ? ' title="Semana de cierre: posterior al final de la docencia"' : ''}>${nombreColumna(i, numSem)}</div>`;
   }
+  html += '</div>';
 
   // Filas
   const weekTotals = new Array(cols).fill(0);
@@ -1046,7 +1134,7 @@ function renderCalendarioDocente(){
     const natCls = natClassName(tp.naturaleza);
     const weeks = distributeDocenteWeeks(tp, numSem, __escenarioDocente);
     const totalTp = weeks.reduce((a,b)=>a+b,0);
-    html += `<div class="cal-tp-label ${natCls}">
+    html += `<div class="gr" role="row"><div class="cal-tp-label ${natCls}" role="rowheader">
       <div class="tp-id">${escapeHtml(tp.id)}</div>
       <div class="tp-name">${escapeHtml(tp.nombre)}</div>
       <div class="tp-sub">total ${fmt(totalTp)} h doc</div>
@@ -1054,20 +1142,23 @@ function renderCalendarioDocente(){
     weeks.forEach((h, idx) => {
       const lvl = cellLevelDocente(h);
       const cls = (h > 0 ? `lvl-${lvl}` : 'empty') + (idx >= numSem ? ' cierre' : '');
-      html += `<div class="cal-cell ${cls}">${h > 0 ? fmt(h) : '·'}</div>`;
+      const etiqueta = `${tp.id} ${tp.nombre}, ${nombreColumna(idx, numSem)}: ${h > 0 ? fmt(h) + ' horas docente' : 'sin carga'}`;
+      html += `<div class="cal-cell ${cls}" role="cell" aria-label="${escapeHtml(etiqueta)}">${h > 0 ? fmt(h) : '·'}</div>`;
       weekTotals[idx] += h;
     });
+    html += '</div>';
   });
 
   // Total row
-  html += '<div class="cal-total-row">Total por semana (h doc)</div>';
+  html += '<div class="gr" role="row"><div class="cal-total-row" role="rowheader">Total por semana (h doc)</div>';
   weekTotals.forEach((total, idx) => {
     let cls = idx >= numSem ? 'cierre' : '';
     if (total > umbral) cls += ' over';
     else if (total > umbral * 0.75) cls += ' warn';
     const aviso = total > umbral ? ' title="Por encima del umbral de pico"' : (total > umbral * 0.75 ? ' title="Cerca del umbral de pico"' : '');
-    html += `<div class="cal-total-cell ${cls}"${aviso}>${fmt(total)}</div>`;
+    html += `<div class="cal-total-cell ${cls}" role="cell" aria-label="${escapeHtml(nombreColumna(idx, numSem))}: ${fmt(total)} horas">${fmt(total)}</div>`;
   });
+  html += '</div>';
 
   grid.innerHTML = html;
 
@@ -1118,6 +1209,14 @@ function hideError(){
   const ep = document.getElementById('panel-error');
   ep.style.display = 'none';
   document.querySelectorAll('.tab-panel:not(#panel-error)').forEach(p => p.style.display = '');
+  // Devolver la pestaña activa. Sin esto el área de contenido quedaba vacía
+  // tras recuperarse de un error, con las cifras correctas arriba y nada debajo,
+  // y solo se arreglaba pinchando una pestaña sin ninguna pista de que hubiera
+  // que hacerlo.
+  const activa = document.querySelector('.tab.active');
+  const destino = activa ? 'panel-' + activa.dataset.tab : 'panel-blueprint';
+  const panel = document.getElementById(destino) || document.getElementById('panel-blueprint');
+  if(panel) panel.classList.add('active');
 }
 
 document.querySelectorAll('.tab').forEach(tab => {
@@ -1164,7 +1263,17 @@ document.getElementById('file-input-2').addEventListener('change', e => handleFi
 document.getElementById('btn-sample').addEventListener('click', () => {
   if (confirm('Esto reemplaza tus datos por el ejemplo IngeSoft. ¿Continuar?')) resetToSample();
 });
-document.getElementById('btn-back-sample').addEventListener('click', resetToSample);
+// Los botones abren el selector de archivos; el campo sigue existiendo para
+// recibirlo, pero ya no es lo que el usuario tiene que alcanzar.
+document.getElementById('btn-subir').addEventListener('click', () => document.getElementById('file-input').click());
+const btnSubir2 = document.getElementById('btn-subir-2');
+if (btnSubir2) btnSubir2.addEventListener('click', () => document.getElementById('file-input-2').click());
+
+document.getElementById('btn-back-sample').addEventListener('click', () => {
+  if (confirm('Esto reemplaza el plan que tenías cargado por el ejemplo IngeSoft.\n\n' +
+              'Si lo que ha fallado es el archivo que acabas de elegir, tu plan anterior sigue guardado: ' +
+              'cancela y vuelve a intentarlo con el archivo correcto. ¿Continuar de todos modos?')) resetToSample();
+});
 
 // Drag & drop
 const dropZone = document.body;

@@ -7,14 +7,12 @@
   <meta name="description" content="Material de lectura y consulta rápida del kit: guías de fondo, glosario operativo, preguntas frecuentes y contacto. Un kit de Eutika.">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">  <link rel="stylesheet" href="/assets/css/fuentes.v1.css">
   <link rel="stylesheet" href="/assets/css/styles.v2.css">
 </head>
 <body data-page="documentacion">
+
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
   <header class="site">
     <div class="shell">
@@ -22,7 +20,7 @@
         <span class="brand-name">Rediseña<span class="dot">.</span>Evaluacion</span>
         <span class="brand-attrib">Un kit de Eutika</span>
       </a>
-      <nav class="primary">
+      <nav class="primary" aria-label="Principal">
         <a href="/">Inicio</a>
         <a href="/proceso">El proceso</a>
         <a href="/kit">Kit</a>
@@ -32,7 +30,7 @@
     </div>
   </header>
 
-  <div class="status-strip">
+  <section class="status-strip" aria-label="Tu progreso en el kit">
     <div class="shell">
       <div class="info">
         <div class="info-item">
@@ -45,14 +43,15 @@
         </div>
       </div>
       <div class="actions">
+        <button class="btn ghost small" data-action="detalle" aria-pressed="false">Ver todo el detalle</button>
         <button class="btn ghost small" data-action="export">Descargar progreso</button>
         <button class="btn ghost small" data-action="import">Cargar progreso</button>
         <button class="btn ghost small" data-action="reset">Reiniciar</button>
       </div>
     </div>
-  </div>
+  </section>
 
-  <main>
+  <main id="contenido" tabindex="-1">
 
     <div class="breadcrumb"><a href="/">Inicio</a> / Documentación</div>
     <span class="chip">Lectura y consulta</span>
@@ -61,10 +60,10 @@
 
     <h2>Guías de fondo</h2>
     <div class="grid-2">
-      <a href="/downloads/sprint-0/guia-estrategica.html" class="card card-linkable with-accent" target="_blank" rel="noopener">
+      <a href="/downloads/sprint-0/guia-estrategica.html" class="card card-linkable with-accent" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>
         <div class="meta">Marco conceptual</div>
         <h3>Guía estratégica</h3>
-        <p>Las cuatro decisiones (D1–D4), los siete componentes de evaluación (C1–C7), los arquetipos de asignatura y los tres estados de cierre del Blueprint 0. Es la lectura de fondo del Sprint 0.</p>
+        <p>Las cuatro decisiones (D1–D4), los siete componentes de la evaluación (C1–C7), los arquetipos de estudiante y dos ejemplos resueltos de extremo a extremo. Es la lectura de fondo del Sprint 0.</p>
         <span class="card-link">Abrir →</span>
       </a>
       <a href="/proceso" class="card card-linkable with-accent">
@@ -73,7 +72,7 @@
         <p>Los tres sprints, sus piezas principales, cómo encajan entre sí y por qué están en este orden. Para quien quiere entender el diseño del kit antes de recorrerlo.</p>
         <span class="card-link">Abrir →</span>
       </a>
-      <a href="/downloads/sprint-0/guia-estrategica.html#ia" class="card card-linkable with-accent" target="_blank" rel="noopener">
+      <a href="/downloads/sprint-0/guia-estrategica.html#decisiones" class="card card-linkable with-accent" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>
         <div class="meta">Enfoque</div>
         <h3>La IA como eje del proceso y del kit</h3>
         <p>El enfoque sobre la IA no se concentra en una pieza aparte, sino que aparece distribuido en los propios materiales del kit. La Guía estratégica introduce las decisiones D4 (IA docente) y D2 (IA en el trabajo del estudiante); la Plantilla del plan operativo pide una línea base y una hipótesis con IA para cada fase; y la recalibración con tiempos medidos es lo que cierra el ciclo al final del cuatrimestre. Si quieres entrar por algún sitio, la Guía estratégica suele ser la mejor puerta.</p>
@@ -87,11 +86,13 @@
       </a>
     </div>
 
+    <div id="siguiente-paso" hidden></div>
+
     <h2 id="glosario">Glosario operativo rápido</h2>
     <p>Los términos que más se repiten en el kit, con definición breve.</p>
     <dl style="margin-top: var(--sp-4);">
       <div class="glossary-item">
-        <dt>Touchpoint <span style="font-weight:400;color:var(--gris-500);font-size:0.85em;">· también «momento evaluativo»</span></dt>
+        <dt>Touchpoint <span style="font-weight:400;color:var(--gris-600);font-size:0.85em;">· también «momento evaluativo»</span></dt>
         <dd>Cada momento evaluativo concreto de la asignatura: una entrega, una prueba, una corrección con rúbrica, una sesión de retroalimentación. Es la unidad mínima con la que se trabaja en el Sprint 1. A lo largo del kit usamos las dos formas, <em>touchpoint</em> (más breve, identificador técnico, sigla <strong>TP</strong>) y <em>momento evaluativo</em> (más descriptivo en prosa).</dd>
       </div>
       <div class="glossary-item">
@@ -104,7 +105,27 @@
       </div>
       <div class="glossary-item">
         <dt>Tres lentes</dt>
-        <dd>Las tres lecturas de factibilidad del plan operativo: carga docente, carga estudiante, y balance formativa/sumativa. Si alguna sale en rojo, el plan no se considera cerrado.</dd>
+        <dd>Las tres lecturas de factibilidad del plan operativo, cada una en su hoja de la Plantilla: <strong>Lente 1 · Carga docente</strong>, <strong>Lente 2 · Carga estudiante</strong> y <strong>Lente 3 · Equilibrio F-S</strong> (formativa frente a sumativa). Si alguna sale en rojo, el plan no se considera cerrado.</dd>
+      </div>
+      <div class="glossary-item">
+        <dt>Semáforo económico</dt>
+        <dd>Compara las horas que te costaría evaluar con la dedicación que has declarado para la asignatura entera. <strong>Verde hasta el 40 %, ámbar del 40 al 70 %, rojo por encima del 70 %.</strong> El mismo criterio en el Sprint 0 y en el Sprint 1, para que la lectura no cambie de un sprint a otro. Mide coste, no calidad: un modelo de clase magistral y examen final sale verde porque es el diseño más barato que existe en dedicación docente, y eso no lo convierte en el mejor.</dd>
+      </div>
+      <div class="glossary-item">
+        <dt>Semanas de cierre · C1, C2, C3</dt>
+        <dd>Tres columnas que el calendario del Panel añade después del final de la docencia. La corrección de un examen de la semana 15 ocurre de verdad, y suele ser el trabajo más duro del semestre: si el calendario terminase en la última semana lectiva, esas horas se perderían o se apilarían donde no van.</dd>
+      </div>
+      <div class="glossary-item">
+        <dt>Señal / ruido</dt>
+        <dd>En el Sprint 2, tres pruebas separan una cosa de la otra: ¿<strong>se repite</strong> —en más de un momento o de una fuente—?, ¿<strong>es específica</strong> —se puede señalar qué la produce—?, ¿<strong>te sorprende</strong> —o sólo confirma lo que ya creías—? Las tres: es una señal. Dos: merece más observación. Una: es ruido. Una sola voz muy articulada no es una señal, pero tampoco es ruido: es una hipótesis, y se le busca confirmación en otra fuente.</dd>
+      </div>
+      <div class="glossary-item">
+        <dt>Triangular</dt>
+        <dd>Observar con tres instrumentos de tres sitios distintos —lo que ves en el aula, lo que dicen los estudiantes y los datos que la asignatura ya produce— para que lo que aparezca en dos de los tres se pueda tomar en serio. Mirar tres veces al mismo sitio no triangula.</dd>
+      </div>
+      <div class="glossary-item">
+        <dt>Escenario</dt>
+        <dd>Una versión completa de tu asignatura dentro de la Plantilla estratégica, con nombre. Se usan para comparar lo que tienes hoy con lo que quieres, y para someter el rediseño a pruebas de resistencia cambiando un solo parámetro: el doble de estudiantes, un arquetipo dominante, la mitad de tu dedicación.</dd>
       </div>
       <div class="glossary-item">
         <dt>Línea base / Hipótesis con IA</dt>
@@ -112,7 +133,7 @@
       </div>
       <div class="glossary-item">
         <dt>Umbrales EEES</dt>
-        <dd>Referencias de carga del estudiante derivadas del Espacio Europeo de Educación Superior (25–30 horas por ECTS). El kit las usa como techo para la Lente 2.</dd>
+        <dd>Referencias de carga del estudiante derivadas del Espacio Europeo de Educación Superior (25–30 horas por ECTS; el kit usa 25 por defecto). Se usan como techo de la Lente 2.</dd>
       </div>
     </dl>
 
@@ -120,12 +141,12 @@
 
     <div class="faq-item">
       <h3>¿Cuánto tiempo de verdad me llevará?</h3>
-      <p>Entre 2 y 4 horas de trabajo real para dejar el rediseño preparado, distribuidas a lo largo de 6 a 8 semanas. El Sprint 0 es el único tramo denso, con 60 a 90 minutos seguidos. El Sprint 1 se reparte en dos o tres sesiones de 45 a 90 minutos, con días entre medias para que las decisiones reposen. El Sprint 2 es de otra naturaleza: no son sesiones de trabajo sino el cuatrimestre entero, con unos minutos de observación por semana mientras impartes la asignatura.</p>
+      <p>Entre 5 y 7 horas de trabajo real para dejar el rediseño preparado, distribuidas a lo largo de 6 a 8 semanas, contando los veinte minutos de onboarding del Sprint 1. El Sprint 0 es el único tramo que conviene hacer del tirón: de 45 a 75 minutos seguidos. El Sprint 1 se reparte en dos o tres sesiones de unos 90 minutos, con días entre medias para que las decisiones reposen. El Sprint 2 es de otra naturaleza: no son sesiones de trabajo sino el cuatrimestre entero, con unos minutos de observación por semana mientras impartes la asignatura.</p>
     </div>
 
     <div class="faq-item">
       <h3>¿Tengo que hacer los tres sprints o puedo usar solo uno?</h3>
-      <p>Puedes. El Sprint 0 funciona por sí solo y te deja ya con un Canvas y un Blueprint 0 utilizables. El Sprint 1 depende del Sprint 0 porque necesita el Blueprint 0 como entrada, pero si tú ya tienes algo equivalente, puedes saltar al Sprint 1 directamente. El Sprint 2, en cambio, asume que hay un plan operativo del Sprint 1 activo en un cuatrimestre.</p>
+      <p>Puedes. El Sprint 0 funciona por sí solo y te deja ya con un Canvas y un Blueprint 0 utilizables. El Sprint 1 depende del Sprint 0 porque necesita el Blueprint 0 como entrada, pero si tú ya tienes algo equivalente, puedes saltar al Sprint 1 directamente. El Sprint 2, en cambio, asume que hay un plan operativo del Sprint 1 activo en un cuatrimestre: sin un diseño en marcha no hay nada que pilotar.</p>
     </div>
 
     <div class="faq-item">
@@ -160,7 +181,7 @@
 
   <footer>
     <div class="shell">
-      <div>© 2026 · Rediseña.Evaluacion · Un kit de <a href="https://eutika.com/" target="_blank" rel="noopener">Eutika</a></div>
+      <div>© 2026 · Rediseña.Evaluacion · Un kit de <a href="https://eutika.com/" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>Eutika</a></div>
       <div>Contenidos CC BY-SA 4.0 · Código MIT</div>
     </div>
   </footer>

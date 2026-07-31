@@ -14,8 +14,8 @@ Este directorio contiene las piezas descargables servidas desde la web. Las URLs
 
 | Archivo | Tipo | Estado | Descripción |
 |---|---|---|---|
-| `sprint-0/plantilla-estrategica.html` | HTML autocontenido | disponible | Pieza principal. Cinco bloques, Canvas + Blueprint 0 auto-generados. |
-| `sprint-0/guia-estrategica.html` | HTML | disponible | Marco conceptual: D1–D4, C1–C7, arquetipos, estados de cierre. |
+| `sprint-0/plantilla-estrategica.html` | HTML autocontenido | disponible | Pieza principal. Seis pasos, Canvas + Blueprint 0 auto-generados, escenarios múltiples con vista de comparación y cinco asignaturas de ejemplo. |
+| `sprint-0/guia-estrategica.html` | HTML | disponible | Marco conceptual: D1–D4, C1–C7, arquetipos de estudiante y dos ejemplos resueltos de extremo a extremo. |
 | `sprint-0/mini-guia-pretrabajo.html` | HTML autocontenido | disponible | Encuadre breve antes de abrir la plantilla. |
 
 ### Sprint 1 · Plan de acción detallado
@@ -30,7 +30,12 @@ Este directorio contiene las piezas descargables servidas desde la web. Las URLs
 
 ### Sprint 2 · Pilotaje
 
-_Próximamente · septiembre 2026. Piezas por definir durante el verano de 2026._
+| Archivo | Tipo | Estado | Descripción |
+|---|---|---|---|
+| `sprint-2/cuaderno-pilotaje.html` | HTML interactivo (SheetJS) | disponible | Pieza principal. Siete apartados que se rellenan a lo largo del cuatrimestre. Lee la Plantilla del plan operativo del Sprint 1 para precargar el registro de tiempos, y genera el informe de pilotaje como vista derivada. Persistencia en localStorage, clave `redisena-cuaderno-pilotaje-v0`. |
+| `sprint-2/guia-observar-y-leer.html` | HTML autocontenido | disponible | Los cinco instrumentos de observación con sus ejemplos rellenos y el calendario mínimo (Parte 1, se lee antes de empezar), y el criterio para distinguir señal de ruido y decidir qué se ajusta (Parte 2, se lee a mitad de cuatrimestre). |
+
+Productizadas el 31 de julio de 2026 a partir de los instrumentos de pilotaje de la Ruta 5 (decisión D22 de su registro): lo pendiente no era diseñarlos sino quitarles lo específico de una universidad concreta y anclarlos al vocabulario del kit.
 
 ---
 

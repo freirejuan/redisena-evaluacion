@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cuaderno de pilotaje · Sprint 2 · Rediseña.Evaluacion</title>
+<meta name="description" content="Cuaderno de pilotaje del Sprint 2: dónde se registra lo que ocurre en el aula durante el cuatrimestre y de donde sale el informe de pilotaje. Todo en tu navegador; nada se envía a ningún sitio.">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<!-- Tipografías servidas desde el propio kit. Si guardas este archivo en tu
+     equipo y lo abres sin conexión, el texto se ve igual con las tipografías
+     del sistema: no se pierde nada. -->
+<link rel="stylesheet" href="/assets/css/fuentes.v1.css">
+<style>
+:root{
+  --azul-deep:#0F0F6B; --azul-reflex:#1E1E99; --azul-mid:#4B4BB8; --azul-light:#8F8FCC;
+  --azul-pale:#E8E8F6; --azul-soft:#F2F2FA;
+  --acento-teal:#1A9E7A; --acento-teal-pale:#E6F7F1;
+  --acento-coral:#E05555; --acento-coral-pale:#FADDDD;
+  --acento-amber:#E8A317; --acento-amber-pale:#FFF7E6;
+  /* Variantes oscurecidas para TEXTO. Los acentos de marca se mantienen para
+     fondos, bordes y superficies; en texto pequeño no llegaban a 4,5:1. */
+  --texto-teal:#0F6F55; --texto-coral:#B81F1F; --texto-ambar:#8A5A00;
+  --ink:#12121A; --gris-900:#1F1F26; --gris-700:#3F3F46; --gris-600:#52525B;
+  --gris-500:#666D76; --gris-300:#C8CCD2; --gris-200:#E2E4E8; --gris-100:#EFF0F2;
+  --gris-050:#F7F8F9; --white:#FFFFFF;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --serif:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'JetBrains Mono','Fira Code',monospace;
+  --text-xs:11px; --text-sm:13px; --text-base:15px; --text-md:17px;
+  --text-lg:20px; --text-xl:26px; --text-2xl:32px; --text-4xl:42px;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:28px;
+  --sp-7:36px; --sp-8:44px; --sp-10:60px; --sp-12:80px;
+  --radius-sm:4px; --radius-md:8px; --radius-lg:14px; --radius-pill:999px;
+  --shadow-sm:0 1px 3px rgba(15,15,107,.07);
+  --shadow-md:0 4px 14px rgba(15,15,107,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{background:var(--gris-050);color:var(--gris-900);font-family:var(--sans);font-size:var(--text-base);line-height:1.65;-webkit-font-smoothing:antialiased}
+
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:999;background:var(--azul-reflex);color:#fff;padding:10px 18px;border-radius:0 0 var(--radius-md) 0;font-size:var(--text-sm);font-weight:600;text-decoration:none}
+.skip-link:focus{left:0}
+:focus-visible{outline:3px solid var(--azul-reflex);outline-offset:2px}
+
+/* ============ BARRA DE VISTAS ============ */
+.tabs-bar{position:sticky;top:0;z-index:200;background:rgba(30,30,153,.97);backdrop-filter:blur(16px);display:flex;align-items:center;gap:6px;padding:10px 24px;flex-wrap:wrap}
+.tabs-brand{font-size:var(--text-xs);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.78);margin-right:14px;line-height:1.35}
+.tabs-brand .brand-kicker{display:block;font-weight:600;letter-spacing:.1em;color:rgba(255,255,255,.6)}
+.tab-btn{padding:6px 14px;border-radius:var(--radius-pill);border:1px solid rgba(255,255,255,.22);background:transparent;color:rgba(255,255,255,.82);font-size:var(--text-xs);font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap}
+.tab-btn:hover{border-color:rgba(255,255,255,.6);color:#fff}
+.tab-btn.active{background:#fff;color:var(--azul-deep);border-color:#fff}
+.tab-num{font-family:var(--mono);opacity:.7;margin-right:4px}
+.tabs-actions{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+.tabs-actions button{padding:6px 12px;border-radius:var(--radius-pill);border:1px solid rgba(255,255,255,.22);background:transparent;color:rgba(255,255,255,.82);font-size:var(--text-xs);font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap}
+.tabs-actions button:hover{border-color:rgba(255,255,255,.6);color:#fff}
+
+/* ============ VISTAS ============ */
+.view{display:none}
+.view.active{display:block}
+.doc{max-width:920px;margin:0 auto;padding:0 24px var(--sp-12)}
+
+/* ============ PORTADA ============ */
+.cover{background:linear-gradient(135deg,var(--azul-reflex) 0%,var(--azul-deep) 100%);color:#fff;padding:72px 48px 52px;margin:0 -24px;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;top:-120px;right:-80px;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,.04)}
+.cover-inner{position:relative;z-index:1;max-width:640px}
+.overline{display:flex;align-items:center;gap:14px;font-size:var(--text-xs);letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:600;margin-bottom:20px}
+.overline::before{content:'';width:32px;height:2px;background:rgba(255,255,255,.4)}
+.cover h1{font-family:var(--serif);font-size:var(--text-4xl);font-weight:700;letter-spacing:-.025em;line-height:1.08;margin-bottom:14px}
+.cover h1 em{font-style:normal;color:rgba(255,255,255,.62)}
+.cover .subtitle{font-family:var(--serif);font-size:var(--text-md);font-style:italic;color:rgba(255,255,255,.82);line-height:1.6;max-width:560px;margin-bottom:var(--sp-8)}
+.cover-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding-top:var(--sp-6);border-top:1px solid rgba(255,255,255,.18)}
+.kv-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:3px}
+.kv-value{font-size:var(--text-sm);font-weight:600}
+
+/* ============ INTRO ============ */
+.intro-card{background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);padding:var(--sp-7) var(--sp-6);margin:var(--sp-7) 0}
+.intro-card-title{font-family:var(--sans);font-size:var(--text-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--azul-reflex);font-weight:700;margin-bottom:var(--sp-3)}
+.intro-card p{color:var(--gris-700);margin-bottom:var(--sp-3)}
+.intro-card p:last-child{margin-bottom:0}
+.intro-card strong{color:var(--ink)}
+.intro-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:var(--sp-4);margin-top:var(--sp-5);padding-top:var(--sp-5);border-top:1px solid var(--gris-200)}
+.intro-stat-value{font-family:var(--serif);font-size:var(--text-xl);font-weight:700;color:var(--azul-reflex);line-height:1}
+.intro-stat-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gris-600);margin-top:3px}
+
+/* ============ SECCIONES ============ */
+.section{background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);padding:var(--sp-7) var(--sp-6);margin:var(--sp-6) 0}
+.section-num{font-family:var(--mono);font-size:var(--text-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--azul-mid);font-weight:600;margin-bottom:var(--sp-2)}
+.section h2{font-family:var(--serif);font-size:var(--text-xl);font-weight:700;color:var(--ink);letter-spacing:-.015em;margin-bottom:var(--sp-3);line-height:1.2}
+.section > p{color:var(--gris-700);margin-bottom:var(--sp-4)}
+.section h3{font-family:var(--sans);font-size:var(--text-base);font-weight:700;color:var(--azul-reflex);margin:var(--sp-6) 0 var(--sp-3)}
+.section ul,.section ol{margin:0 0 var(--sp-4) var(--sp-5);color:var(--gris-700)}
+.section li{margin-bottom:var(--sp-2)}
+.section strong{color:var(--ink)}
+.cuando{display:inline-flex;align-items:center;gap:6px;background:var(--azul-pale);color:var(--azul-deep);border-radius:var(--radius-pill);padding:3px 12px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:var(--sp-3)}
+
+/* ============ CAMPOS ============ */
+.field{margin-bottom:var(--sp-5)}
+.field label,.field .field-label{display:block;font-size:var(--text-sm);font-weight:600;color:var(--ink);margin-bottom:6px}
+.field-hint{font-size:var(--text-xs);color:var(--gris-600);margin-bottom:6px;line-height:1.5}
+input[type=text],input[type=number],textarea,select{width:100%;font-family:inherit;font-size:var(--text-sm);color:var(--ink);background:var(--white);border:1px solid var(--gris-300);border-radius:var(--radius-md);padding:9px 12px;line-height:1.5}
+textarea{min-height:74px;resize:vertical}
+input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--azul-reflex);outline-offset:1px;border-color:var(--azul-reflex)}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--sp-4)}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:var(--sp-4)}
+
+/* Grupos de opciones */
+.pill-group{display:flex;flex-wrap:wrap;gap:6px}
+.pill-group input[type=radio],.pill-group input[type=checkbox]{position:absolute;opacity:0;width:1px;height:1px}
+.pill-group label{display:inline-flex;align-items:center;padding:6px 14px;border:1px solid var(--gris-300);border-radius:var(--radius-pill);font-size:var(--text-sm);font-weight:500;color:var(--gris-700);cursor:pointer;margin:0}
+.pill-group input:checked + label{background:var(--azul-reflex);border-color:var(--azul-reflex);color:#fff}
+.pill-group input:focus-visible + label{outline:3px solid var(--azul-reflex);outline-offset:2px}
+
+/* Casillas de la línea de base */
+.check-list{list-style:none;margin:0;padding:0}
+.check-list li{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--gris-100)}
+.check-list li:last-child{border-bottom:none}
+.check-list input[type=checkbox]{width:20px;height:20px;flex:none;margin-top:2px;accent-color:var(--azul-reflex)}
+.check-list .txt{font-size:var(--text-sm);color:var(--gris-700);line-height:1.55}
+.check-list .txt b{display:block;color:var(--ink);font-weight:600;margin-bottom:2px}
+
+/* ============ INSTRUMENTOS ============ */
+.instr{border:1px solid var(--gris-200);border-radius:var(--radius-md);padding:var(--sp-4) var(--sp-5);margin-bottom:var(--sp-3);background:var(--white)}
+.instr.elegido{border-color:var(--azul-reflex);border-width:2px;background:var(--azul-soft)}
+.instr-head{display:flex;align-items:flex-start;gap:12px}
+.instr-head input[type=checkbox]{width:20px;height:20px;flex:none;margin-top:3px;accent-color:var(--azul-reflex)}
+.instr-nombre{font-weight:700;color:var(--ink);font-size:var(--text-sm)}
+.instr-coste{font-family:var(--mono);font-size:10px;color:var(--gris-600);white-space:nowrap;margin-left:auto}
+.instr-que{font-size:var(--text-xs);color:var(--gris-600);margin-top:2px;line-height:1.5}
+.instr-detalle{margin-top:var(--sp-3);padding-top:var(--sp-3);border-top:1px solid var(--gris-200)}
+.instr-detalle[hidden]{display:none}
+
+/* ============ TABLAS ============ */
+.tabla-envoltura{overflow-x:auto;margin:var(--sp-4) 0}
+.tabla-envoltura:focus-visible{outline:3px solid var(--azul-reflex);outline-offset:3px}
+table.datos{width:100%;border-collapse:collapse;font-size:var(--text-sm);min-width:640px}
+table.datos th{background:var(--azul-soft);color:var(--azul-deep);text-align:left;padding:9px 10px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;border-bottom:2px solid var(--azul-reflex);white-space:nowrap}
+table.datos td{padding:7px 10px;border-bottom:1px solid var(--gris-100);vertical-align:top;color:var(--gris-700)}
+table.datos tbody tr:nth-child(even){background:var(--gris-050)}
+table.datos input,table.datos select,table.datos textarea{padding:5px 8px;font-size:var(--text-xs)}
+/* Sin ancho mínimo, el desplegable de fase se quedaba en la flecha y no se
+   veía qué había elegido. */
+table.datos select{min-width:120px}
+table.datos th:first-child,table.datos td:first-child{min-width:180px}
+table.datos .num{text-align:right;font-family:var(--mono);white-space:nowrap}
+.desv-alta{color:var(--texto-coral);font-weight:700}
+.desv-media{color:var(--texto-ambar);font-weight:700}
+.desv-baja{color:var(--texto-teal);font-weight:700}
+.desv-nula{color:var(--gris-600)}
+
+/* ============ SEÑALES ============ */
+.senal{border:1px solid var(--gris-200);border-left:3px solid var(--azul-mid);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:var(--sp-4);margin-bottom:var(--sp-3);background:var(--white)}
+.senal-head{display:flex;align-items:center;gap:10px;margin-bottom:var(--sp-3)}
+.senal-cod{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--azul-reflex);background:var(--azul-pale);padding:3px 8px;border-radius:var(--radius-sm)}
+.senal-pruebas{display:flex;gap:14px;flex-wrap:wrap;margin:var(--sp-2) 0 var(--sp-3)}
+.senal-pruebas label{display:inline-flex;align-items:center;gap:6px;font-size:var(--text-xs);color:var(--gris-700);font-weight:500;margin:0}
+.senal-pruebas input{width:16px;height:16px;accent-color:var(--azul-reflex)}
+.veredicto{font-size:var(--text-xs);font-weight:700;padding:3px 10px;border-radius:var(--radius-pill);white-space:nowrap}
+.veredicto.v-senal{background:var(--acento-teal-pale);color:var(--texto-teal)}
+.veredicto.v-mirar{background:var(--acento-amber-pale);color:var(--texto-ambar)}
+.veredicto.v-ruido{background:var(--gris-100);color:var(--gris-600)}
+.btn-borrar{background:transparent;border:1px solid var(--gris-300);color:var(--texto-coral);border-radius:var(--radius-pill);padding:4px 12px;font-size:var(--text-xs);font-weight:600;font-family:inherit;cursor:pointer;margin-left:auto}
+.btn-borrar:hover{background:var(--acento-coral-pale);border-color:var(--acento-coral)}
+
+/* ============ AVISOS ============ */
+.callout{border-radius:var(--radius-md);padding:var(--sp-4) var(--sp-5);margin:var(--sp-4) 0;font-size:var(--text-sm);line-height:1.6;border-left:3px solid}
+.callout.info{background:var(--azul-soft);border-left-color:var(--azul-reflex);color:var(--gris-700)}
+.callout.aviso{background:var(--acento-amber-pale);border-left-color:var(--acento-amber);color:#5B3D00}
+.callout.bien{background:var(--acento-teal-pale);border-left-color:var(--acento-teal);color:#0D5C47}
+.callout.mal{background:var(--acento-coral-pale);border-left-color:var(--acento-coral);color:#6B1F1F}
+.callout strong{color:inherit;font-weight:700}
+
+/* ============ BOTONES ============ */
+.btn{display:inline-flex;align-items:center;gap:6px;border-radius:var(--radius-pill);padding:8px 18px;font-size:var(--text-sm);font-weight:600;font-family:inherit;cursor:pointer;border:1px solid transparent;min-height:36px;text-decoration:none}
+.btn.primary{background:var(--azul-reflex);color:#fff;border-color:var(--azul-reflex)}
+.btn.primary:hover{background:var(--azul-deep)}
+.btn.outline{background:transparent;color:var(--azul-reflex);border-color:var(--azul-reflex)}
+.btn.outline:hover{background:var(--azul-pale)}
+.btn.small{padding:5px 13px;font-size:var(--text-xs);min-height:30px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* ============ BARRA DE ACCIONES ============ */
+.action-bar{position:sticky;bottom:0;z-index:150;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-top:1px solid var(--gris-200);padding:10px 24px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.action-bar .estado{font-size:var(--text-xs);color:var(--gris-600);margin-right:auto;font-family:var(--mono)}
+.action-bar .estado.alerta{color:var(--texto-coral);font-weight:700}
+
+/* ============ INFORME ============ */
+.view-informe{background:var(--gris-050);padding:var(--sp-6) var(--sp-5) var(--sp-12);min-height:100vh}
+.informe{max-width:880px;margin:0 auto;background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow-md);overflow:hidden}
+.inf-head{background:linear-gradient(135deg,var(--azul-deep) 0%,var(--azul-reflex) 100%);color:#fff;padding:var(--sp-7) var(--sp-8)}
+.inf-head .kit-tag{font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.75;font-weight:600;margin-bottom:6px}
+.inf-head h2{font-family:var(--serif);font-size:var(--text-2xl);font-weight:700;line-height:1.15}
+.inf-head .sub{font-size:var(--text-sm);opacity:.85;margin-top:6px}
+.inf-body{padding:var(--sp-7) var(--sp-8) var(--sp-8)}
+.inf-ap{margin-bottom:var(--sp-7)}
+.inf-ap h3{font-family:var(--serif);font-size:var(--text-lg);color:var(--azul-deep);font-weight:700;margin-bottom:var(--sp-2);padding-bottom:6px;border-bottom:2px solid var(--azul-pale)}
+.inf-ap p{color:var(--gris-700);font-size:var(--text-sm);margin-bottom:var(--sp-3);white-space:pre-wrap}
+.inf-vacio{color:var(--gris-600);font-style:italic;font-size:var(--text-sm)}
+.inf-cifras{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:var(--sp-4);margin:var(--sp-4) 0}
+.inf-cifra{background:var(--gris-050);border-radius:var(--radius-md);padding:var(--sp-3) var(--sp-4)}
+.inf-cifra .v{font-family:var(--serif);font-size:var(--text-xl);font-weight:700;color:var(--azul-deep);line-height:1}
+.inf-cifra .l{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--gris-600);margin-top:4px}
+.inf-foot{background:var(--gris-100);color:var(--gris-600);padding:var(--sp-4) var(--sp-8);font-size:var(--text-xs);display:flex;justify-content:space-between;gap:var(--sp-4);flex-wrap:wrap}
+
+/* ============ IMPRESIÓN ============ */
+@media print{
+  body{background:#fff}
+  .tabs-bar,.action-bar,.no-imprimir,.btn,.btn-borrar{display:none!important}
+  .view{display:none!important}
+  .view.active{display:block!important}
+  .informe{box-shadow:none;border-radius:0;max-width:none}
+  .view-informe{padding:0;background:#fff}
+  .section,.intro-card{box-shadow:none;border:1px solid var(--gris-200);break-inside:avoid}
+  .cover{margin:0;padding:40px}
+  input,textarea,select{border:none!important;padding-left:0!important;background:transparent!important}
+  .tabla-envoltura{overflow:visible}
+  table.datos{min-width:0;font-size:10px}
+  @page{margin:14mm}
+}
+
+@media (max-width:640px){
+  .doc{padding:0 14px var(--sp-10)}
+  .cover{padding:44px 20px 34px;margin:0 -14px}
+  .cover h1{font-size:var(--text-2xl)}
+  .cover-meta{grid-template-columns:repeat(2,1fr)}
+  .section{padding:var(--sp-5) var(--sp-4)}
+  .inf-body,.inf-head,.inf-foot{padding-left:var(--sp-4);padding-right:var(--sp-4)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<nav class="tabs-bar" id="tabsBar" aria-label="Vistas del cuaderno">
+  <div class="tabs-brand">
+    <a href="/" style="color:inherit;text-decoration:none;display:inline-block">
+      <span class="brand-kicker">← Rediseña.Evaluacion</span>
+      Kit de instrumentos · Sprint 2
+    </a>
+  </div>
+  <button type="button" class="tab-btn active" data-view="cuaderno" onclick="cambiaVista('cuaderno')"><span class="tab-num">1</span> Cuaderno</button>
+  <button type="button" class="tab-btn" data-view="informe" onclick="cambiaVista('informe')"><span class="tab-num">2</span> Informe de pilotaje</button>
+  <div class="tabs-actions">
+    <button type="button" onclick="cargaEjemplo()" title="Ver un cuaderno de ejemplo, ya relleno">Ejemplo</button>
+    <button type="button" onclick="window.print()" title="Imprimir la vista actual">Imprimir</button>
+  </div>
+</nav>
+
+<div id="anuncios" class="visually-hidden" role="status" aria-live="polite"></div>
+
+<!-- ══════════════════ VISTA 1 · CUADERNO ══════════════════ -->
+<div class="view active" id="view-cuaderno" role="main">
+<div class="doc" id="contenido" tabindex="-1">
+
+<section class="cover">
+  <div class="cover-inner">
+    <div class="overline">Cuaderno de pilotaje · Sprint 2</div>
+    <h1>Lo que ocurre de verdad <em>en tu aula</em></h1>
+    <p class="subtitle">Aquí se registra el pilotaje: qué esperabas, qué observas, qué te ha costado y qué decides hacer con ello. De aquí sale el informe de pilotaje, sin volver a escribir nada.</p>
+    <div class="cover-meta">
+      <div><div class="kv-label">Kit</div><div class="kv-value">Rediseña.Evaluacion</div></div>
+      <div><div class="kv-label">Autor</div><div class="kv-value">Eutika</div></div>
+      <div><div class="kv-label">Fase</div><div class="kv-value">Sprint 2 · Pilotaje</div></div>
+      <div><div class="kv-label">Duración</div><div class="kv-value">Un cuatrimestre</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="intro-card">
+  <div class="intro-card-title">Cómo se usa este cuaderno</div>
+  <p><strong>No se rellena de una sentada: se rellena a lo largo del cuatrimestre.</strong> Cada apartado tiene escrito cuándo le toca. En septiembre sólo se tocan los tres primeros; el resto no tiene nada que registrar todavía.</p>
+  <p>El cuaderno no recoge lo que producen los instrumentos de observación —las respuestas de tus estudiantes, tus datos de entregas— sino <strong>qué has leído en ellos y qué has decidido</strong>. Los instrumentos y cómo interpretarlos están en la <a href="/downloads/sprint-2/guia-observar-y-leer.html">guía «Observar y leer lo que ocurre»</a>.</p>
+  <p><strong>Tu trabajo se guarda en este navegador y no sale de aquí.</strong> No hay cuenta, no hay servidor, no hay analítica. Descárgalo con «Descargar JSON» para llevártelo a otro equipo o para tener una copia.</p>
+  <div class="intro-stats">
+    <div><div class="intro-stat-value">7</div><div class="intro-stat-label">Apartados</div></div>
+    <div><div class="intro-stat-value">3</div><div class="intro-stat-label">Instrumentos a elegir</div></div>
+    <div><div class="intro-stat-value">3</div><div class="intro-stat-label">Lecturas</div></div>
+    <div><div class="intro-stat-value">1</div><div class="intro-stat-label">Informe, generado</div></div>
+  </div>
+</div>
+
+<form id="cuaderno-form" autocomplete="off">
+
+<!-- ─── 0 · PUNTO DE PARTIDA ─── -->
+<section class="section" id="ap0">
+  <div class="section-num">Apartado 0</div>
+  <span class="cuando">Antes de empezar el cuatrimestre</span>
+  <h2>Punto de partida</h2>
+  <p>Cuatro comprobaciones. No son un examen: son lo que hace falta tener resuelto para que el pilotaje mida algo. Si alguna se queda sin marcar, ahí está el trabajo previo.</p>
+
+  <ul class="check-list" id="linea-base"></ul>
+
+  <div class="callout aviso" id="aviso-base" hidden>
+    <strong>Falta algo del punto de partida.</strong> Se puede pilotar igual, pero conviene saber qué falta: sin hipótesis explícitas no hay nada que confirmar ni refutar, y sin haber decidido cómo observar se acaba el cuatrimestre con impresiones.
+  </div>
+
+  <div class="grid-2" style="margin-top:var(--sp-5)">
+    <div class="field">
+      <label for="asig-nombre">Asignatura</label>
+      <input type="text" id="asig-nombre" name="asig-nombre" placeholder="Nombre de la asignatura que estás pilotando">
+    </div>
+    <div class="field">
+      <label for="asig-periodo">Cuatrimestre y curso</label>
+      <input type="text" id="asig-periodo" name="asig-periodo" placeholder="p. ej. Primer cuatrimestre 2026-27">
+    </div>
+  </div>
+  <div class="grid-3">
+    <div class="field">
+      <label for="asig-estudiantes">Estudiantes</label>
+      <input type="number" id="asig-estudiantes" name="asig-estudiantes" min="0" step="1" placeholder="0">
+    </div>
+    <div class="field">
+      <label for="asig-semanas">Semanas de docencia</label>
+      <input type="number" id="asig-semanas" name="asig-semanas" min="1" step="1" placeholder="15">
+    </div>
+    <div class="field">
+      <label for="asig-equipo">Personas en el equipo docente</label>
+      <input type="number" id="asig-equipo" name="asig-equipo" min="1" step="1" placeholder="1">
+    </div>
+  </div>
+</section>
+
+<!-- ─── 1 · MIS HIPÓTESIS ─── -->
+<section class="section" id="ap1">
+  <div class="section-num">Apartado 1</div>
+  <span class="cuando">Antes de empezar el cuatrimestre</span>
+  <h2>Mis hipótesis</h2>
+  <p>Qué esperas que ocurra con el rediseño. Escribirlas antes es lo que hace posible equivocarse por escrito, que es de donde se aprende. Dos o tres bastan; más de cuatro no se sostienen.</p>
+
+  <div class="callout info">
+    <strong>Una hipótesis útil dice qué tendría que verse.</strong> «El rediseño va a funcionar mejor» no se puede confirmar ni refutar. «Con la entrega intermedia de la semana 6, la distribución de la entrega final tendrá menos cola por debajo del 4 que el curso pasado» sí.
+  </div>
+
+  <div id="hipotesis-lista"></div>
+  <button type="button" class="btn outline small no-imprimir" id="btn-add-hip" onclick="añadeHipotesis()">+ Añadir hipótesis</button>
+</section>
+
+<!-- ─── 2 · QUÉ VOY A OBSERVAR ─── -->
+<section class="section" id="ap2">
+  <div class="section-num">Apartado 2</div>
+  <span class="cuando">Antes de empezar el cuatrimestre</span>
+  <h2>Qué voy a observar</h2>
+  <p>Cinco instrumentos, de los que se eligen <strong>tres</strong>: uno de lo que ves en el aula, uno de lo que dicen los estudiantes y uno de los datos que tu asignatura ya produce. Con eso se triangula. Con cinco a la vez no se triangula mejor: se abandona antes.</p>
+
+  <div class="callout aviso">
+    <strong>La regla que decide qué eliges:</strong> si un instrumento te cuesta más de quince minutos a la semana, no lo vas a sostener catorce semanas. Y un instrumento abandonado en la semana seis es peor que no haber empezado.
+  </div>
+
+  <div id="instrumentos"></div>
+
+  <div class="callout" id="aviso-instr" hidden></div>
+
+  <h3>Y una retrospectiva con el equipo docente, si lo tienes</h3>
+  <p class="field-hint">Opcional, y en muchas asignaturas no aplica: si trabajas sin equipo docente, este apartado se salta y no pasa nada. Donde sí lo hay, media hora a mitad de cuatrimestre rinde más que cualquier observación individual.</p>
+  <div class="field">
+    <span class="field-label" id="retro-lab">¿Vas a hacer retrospectiva de equipo?</span>
+    <div class="pill-group" role="radiogroup" aria-labelledby="retro-lab">
+      <input type="radio" id="retro-si" name="retro" value="Sí"><label for="retro-si">Sí</label>
+      <input type="radio" id="retro-no" name="retro" value="No aplica: trabajo sin equipo docente"><label for="retro-no">No aplica</label>
+      <input type="radio" id="retro-tal" name="retro" value="Aún no lo sé"><label for="retro-tal">Aún no lo sé</label>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 3 · REGISTRO DE TIEMPOS ─── -->
+<section class="section" id="ap3">
+  <div class="section-num">Apartado 3</div>
+  <span class="cuando">Cada vez que preparas o corriges</span>
+  <h2>Registro de tiempos</h2>
+  <p>Un rediseño que funciona pero que te cuesta el doble no lo vas a repetir el curso que viene. <strong>La sostenibilidad es un resultado del pilotaje tan legítimo como el aprendizaje de tus estudiantes</strong>, y es el que más se olvida documentar.</p>
+
+  <div class="callout info">
+    <strong>Si trabajaste con la Plantilla del plan operativo del Sprint 1, ya declaraste una estimación por fase y por touchpoint</strong>, y en muchos casos una segunda con IA. Súbela aquí y las estimaciones se rellenan solas: tú sólo anotas lo que ha costado de verdad.
+    <div style="margin-top:var(--sp-3);display:flex;gap:8px;flex-wrap:wrap" class="no-imprimir">
+      <button type="button" class="btn outline small" id="btn-subir-plan">Subir mi Plantilla del plan operativo (.xlsx)</button>
+      <input type="file" id="file-plan" accept=".xlsx" class="visually-hidden" aria-label="Plantilla del plan operativo en formato XLSX" tabindex="-1">
+      <button type="button" class="btn outline small" onclick="añadeTarea()">+ Añadir una tarea a mano</button>
+    </div>
+    <div id="aviso-plan" style="margin-top:var(--sp-3)" hidden></div>
+  </div>
+
+  <div class="tabla-envoltura" tabindex="0" role="region" aria-label="Registro de tiempos por tarea (desplazable en horizontal)">
+    <table class="datos" id="tabla-tiempos">
+      <thead>
+        <tr>
+          <th scope="col">Tarea</th>
+          <th scope="col">Fase</th>
+          <th scope="col">Estimado (h)</th>
+          <th scope="col">Real (h)</th>
+          <th scope="col">Desvío</th>
+          <th scope="col">¿Con IA?</th>
+          <th scope="col">Qué concluyo</th>
+          <th scope="col"><span class="visually-hidden">Quitar</span></th>
+        </tr>
+      </thead>
+      <tbody id="cuerpo-tiempos"></tbody>
+      <tfoot id="pie-tiempos"></tfoot>
+    </table>
+  </div>
+
+  <div id="lectura-tiempos"></div>
+
+  <div class="field">
+    <label for="tiempos-nota">Qué leo en esto</label>
+    <div class="field-hint">Lo que interesa no es el total de horas: es dónde se concentra la diferencia entre lo que estimaste y lo que te costó. Casi siempre está en una sola tarea, y casi siempre es la de dar retroalimentación individual.</div>
+    <textarea id="tiempos-nota" name="tiempos-nota" placeholder="p. ej. La corrección se me va a las diez horas por entrega y tengo tres. Con la rúbrica afinada la entrega 3 debería bajar; si no baja, tres entregas es insostenible para un grupo de 44, y eso va al informe como restricción de diseño, no como fallo mío."></textarea>
+  </div>
+</section>
+
+<!-- ─── 4 · LECTURA DE MITAD DE CUATRIMESTRE ─── -->
+<section class="section" id="ap4">
+  <div class="section-num">Apartado 4</div>
+  <span class="cuando">A mitad de cuatrimestre · semanas 7-8</span>
+  <h2>Lectura de mitad de cuatrimestre</h2>
+  <p>Cuarenta minutos, en una sola sentada y con todo lo recogido delante. Lo que se busca son coincidencias entre fuentes, y para verlas hay que tenerlas juntas.</p>
+
+  <div class="callout info">
+    <strong>Tres pruebas convierten una observación en señal.</strong> ¿Se repite —en más de un momento o de una fuente—? ¿Es específica —se puede señalar qué la produce—? ¿Te sorprende —o sólo confirma lo que ya creías—? Las tres: es una señal. Dos: merece más observación. Una: es ruido.
+  </div>
+
+  <div id="senales-4"></div>
+  <button type="button" class="btn outline small no-imprimir" onclick="añadeSenal(4)">+ Añadir señal</button>
+
+  <h3>Contraste con mis hipótesis</h3>
+  <p class="field-hint">Una por una, y sólo tres respuestas posibles. «Todavía no lo sé» es una respuesta legítima, y a mitad de cuatrimestre será la más frecuente.</p>
+  <div id="contraste-4"></div>
+</section>
+
+<!-- ─── 5 · LECTURA DE CIERRE DE LA DOCENCIA ─── -->
+<section class="section" id="ap5">
+  <div class="section-num">Apartado 5</div>
+  <span class="cuando">Al terminar la docencia</span>
+  <h2>Lectura de cierre de la docencia</h2>
+  <p>El mismo ejercicio del apartado anterior, con la docencia terminada y la segunda pasada del pulso ya hecha. Aquí ya no se ajusta nada del cuatrimestre en curso: se decide qué queda anotado para la próxima edición.</p>
+
+  <div id="senales-5"></div>
+  <button type="button" class="btn outline small no-imprimir" onclick="añadeSenal(5)">+ Añadir señal</button>
+
+  <h3>Contraste con mis hipótesis</h3>
+  <div id="contraste-5"></div>
+</section>
+
+<!-- ─── 6 · RESULTADOS Y CIERRE ─── -->
+<section class="section" id="ap6">
+  <div class="section-num">Apartado 6</div>
+  <span class="cuando">Con las actas cerradas</span>
+  <h2>Resultados y cierre</h2>
+  <p>Lo último que falta: los resultados de evaluación, y la respuesta a las tres preguntas con las que se cierra un pilotaje.</p>
+
+  <div class="grid-2">
+    <div class="field">
+      <label for="res-datos">Qué dicen los resultados</label>
+      <div class="field-hint">Distribución, no media. La media puede mejorar mientras el grupo se parte en dos.</div>
+      <textarea id="res-datos" name="res-datos" placeholder="p. ej. Media 6,4 frente a 6,2 del curso pasado, sin cola por debajo del 4. Pero entregaron 38 de 44 frente a 41 de 45: el rediseño sirve a quien ya estaba dentro y no ha enganchado a quien estaba fuera."></textarea>
+    </div>
+    <div class="field">
+      <label for="res-sostenible">¿Es sostenible?</label>
+      <div class="field-hint">Con el número del registro de tiempos, no con un adjetivo.</div>
+      <textarea id="res-sostenible" name="res-sostenible" placeholder="p. ej. Me ha costado 31 h frente a las 22 estimadas. El 70 % del desvío está en la retroalimentación individual de las tres entregas."></textarea>
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="res-repito">¿Qué repito tal cual?</label>
+    <textarea id="res-repito" name="res-repito" placeholder="Lo que ha funcionado y no hay que tocar."></textarea>
+  </div>
+  <div class="field">
+    <label for="res-cambio">¿Qué cambio para la próxima edición?</label>
+    <div class="field-hint">Con la evidencia que lo motiva al lado. Una decisión bien registrada vale más que un cambio precipitado.</div>
+    <textarea id="res-cambio" name="res-cambio" placeholder="p. ej. Bajar de tres entregas a dos, con la evidencia del registro de tiempos y de los nueve comentarios sobre carga en la abierta del pulso."></textarea>
+  </div>
+  <div class="field">
+    <label for="res-abandono">¿Qué abandono?</label>
+    <div class="field-hint">Es la pregunta que menos se hace y la que más espacio libera.</div>
+    <textarea id="res-abandono" name="res-abandono" placeholder="Lo que probaste y no compensa mantener."></textarea>
+  </div>
+  <div class="field">
+    <label for="res-ia">Qué he aprendido sobre la IA en mi trabajo</label>
+    <div class="field-hint">La pregunta no es si ahorra tiempo en abstracto: es si te lo ahorró en esta tarea concreta y qué hiciste con el tiempo ahorrado. Una hora que se convierte en retroalimentación más específica es un resultado; una hora que no se convierte en nada, también, pero es otro.</div>
+    <textarea id="res-ia" name="res-ia" placeholder="p. ej. La hipótesis de ahorro en corrección no se sostuvo: lo que ahorré en redactar lo gasté en revisar. Donde sí funcionó fue en generar variantes de la rúbrica."></textarea>
+  </div>
+</section>
+
+</form>
+</div>
+</div>
+
+<!-- ══════════════════ VISTA 2 · INFORME ══════════════════ -->
+<div class="view view-informe" id="view-informe" role="main">
+  <div class="informe">
+    <div class="inf-head">
+      <div class="kit-tag">Rediseña.Evaluacion · Sprint 2</div>
+      <h2 id="inf-titulo">Informe de pilotaje</h2>
+      <div class="sub" id="inf-sub">Sin asignatura declarada</div>
+    </div>
+    <div class="inf-body" id="inf-body"></div>
+    <div class="inf-foot">
+      <div>Generado desde el Cuaderno de pilotaje · Un kit de Eutika</div>
+      <div>Contenidos CC BY-SA 4.0 · Código MIT</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ BARRA DE ACCIONES ══════════════════ -->
+<div class="action-bar no-imprimir" role="region" aria-label="Guardar y llevarte tu cuaderno">
+  <span class="estado" id="estado-guardado">Guardando en este navegador</span>
+  <button type="button" class="btn outline small" onclick="descargaJSON()">Descargar JSON</button>
+  <button type="button" class="btn outline small" onclick="document.getElementById('file-import').click()">Cargar JSON</button>
+  <input type="file" id="file-import" accept=".json" class="visually-hidden" aria-label="Cuaderno de pilotaje en formato JSON" tabindex="-1">
+  <button type="button" class="btn outline small" onclick="vaciaTodo()">Vaciar</button>
+  <button type="button" class="btn primary small" onclick="cambiaVista('informe')">Ver informe</button>
+</div>
+
+<script src="/assets/vendor/xlsx-0.18.5.min.js"></script>
+<script>
+'use strict';
+
+// El kit es reutilizable por cualquier universidad: nada suyo lleva el nombre
+// de una. La clave y los archivos descargados empiezan por «redisena-».
+const CLAVE = 'redisena-cuaderno-pilotaje-v0';
+const form = document.getElementById('cuaderno-form');
+const estadoEl = document.getElementById('estado-guardado');
+
+// ═══════════════════════════════════════════════════
+// LÍNEA DE BASE E INSTRUMENTOS
+// Fuente única: si cambia el texto, cambia aquí y en ningún otro sitio.
+// ═══════════════════════════════════════════════════
+
+const LINEA_BASE = [
+  ['Tengo claro el modelo de mi asignatura', 'Qué quiero que aprendan y cómo se vive la asignatura. Es lo que cerraste en el Sprint 0.'],
+  ['Tengo mapeados mis touchpoints', 'Cada momento evaluativo, con su tipo, su peso y sus evidencias. Es la Plantilla del plan operativo del Sprint 1.'],
+  ['Tengo hipótesis explícitas de lo que quiero probar', 'Escritas antes de empezar. Sin ellas no hay nada que confirmar ni refutar en enero.'],
+  ['Tengo decidido cómo voy a observar', 'Qué instrumentos, en qué semanas y qué evidencias recojo. Es el apartado 2 de este cuaderno.']
+];
+
+const INSTRUMENTOS = [
+  { id:'cierre', nombre:'La pregunta de cierre de clase', mira:'aula',
+    que:'Si lo que has explicado ha llegado', coste:'3 min / clase', cuando:'Semanal o quincenal',
+    detalle:'Los últimos tres minutos, cada estudiante responde una sola pregunta, sin nombre. Es el instrumento más barato y el que más rápido corrige el rumbo, porque lo que revela se puede arreglar en la clase siguiente. Devuélvelo: empezar la clase siguiente con «la semana pasada varios dijisteis que X no había quedado claro» es lo que hace que la segunda vez respondan en serio.' },
+  { id:'pulso', nombre:'El pulso al estudiantado', mira:'estudiantes',
+    que:'Cómo se está viviendo tu rediseño', coste:'2 × 20 min', cuando:'Semanas 5-6 y 12-13',
+    detalle:'Seis preguntas cerradas y una abierta, dos veces: la primera llega a tiempo de corregir y la segunda a tiempo de documentar. Dos pasadas y no tres, a propósito: una encuesta en las primeras semanas mide sobre todo el desconcierto inicial. En los cerrados no mires la media, mira la dispersión y el ítem más bajo.' },
+  { id:'datos', nombre:'Lo que tu asignatura ya produce', mira:'datos',
+    que:'Hechos, no impresiones', coste:'30 min × 3', cuando:'Semanas 6, 11 y en actas',
+    detalle:'Este instrumento no hay que construirlo: ya existe. Entregas, calificaciones parciales, preguntas repetidas en tutoría, accesos a materiales, abandono. El trabajo no es recoger: es decidir de antemano qué vas a mirar y con qué lo vas a comparar, porque un dato sin término de comparación no dice nada.' },
+  { id:'tiempos', nombre:'El registro de tiempos', mira:'datos',
+    que:'Si tu rediseño es sostenible', coste:'1 min / tarea', cuando:'Cada vez que corriges o preparas',
+    detalle:'Es el apartado 3 de este cuaderno. Si subes tu Plantilla del plan operativo, las estimaciones se rellenan solas y tú sólo anotas lo que ha costado de verdad.' },
+  { id:'mirada', nombre:'Una mirada ajena', mira:'aula',
+    que:'Lo que haces y no puedes ver', coste:'1 h, una vez', cuando:'Entre las semanas 5 y 10',
+    detalle:'Mientras facilitas no puedes observar. Un colega veinte minutos en tu clase con tres preguntas fijas —quién habla, cuánto esperas tras preguntar, cuándo se desengancha el grupo—, o una grabación de diez minutos si no tienes colega. Regla: quien observa no opina sobre si la clase fue buena; sólo describe lo que vio.' }
+];
+
+const FASES = { diseno:'Diseño', ejec:'Ejecución', corr:'Corrección', fback:'Retroalimentación' };
+
+// ═══════════════════════════════════════════════════
+// ESTADO
+// ═══════════════════════════════════════════════════
+
+function estadoVacio(){
+  return { _formato:'cuaderno-v1', campos:{}, base:[false,false,false,false],
+           hipotesis:[], instrumentos:[], tareas:[], senales:{ '4':[], '5':[] }, contraste:{ '4':{}, '5':{} } };
+}
+let est = estadoVacio();
+
+// Repara lo que llegue incompleto, para que el resto del código pueda dar por
+// hecha la forma del objeto.
+function sanea(e){
+  const s = (e && typeof e === 'object' && !Array.isArray(e)) ? e : {};
+  const v = estadoVacio();
+  s._formato = 'cuaderno-v1';
+  if(typeof s.campos !== 'object' || s.campos === null || Array.isArray(s.campos)) s.campos = {};
+  if(!Array.isArray(s.base) || s.base.length !== 4) s.base = v.base.slice();
+  s.base = s.base.map(x => !!x);
+  if(!Array.isArray(s.hipotesis)) s.hipotesis = [];
+  s.hipotesis = s.hipotesis.filter(h => h && typeof h === 'object').map(h => ({ texto: String(h.texto || '') }));
+  if(!Array.isArray(s.instrumentos)) s.instrumentos = [];
+  s.instrumentos = s.instrumentos.filter(id => INSTRUMENTOS.some(i => i.id === id));
+  if(!Array.isArray(s.tareas)) s.tareas = [];
+  s.tareas = s.tareas.filter(t => t && typeof t === 'object').map(t => ({
+    tarea: String(t.tarea || ''), fase: String(t.fase || ''),
+    est: t.est === '' || t.est === null || t.est === undefined ? '' : t.est,
+    real: t.real === '' || t.real === null || t.real === undefined ? '' : t.real,
+    ia: String(t.ia || ''), nota: String(t.nota || '')
+  }));
+  if(typeof s.senales !== 'object' || s.senales === null) s.senales = { '4':[], '5':[] };
+  ['4','5'].forEach(k => {
+    if(!Array.isArray(s.senales[k])) s.senales[k] = [];
+    s.senales[k] = s.senales[k].filter(x => x && typeof x === 'object').map(x => ({
+      obs:String(x.obs||''), fuentes:String(x.fuentes||''), lectura:String(x.lectura||''),
+      repite:!!x.repite, especifica:!!x.especifica, sorprende:!!x.sorprende, decision:String(x.decision||'')
+    }));
+  });
+  if(typeof s.contraste !== 'object' || s.contraste === null) s.contraste = { '4':{}, '5':{} };
+  ['4','5'].forEach(k => { if(typeof s.contraste[k] !== 'object' || s.contraste[k] === null) s.contraste[k] = {}; });
+  return s;
+}
+
+let guardadoOk = true;
+let pendiente = false;
+let temporizador = null;
+
+function guardaYa(){
+  try {
+    localStorage.setItem(CLAVE, JSON.stringify(est));
+    guardadoOk = true; pendiente = false;
+    estadoEl.textContent = 'Guardado en este navegador';
+    estadoEl.classList.remove('alerta');
+  } catch(e){
+    guardadoOk = false;
+    estadoEl.textContent = 'NO se está guardando — descarga el JSON';
+    estadoEl.classList.add('alerta');
+    avisaSinGuardado();
+  }
+}
+
+let yaAvisado = false;
+function avisaSinGuardado(){
+  if(yaAvisado) return;
+  yaAvisado = true;
+  setTimeout(() => alert('Este navegador no está guardando tu trabajo.\n\nPuede ser navegación privada o el almacenamiento lleno. Lo que escribas se perderá al cerrar la pestaña: descarga el JSON con «Descargar JSON» antes de seguir.'), 300);
+}
+
+function guarda(){
+  pendiente = true;
+  clearTimeout(temporizador);
+  estadoEl.textContent = 'Guardando…';
+  temporizador = setTimeout(guardaYa, 260);
+}
+
+// Al ocultarse la pestaña se guarda sin esperar al temporizador: si no, lo
+// último escrito se perdía al cerrar.
+window.addEventListener('pagehide', () => { if(pendiente) guardaYa(); });
+document.addEventListener('visibilitychange', () => { if(document.hidden && pendiente) guardaYa(); });
+
+function anuncia(t){
+  const r = document.getElementById('anuncios');
+  r.textContent = '';
+  setTimeout(() => { r.textContent = t; }, 60);
+}
+
+// ═══════════════════════════════════════════════════
+// APARTADO 0 · LÍNEA DE BASE
+// ═══════════════════════════════════════════════════
+
+function pintaLineaBase(){
+  const ul = document.getElementById('linea-base');
+  ul.innerHTML = '';
+  LINEA_BASE.forEach(([titulo, detalle], i) => {
+    const li = document.createElement('li');
+    const id = 'base-' + i;
+    li.innerHTML = '<input type="checkbox" id="' + id + '"' + (est.base[i] ? ' checked' : '') + '>' +
+      '<label class="txt" for="' + id + '"><b>' + esc(titulo) + '</b>' + esc(detalle) + '</label>';
+    li.querySelector('input').addEventListener('change', e => {
+      est.base[i] = e.target.checked; guarda(); revisaBase();
+    });
+    ul.appendChild(li);
+  });
+  revisaBase();
+}
+function revisaBase(){
+  document.getElementById('aviso-base').hidden = est.base.every(Boolean);
+}
+
+// ═══════════════════════════════════════════════════
+// APARTADO 1 · HIPÓTESIS
+// ═══════════════════════════════════════════════════
+
+function pintaHipotesis(){
+  const cont = document.getElementById('hipotesis-lista');
+  cont.innerHTML = '';
+  est.hipotesis.forEach((h, i) => {
+    const d = document.createElement('div');
+    d.className = 'field';
+    const id = 'hip-' + i;
+    d.innerHTML = '<label for="' + id + '">Hipótesis ' + (i + 1) + '</label>' +
+      '<textarea id="' + id + '" placeholder="Qué esperas que ocurra, en términos que se puedan comprobar."></textarea>' +
+      '<button type="button" class="btn-borrar no-imprimir" style="margin-top:6px">Quitar la hipótesis ' + (i + 1) + '</button>';
+    const ta = d.querySelector('textarea');
+    ta.value = h.texto;
+    ta.addEventListener('input', () => { est.hipotesis[i].texto = ta.value; guarda(); });
+    ta.addEventListener('change', () => { pintaContraste(); });
+    d.querySelector('button').addEventListener('click', () => {
+      if(!confirm('¿Quitar esta hipótesis? También se quitará su contraste en las dos lecturas.')) return;
+      est.hipotesis.splice(i, 1);
+      Object.keys(est.contraste).forEach(k => { delete est.contraste[k][i]; });
+      guarda(); pintaHipotesis(); pintaContraste();
+      anuncia('Hipótesis eliminada. Quedan ' + est.hipotesis.length + '.');
+      const sig = document.querySelector('#hipotesis-lista textarea') || document.getElementById('btn-add-hip');
+      if(sig) sig.focus();
+    });
+    cont.appendChild(d);
+  });
+  if(!est.hipotesis.length){
+    cont.innerHTML = '<p class="field-hint">Todavía no has escrito ninguna hipótesis.</p>';
+  }
+}
+function añadeHipotesis(){
+  if(est.hipotesis.length >= 6){ alert('Seis hipótesis ya son demasiadas para sostenerlas un cuatrimestre. Dos o tres es lo que funciona.'); return; }
+  est.hipotesis.push({ texto:'' });
+  guarda(); pintaHipotesis(); pintaContraste();
+  const campos = document.querySelectorAll('#hipotesis-lista textarea');
+  if(campos.length) campos[campos.length - 1].focus();
+}
+
+// ═══════════════════════════════════════════════════
+// APARTADO 2 · INSTRUMENTOS
+// ═══════════════════════════════════════════════════
+
+function pintaInstrumentos(){
+  const cont = document.getElementById('instrumentos');
+  cont.innerHTML = '';
+  INSTRUMENTOS.forEach(ins => {
+    const elegido = est.instrumentos.includes(ins.id);
+    const d = document.createElement('div');
+    d.className = 'instr' + (elegido ? ' elegido' : '');
+    const idc = 'ins-' + ins.id, idd = 'insd-' + ins.id;
+    d.innerHTML =
+      '<div class="instr-head">' +
+        '<input type="checkbox" id="' + idc + '"' + (elegido ? ' checked' : '') + '>' +
+        '<div style="flex:1">' +
+          '<label for="' + idc + '" class="instr-nombre">' + esc(ins.nombre) + '</label>' +
+          '<div class="instr-que">' + esc(ins.que) + ' · ' + esc(ins.cuando) + '</div>' +
+        '</div>' +
+        '<span class="instr-coste">' + esc(ins.coste) + '</span>' +
+      '</div>' +
+      '<button type="button" class="btn outline small no-imprimir" style="margin-top:10px" aria-expanded="false" aria-controls="' + idd + '">Cómo se usa</button>' +
+      '<div class="instr-detalle" id="' + idd + '" hidden><p style="font-size:var(--text-sm);color:var(--gris-700)">' + esc(ins.detalle) + '</p></div>';
+    d.querySelector('input').addEventListener('change', e => {
+      if(e.target.checked) { if(!est.instrumentos.includes(ins.id)) est.instrumentos.push(ins.id); }
+      else est.instrumentos = est.instrumentos.filter(x => x !== ins.id);
+      guarda(); pintaInstrumentos(); revisaInstrumentos();
+    });
+    const btn = d.querySelector('button');
+    btn.addEventListener('click', () => {
+      const det = d.querySelector('.instr-detalle');
+      const abierto = !det.hidden;
+      det.hidden = abierto;
+      btn.setAttribute('aria-expanded', abierto ? 'false' : 'true');
+      btn.textContent = abierto ? 'Cómo se usa' : 'Ocultar';
+    });
+    cont.appendChild(d);
+  });
+  revisaInstrumentos();
+}
+
+function revisaInstrumentos(){
+  const caja = document.getElementById('aviso-instr');
+  const n = est.instrumentos.length;
+  const miradas = new Set(est.instrumentos.map(id => (INSTRUMENTOS.find(i => i.id === id) || {}).mira));
+  if(n === 0){ caja.hidden = true; return; }
+  caja.hidden = false;
+  if(n > 3){
+    caja.className = 'callout mal';
+    caja.innerHTML = '<strong>' + n + ' instrumentos son demasiados.</strong> Con más de tres a la vez, en la semana ocho no queda ninguno. Quita los que menos te vayan a decir.';
+  } else if(n < 3){
+    caja.className = 'callout aviso';
+    caja.innerHTML = '<strong>Llevas ' + n + ' de 3.</strong> Con menos de tres no se triangula: una sola fuente no distingue una señal de una casualidad.';
+  } else if(miradas.size < 3){
+    caja.className = 'callout aviso';
+    caja.innerHTML = '<strong>Tres instrumentos, pero no de tres sitios distintos.</strong> Lo que se busca es uno de lo que ves en el aula, uno de lo que dicen los estudiantes y uno de los datos que tu asignatura ya produce. Mirar tres veces al mismo sitio no triangula.';
+  } else {
+    caja.className = 'callout bien';
+    caja.innerHTML = '<strong>Tres instrumentos, de tres sitios distintos.</strong> Con esto se triangula: si algo aparece en dos de los tres, es una señal.';
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// APARTADO 3 · REGISTRO DE TIEMPOS
+// ═══════════════════════════════════════════════════
+
+function pintaTiempos(){
+  const cuerpo = document.getElementById('cuerpo-tiempos');
+  cuerpo.innerHTML = '';
+  est.tareas.forEach((t, i) => {
+    const tr = document.createElement('tr');
+    const d = desvio(t);
+    tr.innerHTML =
+      '<td><input type="text" value="" aria-label="Tarea de la fila ' + (i+1) + '"></td>' +
+      '<td><select aria-label="Fase de la fila ' + (i+1) + '">' +
+        '<option value="">—</option>' +
+        Object.entries(FASES).map(([k, v]) => '<option value="' + k + '">' + v + '</option>').join('') +
+      '</select></td>' +
+      '<td class="num"><input type="number" min="0" step="0.25" value="" aria-label="Horas estimadas de la fila ' + (i+1) + '" style="max-width:80px"></td>' +
+      '<td class="num"><input type="number" min="0" step="0.25" value="" aria-label="Horas reales de la fila ' + (i+1) + '" style="max-width:80px"></td>' +
+      '<td class="num ' + d.clase + '">' + d.texto + '</td>' +
+      '<td><select aria-label="Uso de IA en la fila ' + (i+1) + '">' +
+        '<option value="">—</option><option value="Sí">Sí</option><option value="No">No</option>' +
+      '</select></td>' +
+      '<td><input type="text" value="" aria-label="Conclusión de la fila ' + (i+1) + '"></td>' +
+      '<td><button type="button" class="btn-borrar no-imprimir" style="margin:0">Quitar</button></td>';
+    const [inTarea, inEst, inReal, inNota] = tr.querySelectorAll('input');
+    const [selFase, selIA] = tr.querySelectorAll('select');
+    inTarea.value = t.tarea; inEst.value = t.est; inReal.value = t.real; inNota.value = t.nota;
+    selFase.value = t.fase; selIA.value = t.ia;
+    const liga = (el, campo, numerico) => el.addEventListener('input', () => {
+      est.tareas[i][campo] = numerico && el.value !== '' ? el.value : el.value;
+      guarda(); if(numerico) pintaTiempos();
+    });
+    liga(inTarea, 'tarea', false); liga(inNota, 'nota', false);
+    liga(inEst, 'est', true); liga(inReal, 'real', true);
+    selFase.addEventListener('change', () => { est.tareas[i].fase = selFase.value; guarda(); pintaTiempos(); });
+    selIA.addEventListener('change', () => { est.tareas[i].ia = selIA.value; guarda(); pintaTiempos(); });
+    tr.querySelector('button').addEventListener('click', () => {
+      const nom = est.tareas[i].tarea || 'la fila ' + (i + 1);
+      est.tareas.splice(i, 1); guarda(); pintaTiempos();
+      anuncia('Quitada ' + nom + '. Quedan ' + est.tareas.length + ' tareas.');
+      const sig = document.querySelector('#cuerpo-tiempos input') || document.getElementById('btn-subir-plan');
+      if(sig) sig.focus();
+    });
+    cuerpo.appendChild(tr);
+  });
+  if(!est.tareas.length){
+    cuerpo.innerHTML = '<tr><td colspan="8" style="color:var(--gris-600);font-style:italic">Sin tareas todavía. Sube tu Plantilla del plan operativo o añade una a mano.</td></tr>';
+  }
+  pintaPieTiempos();
+  pintaLecturaTiempos();
+}
+
+function num(v){ const n = parseFloat(v); return isFinite(n) ? n : null; }
+
+function desvio(t){
+  const e = num(t.est), r = num(t.real);
+  if(e === null || r === null) return { clase:'desv-nula', texto:'—', valor:null, pct:null };
+  const dif = r - e;
+  const pct = e > 0 ? (dif / e) * 100 : null;
+  let clase = 'desv-nula';
+  if(pct !== null){
+    if(pct >= 50) clase = 'desv-alta';
+    else if(pct >= 20) clase = 'desv-media';
+    else if(pct <= -20) clase = 'desv-baja';
+  }
+  const signo = dif > 0 ? '+' : '';
+  return { clase, texto: signo + fmt(dif) + ' h' + (pct !== null ? ' (' + signo + Math.round(pct) + ' %)' : ''), valor: dif, pct };
+}
+
+function fmt(n){ return (Math.round(n * 10) / 10).toString().replace('.', ','); }
+
+function pintaPieTiempos(){
+  const pie = document.getElementById('pie-tiempos');
+  const conAmbas = est.tareas.filter(t => num(t.est) !== null && num(t.real) !== null);
+  if(!conAmbas.length){ pie.innerHTML = ''; return; }
+  const tEst = conAmbas.reduce((a, t) => a + num(t.est), 0);
+  const tReal = conAmbas.reduce((a, t) => a + num(t.real), 0);
+  const d = desvio({ est: tEst, real: tReal });
+  pie.innerHTML = '<tr><th scope="row">Total (' + conAmbas.length + ' tareas con las dos cifras)</th><td></td>' +
+    '<td class="num">' + fmt(tEst) + '</td><td class="num">' + fmt(tReal) + '</td>' +
+    '<td class="num ' + d.clase + '">' + d.texto + '</td><td></td><td></td><td></td></tr>';
+}
+
+function pintaLecturaTiempos(){
+  const caja = document.getElementById('lectura-tiempos');
+  const conAmbas = est.tareas.filter(t => num(t.est) !== null && num(t.real) !== null);
+  if(conAmbas.length < 2){ caja.innerHTML = ''; return; }
+  const desvios = conAmbas.map(t => ({ t, d: num(t.real) - num(t.est) })).filter(x => x.d > 0).sort((a, b) => b.d - a.d);
+  const total = desvios.reduce((a, x) => a + x.d, 0);
+  if(!total){
+    caja.innerHTML = '<div class="callout bien"><strong>No te has pasado de lo estimado en ninguna tarea.</strong> Es poco frecuente y merece anotarse: significa que tu estimación del Sprint 1 era buena, y eso vale para el curso que viene.</div>';
+    return;
+  }
+  const peor = desvios[0];
+  const cuota = Math.round((peor.d / total) * 100);
+  const porFase = {};
+  desvios.forEach(x => { const f = x.t.fase || 'sin fase'; porFase[f] = (porFase[f] || 0) + x.d; });
+  const faseTop = Object.entries(porFase).sort((a, b) => b[1] - a[1])[0];
+  caja.innerHTML = '<div class="callout info"><strong>Dónde se concentra el desvío.</strong> Te has pasado ' + fmt(total) +
+    ' h en total. La tarea que más se desvía es «' + esc(peor.t.tarea || 'sin nombre') + '», con ' + fmt(peor.d) +
+    ' h, el ' + cuota + ' % del desvío. Por fase, la que más se pasa es ' + esc(FASES[faseTop[0]] || faseTop[0]) +
+    ' con ' + fmt(faseTop[1]) + ' h. ' +
+    (cuota >= 40 ? '<em>Casi todo el desvío está en una sola tarea: ahí es donde hay que mirar, no en el total.</em>' :
+                   '<em>El desvío está repartido: es la estimación de fondo lo que habría que recalibrar, no una tarea concreta.</em>') +
+    '</div>';
+}
+
+function añadeTarea(datos){
+  est.tareas.push(Object.assign({ tarea:'', fase:'', est:'', real:'', ia:'', nota:'' }, datos || {}));
+  guarda(); pintaTiempos();
+  if(!datos){
+    const filas = document.querySelectorAll('#cuerpo-tiempos tr input');
+    if(filas.length) filas[filas.length - 4].focus();
+  }
+}
+
+// ─── Subida de la Plantilla del plan operativo ───
+document.getElementById('btn-subir-plan').addEventListener('click', () => document.getElementById('file-plan').click());
+document.getElementById('file-plan').addEventListener('change', e => {
+  const f = e.target.files[0];
+  if(!f) return;
+  const lector = new FileReader();
+  lector.onload = ev => {
+    const caja = document.getElementById('aviso-plan');
+    caja.hidden = false;
+    if(typeof XLSX === 'undefined'){
+      caja.className = 'callout mal';
+      caja.innerHTML = '<strong>No se ha podido cargar el lector de hojas de cálculo.</strong> Recarga la página; si sigue igual, ábrela desde la web del kit en vez de desde una copia guardada. Mientras tanto puedes añadir las tareas a mano.';
+      return;
+    }
+    let tps;
+    try {
+      const wb = XLSX.read(new Uint8Array(ev.target.result), { type:'array' });
+      tps = leePlan(wb);
+    } catch(err){
+      caja.className = 'callout mal';
+      caja.innerHTML = '<strong>No se ha podido leer el archivo.</strong> ' + esc(err.message) +
+        ' No se ha tocado nada de lo que tenías. Comprueba que es la Plantilla del plan operativo del Sprint 1.';
+      e.target.value = '';
+      return;
+    }
+    if(est.tareas.length && !confirm('Ya tienes ' + est.tareas.length + ' tareas en el registro.\n\nSe van a añadir ' + tps.length + ' más a partir de la Plantilla. Lo que ya habías escrito no se toca.\n\n¿Sigo?')){
+      e.target.value = ''; return;
+    }
+    tps.forEach(t => est.tareas.push(t));
+    guarda(); pintaTiempos();
+    caja.className = 'callout bien';
+    caja.innerHTML = '<strong>' + tps.length + ' tareas añadidas</strong> desde tu Plantilla, con su estimación ya puesta. Ahora sólo falta anotar lo que ha costado de verdad.';
+    anuncia(tps.length + ' tareas añadidas desde la Plantilla del plan operativo.');
+    e.target.value = '';
+  };
+  lector.readAsArrayBuffer(f);
+});
+
+// Lee la hoja «Touchpoints» de la Plantilla del plan operativo y devuelve una
+// tarea por cada fase con horas declaradas. Se toma la hipótesis con IA cuando
+// existe, y la línea base cuando no: es lo que el profesor esperaba que costase.
+function leePlan(wb){
+  const hoja = wb.Sheets['Touchpoints'];
+  if(!hoja) throw new Error('No se encontró la hoja «Touchpoints».');
+  const filas = XLSX.utils.sheet_to_json(hoja, { header:1, defval:null });
+  const COLS_BASE = { diseno:11, ejec:12, corr:13, fback:14 };
+  const COLS_IA   = { diseno:16, ejec:17, corr:18, fback:19 };
+  const salida = [];
+  for(let i = 5; i < filas.length; i++){
+    const r = filas[i];
+    if(!r || (!r[0] && !r[1])) continue;
+    if(/^total/i.test(String(r[0] || '').trim())) break;
+    if(!r[0] || !r[1]) continue;
+    const id = String(r[0]).trim(), nombre = String(r[1]).trim();
+    Object.keys(FASES).forEach(fase => {
+      const base = parseFloat(r[COLS_BASE[fase]]);
+      const ia = parseFloat(r[COLS_IA[fase]]);
+      const hayIA = isFinite(ia);
+      const estimado = hayIA ? ia : (isFinite(base) ? base : null);
+      if(estimado === null || estimado === 0) return;
+      salida.push({ tarea: id + ' · ' + nombre, fase, est: String(estimado), real:'',
+                    ia: hayIA ? 'Sí' : '', nota:'' });
+    });
+  }
+  if(!salida.length) throw new Error('No se encontró ninguna fase con horas declaradas.');
+  return salida;
+}
+
+// ═══════════════════════════════════════════════════
+// APARTADOS 4 Y 5 · SEÑALES Y CONTRASTE
+// ═══════════════════════════════════════════════════
+
+function veredicto(s){
+  const n = (s.repite ? 1 : 0) + (s.especifica ? 1 : 0) + (s.sorprende ? 1 : 0);
+  if(n === 3) return { clase:'v-senal', txt:'Es una señal' };
+  if(n === 2) return { clase:'v-mirar', txt:'Merece más observación' };
+  return { clase:'v-ruido', txt:'Probablemente ruido' };
+}
+
+function pintaSenales(ap){
+  const cont = document.getElementById('senales-' + ap);
+  const lista = est.senales[String(ap)];
+  cont.innerHTML = '';
+  lista.forEach((s, i) => {
+    const v = veredicto(s);
+    const d = document.createElement('div');
+    d.className = 'senal';
+    const p = 's' + ap + '-' + i;
+    d.innerHTML =
+      '<div class="senal-head"><span class="senal-cod">Señal ' + (i + 1) + '</span>' +
+        '<span class="veredicto ' + v.clase + '">' + v.txt + '</span>' +
+        '<button type="button" class="btn-borrar no-imprimir">Quitar la señal ' + (i + 1) + '</button></div>' +
+      '<div class="field"><label for="' + p + '-obs">Qué observé</label>' +
+        '<div class="field-hint">En frases planas, sin explicación ni valoración. La tentación de explicar mientras se anota es fuerte, y una vez escrita la explicación ya no se ve otra.</div>' +
+        '<textarea id="' + p + '-obs"></textarea></div>' +
+      '<div class="field"><label for="' + p + '-fue">En qué fuentes aparece</label>' +
+        '<input type="text" id="' + p + '-fue" placeholder="p. ej. pulso, pregunta de cierre y retrasos en la entrega 2"></input></div>' +
+      '<div class="senal-pruebas" role="group" aria-label="Las tres pruebas de la señal ' + (i + 1) + '">' +
+        '<label><input type="checkbox" id="' + p + '-rep"> Se repite</label>' +
+        '<label><input type="checkbox" id="' + p + '-esp"> Es específica</label>' +
+        '<label><input type="checkbox" id="' + p + '-sor"> Me sorprende</label>' +
+      '</div>' +
+      '<div class="field"><label for="' + p + '-lec">Qué creo que significa</label><textarea id="' + p + '-lec"></textarea></div>' +
+      '<div class="field"><span class="field-label" id="' + p + '-dec-lab">Qué hago con ella</span>' +
+        '<div class="pill-group" role="radiogroup" aria-labelledby="' + p + '-dec-lab">' +
+          '<input type="radio" id="' + p + '-d1" name="' + p + '-dec" value="Ajusto ahora"><label for="' + p + '-d1">Ajusto ahora</label>' +
+          '<input type="radio" id="' + p + '-d2" name="' + p + '-dec" value="Sigo observando"><label for="' + p + '-d2">Sigo observando</label>' +
+          '<input type="radio" id="' + p + '-d3" name="' + p + '-dec" value="Anoto para la próxima edición"><label for="' + p + '-d3">Anoto para la próxima</label>' +
+        '</div></div>';
+    const obs = d.querySelector('#' + p + '-obs'), fue = d.querySelector('#' + p + '-fue'), lec = d.querySelector('#' + p + '-lec');
+    obs.value = s.obs; fue.value = s.fuentes; lec.value = s.lectura;
+    obs.addEventListener('input', () => { s.obs = obs.value; guarda(); });
+    fue.addEventListener('input', () => { s.fuentes = fue.value; guarda(); });
+    lec.addEventListener('input', () => { s.lectura = lec.value; guarda(); });
+    const [rep, esp, sor] = [d.querySelector('#' + p + '-rep'), d.querySelector('#' + p + '-esp'), d.querySelector('#' + p + '-sor')];
+    rep.checked = s.repite; esp.checked = s.especifica; sor.checked = s.sorprende;
+    [[rep, 'repite'], [esp, 'especifica'], [sor, 'sorprende']].forEach(([el, campo]) => {
+      el.addEventListener('change', () => { s[campo] = el.checked; guarda(); pintaSenales(ap); });
+    });
+    d.querySelectorAll('input[name="' + p + '-dec"]').forEach(r => {
+      r.checked = (s.decision === r.value);
+      r.addEventListener('change', () => { s.decision = r.value; guarda(); });
+    });
+    d.querySelector('.btn-borrar').addEventListener('click', () => {
+      if(!confirm('¿Quitar esta señal?')) return;
+      lista.splice(i, 1); guarda(); pintaSenales(ap);
+      anuncia('Señal eliminada. Quedan ' + lista.length + '.');
+    });
+    cont.appendChild(d);
+  });
+  if(!lista.length) cont.innerHTML = '<p class="field-hint">Todavía no has anotado ninguna señal.</p>';
+}
+
+function añadeSenal(ap){
+  est.senales[String(ap)].push({ obs:'', fuentes:'', lectura:'', repite:false, especifica:false, sorprende:false, decision:'' });
+  guarda(); pintaSenales(ap);
+  const campos = document.querySelectorAll('#senales-' + ap + ' textarea');
+  if(campos.length) campos[campos.length - 2].focus();
+}
+
+function pintaContraste(){
+  [4, 5].forEach(ap => {
+    const cont = document.getElementById('contraste-' + ap);
+    cont.innerHTML = '';
+    if(!est.hipotesis.length){
+      cont.innerHTML = '<p class="field-hint">Escribe primero tus hipótesis en el apartado 1 y aparecerán aquí para contrastarlas.</p>';
+      return;
+    }
+    est.hipotesis.forEach((h, i) => {
+      const val = est.contraste[String(ap)][i] || '';
+      const p = 'c' + ap + '-' + i;
+      const d = document.createElement('div');
+      d.className = 'field';
+      d.innerHTML = '<span class="field-label" id="' + p + '-lab">Hipótesis ' + (i + 1) + ': ' +
+        esc(h.texto ? (h.texto.length > 120 ? h.texto.slice(0, 120) + '…' : h.texto) : 'sin texto') + '</span>' +
+        '<div class="pill-group" role="radiogroup" aria-labelledby="' + p + '-lab">' +
+          '<input type="radio" id="' + p + '-a" name="' + p + '" value="Confirmada"><label for="' + p + '-a">Confirmada</label>' +
+          '<input type="radio" id="' + p + '-b" name="' + p + '" value="Refutada"><label for="' + p + '-b">Refutada</label>' +
+          '<input type="radio" id="' + p + '-c" name="' + p + '" value="Todavía no lo sé"><label for="' + p + '-c">Todavía no lo sé</label>' +
+        '</div>';
+      d.querySelectorAll('input').forEach(r => {
+        r.checked = (val === r.value);
+        r.addEventListener('change', () => { est.contraste[String(ap)][i] = r.value; guarda(); });
+      });
+      cont.appendChild(d);
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════════
+// CAMPOS SUELTOS
+// ═══════════════════════════════════════════════════
+
+function ligaCampos(){
+  form.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => {
+    if(!el.name) return;
+    el.addEventListener('input', () => { est.campos[el.name] = el.value; guarda(); });
+  });
+  form.querySelectorAll('input[type=radio]').forEach(el => {
+    if(!el.name || el.name.indexOf('-dec') > -1 || /^c[45]-/.test(el.name)) return;
+    el.addEventListener('change', () => { if(el.checked) est.campos[el.name] = el.value; guarda(); });
+  });
+  // Un número negativo no significa nada aquí y ensuciaba las cuentas.
+  form.querySelectorAll('input[type=number]').forEach(el => {
+    el.addEventListener('change', () => {
+      if(parseFloat(el.value) < 0){ el.value = ''; if(el.name) est.campos[el.name] = ''; guarda(); }
+    });
+  });
+}
+
+function aplicaCampos(){
+  form.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => {
+    if(el.name && est.campos[el.name] !== undefined) el.value = est.campos[el.name];
+  });
+  form.querySelectorAll('input[type=radio]').forEach(el => {
+    if(el.name && est.campos[el.name] !== undefined) el.checked = (est.campos[el.name] === el.value);
+  });
+}
+
+// ═══════════════════════════════════════════════════
+// INFORME
+// ═══════════════════════════════════════════════════
+
+function pintaInforme(){
+  const c = est.campos;
+  document.getElementById('inf-titulo').textContent = 'Informe de pilotaje' + (c['asig-nombre'] ? ' · ' + c['asig-nombre'] : '');
+  const partes = [c['asig-periodo'], c['asig-estudiantes'] ? c['asig-estudiantes'] + ' estudiantes' : '',
+                  c['asig-semanas'] ? c['asig-semanas'] + ' semanas de docencia' : ''].filter(Boolean);
+  document.getElementById('inf-sub').textContent = partes.length ? partes.join(' · ') : 'Sin datos de la asignatura todavía';
+
+  const b = document.getElementById('inf-body');
+  b.innerHTML = '';
+
+  // 1 · Qué probaba
+  const hips = est.hipotesis.filter(h => h.texto.trim());
+  b.appendChild(ap('1 · Qué probaba', hips.length
+    ? '<ol>' + hips.map((h, i) => '<li>' + esc(h.texto) + estadoHip(i) + '</li>').join('') + '</ol>'
+    : vacio('No hay hipótesis escritas. Sin ellas el pilotaje no puede confirmar ni refutar nada: es el apartado 1 del cuaderno.')));
+
+  // 2 · Cómo lo he observado
+  const ins = est.instrumentos.map(id => INSTRUMENTOS.find(i => i.id === id)).filter(Boolean);
+  const retro = c['retro'] ? '<p><strong>Retrospectiva con el equipo docente:</strong> ' + esc(c['retro']) + '</p>' : '';
+  b.appendChild(ap('2 · Cómo lo he observado', ins.length
+    ? '<ul>' + ins.map(i => '<li><strong>' + esc(i.nombre) + '</strong> · ' + esc(i.cuando) + ' · ' + esc(i.coste) + '</li>').join('') + '</ul>' + retro
+    : vacio('No hay instrumentos elegidos.') + retro));
+
+  // 3 · Qué me ha costado
+  b.appendChild(ap('3 · Qué me ha costado', bloqueTiempos()));
+
+  // 4 · Qué he visto y qué he decidido
+  b.appendChild(ap('4 · Qué he visto y qué he decidido', bloqueSenales()));
+
+  // 5 · Resultados
+  b.appendChild(ap('5 · Resultados', [
+    campo('Qué dicen los resultados', c['res-datos']),
+    campo('¿Es sostenible?', c['res-sostenible'])
+  ].join('') || vacio('Sin resultados anotados todavía.')));
+
+  // 6 · Qué hago la próxima vez
+  b.appendChild(ap('6 · Qué hago la próxima vez', [
+    campo('Repito tal cual', c['res-repito']),
+    campo('Cambio', c['res-cambio']),
+    campo('Abandono', c['res-abandono']),
+    campo('Sobre la IA en mi trabajo', c['res-ia'])
+  ].join('') || vacio('Sin decisiones anotadas todavía.')));
+}
+
+function ap(titulo, html){
+  const d = document.createElement('div');
+  d.className = 'inf-ap';
+  d.innerHTML = '<h3>' + esc(titulo) + '</h3>' + html;
+  return d;
+}
+function vacio(t){ return '<p class="inf-vacio">' + esc(t) + '</p>'; }
+function campo(rotulo, valor){
+  if(!valor || !String(valor).trim()) return '';
+  return '<p><strong>' + esc(rotulo) + '.</strong> ' + esc(valor) + '</p>';
+}
+function estadoHip(i){
+  const a = est.contraste['4'][i], b = est.contraste['5'][i];
+  const fin = b || a;
+  if(!fin) return '';
+  return ' <em>(' + esc(fin.toLowerCase()) + (b && a && a !== b ? ', tras haber salido «' + esc(a.toLowerCase()) + '» a mitad de cuatrimestre' : '') + ')</em>';
+}
+
+function bloqueTiempos(){
+  const conAmbas = est.tareas.filter(t => num(t.est) !== null && num(t.real) !== null);
+  if(!conAmbas.length) return vacio('Sin registro de tiempos. Es el resultado del pilotaje que más se olvida documentar y el que decide si el rediseño se repite el curso que viene.') +
+    campo('Qué leo en esto', est.campos['tiempos-nota']);
+  const tEst = conAmbas.reduce((a, t) => a + num(t.est), 0);
+  const tReal = conAmbas.reduce((a, t) => a + num(t.real), 0);
+  const dif = tReal - tEst;
+  const pct = tEst > 0 ? Math.round((dif / tEst) * 100) : 0;
+  const filas = conAmbas.map(t => ({ t, d: num(t.real) - num(t.est) })).sort((a, b) => b.d - a.d).slice(0, 5);
+  return '<div class="inf-cifras">' +
+      '<div class="inf-cifra"><div class="v">' + fmt(tEst) + ' h</div><div class="l">Estimado</div></div>' +
+      '<div class="inf-cifra"><div class="v">' + fmt(tReal) + ' h</div><div class="l">Real</div></div>' +
+      '<div class="inf-cifra"><div class="v">' + (dif >= 0 ? '+' : '') + fmt(dif) + ' h</div><div class="l">Desvío (' + (dif >= 0 ? '+' : '') + pct + ' %)</div></div>' +
+      '<div class="inf-cifra"><div class="v">' + conAmbas.length + '</div><div class="l">Tareas medidas</div></div>' +
+    '</div>' +
+    '<p><strong>Donde más se desvía:</strong></p><ul>' +
+    filas.map(x => '<li>' + esc(x.t.tarea || 'sin nombre') + (x.t.fase ? ' · ' + esc(FASES[x.t.fase] || x.t.fase) : '') +
+      ' — ' + (x.d >= 0 ? '+' : '') + fmt(x.d) + ' h' + (x.t.ia === 'Sí' ? ' · con IA' : '') +
+      (x.t.nota ? '. ' + esc(x.t.nota) : '') + '</li>').join('') + '</ul>' +
+    campo('Qué leo en esto', est.campos['tiempos-nota']);
+}
+
+function bloqueSenales(){
+  const bloques = [];
+  [['4', 'A mitad de cuatrimestre'], ['5', 'Al cerrar la docencia']].forEach(([k, rotulo]) => {
+    const lista = est.senales[k].filter(s => s.obs.trim());
+    if(!lista.length) return;
+    bloques.push('<p><strong>' + rotulo + '</strong></p><ul>' + lista.map(s => {
+      const v = veredicto(s);
+      return '<li>' + esc(s.obs) + (s.fuentes ? ' <em>(' + esc(s.fuentes) + ')</em>' : '') +
+        ' — ' + esc(v.txt.toLowerCase()) + (s.lectura ? '. ' + esc(s.lectura) : '') +
+        (s.decision ? ' <strong>' + esc(s.decision) + '.</strong>' : '') + '</li>';
+    }).join('') + '</ul>');
+  });
+  return bloques.length ? bloques.join('') : vacio('Sin señales anotadas todavía. Se registran en los apartados 4 y 5, a mitad de cuatrimestre y al cerrar la docencia.');
+}
+
+// ═══════════════════════════════════════════════════
+// VISTAS, ARCHIVO Y EJEMPLO
+// ═══════════════════════════════════════════════════
+
+function cambiaVista(nombre){
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.view === nombre));
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === 'view-' + nombre));
+  if(nombre === 'informe') pintaInforme();
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function esc(s){
+  return String(s === null || s === undefined ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function limpia(s){
+  return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
+}
+
+function descargaJSON(){
+  const blob = new Blob([JSON.stringify(est, null, 2)], { type:'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const asig = limpia(est.campos['asig-nombre']) || 'pilotaje';
+  a.href = url;
+  a.download = 'redisena-cuaderno-' + asig + '-' + new Date().toISOString().slice(0, 10) + '.json';
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+}
+
+// ¿El archivo es de este cuaderno? Antes de esta comprobación, cualquier JSON
+// ajeno vaciaba el trabajo y se guardaba encima.
+function pareceDeEsteCuaderno(o){
+  if(!o || typeof o !== 'object' || Array.isArray(o)) return false;
+  if(o._formato === 'cuaderno-v1') return true;
+  return ['campos', 'hipotesis', 'instrumentos', 'tareas', 'senales'].filter(k => k in o).length >= 3;
+}
+
+document.getElementById('file-import').addEventListener('change', e => {
+  const f = e.target.files[0];
+  if(!f) return;
+  const lector = new FileReader();
+  lector.onload = ev => {
+    let datos;
+    try { datos = JSON.parse(ev.target.result); }
+    catch(err){ alert('No se ha podido leer el archivo: no es un JSON válido.'); e.target.value = ''; return; }
+    if(!pareceDeEsteCuaderno(datos)){
+      alert('Este archivo no es un cuaderno de pilotaje.\n\nNo se ha tocado nada de lo que tienes. Busca el que descargaste desde aquí con «Descargar JSON»: su nombre empieza por «redisena-cuaderno-».');
+      e.target.value = ''; return;
+    }
+    if(hayTrabajo() && !confirm('Vas a reemplazar lo que tienes escrito en este navegador por el contenido del archivo.\n\n¿Sigo?')){
+      e.target.value = ''; return;
+    }
+    est = sanea(datos);
+    guardaYa(); pintaTodo();
+    anuncia('Cuaderno cargado desde el archivo.');
+    e.target.value = '';
+  };
+  lector.readAsText(f);
+});
+
+function hayTrabajo(){
+  return Object.values(est.campos).some(v => String(v || '').trim()) ||
+    est.hipotesis.length || est.instrumentos.length || est.tareas.length ||
+    est.senales['4'].length || est.senales['5'].length || est.base.some(Boolean);
+}
+
+function vaciaTodo(){
+  if(!confirm('Se va a vaciar todo el cuaderno en este navegador.\n\nSi no has descargado el JSON, esto no se puede deshacer. ¿Sigo?')) return;
+  est = estadoVacio();
+  guardaYa(); pintaTodo();
+  anuncia('Cuaderno vaciado.');
+}
+
+// ─── Ejemplo ───
+// Ninguna pieza del kit se entrega en blanco: este es el mismo caso que recorre
+// la guía «Observar y leer», para poder ver a dónde se llega antes de empezar.
+const EJEMPLO = {
+  _formato:'cuaderno-v1',
+  campos:{
+    'asig-nombre':'Diseño de Servicios Digitales', 'asig-periodo':'Primer cuatrimestre 2026-27',
+    'asig-estudiantes':'44', 'asig-semanas':'15', 'asig-equipo':'1',
+    'retro':'No aplica: trabajo sin equipo docente',
+    'tiempos-nota':'La corrección se me va a las diez horas por entrega y tengo tres. Con la rúbrica afinada la entrega 3 debería bajar. Si no baja, tres entregas es insostenible para un grupo de 44, y eso va al informe como restricción de diseño, no como fallo mío.',
+    'res-datos':'Entrega final: media 6,4 frente a 6,2 del curso pasado, y sin la cola por debajo del 4 que había el año anterior. Pero entregaron 38 de 44 frente a 41 de 45.',
+    'res-sostenible':'31 h reales frente a 22 estimadas. El 70 % del desvío está en la retroalimentación individual de las tres entregas.',
+    'res-repito':'La entrega intermedia de la semana 6 con devolución antes de la siguiente. Es lo que ha quitado la cola de suspensos.',
+    'res-cambio':'Bajar de tres entregas a dos, fusionando la 1 y la 2. La evidencia: nueve de treinta y una respuestas de la abierta del pulso piden menos entregas, y el ítem de carga salió en 2,6.',
+    'res-abandono':'La rúbrica de nueve criterios. Ni yo la aplicaba igual dos veces ni ellos la leían.',
+    'res-ia':'La hipótesis de ahorro en corrección no se sostuvo: lo que ahorré redactando lo gasté revisando. Donde sí funcionó fue generando variantes de la rúbrica, que pasó de una hora a cuarenta minutos.'
+  },
+  base:[true, true, true, true],
+  hipotesis:[
+    { texto:'Con la entrega intermedia de la semana 6 y su devolución antes de la siguiente, la distribución de la entrega final tendrá menos cola por debajo del 4 que el curso pasado.' },
+    { texto:'Con el andamiaje nuevo —plantilla y caso resuelto— entregarán más y mejor que el curso pasado.' },
+    { texto:'Usar IA para redactar el primer borrador de la retroalimentación me ahorrará al menos un tercio del tiempo de corrección.' }
+  ],
+  instrumentos:['cierre', 'pulso', 'datos'],
+  tareas:[
+    { tarea:'TP3 · Entrega intermedia', fase:'diseno', est:'3', real:'4', ia:'', nota:'El enunciado se reescribió dos veces.' },
+    { tarea:'TP3 · Entrega intermedia', fase:'corr', est:'6', real:'9.5', ia:'No', nota:'44 trabajos. Muy por encima de lo previsto.' },
+    { tarea:'TP3 · Entrega intermedia', fase:'fback', est:'4', real:'7', ia:'Sí', nota:'La IA redactó el primer borrador; revisarlo costó casi lo mismo que escribirlo.' },
+    { tarea:'TP5 · Entrega final', fase:'diseno', est:'3', real:'2.5', ia:'Sí', nota:'Reutilicé la rúbrica afinada.' },
+    { tarea:'TP5 · Entrega final', fase:'corr', est:'6', real:'8', ia:'No', nota:'Bajó respecto a la intermedia, pero no lo suficiente.' }
+  ],
+  senales:{
+    '4':[
+      { obs:'Nueve de veintidós respuestas de la pregunta de cierre no distinguen cuándo aplicar cada método.', fuentes:'pregunta de cierre, semana 4', lectura:'Creía que el problema era el cálculo y el problema es el criterio de elección.', repite:true, especifica:true, sorprende:true, decision:'Ajusto ahora' },
+      { obs:'El ítem de carga de trabajo sale en 2,6, con doce respuestas en 1 o 2. Nueve de treinta y una piden menos entregas en la abierta. La entrega 2 llega con retraso en la mitad de los casos.', fuentes:'pulso, abierta del pulso y datos de entregas', lectura:'Tres fuentes apuntando a lo mismo: la carga está mal calibrada y la retroalimentación llega tarde.', repite:true, especifica:true, sorprende:false, decision:'Ajusto ahora' },
+      { obs:'Tres personas más que el curso pasado no entregan nada.', fuentes:'datos de entregas', lectura:'El rediseño sirve a quien ya estaba dentro y no ha enganchado a quien estaba fuera. Es lo que no se ve mirando la media.', repite:false, especifica:true, sorprende:true, decision:'Sigo observando' }
+    ],
+    '5':[
+      { obs:'La segunda pasada del pulso sube el ítem de carga de 2,6 a 3,4 tras fusionar dos entregas.', fuentes:'pulso, segunda pasada', lectura:'El ajuste de mitad de cuatrimestre funcionó, y con el número, no con la impresión.', repite:true, especifica:true, sorprende:false, decision:'Anoto para la próxima edición' }
+    ]
+  },
+  contraste:{ '4':{ '0':'Todavía no lo sé', '1':'Confirmada', '2':'Refutada' },
+              '5':{ '0':'Confirmada', '1':'Confirmada', '2':'Refutada' } }
+};
+
+function cargaEjemplo(){
+  if(hayTrabajo() && !confirm('Vas a reemplazar lo que tienes escrito por el cuaderno de ejemplo.\n\nSi quieres conservar lo tuyo, cancela y descárgalo antes con «Descargar JSON». ¿Sigo?')) return;
+  est = sanea(JSON.parse(JSON.stringify(EJEMPLO)));
+  guardaYa(); pintaTodo();
+  anuncia('Cuaderno de ejemplo cargado.');
+}
+
+// ═══════════════════════════════════════════════════
+// ARRANQUE
+// ═══════════════════════════════════════════════════
+
+function pintaTodo(){
+  aplicaCampos();
+  pintaLineaBase();
+  pintaHipotesis();
+  pintaInstrumentos();
+  pintaTiempos();
+  pintaSenales(4);
+  pintaSenales(5);
+  pintaContraste();
+}
+
+// Lee lo guardado comprobando antes que se puede interpretar: así un contenido
+// corrupto no arranca vacío en silencio para que la primera tecla lo pise.
+(function arranca(){
+  let crudo = null;
+  try { crudo = localStorage.getItem(CLAVE); }
+  catch(e){ guardadoOk = false; }
+  if(crudo !== null){
+    try { est = sanea(JSON.parse(crudo)); }
+    catch(e){
+      try { localStorage.setItem(CLAVE + '-ilegible-' + Date.now(), crudo); } catch(err){}
+      est = estadoVacio();
+      setTimeout(() => alert('No se ha podido leer lo que tenías guardado en este navegador, así que el cuaderno ha arrancado vacío.\n\nNo se ha borrado nada: la copia ilegible sigue en el almacenamiento por si hay que recuperarla. Si tienes un archivo JSON descargado, cárgalo antes de seguir.'), 400);
+    }
+  }
+  ligaCampos();
+  pintaTodo();
+  // Comprueba que este navegador guarda de verdad. Antes se descubría al cerrar.
+  try {
+    localStorage.setItem(CLAVE + '-prueba', '1');
+    localStorage.removeItem(CLAVE + '-prueba');
+    estadoEl.textContent = 'Se guarda en este navegador';
+  } catch(e){
+    guardadoOk = false;
+    estadoEl.textContent = 'NO se está guardando — descarga el JSON';
+    estadoEl.classList.add('alerta');
+    avisaSinGuardado();
+  }
+})();
+</script>
+</body>
+</html>

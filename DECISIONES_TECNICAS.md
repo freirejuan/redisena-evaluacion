@@ -39,9 +39,17 @@ redisena-evaluacion/
 │
 ├── assets/
 │   ├── css/
-│   │   └── styles.v2.css        Sistema de Diseño UC3M IMPULSO
-│   └── js/
-│       └── app.v2.js            Estado, localStorage, inicialización
+│   │   ├── styles.v2.css        Sistema de diseño
+│   │   └── fuentes.v1.css       @font-face de las tres familias
+│   ├── js/
+│   │   └── app.v2.js            Estado, localStorage, capas, guiado
+│   ├── fonts/                   19 woff2, subconjunto latino (SIL OFL 1.1)
+│   ├── vendor/
+│   │   ├── xlsx-0.18.5.min.js   SheetJS CE (Apache-2.0)
+│   │   └── LICENSE-sheetjs.txt
+│   ├── favicon.svg
+│   ├── favicon-32.png
+│   └── apple-touch-icon.png
 │
 ├── downloads/                   Piezas descargables del kit
 │   ├── README.md                Inventario + convenciones de archivo
@@ -49,12 +57,15 @@ redisena-evaluacion/
 │   │   ├── plantilla-estrategica.html
 │   │   ├── guia-estrategica.html
 │   │   └── mini-guia-pretrabajo.html
-│   └── sprint-1/
-│       ├── plantilla-plan-operativo.xlsx
-│       ├── plantilla-ejemplo-ingesoft.xlsx
-│       ├── guia-breve.html
-│       ├── walkthrough.html
-│       └── panel-plan-operativo.html  (lee XLSX con SheetJS, genera Blueprint + Calendario)
+│   ├── sprint-1/
+│   │   ├── plantilla-plan-operativo.xlsx
+│   │   ├── plantilla-ejemplo-ingesoft.xlsx
+│   │   ├── guia-breve.html
+│   │   ├── walkthrough.html
+│   │   └── panel-plan-operativo.html  (lee XLSX con SheetJS, genera Blueprint + Calendario)
+│   └── sprint-2/
+│       ├── cuaderno-pilotaje.html     (7 apartados, lee el XLSX del Sprint 1, genera el informe)
+│       └── guia-observar-y-leer.html
 │
 ├── _headers                     Headers HTTP (caché, seguridad)
 └── .gitignore
@@ -99,11 +110,17 @@ Una sola clave, un solo objeto JSON. Simple de razonar, simple de exportar.
       "completado_en": null
     }
   },
+  "prefs": {
+    "detalle": false
+  },
   "creado_en": "2026-04-21T10:00:00Z",
   "actualizado_en": "2026-04-22T14:30:00Z",
-  "ultima_visita": "2026-04-22T14:30:00Z"
+  "ultima_visita": "2026-04-22T14:30:00Z",
+  "visita_previa": "2026-04-19T09:00:00Z"
 }
 ```
+
+`prefs.detalle` guarda si el profesor ha pedido ver desplegados todos los apartados plegables (`<details class="capa">`) en todas las páginas. `visita_previa` es la anterior a la actual, y es la que se muestra en la portada: `ultima_visita` se pisa en cuanto se abre la página, así que siempre diría «hoy».
 
 **Estados posibles de cada sprint:**
 
@@ -121,11 +138,15 @@ Una sola clave, un solo objeto JSON. Simple de razonar, simple de exportar.
 - Sprint 1 arranca en `bloqueado`; pasa a `sin_iniciar` cuando Sprint 0 llega a `completado`.
 - Sprint 2 permanece en `proximamente` hasta la release de septiembre 2026.
 
+**`state_normalize()` repara lo que llegue roto**, y se ejecuta en cada lectura. Además de completar los campos que falten: sustituye por el valor por defecto cualquier `estado` que no esté en la tabla de arriba —uno inventado pintaba «Sprint 0 · undefined» en la barra—, y desbloquea todo sprint que siga en `bloqueado` teniendo el anterior en `completado`. Esto último no es hipotético: el desbloqueo automático se añadió después de que hubiera profesores con el Sprint 0 cerrado, y sin la reparación la aplicación les mandaba a cerrar algo que ya estaba cerrado.
+
 **Export / import.** El usuario puede descargar el objeto completo como archivo JSON (`redisena-{asignatura}-YYYYMMDD.json`) o cargar uno exportado antes. Es el único mecanismo de portabilidad entre navegadores o máquinas. Ambos botones viven en la barra de estado; hasta el 31 de julio de 2026 solo existía el de descarga y la función de carga no tenía forma de invocarse.
 
 **Del objeto `asignatura` solo se captura hoy el `nombre`**, editable pinchando sobre él en la barra de estado. Los campos `codigo`, `curso`, `ects` y `estudiantes` que aparecen arriba están previstos pero no los pide ninguna pantalla todavía: los datos de ECTS y número de estudiantes viven por ahora en la Plantilla del Sprint 1.
 
-**Versionado del schema.** El campo `schema_version` permite migrar estados antiguos cuando la estructura cambie. Todas las lecturas verifican el schema antes de usarlo; si el schema es superior al soportado, se muestra un aviso. Si es inferior, se migra en memoria.
+**Versionado del schema.** El campo `schema_version` está pensado para migrar estados antiguos cuando la estructura cambie. Hoy, con una sola versión publicada, `state_load()` se limita a dejar un aviso en la consola si no coincide y a usar el estado tal cual: la reparación real la hace `state_normalize()`, que completa lo que falte campo a campo. Cuando haya un cambio de forma que no se pueda reparar así, aquí es donde hay que escribir la migración.
+
+**La otra clave: la Plantilla estratégica.** La Plantilla del Sprint 0 es una pieza independiente y guarda lo suyo en `redisena-plantilla-estrategica-v0`, con su propio formato de escenarios (`{_formato:'escenarios-v1', activo, escenarios:[…]}`). Hasta el 31 de julio de 2026 esa clave se llamaba `uc3m-plantilla-estrategica-v0`, con el nombre de una universidad dentro de un kit que se ofrece a cualquiera; al abrir la plantilla, el contenido de la clave antigua se **copia** —no se mueve— a la nueva, después de comprobar que se puede interpretar. Que sean dos claves separadas y dos descargas separadas es la fricción principal que queda por resolver en la portabilidad.
 
 ---
 
@@ -225,7 +246,10 @@ Archivo `_headers` en la raíz — Cloudflare Pages lo interpreta automáticamen
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; …
 ```
+
+**La política de seguridad de contenidos no es decorativa: es la promesa de privacidad hecha cumplir por el navegador.** `default-src 'self'` y `connect-src 'self'` impiden cargar cualquier recurso de terceros o abrir cualquier conexión fuera del dominio; `form-action 'none'` impide enviar un formulario a ninguna parte. Desde el 31 de julio de 2026 no hay ningún recurso externo: las tipografías se sirven desde `/assets/fonts/` y SheetJS desde `/assets/vendor/`. Antes se pedían a `fonts.googleapis.com` y a `cdnjs.cloudflare.com`, que recibían la IP de cada profesor. **`'unsafe-inline'` en `script-src` es necesario porque las piezas descargables usan `<script>` en línea y atributos `onclick`;** si algún día se eliminan, conviene endurecerlo con hashes.
 
 Cuando se publique una nueva versión de un asset **hay que cambiarle el nombre**. No es opcional: `immutable` con un año de caducidad significa que un navegador que ya cargó la versión anterior no vuelve a preguntar por ella, así que una corrección publicada sobre el mismo nombre no llega a quien ya ha entrado alguna vez. El 31 de julio de 2026, al corregir los fallos de estado de la aplicación, se pasó a `styles.v2.css` y `app.v2.js` por esta razón.
 
@@ -241,15 +265,24 @@ Si en el futuro se necesitan redirecciones reales (p. ej. cambios de ruta, acort
 
 ---
 
-## 8 · Accesibilidad mínima
+## 8 · Accesibilidad
 
-Para esta primera iteración:
+Objetivo: **WCAG 2.1 AA**, comprobado automáticamente antes de cada despliegue y no una vez al año.
 
-- Contraste WCAG AA en todos los textos de UI (el sistema UC3M IMPULSO cumple por diseño).
-- Jerarquía de headings correcta (un solo `<h1>` por página, h2 debajo, h3 para sub-bloques).
-- Todas las imágenes llevan `alt` descriptivo.
-- Formularios y botones tienen labels programáticos.
-- Navegación por teclado funcional (no hay trampas de focus).
+- `axe-core` sobre las quince piezas, con las reglas WCAG 2.0 A/AA, 2.1 A/AA y buenas prácticas: **cero incumplimientos**, incluidas las vistas que sólo existen cuando se usan (Canvas, Blueprint, Comparar, galería, las dos lentes del calendario del Panel). La comprobación de las vistas dinámicas es la que importa: ahí estaba escondida la mitad de los problemas.
+- Contraste: los acentos de marca (`--acento-teal`, `--acento-coral`, `--acento-amber`) valen para fondos y bordes, **no para texto pequeño**. Para tinta existen `--texto-teal`, `--texto-coral` y `--texto-ambar`, que sí llegan a 4,5:1 sobre los fondos del kit.
+- Las tres rejillas de datos —Blueprint y los dos mapas de calor— son rejillas CSS planas envueltas en `<div class="gr" role="row" style="display:contents">`, con `columnheader` / `rowheader` / `cell` y una etiqueta por celda del tipo «TP2 Quiz semanal, S7: 4,3 horas docente».
+- Suites propias en `/tmp/pruebas` (`a11y.js`, `teclado.js`, `desborde.js`): enlace de salto, foco tras eliminar, nombres distinguibles de los botones repetidos, `aria-expanded`, grupos de opciones con nombre y recorte de texto a 360 px.
+- Pendiente: una prueba con lector de pantalla real. Todo lo anterior verifica que la información esté ahí, no que la experiencia sea buena.
+
+## 8 bis · Capas de información
+
+Las páginas raíz se leen en dos capas. La primera —lo que se ve al abrir— dice qué es esto, qué toca hacer ahora y cuánto cuesta; el resto vive en `<details class="capa">`. Se eligió `<details>` nativo y no un desplegable propio porque ya viene resuelto con teclado y con lector de pantalla.
+
+Dos cosas que no son obvias y conviene no romper:
+
+- **`app.v2.js` los abre en `beforeprint` y los devuelve a como estaban en `afterprint`.** El navegador no despliega un `<details>` cerrado al imprimir, y sin esto en papel se perdía hasta el 65 % del texto de la página, sin ninguna señal de que faltara algo.
+- **`#siguiente-paso[hidden]` y `.btn[hidden]` necesitan su regla explícita.** `#siguiente-paso{display:flex}` y `.btn{display:inline-flex}` ganan por especificidad al `[hidden]` del navegador; sin esas dos reglas quedaba una barra azul vacía en seis páginas sin JavaScript, y un botón visible que no hacía nada en las dos páginas sin capas.
 - `lang="es"` declarado en la raíz.
 
 Auditoría pendiente: lighthouse + axe al cierre del prototipo.

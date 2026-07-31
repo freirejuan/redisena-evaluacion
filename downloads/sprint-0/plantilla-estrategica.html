@@ -4,18 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Plantilla estratégica v3 · Plantilla · Canvas · Blueprint 0 · Rediseña.Evaluacion</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Tipografías servidas desde el propio kit. Antes se pedían a Google, que
+     recibía la IP de cada profesor que abriese esta pieza. Si guardas este
+     archivo en tu equipo y lo abres sin conexión, el texto se ve igual con las
+     tipografías del sistema: no se pierde nada. -->
+<link rel="stylesheet" href="/assets/css/fuentes.v1.css">
 <style>
 :root {
   --azul-reflex:#171796; --azul-deep:#0F0F6B; --azul-mid:#3A3AB8;
   --azul-light:#6868D4; --azul-pale:#E8E8F7; --azul-ghost:#F2F2FB;
   --white:#FFFFFF; --gris-claro:#F7F6F6; --gris-100:#EFEFEF;
   --gris-200:#E0E0E0; --gris-300:#C4C4C4; --gris-400:#9E9E9E;
-  --gris-500:#757575; --gris-600:#545454; --gris-700:#3A3A3A;
+  --gris-500:#6B6B6B; --gris-600:#545454; --gris-700:#3A3A3A;
   --ink:#1A1A1A; --ink-soft:#4A4A4A;
-  --acento-teal:#1A9E7A; --acento-teal-pale:#E6F7F1;
+  --acento-teal:#1A9E7A;
+  /* Variantes oscurecidas para TEXTO. Los acentos de marca se mantienen para
+     fondos, bordes y superficies; en texto pequeño no llegaban a 4,5:1. */
+  --texto-teal:#0F6F55;
+  --texto-coral:#B81F1F;
+  --texto-ambar:#8A5A00;
+ --acento-teal-pale:#E6F7F1;
   --acento-amber:#E8A317; --acento-amber-pale:#FFF7E6;
   --acento-coral:#E05555; --acento-coral-pale:#FDECEC;
   --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
@@ -37,7 +45,7 @@ html{font-size:16px;scroll-behavior:smooth;}
 body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-height:1.65;-webkit-font-smoothing:antialiased;}
 
 .nav{position:sticky;top:0;z-index:200;background:rgba(23,23,150,0.97);backdrop-filter:blur(16px);display:flex;align-items:center;gap:6px;padding:10px 24px;flex-wrap:wrap;}
-.nav-brand{font-size:var(--text-xs);font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-right:16px;}
+.nav-brand{font-size:var(--text-xs);font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.72);margin-right:16px;}
 .nav a{padding:6px 14px;border-radius:var(--radius-pill);border:1px solid rgba(255,255,255,0.12);background:transparent;color:rgba(255,255,255,0.65);font-size:11px;font-weight:500;text-decoration:none;transition:all 0.2s;white-space:nowrap;}
 .nav a:hover{border-color:rgba(255,255,255,0.4);color:#fff;}
 .nav .nav-progress{margin-left:auto;display:flex;align-items:center;gap:10px;color:rgba(255,255,255,0.8);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;}
@@ -71,6 +79,9 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 .cover-meta .kv-value{font-size:13px;font-weight:600;color:#fff;line-height:1.4;}
 
 .intro-card{background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-md);padding:var(--sp-8) var(--sp-10);margin-top:-32px;position:relative;z-index:2;margin-bottom:var(--sp-10);}
+.intro-escenarios{margin-top:var(--sp-4);padding-top:var(--sp-4);border-top:1px solid var(--gris-200);}
+.intro-escenarios ol{margin:var(--sp-2) 0 var(--sp-3);padding-left:var(--sp-5);}
+.intro-escenarios li{margin-bottom:8px;line-height:1.55;}
 .intro-card-title{font-size:var(--text-xs);font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--azul-mid);margin-bottom:var(--sp-4);display:flex;align-items:center;gap:var(--sp-3);}
 .intro-card-title::before{content:'';width:24px;height:2px;background:var(--azul-reflex);}
 .intro-card p{font-size:var(--text-sm);color:var(--gris-700);margin-bottom:var(--sp-3);line-height:1.7;}
@@ -101,7 +112,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 
 .badge{display:inline-flex;align-items:center;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 12px;border-radius:var(--radius-pill);margin-right:6px;}
 .badge.primary{background:var(--azul-pale);color:var(--azul-reflex);}
-.badge.teal{background:var(--acento-teal-pale);color:var(--acento-teal);}
+.badge.teal{background:var(--acento-teal-pale);color:var(--texto-teal);}
 .badge.amber{background:var(--acento-amber-pale);color:#7A5200;}
 .badge.coral{background:var(--acento-coral-pale);color:#8A2A2A;}
 .badge.neutral{background:var(--gris-100);color:var(--gris-600);}
@@ -120,6 +131,9 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 
 .pill-group{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
 .pill-group input[type=radio]{position:absolute;opacity:0;pointer-events:none;}
+.pill-group input[type=radio]:focus-visible + label,
+.pill-group input[type=checkbox]:focus-visible + label{
+  outline:2px solid var(--azul-reflex);outline-offset:2px;border-color:var(--azul-reflex);}
 .pill-group label{display:inline-flex;align-items:center;padding:8px 16px;border:1.5px solid var(--gris-200);background:var(--white);border-radius:var(--radius-pill);font-size:var(--text-xs);font-weight:600;color:var(--gris-600);cursor:pointer;transition:all 0.2s;letter-spacing:0.04em;}
 .pill-group label:hover{border-color:var(--azul-mid);color:var(--azul-reflex);}
 .pill-group input[type=radio]:checked + label{background:var(--azul-reflex);color:#fff;border-color:var(--azul-reflex);}
@@ -127,7 +141,8 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 .pill-group.amber input[type=radio]:checked + label{background:var(--acento-amber);border-color:var(--acento-amber);}
 .pill-group.coral input[type=radio]:checked + label{background:var(--acento-coral);border-color:var(--acento-coral);}
 
-.slider-row{display:grid;grid-template-columns:220px 1fr;gap:var(--sp-3);align-items:center;padding:6px 0;}
+.slider-row{display:grid;grid-template-columns:220px 1fr 56px;gap:var(--sp-3);align-items:center;padding:6px 0;}
+.slider-val{font-family:var(--mono);font-size:var(--text-xs);color:var(--azul-reflex);font-weight:700;text-align:right;}
 .slider-row label{font-size:var(--text-sm);color:var(--gris-700);font-weight:500;}
 .slider-row label strong{color:var(--ink);font-weight:700;display:block;font-size:var(--text-xs);letter-spacing:0.08em;text-transform:uppercase;color:var(--azul-reflex);margin-bottom:2px;}
 .slider-row input[type=range]{width:100%;accent-color:var(--azul-reflex);}
@@ -161,7 +176,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 .decision-block::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--azul-reflex);}
 .decision-header{display:grid;grid-template-columns:auto 1fr;gap:var(--sp-6);align-items:center;margin-bottom:var(--sp-5);padding-bottom:var(--sp-4);border-bottom:1px solid var(--gris-100);}
 .decision-num{font-family:var(--serif);font-size:var(--text-3xl);font-weight:700;color:var(--azul-pale);line-height:1;width:54px;text-align:center;}
-.decision-title h4{font-family:var(--serif);font-size:var(--text-lg);color:var(--ink);margin-bottom:4px;font-weight:600;}
+.decision-title h3,.decision-title h4{border-bottom:none;padding-bottom:0;display:block;font-family:var(--serif);font-size:var(--text-lg);color:var(--ink);margin-bottom:4px;font-weight:600;}
 .decision-title p{font-size:var(--text-xs);color:var(--gris-500);margin:0;line-height:1.5;}
 
 /* TOUCHPOINT CARDS (acordeón) */
@@ -261,7 +276,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 .btn.outline:hover{background:var(--azul-ghost);}
 .btn.ghost{background:transparent;color:var(--gris-600);border-color:var(--gris-200);}
 .btn.ghost:hover{color:var(--azul-reflex);border-color:var(--azul-mid);}
-.btn.danger{background:transparent;color:var(--acento-coral);border-color:var(--acento-coral);}
+.btn.danger{background:transparent;color:var(--texto-coral);border-color:var(--acento-coral);}
 .btn.danger:hover{background:var(--acento-coral-pale);}
 
 .inst-footer{margin-top:var(--sp-16);padding:var(--sp-8) var(--sp-6);border-top:3px solid var(--azul-reflex);background:var(--white);border-radius:var(--radius-md);display:grid;grid-template-columns:1fr auto;gap:var(--sp-6);align-items:center;}
@@ -273,7 +288,8 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 .combo-card{background:var(--white);border:1.5px solid var(--gris-200);border-radius:var(--radius-md);padding:var(--sp-4);cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;gap:8px;}
 .combo-card:hover{border-color:var(--azul-mid);}
 .combo-card.selected{border-color:var(--azul-reflex);background:var(--azul-ghost);box-shadow:var(--shadow-sm);}
-.combo-card input[type=checkbox]{display:none;}
+.combo-card input[type=checkbox]{position:absolute;width:1px;height:1px;opacity:0;margin:0;}
+.combo-card:focus-within{border-color:var(--azul-reflex);box-shadow:0 0 0 3px var(--azul-pale);}
 .combo-card .combo-code{font-family:var(--mono);font-size:var(--text-xs);font-weight:700;color:var(--azul-reflex);letter-spacing:0.08em;}
 .combo-card .combo-name{font-size:var(--text-sm);font-weight:600;color:var(--ink);line-height:1.3;}
 .combo-card .combo-signal{font-size:var(--text-xs);color:var(--gris-600);line-height:1.5;}
@@ -285,33 +301,162 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   .intro-stats{grid-template-columns:repeat(2,1fr);}
   .field-grid.cols-2,.field-grid.cols-3,.field-grid.cols-4{grid-template-columns:1fr;}
   .decision-header{grid-template-columns:1fr;gap:var(--sp-3);}
-  .slider-row{grid-template-columns:170px 1fr;}
+  .slider-row{grid-template-columns:1fr 56px;}
+  .slider-row label{grid-column:1/-1;}
   .action-bar{flex-direction:column;gap:10px;padding:12px 20px;}
   .summary-row{grid-template-columns:1fr;gap:4px;}
   .tp-head{grid-template-columns:auto 1fr;gap:var(--sp-2);}
   .tp-head .tp-toggle,.tp-head .tp-remove{grid-column:auto;}
   .tp-meta{grid-template-columns:1fr;}
   .tp-carga-grid{grid-template-columns:repeat(2,1fr);}
+  .tabs-bar{flex-wrap:wrap;row-gap:6px;}
+  .tabs-bar .tabs-brand{flex-basis:100%;}
   .tp-head{grid-template-columns:auto minmax(0,1fr);grid-auto-flow:row dense;}
   .tp-head .tp-toggle,.tp-head .tp-dup,.tp-head .tp-remove{grid-column:auto;}
   .semaforo-wrap{grid-template-columns:1fr;text-align:center;}
   .semaforo-stats{margin:0 auto;}
 }
 @media print{
+  /* La caja de impresión de un A4 queda por debajo del punto de ruptura de
+     móvil, así que sin esto todas las rejillas colapsaban a una columna y la
+     Plantilla salía en 26 páginas. Se recuperan aquí las rejillas de escritorio. */
+  .field-grid.cols-2{grid-template-columns:repeat(2,1fr)!important;}
+  .field-grid.cols-3{grid-template-columns:repeat(3,1fr)!important;}
+  .field-grid.cols-4{grid-template-columns:repeat(4,1fr)!important;}
+  .tp-meta{grid-template-columns:auto 1fr 1fr!important;}
+  .tp-carga-grid{grid-template-columns:repeat(4,1fr)!important;}
+  .tp-head{grid-template-columns:auto minmax(0,1fr) auto auto auto!important;grid-auto-flow:row!important;}
+  .summary-row{grid-template-columns:auto 1fr!important;}
+  .semaforo-wrap{grid-template-columns:auto 1fr auto!important;text-align:left!important;}
+  .doc{max-width:none;}
+
   body{background:#fff;}
-  .nav,.action-bar,.btn-add-row,.btn-row-remove,.row-actions,.tp-add,.tp-head .tp-toggle,.tp-head .tp-remove{display:none;}
+  .nav,.action-bar,.btn-add-row,.btn-row-remove,.row-actions,.tp-add,.tp-head .tp-toggle,.tp-head .tp-remove,.tp-head .tp-dup,.tabs-bar,.aviso-conflicto{display:none;}
   .section{page-break-inside:avoid;border-top:none;padding:40px 0 16px;}
   .cover{margin:0;page-break-after:always;}
   .section h2{page-break-after:avoid;}
   .decision-block,.tp-card,.summary-wrap,.callout,.semaforo-wrap{page-break-inside:avoid;}
   .tp-card .tp-body{display:block !important;}
-  .field input,.field select,.field textarea,.tbl td input,.tbl td textarea,.tbl td select{border:none;background:transparent;padding:2px 0;font-size:var(--text-sm);color:var(--ink);}
+  .field input,.field select,.field textarea,.tbl td input,.tbl td textarea,.tbl td select,
+  input[type=text],input[type=number],select,textarea{border:none!important;background:transparent!important;padding:2px 0!important;font-size:var(--text-sm);color:var(--ink);box-shadow:none!important;}
+  /* Un campo vacío debe verse vacío: en papel, «Nº ESTUDIANTES 80» se leía
+     como un dato declarado cuando era el texto de ejemplo. */
+  input::placeholder,textarea::placeholder{color:transparent!important;opacity:0!important;}
+  .field-hint,.tp-carga-hint{display:none;}
   .pill-group label{border-color:var(--gris-300)!important;background:transparent!important;color:var(--gris-500)!important;}
   .pill-group input[type=radio]:checked + label{background:var(--azul-reflex)!important;color:#fff!important;border-color:var(--azul-reflex)!important;}
   .combo-card.selected{background:var(--azul-ghost)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   .semaforo-light{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   .doc{padding-bottom:40px;}
+
+  /* En pantalla la matriz del Blueprint se desplaza a lo ancho; en papel no hay
+     desplazamiento posible, así que se recompone para que quepa entera: la
+     columna Transversal se perdía siempre, y con ella D2, D3 y D4. */
+  .view-blueprint .bp-matrix-wrap{overflow:visible!important;}
+  .view-blueprint .bp-matrix{
+    grid-template-columns:110px repeat(var(--num-tps,3),minmax(0,1fr)) minmax(0,1.1fr)!important;
+    min-width:0!important;font-size:9pt;gap:3px;}
+  .view-blueprint .bp-matrix > *{overflow-wrap:anywhere;}
+  /* El aviso de desplazar no significa nada en papel. */
+  .bp-matrix-hint{display:none!important;}
+  /* Solo la vista del Blueprint se imprime apaisada; la Plantilla, en vertical. */
+  .view-blueprint{page:apaisada;}
+  @page{margin:14mm;}
+  @page apaisada{size:A4 landscape;margin:10mm;}
 }
+
+
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
+}
+/* ===== GALERÍA DE EJEMPLOS ===== */
+.gal-fondo{position:fixed;inset:0;z-index:400;background:rgba(15,15,107,.42);
+  display:flex;align-items:flex-start;justify-content:center;padding:5vh var(--sp-5);overflow-y:auto;}
+.gal-fondo[hidden]{display:none;}
+.gal-caja{background:var(--white);border-radius:var(--radius-lg);box-shadow:0 20px 60px rgba(15,15,107,.28);
+  max-width:900px;width:100%;padding:var(--sp-6) var(--sp-7) var(--sp-7);}
+.gal-cabecera{display:flex;gap:var(--sp-4);align-items:flex-start;justify-content:space-between;
+  border-bottom:1px solid var(--gris-200);padding-bottom:var(--sp-4);margin-bottom:var(--sp-5);}
+.gal-cabecera h2{font-family:var(--serif);font-size:var(--text-xl);color:var(--azul-deep);margin:0 0 6px;}
+.gal-cabecera p{font-size:var(--text-xs);color:var(--gris-600);line-height:1.55;max-width:64ch;margin:0;}
+.gal-cerrar{background:transparent;border:1px solid var(--gris-200);border-radius:var(--radius-sm);
+  width:32px;height:32px;font-size:20px;line-height:1;color:var(--gris-600);cursor:pointer;flex-shrink:0;}
+.gal-cerrar:hover{border-color:var(--acento-coral);color:var(--acento-coral);}
+.gal-lista{display:grid;gap:var(--sp-3);}
+.gal-item{border:1.5px solid var(--gris-200);border-radius:var(--radius-md);padding:var(--sp-4) var(--sp-5);
+  display:grid;grid-template-columns:1fr auto;gap:var(--sp-4);align-items:center;transition:border-color .18s;}
+.gal-item:hover{border-color:var(--azul-mid);}
+.gal-modelo{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--azul-mid);font-weight:700;}
+.gal-item h3{font-family:var(--serif);font-size:var(--text-md);color:var(--azul-deep);margin:3px 0 5px;}
+.gal-item p{font-size:var(--text-xs);color:var(--gris-600);line-height:1.5;margin:0;}
+.gal-escenarios{font-size:11px;color:var(--gris-500);margin-top:7px;font-style:italic;}
+.gal-item button{white-space:nowrap;}
+@media (max-width:768px){ .gal-item{grid-template-columns:1fr;} .gal-caja{padding:var(--sp-5);} }
+@media print{ .gal-fondo{display:none!important;} }
+
+/* ===== BARRA DE ESCENARIOS ===== */
+.esc-bar{position:sticky;top:56px;z-index:200;display:flex;align-items:center;gap:var(--sp-3);
+  flex-wrap:wrap;padding:10px 32px;background:var(--azul-ghost);border-bottom:1px solid var(--azul-pale);}
+.esc-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--azul-mid);font-weight:700;}
+.esc-select{font-family:var(--sans);font-size:var(--text-sm);font-weight:600;color:var(--azul-deep);
+  background:var(--white);border:1.5px solid var(--azul-pale);border-radius:var(--radius-sm);
+  padding:6px 10px;min-width:220px;max-width:100%;}
+.esc-select:focus-visible{outline:2px solid var(--azul-reflex);outline-offset:2px;}
+.esc-variacion{font-size:var(--text-xs);color:var(--gris-600);font-style:italic;}
+.esc-variacion:empty{display:none;}
+.esc-acciones{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap;}
+.esc-acciones button{font-family:var(--sans);font-size:11px;font-weight:600;color:var(--azul-mid);
+  background:transparent;border:1px solid var(--azul-pale);border-radius:var(--radius-sm);
+  padding:6px 11px;cursor:pointer;transition:all .18s;}
+.esc-acciones button:hover{background:var(--white);border-color:var(--azul-reflex);color:var(--azul-reflex);}
+.esc-acciones button:focus-visible{outline:2px solid var(--azul-reflex);outline-offset:2px;}
+
+/* ===== VISTA COMPARAR ===== */
+.view-comparar{background:var(--gris-claro);padding:var(--sp-6) var(--sp-5) var(--sp-10);min-height:100vh;}
+.cmp-wrap{max-width:1180px;margin:0 auto;background:var(--white);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-md);padding:var(--sp-8);}
+.cmp-head{margin-bottom:var(--sp-6);}
+.cmp-head h1{font-family:var(--serif);font-size:var(--text-2xl);color:var(--azul-deep);margin:6px 0 8px;}
+.cmp-head p{font-size:var(--text-sm);color:var(--gris-600);max-width:70ch;line-height:1.55;}
+.cmp-tabla{width:100%;border-collapse:collapse;font-size:var(--text-xs);}
+.cmp-tabla th,.cmp-tabla td{border:1px solid var(--gris-200);padding:9px 11px;text-align:left;vertical-align:top;}
+.cmp-tabla thead th{background:var(--azul-deep);color:var(--white);font-family:var(--sans);font-weight:600;}
+.cmp-tabla thead th.activo{background:var(--azul-reflex);}
+.cmp-tabla tbody th{background:var(--gris-claro);font-weight:600;color:var(--azul-deep);width:190px;
+  position:sticky;left:0;z-index:2;box-shadow:1px 0 0 var(--gris-200);}
+.cmp-tabla thead th:first-child{position:sticky;left:0;z-index:3;background:var(--azul-deep);}
+.cmp-tabla tr.grupo th{position:sticky;left:0;z-index:2;}
+.cmp-scroll{overflow-x:auto;}
+@media print{
+  .cmp-scroll{overflow:visible!important;}
+  .cmp-tabla{font-size:7.5pt;table-layout:fixed;width:100%;}
+  .cmp-tabla th,.cmp-tabla td{padding:4px 5px;overflow-wrap:anywhere;}
+  .cmp-tabla tbody th{width:110px;position:static;}
+  .view-comparar{page:apaisada;}
+}
+.cmp-tabla tr.grupo th{background:var(--azul-pale);color:var(--azul-deep);font-family:var(--mono);
+  font-size:10px;letter-spacing:.09em;text-transform:uppercase;}
+.cmp-sem{display:inline-flex;align-items:center;gap:6px;font-weight:700;}
+.cmp-punto{width:11px;height:11px;border-radius:50%;display:inline-block;}
+.cmp-punto.verde{background:var(--acento-teal);}
+.cmp-punto.ambar{background:var(--acento-amber);}
+.cmp-punto.rojo{background:var(--acento-coral);}
+.cmp-punto.gris{background:var(--gris-300);}
+.cmp-var{display:block;font-size:10px;font-weight:400;font-style:italic;opacity:.85;margin-top:3px;}
+.cmp-dif{color:var(--azul-reflex);font-weight:700;}
+.cmp-vacio{padding:var(--sp-8);text-align:center;color:var(--gris-500);font-size:var(--text-sm);}
+.cmp-nota{margin-top:var(--sp-5);font-size:var(--text-xs);color:var(--gris-600);line-height:1.55;}
+@media (max-width:768px){
+  .esc-bar{padding:10px 20px;}
+  .esc-acciones{margin-left:0;width:100%;}
+  .cmp-wrap{padding:var(--sp-5);}
+}
+@media print{ .esc-bar{display:none!important;} }
 
 /* ====================================================================== */
 /* ========== TAB SYSTEM · Plantilla · Canvas · Blueprint 0 ============= */
@@ -484,8 +629,8 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   color:var(--gris-600);font-weight:700;padding-top:3px;
 }
 .view-canvas .hoy-row.descripcion .hoy-label{color:var(--azul-reflex);}
-.view-canvas .hoy-row.funciona .hoy-label{color:var(--acento-teal);}
-.view-canvas .hoy-row.fricciona .hoy-label{color:var(--acento-coral);}
+.view-canvas .hoy-row.funciona .hoy-label{color:var(--texto-teal);}
+.view-canvas .hoy-row.fricciona .hoy-label{color:var(--texto-coral);}
 .view-canvas .hoy-row .hoy-text{color:var(--ink);line-height:1.45;font-size:var(--text-sm);}
 .view-canvas .timeline-panel{
   background:linear-gradient(180deg,#FFFFFF 0%,var(--gris-claro) 100%);
@@ -497,7 +642,9 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   border-radius:2px;
 }
 .view-canvas .timeline-steps{display:flex;justify-content:space-between;margin-top:-14px;gap:var(--sp-3);}
-.view-canvas .timeline-step{flex:1;display:flex;flex-direction:column;align-items:center;max-width:260px;}
+.view-canvas .timeline-step.compacto .step-card{padding:8px 12px;}
+.timeline-step.compacto .step-title{font-size:var(--text-xs);}
+.timeline-step{flex:1;display:flex;flex-direction:column;align-items:center;max-width:260px;}
 .view-canvas .step-dot{
   width:32px;height:32px;border-radius:50%;background:#fff;
   border:3px solid var(--azul-reflex);box-shadow:var(--shadow-sm);
@@ -522,8 +669,8 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   display:inline-block;font-size:9px;letter-spacing:.08em;text-transform:uppercase;
   font-weight:700;padding:2px 8px;border-radius:10px;
 }
-.view-canvas .natur-badge.puntual{background:var(--acento-teal-pale);color:var(--acento-teal);}
-.view-canvas .natur-badge.continuo{background:var(--acento-amber-pale);color:#8C6410;}
+.view-canvas .natur-badge.puntual{background:var(--acento-teal-pale);color:var(--texto-teal);}
+.view-canvas .natur-badge.continuo{background:var(--acento-amber-pale);color:var(--texto-ambar);}
 .view-canvas .step-card .step-evidencia{
   font-size:var(--text-xs);color:var(--gris-700);line-height:1.4;
   padding-top:var(--sp-2);border-top:1px dashed var(--gris-300);
@@ -550,9 +697,9 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   padding:1px 5px;border-radius:2px;font-size:10px;
 }
 .view-canvas .dim-chip.off{border-color:var(--gris-300);color:var(--gris-500);background:var(--gris-100);}
-.view-canvas .dim-chip.off .dim-code{background:var(--gris-400);}
-.view-canvas .dim-chip.later{border-color:var(--acento-amber);color:#8C6410;background:var(--acento-amber-pale);}
-.view-canvas .dim-chip.later .dim-code{background:var(--acento-amber);}
+.view-canvas .dim-chip.off .dim-code{background:#5C636D;}
+.view-canvas .dim-chip.later{border-color:var(--acento-amber);color:var(--texto-ambar);background:var(--acento-amber-pale);}
+.view-canvas .dim-chip.later .dim-code{background:var(--texto-ambar);}
 .view-canvas .dec-capsula{
   background:#fff;border:1px solid var(--gris-200);
   border-radius:var(--radius-md);padding:var(--sp-3) var(--sp-4);
@@ -601,8 +748,8 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 }
 .view-canvas .evid-item:first-of-type{border-top:0;padding-top:0;}
 .view-canvas .evid-when{font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding-top:3px;}
-.view-canvas .evid-when.ahora{color:var(--acento-teal);}
-.view-canvas .evid-when.despues{color:var(--acento-amber);}
+.view-canvas .evid-when.ahora{color:var(--texto-teal);}
+.view-canvas .evid-when.despues{color:var(--texto-ambar);}
 .view-canvas .evid-when.fuera{color:var(--gris-500);}
 .view-canvas .evid-text{color:var(--ink);line-height:1.45;font-size:var(--text-sm);}
 .view-canvas .cierre-panel{background:var(--azul-deep);color:#fff;border-radius:var(--radius-md);padding:var(--sp-5);display:flex;flex-direction:column;justify-content:space-between;}
@@ -690,10 +837,10 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 .view-blueprint .cell .cell-text{color:var(--ink);font-size:var(--text-xs);}
 .view-blueprint .cell .cell-text strong{color:var(--azul-deep);font-weight:600;}
 .view-blueprint .cell.cerrado{background:var(--acento-teal-pale);border:1px solid var(--acento-teal);}
-.view-blueprint .cell.cerrado .cell-tag{color:var(--acento-teal);}
+.view-blueprint .cell.cerrado .cell-tag{color:var(--texto-teal);}
 .view-blueprint .cell.cerrado .cell-tag::before{content:'●';font-size:10px;}
 .view-blueprint .cell.placeholder{background:var(--acento-amber-pale);border:1.5px dashed var(--acento-amber);}
-.view-blueprint .cell.placeholder .cell-tag{color:#8C6410;}
+.view-blueprint .cell.placeholder .cell-tag{color:var(--texto-ambar);}
 .view-blueprint .cell.placeholder .cell-tag::before{content:'◆';font-size:10px;}
 .view-blueprint .cell.placeholder .cell-text{color:#6A4E0C;}
 .view-blueprint .cell.sprint1{background:var(--gris-100);border:1px dashed var(--gris-400);}
@@ -747,7 +894,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 <body>
 
 <!-- ==================== TABS BAR ==================== -->
-<div class="tabs-bar" id="tabsBar">
+<nav class="tabs-bar" id="tabsBar" aria-label="Vistas de la plantilla">
   <div class="tabs-brand">
     <a href="/" style="color:inherit;text-decoration:none;display:inline-block;" title="Volver a Rediseña.Evaluacion">
       <span class="brand-kicker">← Rediseña.Evaluacion</span>
@@ -763,14 +910,56 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   <button type="button" class="tab-btn" data-view="blueprint" onclick="switchView('blueprint')">
     <span class="tab-num">3</span> Blueprint 0
   </button>
+  <button type="button" class="tab-btn" data-view="comparar" onclick="switchView('comparar')">
+    <span class="tab-num">4</span> Comparar
+  </button>
   <div class="tabs-actions">
-    <button type="button" onclick="loadExample()" title="Cargar el caso ejemplo en el estado actual">Cargar ejemplo</button>
+    <button type="button" onclick="abreGaleria()" title="Ver asignaturas de ejemplo y añadir sus escenarios a los tuyos">Ejemplos</button>
     <button type="button" onclick="window.print()" title="Imprimir la vista actual">Imprimir</button>
+  </div>
+</nav>
+
+<!-- ==================== GALERÍA DE EJEMPLOS ==================== -->
+<div class="gal-fondo" id="gal-fondo" hidden>
+  <div class="gal-caja" role="dialog" aria-modal="true" aria-labelledby="gal-titulo">
+    <header class="gal-cabecera">
+      <div>
+        <h2 id="gal-titulo">Asignaturas de ejemplo</h2>
+        <p>Cinco asignaturas inventadas con modelos pedagógicos distintos. Cada una trae tres escenarios: cómo es hoy, una evolución posible y una prueba de resistencia. <strong>Al añadirlas no se toca nada de lo tuyo</strong>: aparecen junto a tus escenarios y puedes borrarlas cuando quieras.</p>
+      </div>
+      <button type="button" class="gal-cerrar" onclick="cierraGaleria()" aria-label="Cerrar la galería">×</button>
+    </header>
+    <div class="gal-lista" id="gal-lista"></div>
+  </div>
+</div>
+
+<!-- ==================== BARRA DE ESCENARIOS ==================== -->
+<div id="anuncios-plantilla" class="visually-hidden" role="status" aria-live="polite"></div>
+<div class="esc-bar" id="esc-bar" role="region" aria-label="Escenario activo">
+  <label class="esc-label" for="esc-select">Escenario</label>
+  <select id="esc-select" class="esc-select" onchange="cambiaEscenario(this.value)" aria-label="Escenario activo"></select>
+  <span class="esc-variacion" id="esc-variacion"></span>
+  <div class="esc-acciones">
+    <button type="button" onclick="menuNuevoEscenario()" title="Crear un escenario nuevo a partir de este">+ Nuevo escenario</button>
+    <button type="button" onclick="renombraEscenario(libro.activo)" title="Cambiar el nombre de este escenario">Renombrar</button>
+    <button type="button" onclick="borraEscenario(libro.activo)" title="Eliminar este escenario">Eliminar</button>
+  </div>
+</div>
+
+<!-- ==================== VISTA 4 · COMPARAR ==================== -->
+<div class="view view-comparar" id="view-comparar" role="main">
+  <div class="cmp-wrap">
+    <div class="cmp-head">
+      <span class="kit-tag">Sprint 0 · laboratorio de escenarios</span>
+      <h1>Comparar escenarios</h1>
+      <p>Un rediseño que solo funciona con el grupo que tienes este año no es un rediseño. Aquí ves tus escenarios uno al lado del otro: lo que cambia entre columnas es lo que tu diseño no aguanta.</p>
+    </div>
+    <div id="cmp-contenido"></div>
   </div>
 </div>
 
 <!-- ==================== VISTA 1 · PLANTILLA ==================== -->
-<div class="view view-plantilla active" id="view-plantilla">
+<div class="view view-plantilla active" id="view-plantilla" role="main">
 
 <nav class="nav">
   <span class="nav-brand">Rediseña.Evaluacion · Plantilla estratégica v3</span>
@@ -783,7 +972,10 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   <a href="#paso6">6 · Resumen</a>
   <div class="nav-progress">
     <span id="progress-label">0%</span>
-    <div class="nav-progress-track"><div class="nav-progress-fill" id="progress-fill" style="width:0%;"></div></div>
+    <div class="nav-progress-track" id="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+         aria-label="Campos clave de la plantilla cumplimentados"
+         title="Cuenta catorce campos clave: la ficha de la asignatura, las combinaciones de arquetipos, la foto de hoy, las cuatro decisiones y al menos un touchpoint. Ninguno es obligatorio.">
+      <div class="nav-progress-fill" id="progress-fill" style="width:0%;"></div></div>
   </div>
 </nav>
 
@@ -806,6 +998,17 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 <div class="intro-card">
   <div class="intro-card-title">Cómo usar esta plantilla</div>
   <p>Esta plantilla operacionaliza la <strong>Guía estratégica</strong> en seis pasos. Al terminarla, llegas al Sprint 1 con tu posicionamiento estratégico cerrado: identidad de la asignatura, arquetipos dominantes, las <strong>cuatro decisiones de encuadre</strong> (D1–D4) y un <strong>listado de touchpoints con las dimensiones (C2–C7)</strong> activas en cada uno.</p>
+
+  <div class="intro-escenarios">
+    <div class="intro-card-title">Y algo más: úsala para probar, no solo para decidir</div>
+    <p>La plantilla admite <strong>varios escenarios de la misma asignatura</strong>, y ahí es donde más rinde. La forma que mejor funciona es una escalera de tres peldaños:</p>
+    <ol>
+      <li><strong>Lo que tengo hoy.</strong> Modeliza tu asignatura tal como la impartes ahora, sin arreglarla. Es tu punto de comparación, y sin él lo demás no dice nada.</li>
+      <li><strong>Lo que quiero.</strong> El rediseño al que aspiras. Al ponerlo al lado del anterior ves lo que cuesta de verdad, en horas, la evaluación que dices querer.</li>
+      <li><strong>Una prueba de resistencia.</strong> Aquí está lo interesante. Coges el escenario que quieres y le fuerzas <em>un solo</em> parámetro: el doble de estudiantes, un arquetipo dominante, la mitad de tu dedicación. Un rediseño que solo funciona con el grupo de este año no es un rediseño; es una suerte que no se repetirá.</li>
+    </ol>
+    <p>Los escenarios se crean desde la barra de arriba, con «+ Nuevo escenario», y la aplicación genera sola las pruebas de resistencia para que cambie una cosa y no diez. En la pestaña <strong>Comparar</strong> los ves uno al lado del otro. Y si quieres ver la mecánica antes de usarla con lo tuyo, en <strong>Ejemplos</strong> hay cinco asignaturas de modelos pedagógicos distintos, cada una con sus tres escenarios.</p>
+  </div>
   <p><strong>No la rellenes de un tirón si no te apetece</strong>: tu progreso se guarda automáticamente en este navegador. No se envía nada al exterior. Usa <em>Descargar JSON</em> para portar tu plantilla a otro equipo, e <em>Imprimir</em> para llevarla al Sprint 1.</p>
   <p>Puedes dejar cualquier campo como <em>«lo veré en Sprint 1»</em>. No pasa nada. La plantilla es un mapa, no un contrato.</p>
   <div class="intro-stats">
@@ -903,16 +1106,16 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   <p style="font-size:12px;color:var(--gris-500);margin-top:calc(var(--sp-2)*-1);">Orientación · estudiante: la unidad ECTS asume 25 h totales por crédito, así que con 6 ECTS y 15 semanas salen ≈ 10 h/sem. Pico estudiante por defecto: 1,2 × promedio. · docente: pico por defecto 1,5 × promedio.</p>
 
   <div class="field">
-    <label for="asig-formato">Formato de la asignatura</label>
-    <div class="pill-group" data-field="asig-formato">
+    <label id="asig-formato-lab">Formato de la asignatura</label>
+    <div class="pill-group" role="radiogroup" aria-labelledby="asig-formato-lab" data-field="asig-formato">
       <input type="radio" id="fmt-pres" name="asig-formato" value="Presencial"><label for="fmt-pres">Presencial</label>
       <input type="radio" id="fmt-mixta" name="asig-formato" value="Mixta"><label for="fmt-mixta">Mixta · b-learning</label>
       <input type="radio" id="fmt-online" name="asig-formato" value="Online"><label for="fmt-online">Online</label>
     </div>
   </div>
   <div class="field">
-    <label for="asig-rol">Tu rol en la asignatura</label>
-    <div class="pill-group" data-field="asig-rol">
+    <label id="asig-rol-lab">Tu rol en la asignatura</label>
+    <div class="pill-group" role="radiogroup" aria-labelledby="asig-rol-lab" data-field="asig-rol">
       <input type="radio" id="rol-coord" name="asig-rol" value="Coordinación + docencia"><label for="rol-coord">Coordinación + docencia</label>
       <input type="radio" id="rol-doc" name="asig-rol" value="Docencia sin coordinación"><label for="rol-doc">Docencia</label>
       <input type="radio" id="rol-coord-only" name="asig-rol" value="Solo coordinación"><label for="rol-coord-only">Solo coordinación</label>
@@ -935,18 +1138,18 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 
   <h3>Eje A · qué ves tú en el aula</h3>
   <p>Mueve cada deslizador para indicar el peso aproximado de cada tipo en tu grupo típico. <strong>No tiene que sumar 100 ni ser exacto</strong>: es orientación, no medición.</p>
-  <div class="slider-row"><label><strong>A1</strong>Brillantes</label><input type="range" min="0" max="100" value="20" id="eje-a1" data-slider-group="ejeA"></div>
-  <div class="slider-row"><label><strong>A2</strong>Con dificultades de aprendizaje</label><input type="range" min="0" max="100" value="20" id="eje-a2" data-slider-group="ejeA"></div>
-  <div class="slider-row"><label><strong>A3</strong>Con dificultades relacionales</label><input type="range" min="0" max="100" value="20" id="eje-a3" data-slider-group="ejeA"></div>
-  <div class="slider-row"><label><strong>A4</strong>Sin interés aparente</label><input type="range" min="0" max="100" value="20" id="eje-a4" data-slider-group="ejeA"></div>
-  <div class="slider-row"><label><strong>A5</strong>Normales</label><input type="range" min="0" max="100" value="20" id="eje-a5" data-slider-group="ejeA"></div>
+  <div class="slider-row"><label for="eje-a1"><strong>A1</strong>Brillantes</label><input type="range" min="0" max="100" value="20" id="eje-a1" data-slider-group="ejeA" aria-describedby="eje-a1-val"><output class="slider-val" id="eje-a1-val" for="eje-a1">20 %</output></div>
+  <div class="slider-row"><label for="eje-a2"><strong>A2</strong>Con dificultades de aprendizaje</label><input type="range" min="0" max="100" value="20" id="eje-a2" data-slider-group="ejeA" aria-describedby="eje-a2-val"><output class="slider-val" id="eje-a2-val" for="eje-a2">20 %</output></div>
+  <div class="slider-row"><label for="eje-a3"><strong>A3</strong>Con dificultades relacionales</label><input type="range" min="0" max="100" value="20" id="eje-a3" data-slider-group="ejeA" aria-describedby="eje-a3-val"><output class="slider-val" id="eje-a3-val" for="eje-a3">20 %</output></div>
+  <div class="slider-row"><label for="eje-a4"><strong>A4</strong>Sin interés aparente</label><input type="range" min="0" max="100" value="20" id="eje-a4" data-slider-group="ejeA" aria-describedby="eje-a4-val"><output class="slider-val" id="eje-a4-val" for="eje-a4">20 %</output></div>
+  <div class="slider-row"><label for="eje-a5"><strong>A5</strong>Normales</label><input type="range" min="0" max="100" value="20" id="eje-a5" data-slider-group="ejeA" aria-describedby="eje-a5-val"><output class="slider-val" id="eje-a5-val" for="eje-a5">20 %</output></div>
 
   <h3>Eje B · postura ante la evaluación</h3>
   <p>Mismo ejercicio para el Eje B.</p>
-  <div class="slider-row"><label><strong>B1</strong>Estratega · nota</label><input type="range" min="0" max="100" value="25" id="eje-b1" data-slider-group="ejeB"></div>
-  <div class="slider-row"><label><strong>B2</strong>Curioso · aprendizaje</label><input type="range" min="0" max="100" value="25" id="eje-b2" data-slider-group="ejeB"></div>
-  <div class="slider-row"><label><strong>B3</strong>Bajo presión</label><input type="range" min="0" max="100" value="25" id="eje-b3" data-slider-group="ejeB"></div>
-  <div class="slider-row"><label><strong>B4</strong>Co-diseñador · Co-evaluador</label><input type="range" min="0" max="100" value="25" id="eje-b4" data-slider-group="ejeB"></div>
+  <div class="slider-row"><label for="eje-b1"><strong>B1</strong>Estratega · nota</label><input type="range" min="0" max="100" value="25" id="eje-b1" data-slider-group="ejeB" aria-describedby="eje-b1-val"><output class="slider-val" id="eje-b1-val" for="eje-b1">25 %</output></div>
+  <div class="slider-row"><label for="eje-b2"><strong>B2</strong>Curioso · aprendizaje</label><input type="range" min="0" max="100" value="25" id="eje-b2" data-slider-group="ejeB" aria-describedby="eje-b2-val"><output class="slider-val" id="eje-b2-val" for="eje-b2">25 %</output></div>
+  <div class="slider-row"><label for="eje-b3"><strong>B3</strong>Bajo presión</label><input type="range" min="0" max="100" value="25" id="eje-b3" data-slider-group="ejeB" aria-describedby="eje-b3-val"><output class="slider-val" id="eje-b3-val" for="eje-b3">25 %</output></div>
+  <div class="slider-row"><label for="eje-b4"><strong>B4</strong>Co-diseñador · Co-evaluador</label><input type="range" min="0" max="100" value="25" id="eje-b4" data-slider-group="ejeB" aria-describedby="eje-b4-val"><output class="slider-val" id="eje-b4-val" for="eje-b4">25 %</output></div>
 
   <h3>Combinaciones dominantes en tu aula</h3>
   <p>Marca las <strong>2–3</strong> combinaciones A×B más presentes o críticas. Si la tuya no está en la lista, usa <em>Otra combinación</em>.</p>
@@ -1018,7 +1221,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
     <div class="decision-header">
       <div class="decision-num">D1</div>
       <div class="decision-title">
-        <h4>¿Cuáles son los 2–3 momentos evaluativos clave de tu asignatura?</h4>
+        <h3>¿Cuáles son los 2–3 momentos evaluativos clave de tu asignatura?</h3>
         <p>No son todos. Son los que, si quitas uno, cambia el sentido del curso. Los demás se modulan alrededor.</p>
       </div>
     </div>
@@ -1038,7 +1241,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
     <div class="decision-header">
       <div class="decision-num">D2</div>
       <div class="decision-title">
-        <h4>¿Qué papel tiene la IA en el trabajo del estudiante?</h4>
+        <h3>¿Qué papel tiene la IA en el trabajo del estudiante?</h3>
         <p>Postura global. Marca el tono. En el Paso 5 podrás matizarla touchpoint por touchpoint.</p>
       </div>
     </div>
@@ -1094,7 +1297,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
     <div class="decision-header">
       <div class="decision-num">D3</div>
       <div class="decision-title">
-        <h4>¿Qué evidencias decides ahora y cuáles dejas para el Sprint 1?</h4>
+        <h3>¿Qué evidencias decides ahora y cuáles dejas para el Sprint 1?</h3>
         <p>Dos preguntas acopladas. No todo tiene que estar listo en Sprint 0.</p>
       </div>
     </div>
@@ -1121,7 +1324,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
     <div class="decision-header">
       <div class="decision-num">D4</div>
       <div class="decision-title">
-        <h4>¿Qué papel tiene la IA en tu trabajo como docente?</h4>
+        <h3>¿Qué papel tiene la IA en tu trabajo como docente?</h3>
         <p>Preparación, retroalimentación, análisis de recogida, mejora docente. Esta decisión es independiente de D2.</p>
       </div>
     </div>
@@ -1192,7 +1395,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   <h3>Touchpoints de tu asignatura</h3>
   <div id="tp-list" class="tp-list"></div>
   <div id="tp-empty" class="tp-empty" style="display:none;">Aún no has añadido touchpoints. Empieza por los 2–3 momentos clave que declaraste en D1.</div>
-  <button type="button" class="tp-add" onclick="addTouchpoint()">+ Añadir touchpoint</button>
+  <button type="button" class="tp-add" id="btn-add-tp" onclick="addTouchpoint()">+ Añadir touchpoint</button>
 
   <h3 style="margin-top:var(--sp-10);">Cierre cuantitativo y semáforo económico</h3>
   <p>Una lectura orientativa de tu listado, calculada con lo que declaraste en el <strong>Paso 1</strong> (estudiantes · equipo docente · dedicación) y en este <strong>Paso 5</strong>. Si dejas algún campo del Paso 1 vacío, el cálculo usa el valor sugerido del propio campo y te lo indica con una etiqueta.</p>
@@ -1248,10 +1451,10 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 
 </form>
 
-<footer class="inst-footer">
+<div class="inst-footer">
   <div class="footer-brand">Rediseña.Evaluacion · Un kit de Eutika</div>
   <div class="footer-meta">Plantilla estratégica · v3 · 21 abril 2026 · ahora con vista Canvas y Blueprint 0</div>
-</footer>
+</div>
 
 </div>
 
@@ -1271,7 +1474,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 </div><!-- /view-plantilla -->
 
 <!-- ==================== VISTA 2 · CANVAS ==================== -->
-<div class="view view-canvas" id="view-canvas">
+<div class="view view-canvas" id="view-canvas" role="main">
   <div class="view-banner hidden" id="canvas-banner">
     <div>
       <strong>Vista parcial.</strong> Faltan campos en la Plantilla (asignatura o touchpoints). Completa la Plantilla para ver el Canvas con todos los datos.
@@ -1282,7 +1485,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 </div>
 
 <!-- ==================== VISTA 3 · BLUEPRINT 0 ==================== -->
-<div class="view view-blueprint" id="view-blueprint">
+<div class="view view-blueprint" id="view-blueprint" role="main">
   <div class="view-banner hidden" id="blueprint-banner">
     <div>
       <strong>Vista parcial.</strong> Faltan campos en la Plantilla (asignatura o touchpoints). Completa la Plantilla para ver el Blueprint con todos los datos.
@@ -1294,7 +1497,12 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 
 <script>
 'use strict';
-const STORAGE_KEY = 'uc3m-plantilla-estrategica-v0';
+// El kit es reutilizable por cualquier universidad: nada suyo puede llevar el
+// nombre de una. La clave anterior sí lo llevaba, y también el nombre de los
+// archivos que se descargaba el profesor. Se conserva la clave antigua para
+// migrar el trabajo de quien ya la tenga (ver el arranque, más abajo).
+const STORAGE_KEY = 'redisena-plantilla-estrategica-v0';
+const STORAGE_KEY_ANTIGUA = 'uc3m-plantilla-estrategica-v0';
 const form = document.getElementById('plantilla-form');
 const saveState = document.getElementById('save-state');
 
@@ -1338,8 +1546,8 @@ function addTouchpoint(data){
           <span class="tp-dim-code">${d.code}</span>
           <span class="tp-dim-title">${d.title}</span>
         </div>
-        <div class="tp-dim-hint">${d.hint}</div>
-        <div class="pill-group" data-field="${dimKey}-estado">${pills}</div>
+        <div class="tp-dim-hint" id="${dimKey}-hint">${d.hint}</div>
+        <div class="pill-group" role="radiogroup" aria-label="${d.code} · ${d.title}" aria-describedby="${dimKey}-hint" data-field="${dimKey}-estado">${pills}</div>
         <textarea name="${dimKey}-nota" placeholder="Nota opcional: cómo se concreta esta dimensión en este touchpoint. Si marcas 'Aún no lo decido', puedes dejar anotada la duda." style="margin-top:8px;"></textarea>
       </div>
     `;
@@ -1348,15 +1556,15 @@ function addTouchpoint(data){
   card.innerHTML = `
     <div class="tp-head">
       <span class="tp-code">TP${idx}</span>
-      <input type="text" class="tp-nombre" name="tp${idx}-nombre" placeholder="p. ej. Parcial 1 · Proyecto · Tutorías continuas…">
-      <button type="button" class="tp-toggle" title="Abrir / cerrar" aria-label="Abrir o cerrar tarjeta">▾</button>
+      <input type="text" class="tp-nombre" name="tp${idx}-nombre" aria-label="Nombre del touchpoint" placeholder="p. ej. Parcial 1 · Proyecto · Tutorías continuas…">
+      <button type="button" class="tp-toggle" title="Abrir / cerrar" aria-expanded="false" aria-controls="tp${idx}-cuerpo">▾</button>
       <button type="button" class="tp-dup" title="Crear una copia de este touchpoint justo debajo">Duplicar</button>
       <button type="button" class="tp-remove" title="Eliminar touchpoint">Eliminar</button>
     </div>
     <div class="tp-meta">
       <div class="field">
-        <label>Naturaleza temporal</label>
-        <div class="pill-group" data-field="tp${idx}-naturaleza">
+        <label id="tp${idx}-nat-lab">Naturaleza temporal</label>
+        <div class="pill-group" role="radiogroup" aria-labelledby="tp${idx}-nat-lab" data-field="tp${idx}-naturaleza">
           <input type="radio" id="tp${idx}-punt" name="tp${idx}-naturaleza" value="Puntual"><label for="tp${idx}-punt">Puntual</label>
           <input type="radio" id="tp${idx}-cont" name="tp${idx}-naturaleza" value="Continuo"><label for="tp${idx}-cont">Continuo</label>
         </div>
@@ -1395,7 +1603,7 @@ function addTouchpoint(data){
       </div>
       <div class="tp-carga-hint">No es lo mismo un test de diez preguntas que se resuelve en clase en diez minutos que una prueba formativa de dos horas. La duración cuenta como tiempo tuyo, porque durante el touchpoint tú también estás ahí. Déjalo en blanco si aún no lo sabes: el semáforo funciona igual. En los touchpoints continuos, estima el total del semestre, no cada ocurrencia.</div>
     </div>
-    <div class="tp-body">${dimsHtml}</div>
+    <div class="tp-body" id="tp${idx}-cuerpo">${dimsHtml}</div>
   `;
   tpListEl.appendChild(card);
 
@@ -1403,16 +1611,26 @@ function addTouchpoint(data){
   const toggleBtn = card.querySelector('.tp-toggle');
   toggleBtn.addEventListener('click', () => {
     card.classList.toggle('open');
-    toggleBtn.textContent = card.classList.contains('open') ? '▴' : '▾';
+    const abierta = card.classList.contains('open');
+    toggleBtn.textContent = abierta ? '▴' : '▾';
+    toggleBtn.setAttribute('aria-expanded', abierta ? 'true' : 'false');
   });
   // Duplicar
   card.querySelector('.tp-dup').addEventListener('click', () => duplicateTouchpoint(card));
   // Remove
   card.querySelector('.tp-remove').addEventListener('click', () => {
+    const codigo = (card.querySelector('.tp-code') || {}).textContent || 'el touchpoint';
     if(confirm('¿Eliminar este touchpoint? Esta acción no se puede deshacer.')){
+      // Al eliminar la tarjeta, el foco se quedaba en un botón que ya no existe y
+      // el navegador lo devolvía al <body>: quien no ve la pantalla perdía el sitio.
+      const siguiente = card.nextElementSibling || card.previousElementSibling;
       card.remove();
       refreshTpCodes();
       persist();
+      anunciaPlantilla(codigo + ' eliminado. Quedan ' + tpListEl.children.length + ' touchpoints.');
+      const destino = siguiente ? siguiente.querySelector('.tp-nombre')
+                                : document.getElementById('btn-add-tp');
+      if(destino) destino.focus();
     }
   });
   // Persist on change
@@ -1420,6 +1638,9 @@ function addTouchpoint(data){
     el.addEventListener('input', persist);
     el.addEventListener('change', persist);
   });
+  // El nombre forma parte del rótulo accesible de los tres botones de la tarjeta.
+  const nombreEl = card.querySelector('.tp-nombre');
+  if(nombreEl) nombreEl.addEventListener('change', refreshTpCodes);
   // Un signo menos de más devolvía «carga sostenible» con horas negativas.
   card.querySelectorAll('.tp-carga-grid input[type=number]').forEach(el => {
     el.addEventListener('change', () => {
@@ -1455,6 +1676,7 @@ function addTouchpoint(data){
     card.classList.add('open');
   }
   toggleBtn.textContent = card.classList.contains('open') ? '▴' : '▾';
+  toggleBtn.setAttribute('aria-expanded', card.classList.contains('open') ? 'true' : 'false');
 
   refreshTpCodes();
   updateTpEmpty();
@@ -1503,10 +1725,29 @@ function duplicateTouchpoint(card){
   nueva.scrollIntoView({ behavior:'smooth', block:'nearest' });
 }
 
+// Lo que cambia en pantalla sin recargarla no llega a un lector de pantalla si
+// nadie se lo dice. Esta región lo anuncia sin ocupar sitio.
+function anunciaPlantilla(texto){
+  const r = document.getElementById('anuncios-plantilla');
+  if(!r) return;
+  r.textContent = '';
+  setTimeout(() => { r.textContent = texto; }, 60);
+}
+
 function refreshTpCodes(){
   tpListEl.querySelectorAll('.tp-card').forEach((card, i) => {
     const code = card.querySelector('.tp-code');
     if(code) code.textContent = 'TP' + (i+1);
+    // Sin esto, la lista de botones de la página era «Duplicar, Eliminar,
+    // Duplicar, Eliminar…» y no había forma de saber a cuál correspondía cada uno.
+    const cod = 'TP' + (i+1);
+    const nom = (card.querySelector('.tp-nombre') || {}).value || '';
+    const quien = nom ? cod + ' · ' + nom : cod;
+    const et = (sel, txt) => { const b = card.querySelector(sel); if(b) b.setAttribute('aria-label', txt); };
+    et('.tp-toggle', 'Abrir o cerrar ' + quien);
+    et('.tp-dup',    'Duplicar ' + quien);
+    et('.tp-remove', 'Eliminar ' + quien);
+    et('.tp-nombre', 'Nombre del touchpoint ' + cod);
   });
 }
 function updateTpEmpty(){
@@ -1530,9 +1771,21 @@ function collectState(){
 // ausentes conservaban el valor anterior y los grupos de opciones no se
 // desmarcaban nunca, así que se acababa con las decisiones de dos asignaturas
 // mezcladas y sin ninguna señal.
+// Valores de fábrica de los deslizadores, leídos una sola vez del propio marcado.
+const RANGOS_POR_DEFECTO = {};
+function capturaRangos(){
+  document.querySelectorAll('input[type=range]').forEach(el => { RANGOS_POR_DEFECTO[el.id] = el.value; });
+}
+
 function limpiarFormulario(){
   form.querySelectorAll('input[type=text],input[type=number],input[type=email],textarea').forEach(el => { el.value = ''; });
   form.querySelectorAll('select').forEach(el => { el.selectedIndex = 0; });
+  // Los deslizadores no se vaciaban, así que un escenario «en blanco» heredaba
+  // el perfil de aula del anterior y lo guardaba como si el profesor lo hubiera
+  // declarado.
+  form.querySelectorAll('input[type=range]').forEach(el => {
+    if(RANGOS_POR_DEFECTO[el.id] !== undefined){ el.value = RANGOS_POR_DEFECTO[el.id]; el.dispatchEvent(new Event('input')); }
+  });
   form.querySelectorAll('input[type=radio],input[type=checkbox]').forEach(el => { el.checked = false; });
   form.querySelectorAll('.combo-card.selected').forEach(el => el.classList.remove('selected'));
   tpListEl.innerHTML = ''; tpCounter = 0;
@@ -1540,6 +1793,7 @@ function limpiarFormulario(){
 
 function applyState(state, limpiarAntes){
   if(!state) return;
+  state = saneaEstado(state);
   if(limpiarAntes) limpiarFormulario();
   form.querySelectorAll('input[type=text],input[type=number],input[type=email],select,textarea').forEach(el => {
     if(el.name && state[el.name] !== undefined) el.value = state[el.name];
@@ -1548,7 +1802,10 @@ function applyState(state, limpiarAntes){
     if(el.name && state[el.name] !== undefined && state[el.name] === el.value) el.checked = true;
   });
   form.querySelectorAll('input[type=range]').forEach(el => {
-    if(state[el.id] !== undefined){ el.value = state[el.id]; el.dispatchEvent(new Event('input')); }
+    if(state[el.id] !== undefined) el.value = state[el.id];
+    const out = document.getElementById(el.id + '-val');
+    if(out) out.textContent = el.value + ' %';
+    el.dispatchEvent(new Event('input'));
   });
   if(Array.isArray(state['combo'])){
     form.querySelectorAll('input[name=combo]').forEach(cb => {
@@ -1566,6 +1823,225 @@ function applyState(state, limpiarAntes){
   updateProgress();
 }
 
+
+// ======================================================================
+// ESCENARIOS · decisión E5
+// El Sprint 0 no se usa solo para cerrar un diseño: los profesores modelizan
+// la asignatura que tienen, la que quieren, y variantes de estrés (el doble de
+// estudiantes, un arquetipo dominante). Antes eso obligaba a descargar un JSON
+// por variante y renombrarlo a mano. Ahora conviven dentro de la plantilla.
+// ======================================================================
+const FORMATO_ESCENARIOS = 'escenarios-v1';
+let libro = null;
+
+function nuevoId(){ return 'e' + Math.random().toString(36).slice(2,8); }
+
+// Garantiza la forma de un estado. Sin esto, un archivo con «touchpoints» que no
+// sea una lista hacía reventar applyState a mitad de camino, dejando el libro
+// medio sustituido y el formulario descuadrado: el profesor veía sus escenarios
+// en la barra y ya no existían.
+function saneaEstado(e){
+  const s = (e && typeof e === 'object' && !Array.isArray(e)) ? e : {};
+  if(!Array.isArray(s.touchpoints)) s.touchpoints = [];
+  s.touchpoints = s.touchpoints
+    .filter(tp => tp && typeof tp === 'object' && !Array.isArray(tp))
+    .map(tp => {
+      if(!tp.dims || typeof tp.dims !== 'object' || Array.isArray(tp.dims)) tp.dims = {};
+      Object.keys(tp.dims).forEach(k => {
+        const d = tp.dims[k];
+        if(!d || typeof d !== 'object' || Array.isArray(d)) tp.dims[k] = { estado:'', nota:'' };
+      });
+      return tp;
+    });
+  if(!Array.isArray(s.combo)) s.combo = [];
+  return s;
+}
+
+function escenarioActivo(){
+  if(!libro) return null;
+  return libro.escenarios.find(e => e.id === libro.activo) || libro.escenarios[0] || null;
+}
+
+// Convierte lo guardado al formato de escenarios. Lo importante: quien ya tenía
+// trabajo en el formato de un solo estado debe encontrárselo intacto, como su
+// primer escenario, sin perder una coma.
+function aLibro(guardado){
+  if(guardado && guardado._formato === FORMATO_ESCENARIOS && Array.isArray(guardado.escenarios) && guardado.escenarios.length){
+    guardado.escenarios = guardado.escenarios
+      .filter(e => e && typeof e === 'object' && !Array.isArray(e))
+      .map(e => { if(!e.id) e.id = nuevoId(); e.estado = saneaEstado(e.estado); return e; });
+    if(!guardado.escenarios.length) return aLibro(null);
+    if(!guardado.escenarios.some(e => e.id === guardado.activo)) guardado.activo = guardado.escenarios[0].id;
+    return guardado;
+  }
+  const estado = saneaEstado(guardado);
+  const tieneTrabajo = Object.keys(estado).some(k => k !== '_sesion' && k !== '_guardado_en' &&
+                                                     k !== 'touchpoints' && k !== 'combo')
+                       || estado.touchpoints.length > 0;
+  const id = nuevoId();
+  return {
+    _formato: FORMATO_ESCENARIOS,
+    activo: id,
+    escenarios: [{ id, nombre: tieneTrabajo ? 'Lo que tengo hoy' : 'Escenario 1',
+                   variacion: null, derivadoDe: null, estado }]
+  };
+}
+
+// Guarda en el escenario activo lo que hay ahora mismo en el formulario.
+function vuelcaFormularioAlEscenario(){
+  const act = escenarioActivo();
+  if(act){ act.estado = collectState(); act._tocado = Date.now(); }
+}
+
+function cambiaEscenario(id){
+  const destino = libro.escenarios.find(e => e.id === id);
+  if(!destino){
+    // El desplegable apuntaba a algo que ya no existe: se repinta y no se toca nada.
+    pintaBarraEscenarios();
+    return;
+  }
+  if(id === libro.activo) return;
+  vuelcaFormularioAlEscenario();
+  destino.estado = saneaEstado(destino.estado);
+  libro.activo = id;
+  applyState(destino.estado, true);
+  persist();
+  pintaBarraEscenarios();
+  refreshActiveView();
+}
+
+function creaEscenario(nombre, estadoBase, variacion, derivadoDe){
+  vuelcaFormularioAlEscenario();
+  const id = nuevoId();
+  libro.escenarios.push({ id, nombre, variacion: variacion || null,
+                          derivadoDe: derivadoDe || null, _tocado: Date.now(),
+                          estado: JSON.parse(JSON.stringify(estadoBase || {})) });
+  libro.activo = id;
+  applyState(libro.escenarios[libro.escenarios.length - 1].estado, true);
+  persist();
+  pintaBarraEscenarios();
+  refreshActiveView();
+  return id;
+}
+
+function borraEscenario(id){
+  if(libro.escenarios.length <= 1){
+    alert('No se puede eliminar el único escenario. Crea otro antes, o usa «Limpiar todo».');
+    return;
+  }
+  const e = libro.escenarios.find(x => x.id === id);
+  if(!e) return;
+  if(!confirm(`Se eliminará el escenario «${e.nombre}» y todo lo que contiene. Esta acción no se puede deshacer.\n\nSi quieres conservarlo, cancela y pulsa antes «Descargar JSON».`)) return;
+  libro.escenarios = libro.escenarios.filter(x => x.id !== id);
+  if(libro.activo === id){
+    libro.activo = libro.escenarios[0].id;
+    applyState(libro.escenarios[0].estado, true);
+  }
+  persist();
+  pintaBarraEscenarios();
+  refreshActiveView();
+}
+
+function renombraEscenario(id){
+  const e = libro.escenarios.find(x => x.id === id);
+  if(!e) return;
+  const nombre = prompt('Nombre del escenario', e.nombre);
+  if(nombre === null) return;
+  const limpio = nombre.trim();
+  if(!limpio) return;
+  e.nombre = limpio.slice(0, 60);
+  persist();
+  pintaBarraEscenarios();
+}
+
+// ── Variaciones de un solo parámetro ─────────────────────────────────
+// La gracia de un escenario de estrés es que cambie UNA cosa. Si cambian
+// varias, la comparación deja de decir nada.
+const EJES_A = [['eje-a1','A1 · Brillantes'],['eje-a2','A2'],['eje-a3','A3'],['eje-a4','A4'],['eje-a5','A5']];
+const EJES_B = [['eje-b1','B1 · Estratega de nota'],['eje-b2','B2'],['eje-b3','B3'],['eje-b4','B4 · Co-diseñador']];
+
+const PARAMETROS_LIBRES = [
+  { id:'asig-estudiantes',           etiqueta:'Nº de estudiantes' },
+  { id:'asig-equipo',                etiqueta:'Personas en el equipo docente' },
+  { id:'asig-horas-semana',          etiqueta:'Horas lectivas por semana' },
+  { id:'asig-dedicacion-docente',    etiqueta:'Tu dedicación (h/sem)' },
+  { id:'asig-dedicacion-estudiante', etiqueta:'Dedicación del estudiante (h/sem)' },
+  { id:'asig-ects',                  etiqueta:'ECTS de la asignatura' },
+];
+
+function valorActual(estado, id){
+  const r = numDeEstado(estado, id);
+  return r.value;
+}
+
+function generaVariacion(tipo){
+  const act = escenarioActivo();
+  if(!act) return;
+  vuelcaFormularioAlEscenario();
+  const base = JSON.parse(JSON.stringify(act.estado || {}));
+
+  if(tipo === 'estudiantes-x2'){
+    const r = numDeEstado(base, 'asig-estudiantes', parseInt);
+    if(r.fromPlaceholder && !confirm('No has declarado cuántos estudiantes tienes, así que se usará el valor ' +
+        `sugerido (${r.value}) como punto de partida y el escenario tendrá ${r.value * 2}.\n\n` +
+        'La comparación será más útil si antes escribes tu número real. ¿Continúas igualmente?')) return;
+    const n = Math.round(r.value * 2);
+    base['asig-estudiantes'] = String(n);
+    if(r.fromPlaceholder) base['asig-estudiantes'] = String(n);
+    creaEscenario(`El doble de estudiantes (${n})`, base,
+                  `Nº de estudiantes: ${r.value}${r.fromPlaceholder ? ' (sugerido)' : ''} → ${n}`, act.id);
+    return;
+  }
+
+  if(tipo === 'arquetipo'){
+    const opciones = EJES_A.concat(EJES_B);
+    const lista = opciones.map((o,i) => `${i+1}. ${o[1]}`).join('\n');
+    const eleccion = prompt('¿Qué arquetipo quieres hacer dominante?\n\n' + lista + '\n\nEscribe el número:', '1');
+    if(eleccion === null) return;
+    const idx = parseInt(eleccion, 10) - 1;
+    if(isNaN(idx) || idx < 0 || idx >= opciones.length) return;
+    const elegido = opciones[idx][0];
+    const grupo = elegido.startsWith('eje-a') ? EJES_A : EJES_B;
+    const resto = Math.round(30 / (grupo.length - 1));
+    grupo.forEach(([campo]) => { base[campo] = (campo === elegido) ? '70' : String(resto); });
+    creaEscenario(`Dominante ${opciones[idx][1].split(' · ')[0]}`, base,
+                  `Arquetipo dominante: ${opciones[idx][1]} al 70 %`, act.id);
+    return;
+  }
+
+  if(tipo === 'libre'){
+    const lista = PARAMETROS_LIBRES.map((o,i) => `${i+1}. ${o.etiqueta} (ahora: ${valorActual(base, o.id)})`).join('\n');
+    const cual = prompt('¿Qué parámetro quieres cambiar?\n\n' + lista + '\n\nEscribe el número:', '1');
+    if(cual === null) return;
+    const i = parseInt(cual, 10) - 1;
+    if(isNaN(i) || i < 0 || i >= PARAMETROS_LIBRES.length) return;
+    const par = PARAMETROS_LIBRES[i];
+    const actualVal = valorActual(base, par.id);
+    const nuevo = prompt(`${par.etiqueta}\n\nValor actual: ${actualVal}\nNuevo valor:`, String(actualVal));
+    if(nuevo === null) return;
+    const num = parseFloat(nuevo);
+    if(isNaN(num) || num < 0){ alert('Escribe un número válido.'); return; }
+    base[par.id] = String(num);
+    creaEscenario(`${par.etiqueta}: ${num}`, base, `${par.etiqueta}: ${actualVal} → ${num}`, act.id);
+    return;
+  }
+
+  if(tipo === 'copia'){
+    creaEscenario(`${act.nombre} (copia)`, base, act.variacion, act.derivadoDe);
+    return;
+  }
+
+  if(tipo === 'quiero'){
+    creaEscenario('Lo que quiero', base, null, act.id);
+    return;
+  }
+
+  if(tipo === 'vacio'){
+    creaEscenario('Escenario ' + (libro.escenarios.length + 1), {}, null, null);
+    return;
+  }
+}
+
 // ===== PERSIST =====
 // Identificador de esta pestaña. Sirve para detectar que otra pestaña ha
 // escrito encima: antes, dos pestañas abiertas se pisaban en silencio y se
@@ -1578,10 +2054,10 @@ let conflictoOtraPestana = false;
 let fallosDeGuardadoAvisados = false;
 
 function escribeEstado(){
-  const payload = collectState();
-  payload._sesion = SESION;
-  payload._guardado_en = new Date().toISOString();
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+  vuelcaFormularioAlEscenario();
+  libro._sesion = SESION;
+  libro._guardado_en = new Date().toISOString();
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(libro));
 }
 
 function guardaYa(){
@@ -1636,20 +2112,45 @@ window.addEventListener('beforeunload', (e) => {
 });
 
 // ===== DOS PESTAÑAS A LA VEZ =====
+let libroOtraPestana = null;
+
+// Cuando dos pestañas trabajan en escenarios distintos, quedarse con el libro de
+// una borraba los escenarios que la otra había tocado. Se fusionan: los míos
+// mandan donde coinciden, y los suyos se conservan donde yo no tengo nada.
+function fusionaLibros(ajeno, mio){
+  if(!ajeno || !Array.isArray(ajeno.escenarios)) return mio;
+  const res = JSON.parse(JSON.stringify(ajeno));
+  mio.escenarios.forEach(m => {
+    const i = res.escenarios.findIndex(e => e.id === m.id);
+    if(i < 0){ res.escenarios.push(m); return; }
+    // Donde el escenario existe en las dos pestañas gana el que se editó más
+    // tarde. Quedarse siempre con «el mío» borraba lo que la otra pestaña
+    // acababa de escribir en un escenario que yo tenía abierto pero sin tocar.
+    const mioT = m._tocado || 0, suyoT = res.escenarios[i]._tocado || 0;
+    if(mioT >= suyoT) res.escenarios[i] = m;
+  });
+  res.activo = mio.activo;
+  return res;
+}
 function avisaConflicto(){
   if(document.getElementById('aviso-conflicto')) return;
   const caja = document.createElement('div');
   caja.id = 'aviso-conflicto';
   caja.className = 'aviso-conflicto';
   caja.innerHTML = '<strong>Has abierto esta plantilla en otra pestaña</strong>' +
-    '<span>La otra pestaña ha guardado cambios. Para no pisaros el trabajo, aquí se ha pausado el guardado automático. Elige con cuál te quedas.</span>' +
+    '<span>La otra pestaña ha guardado cambios. Para no pisaros el trabajo, aquí se ha pausado el guardado automático. Si te quedas con esta, se conservan también los escenarios que la otra haya tocado y tú no.</span>' +
     '<div class="aviso-acciones">' +
       '<button type="button" class="btn primary" id="btn-conflicto-mio">Conservar lo de esta pestaña</button>' +
       '<button type="button" class="btn outline" id="btn-conflicto-otra">Cargar lo de la otra</button>' +
     '</div>';
   document.body.appendChild(caja);
   document.getElementById('btn-conflicto-mio').addEventListener('click', () => {
-    conflictoOtraPestana = false; caja.remove(); guardaYa();
+    conflictoOtraPestana = false; caja.remove();
+    vuelcaFormularioAlEscenario();
+    libro = fusionaLibros(libroOtraPestana, libro);
+    libroOtraPestana = null;
+    guardaYa();
+    pintaBarraEscenarios();
   });
   document.getElementById('btn-conflicto-otra').addEventListener('click', () => {
     conflictoOtraPestana = false; caja.remove(); location.reload();
@@ -1661,6 +2162,7 @@ window.addEventListener('storage', (e) => {
   try {
     const otro = JSON.parse(e.newValue);
     if(otro._sesion && otro._sesion === SESION) return;   // eco de esta misma pestaña
+    libroOtraPestana = otro;
   } catch(err){ /* si no se puede leer, avisamos igual */ }
   conflictoOtraPestana = true;
   clearTimeout(saveTimer);
@@ -1757,13 +2259,18 @@ function updateProgress(){
   const pct = Math.round(required.filter(Boolean).length / required.length * 100);
   document.getElementById('progress-fill').style.width = pct + '%';
   document.getElementById('progress-label').textContent = pct + '%';
+  const pista = document.getElementById('progress-track');
+  if(pista){
+    pista.setAttribute('aria-valuenow', pct);
+    pista.setAttribute('aria-valuetext', required.filter(Boolean).length + ' de ' + required.length + ' campos clave');
+  }
 }
 
 // ===== SLIDERS LIVE =====
 form.querySelectorAll('input[type=range]').forEach(el => {
   el.addEventListener('input', () => {
-    const out = el.parentElement.querySelector('.slider-value output');
-    if(out) out.textContent = el.value;
+    const out = document.getElementById(el.id + '-val');
+    if(out) out.textContent = el.value + ' %';
     persist();
   });
 });
@@ -1901,13 +2408,20 @@ function clearSummary(){
 
 // ===== EXPORT / IMPORT / CLEAR =====
 function exportJSON(){
-  const state = collectState();
-  const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
+  vuelcaFormularioAlEscenario();
+  const act = escenarioActivo() || { estado:{} };
+  const blob = new Blob([JSON.stringify(libro, null, 2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  const asig = (state['asig-nombre'] || 'plantilla').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40);
+  // El nombre del archivo lleva la asignatura y cuántos escenarios contiene, para
+  // que en la carpeta de descargas se distinga sin abrirlo.
+  const limpia = s => (s || '').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu,'')
+                       .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+  const asig = limpia(act.estado && act.estado['asig-nombre']) || 'plantilla';
+  const n = libro.escenarios.length;
+  const sufijo = n > 1 ? `-${n}escenarios` : '-' + (limpia(act.nombre) || 'escenario');
   a.href = url;
-  a.download = `uc3m-plantilla-${asig}-${new Date().toISOString().slice(0,10)}.json`;
+  a.download = `redisena-plantilla-${asig}${sufijo}-${new Date().toISOString().slice(0,10)}.json`;
   document.body.appendChild(a); a.click(); a.remove();
   URL.revokeObjectURL(url);
 }
@@ -1921,6 +2435,12 @@ const CLAVES_CONOCIDAS = ['asig-nombre','asig-titulacion','asig-ects','hoy-descr
                           'd1-momentos','d2-postura','d3-ahora','d4-postura','combo','touchpoints'];
 function pareceDeEstaPlantilla(obj){
   if(!obj || typeof obj !== 'object' || Array.isArray(obj)) return false;
+  // Formato nuevo, con escenarios
+  if(obj._formato === FORMATO_ESCENARIOS && Array.isArray(obj.escenarios)) return true;
+  // Formato antiguo, un único estado plano. Se comprueba el tipo: antes bastaba
+  // con que la clave existiera, y un «touchpoints» que fuera texto pasaba el filtro.
+  if(obj.touchpoints !== undefined && !Array.isArray(obj.touchpoints)) return false;
+  if(obj.combo !== undefined && !Array.isArray(obj.combo)) return false;
   return CLAVES_CONOCIDAS.some(k => Object.prototype.hasOwnProperty.call(obj, k));
 }
 
@@ -1929,7 +2449,8 @@ function cuentaTrabajo(){
   const tps = (s.touchpoints || []).length;
   const campos = Object.keys(s).filter(k => k !== 'touchpoints' && k !== 'combo' &&
                                             typeof s[k] === 'string' && s[k].trim() !== '').length;
-  return { tps, campos, vacia: tps === 0 && campos === 0 };
+  const escenarios = libro ? libro.escenarios.length : 1;
+  return { tps, campos, escenarios, vacia: tps === 0 && campos === 0 && escenarios <= 1 };
 }
 
 function handleImport(event){
@@ -1947,22 +2468,47 @@ function handleImport(event){
     if(!pareceDeEstaPlantilla(state)){
       alert('Este archivo no es una plantilla estratégica.\n\n' +
             'No se ha tocado nada de lo que tienes. Busca el archivo que descargaste ' +
-            'desde aquí con «Descargar JSON»: su nombre empieza por «uc3m-plantilla-».');
+            'desde aquí con «Descargar JSON»: su nombre empieza por «redisena-plantilla-» ' +
+            '(o por «uc3m-plantilla-», si lo descargaste antes de julio de 2026).');
       return;
     }
     const actual = cuentaTrabajo();
     if(!actual.vacia){
-      const detalle = actual.tps > 0
-        ? `${actual.tps} touchpoint${actual.tps === 1 ? '' : 's'} y ${actual.campos} campos rellenos`
-        : `${actual.campos} campos rellenos`;
-      if(!confirm(`Vas a reemplazar la plantilla que tienes abierta, que contiene ${detalle}.\n\n` +
+      const trozos = [];
+      if(actual.escenarios > 1) trozos.push(`${actual.escenarios} escenarios`);
+      if(actual.tps > 0) trozos.push(`${actual.tps} touchpoint${actual.tps === 1 ? '' : 's'} en el activo`);
+      if(actual.campos > 0) trozos.push(`${actual.campos} campos rellenos`);
+      if(!confirm(`Vas a reemplazar la plantilla que tienes abierta, que contiene ${trozos.join(', ')}.\n\n` +
                   'Se guardará una copia para que puedas deshacerlo. ¿Continúas?')) return;
-      try { localStorage.setItem(CLAVE_COPIA, JSON.stringify(collectState())); } catch(err){ /* sin copia, seguimos */ }
+      try {
+        vuelcaFormularioAlEscenario();
+        localStorage.setItem(CLAVE_COPIA, JSON.stringify(libro));
+      } catch(err){ /* sin copia, seguimos */ }
     }
-    applyState(state, true);      // reemplaza, no fusiona
+    // Si algo falla a mitad, se vuelve al libro anterior: antes una carga rota
+    // dejaba la barra mostrando escenarios que ya no existían en memoria, y la
+    // primera tecla los borraba del disco.
+    const anterior = libro;
+    try {
+      libro = aLibro(state);          // acepta el formato con escenarios y el antiguo
+      applyState((escenarioActivo() || {}).estado || {}, true);
+    } catch(err){
+      libro = anterior;
+      applyState((escenarioActivo() || {}).estado || {}, true);
+      pintaBarraEscenarios();
+      refreshActiveView();
+      alert('El archivo está dañado y no se ha podido cargar del todo.\n\n' +
+            'Se ha dejado tu plantilla como estaba, sin tocar nada.');
+      return;
+    }
     persist();
+    pintaBarraEscenarios();
     muestraDeshacer();
-    alert('Plantilla cargada. Revisa que es la asignatura que esperabas antes de seguir.');
+    refreshActiveView();
+    const n = libro.escenarios.length;
+    alert(n > 1
+      ? `Cargados ${n} escenarios. Estás en «${escenarioActivo().nombre}»; cambia de escenario en la barra de arriba.`
+      : 'Plantilla cargada. Revisa que es la asignatura que esperabas antes de seguir.');
   };
   reader.onerror = () => alert('No se ha podido leer el archivo.');
   reader.readAsText(file);
@@ -1982,17 +2528,22 @@ function muestraDeshacer(){
     const copia = localStorage.getItem(CLAVE_COPIA);
     if(!copia) return;
     if(!confirm('Se recuperará la plantilla que tenías antes de la última carga. ¿Continúas?')) return;
-    applyState(JSON.parse(copia), true);
+    libro = aLibro(JSON.parse(copia));
+    applyState((escenarioActivo() || {}).estado || {}, true);
     localStorage.removeItem(CLAVE_COPIA);
     b.remove();
     persist();
+    pintaBarraEscenarios();
+    refreshActiveView();
   });
   grupo.insertBefore(b, grupo.firstChild);
 }
 
 function clearAll(){
-  if(!confirm('¿Seguro que quieres limpiar toda la plantilla? Esta acción no se puede deshacer.\n\n' +
-              'Si quieres conservarla, cancela y pulsa antes «Descargar JSON».')) return;
+  const n = libro ? libro.escenarios.length : 1;
+  const cuantos = n > 1 ? `los ${n} escenarios que tienes` : 'la plantilla';
+  if(!confirm(`¿Seguro que quieres limpiar ${cuantos}? Esta acción no se puede deshacer.\n\n` +
+              'Si quieres conservarlo, cancela y pulsa antes «Descargar JSON».')) return;
   localStorage.removeItem(STORAGE_KEY);
   localStorage.removeItem(CLAVE_COPIA);
   hayCambiosSinGuardar = false;
@@ -2008,9 +2559,9 @@ const DEMO_STATE = {
   'asig-nombre':'Diseño de Servicios Digitales',
   'asig-codigo':'ADE-3017',
   'asig-titulacion':'Doble Grado ADE + Tecnologías',
-  'asig-curso':'3',
+  'asig-curso':'3º',
   'asig-ects':'6',
-  'asig-semestre':'Primavera',
+  'asig-semestre':'Segundo cuatrimestre',
   'asig-estudiantes':'75',
   'asig-equipo':'2',
   'asig-horas-semana':'4',
@@ -2024,10 +2575,10 @@ const DEMO_STATE = {
   'eje-b1':'15','eje-b2':'25','eje-b3':'10','eje-b4':'50',
   'combo':['A1×B2','A3×B4'],
   'combo-otra':'',
-  'comentario-arquetipo':'Grupo con mayoría curiosa y participativa en evaluación (co-diseño y co-evaluación), atravesado por tensiones relacionales en trabajos de equipo.',
+  'combo-comentario':'Grupo con mayoría curiosa y participativa en evaluación (co-diseño y co-evaluación), atravesado por tensiones relacionales en trabajos de equipo.',
   'hoy-descripcion':'2 pruebas escritas intermedias + trabajo final de grupo con defensa oral. Hoy no uso IA de forma deliberada; los estudiantes sí la usan aunque no lo declaran.',
   'hoy-funciona':'Los grupos se implican cuando hay entregas intermedias visibles.',
-  'hoy-fricciona':'Las correcciones se acumulan al final; el retroalimentación llega demasiado tarde para ajustar.',
+  'hoy-fricciona':'Las correcciones se acumulan al final; la retroalimentación llega demasiado tarde para ajustar.',
   'd1-momentos':'3 touchpoints: explorar (TP1 · semana 3), construir (TP2 · semana 8), integrar (TP3 · semana 13).',
   'd1-criterio':'Cada TP separa una fase cognitiva distinta y ofrece dos oportunidades de ajuste antes del cierre.',
   'd2-postura':'Herramienta abierta con reglas',
@@ -2043,13 +2594,14 @@ const DEMO_STATE = {
       naturaleza:'Puntual',
       cuando:'Semana 3 · 45 min en clase',
       cuandoRetro:'Misma sesión (oral) + nota escrita en 48 h',
+      hPrep:'3', minDur:'45', minCorr:'6', minFb:'4',
       dims:{
-        C2:{estado:'Activa',nota:'Autoeval 1–5 con comentario individual antes del presentación corta.'},
+        C2:{estado:'Activa',nota:'Autoevaluación 1–5 con comentario individual antes de la presentación corta.'},
         C3:{estado:'Activa',nota:'Libre para explorar; obligatorio declarar uso.'},
-        C4:{estado:'Activa',nota:'Entrega ½ pág. + presentación corta de 3 min por equipo.'},
-        C5:{estado:'Activa',nota:'Formulario breve + grabación del presentación corta (audio).'},
-        C6:{estado:'Activa',nota:'Retroalimentación oral inmediato al presentación corta + rubricón ligero.'},
-        C7:{estado:'Lo veré en Sprint 1',nota:'Registro de dudas frecuentes post-presentación corta (formato por definir).'}
+        C4:{estado:'Activa',nota:'Entrega de media página + presentación corta de 3 min por equipo.'},
+        C5:{estado:'Activa',nota:'Formulario breve + grabación de la presentación corta (audio).'},
+        C6:{estado:'Activa',nota:'Retroalimentación oral inmediata tras la presentación corta, con una rúbrica ligera.'},
+        C7:{estado:'Lo veré en Sprint 1',nota:'Registro de dudas frecuentes tras la presentación corta (formato por definir).'}
       },
       open:true
     },
@@ -2058,6 +2610,7 @@ const DEMO_STATE = {
       naturaleza:'Puntual',
       cuando:'Semana 8 · sesión dedicada',
       cuandoRetro:'Devolución 1-a-1 durante la semana 9',
+      hPrep:'5', minDur:'90', minCorr:'14', minFb:'10',
       dims:{
         C2:{estado:'Activa',nota:'Revisión entre pares estructurada entre equipos (rúbrica corta).'},
         C3:{estado:'Activa',nota:'Libre para validar; documentar uso en memoria de proceso.'},
@@ -2073,6 +2626,7 @@ const DEMO_STATE = {
       naturaleza:'Puntual',
       cuando:'Semana 13 · defensa pública',
       cuandoRetro:'Rúbrica final + devolución escrita individual en 7 días',
+      hPrep:'8', minDur:'120', minCorr:'22', minFb:'12',
       dims:{
         C2:{estado:'No aplica',nota:''},
         C3:{estado:'Activa',nota:'Declaración final de uso de IA (apartado obligatorio del informe).'},
@@ -2106,20 +2660,41 @@ function _dominantAxis(s, axis){
 // Única implementación del semáforo. La consumen la propia Plantilla
 // (updateSemaforo) y las vistas de Canvas y Blueprint, para que las tres no
 // puedan devolver colores distintos del mismo diseño.
+// Valores sugeridos de los campos del Paso 1, leídos una vez de los propios
+// marcadores de posición. Permiten calcular el semáforo de un escenario que no
+// está en pantalla, que es lo que necesita la comparación.
+const VALORES_SUGERIDOS = {};
+function capturaSugeridos(){
+  ['asig-estudiantes','asig-horas-semana','asig-equipo','asig-dedicacion-docente',
+   'asig-dedicacion-estudiante','asig-pico-docente','asig-pico-estudiante','asig-ects'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) VALORES_SUGERIDOS[id] = parseFloat(el.placeholder) || 0;
+  });
+}
+
+// Lee un número del estado; si no está, cae al valor sugerido, avisando.
+function numDeEstado(s, id, parser){
+  parser = parser || parseFloat;
+  const bruto = s ? s[id] : undefined;
+  const v = parser(bruto);
+  if(bruto !== undefined && bruto !== '' && !isNaN(v)) return { value: v, fromPlaceholder: false };
+  return { value: VALORES_SUGERIDOS[id] || 0, fromPlaceholder: true };
+}
+
 function computeSemaforo(s){
   const tps = s['touchpoints'] || [];
   const total = tps.length;
   const puntuales = tps.filter(t => t.naturaleza === 'Puntual').length;
   const continuos = tps.filter(t => t.naturaleza === 'Continuo').length;
   // Si el campo está vacío, cae al placeholder.
-  const estR = readNumWithPlaceholder('asig-estudiantes', parseInt);
-  const hsR  = readNumWithPlaceholder('asig-horas-semana', parseFloat);
-  const eqR  = readNumWithPlaceholder('asig-equipo', parseInt);
-  const dedR = readNumWithPlaceholder('asig-dedicacion-docente', parseFloat);
-  const estudiantes = estR.value || parseInt(s['asig-estudiantes']) || 0;
-  const horasSemana = hsR.value  || parseFloat(s['asig-horas-semana']) || 0;
-  const equipo      = eqR.value  || parseInt(s['asig-equipo']) || 1;
-  const dedicacion  = dedR.value || parseFloat(s['asig-dedicacion-docente']) || 0;
+  const estR = numDeEstado(s, 'asig-estudiantes', parseInt);
+  const hsR  = numDeEstado(s, 'asig-horas-semana', parseFloat);
+  const eqR  = numDeEstado(s, 'asig-equipo', parseInt);
+  const dedR = numDeEstado(s, 'asig-dedicacion-docente', parseFloat);
+  const estudiantes = estR.value;
+  const horasSemana = hsR.value;
+  const equipo      = eqR.value || 1;
+  const dedicacion  = dedR.value;
   const semanas = (s['asig-semestre'] === 'Anual') ? 30 : 15;
   let usingFallback = estR.fromPlaceholder || hsR.fromPlaceholder || eqR.fromPlaceholder;
 
@@ -2221,15 +2796,27 @@ function buildCanvasHTML(s){
   const sem = computeSemaforo(s);
   const dims = countDims(tps);
 
-  const tpCards = tps.length ? tps.slice(0,3).map((t,i) => {
+  const DETALLE_HASTA = 5;   // a partir de aquí, tarjeta compacta
+  const tpCards = tps.length ? tps.map((t,i) => {
     const natur = (t.naturaleza || '').toLowerCase();
+    const insignia = natur ? `<span class="natur-badge ${natur === 'continuo' ? 'continuo' : 'puntual'}">${escC(t.naturaleza)}</span>` : '';
+    if(i >= DETALLE_HASTA){
+      return `
+      <div class="timeline-step compacto">
+        <div class="step-dot">TP${i+1}</div>
+        <div class="step-card">
+          <div class="step-title">${escC(t.nombre) || 'Touchpoint sin nombre'}</div>
+          <div class="step-when">${escC(t.cuando) || '—'}${insignia}</div>
+        </div>
+      </div>`;
+    }
     const evid = (t.dims||{}).C4?.nota || 'Evidencia por declarar.';
     return `
       <div class="timeline-step">
         <div class="step-dot">TP${i+1}</div>
         <div class="step-card">
           <div class="step-title">${escC(t.nombre) || 'Touchpoint sin nombre'}</div>
-          <div class="step-when">${escC(t.cuando) || '—'}${natur ? `<span class="natur-badge ${natur === 'continuo' ? 'continuo' : 'puntual'}">${escC(t.naturaleza)}</span>` : ''}</div>
+          <div class="step-when">${escC(t.cuando) || '—'}${insignia}</div>
           <div class="step-evidencia"><strong>Evidencia:</strong> ${escC(evid)}</div>
         </div>
       </div>`;
@@ -2264,7 +2851,7 @@ function buildCanvasHTML(s){
 
   return `
   <div class="canvas">
-    <header class="canvas-head">
+    <div class="canvas-head">
       <div>
         <div class="kit-tag">Rediseña.Evaluacion · Sprint 0</div>
         <h1>Canvas del proceso de evaluación</h1>
@@ -2281,7 +2868,7 @@ function buildCanvasHTML(s){
         <div class="asig-name">${escC(s['asig-nombre']||'Sin título')}</div>
         <div class="asig-titulacion">${escC(s['asig-titulacion']||'Sin titulación')}${s['asig-formato']?` · ${escC(s['asig-formato'])}`:''}</div>
       </div>
-    </header>
+    </div>
 
     <div class="canvas-body">
       <div class="row row-1">
@@ -2385,10 +2972,10 @@ function buildCanvasHTML(s){
       </section>
     </div>
 
-    <footer class="canvas-foot">
+    <div class="canvas-foot">
       <div><strong>Rediseña.Evaluacion</strong> · Sprint 0 · Kit de instrumentos estratégicos</div>
       <div>Canvas · ${new Date().toLocaleDateString('es-ES', {day:'numeric',month:'long',year:'numeric'})} · Render de la Plantilla estratégica v3</div>
-    </footer>
+    </div>
   </div>`;
 }
 
@@ -2482,7 +3069,7 @@ function buildBlueprintHTML(s){
 
   return `
   <div class="page">
-    <header class="bp-head">
+    <div class="bp-head">
       <div>
         <div class="kit-tag">Rediseña.Evaluacion · Pieza puente Sprint 0 → Sprint 1</div>
         <h1>Blueprint 0 del proceso de evaluación</h1>
@@ -2493,7 +3080,7 @@ function buildBlueprintHTML(s){
         <div class="asig-name">${escC(s['asig-nombre']||'Sin título')}</div>
         <div class="asig-meta">${escC(s['asig-estudiantes']||'—')} estudiantes · ${escC(equipoVal)} docente${equipoSuf} · ${semestreTxt}</div>
       </div>
-    </header>
+    </div>
 
     <div class="bp-meta">
       <div class="bp-intro">
@@ -2532,10 +3119,10 @@ function buildBlueprintHTML(s){
       </section>
     </div>
 
-    <footer class="bp-foot">
+    <div class="bp-foot">
       <div><strong>Rediseña.Evaluacion</strong> · Pieza puente Sprint 0 → Sprint 1</div>
       <div>Blueprint 0 · cierre de Sprint 0 · ${new Date().toLocaleDateString('es-ES', {day:'numeric',month:'long',year:'numeric'})} · Render de la Plantilla estratégica v3</div>
-    </footer>
+    </div>
   </div>`;
 }
 
@@ -2556,11 +3143,134 @@ function renderBlueprintView(){
   document.getElementById('blueprint-render').innerHTML = buildBlueprintHTML(s);
 }
 
+
+// ── Barra de escenarios ──────────────────────────────────────────────
+function pintaBarraEscenarios(){
+  const sel = document.getElementById('esc-select');
+  const va  = document.getElementById('esc-variacion');
+  if(!sel || !libro) return;
+  sel.innerHTML = libro.escenarios.map(e =>
+    `<option value="${e.id}"${e.id === libro.activo ? ' selected' : ''}>${escC(e.nombre)}</option>`).join('');
+  const act = escenarioActivo();
+  va.textContent = (act && act.variacion) ? '· ' + act.variacion : '';
+}
+
+function menuNuevoEscenario(){
+  const opciones = [
+    ['quiero',         'Lo que quiero — copia de este para ir modificándolo'],
+    ['estudiantes-x2', 'El doble de estudiantes — prueba de escala'],
+    ['arquetipo',      'Un arquetipo dominante — prueba de composición del aula'],
+    ['libre',          'Otro parámetro — eliges cuál y qué valor'],
+    ['copia',          'Copia exacta de este escenario'],
+    ['vacio',          'Escenario en blanco'],
+  ];
+  const lista = opciones.map((o,i) => `${i+1}. ${o[1]}`).join('\n');
+  const r = prompt('Nuevo escenario a partir de «' + escenarioActivo().nombre + '»\n\n' + lista +
+                   '\n\nEscribe el número:', '2');
+  if(r === null) return;
+  const i = parseInt(r, 10) - 1;
+  if(isNaN(i) || i < 0 || i >= opciones.length) return;
+  generaVariacion(opciones[i][0]);
+}
+
+// ── Comparación ──────────────────────────────────────────────────────
+// «80» si el profesor lo escribió; «~80» si es el valor sugerido por defecto.
+function recorta(s, n){ s = String(s || ''); return s.length > n ? s.slice(0, n - 1) + '…' : s; }
+
+function comoTexto(r){ return (r.fromPlaceholder ? '~' : '') + r.value; }
+
+function renderCompararView(){
+  const cont = document.getElementById('cmp-contenido');
+  if(!cont || !libro) return;
+  vuelcaFormularioAlEscenario();
+
+  if(libro.escenarios.length < 2){
+    cont.innerHTML = `<div class="cmp-vacio">
+      <p><strong>Todavía tienes un solo escenario.</strong></p>
+      <p style="margin-top:8px;">Crea al menos uno más con «+ Nuevo escenario» en la barra de arriba.
+      Lo habitual es empezar por dos —lo que tienes hoy y lo que quieres— y añadir después una prueba
+      de resistencia, como el doble de estudiantes.</p></div>`;
+    return;
+  }
+
+  const escs = libro.escenarios;
+  const datos = escs.map(e => {
+    const s = e.estado || {};
+    const sem = computeSemaforo(s);
+    const tps = s.touchpoints || [];
+    return {
+      e, s, sem,
+      tps: tps.length,
+      puntuales: tps.filter(x => x.naturaleza === 'Puntual').length,
+      continuos: tps.filter(x => x.naturaleza === 'Continuo').length,
+      // Marcamos con «~» lo que sale del valor sugerido y no de lo que el
+      // profesor escribió: la tabla enseñaba 80 estudiantes en un escenario
+      // completamente vacío, como si los hubiera declarado.
+      estudiantes: comoTexto(numDeEstado(s,'asig-estudiantes',parseInt)),
+      equipo: comoTexto(numDeEstado(s,'asig-equipo',parseInt)),
+      dedicacion: comoTexto(numDeEstado(s,'asig-dedicacion-docente')),
+      horasLect: comoTexto(numDeEstado(s,'asig-horas-semana')),
+    };
+  });
+
+  // Marca en azul lo que difiere del primer escenario: es lo que se está mirando.
+  const dif = (vals, i) => (i > 0 && String(vals[i]) !== String(vals[0])) ? ' class="cmp-dif"' : '';
+  const fila = (etiqueta, vals, formato) => {
+    const f = formato || (v => (v === '' || v === undefined || v === null) ? '—' : escC(String(v)));
+    return `<tr><th scope="row">${etiqueta}</th>` +
+      vals.map((v,i) => `<td${dif(vals,i)}>${f(v)}</td>`).join('') + '</tr>';
+  };
+  const grupo = (titulo) => `<tr class="grupo"><th colspan="${escs.length+1}">${titulo}</th></tr>`;
+
+  const cabecera = '<thead><tr><th></th>' + datos.map(d =>
+    `<th class="${d.e.id === libro.activo ? 'activo' : ''}">${escC(recorta(d.e.nombre, 46))}` +
+    (d.e.variacion ? `<span class="cmp-var" title="${escC(d.e.variacion)}">${escC(recorta(d.e.variacion, 64))}</span>` : '') +
+    '</th>').join('') + '</tr></thead>';
+
+  const semCelda = d => `<span class="cmp-sem"><span class="cmp-punto ${d.sem.color}"></span>${escC(d.sem.titulo)}</span>`;
+
+  const colores = datos.map(d => d.sem.color);
+  const cuerpo = '<tbody>' +
+    grupo('La lectura de factibilidad') +
+    `<tr><th scope="row">Semáforo</th>${datos.map((d,i) => `<td${dif(colores,i)}>${semCelda(d)}</td>`).join('')}</tr>` +
+    fila('Horas de evaluar', datos.map(d => d.sem.horas !== null ? Math.round(d.sem.horas) + ' h' : 'sin estimar')) +
+    fila('% de tu dedicación', datos.map(d => d.sem.pct !== null ? d.sem.pct + ' %' : '—')) +
+    grupo('El diseño') +
+    fila('Touchpoints', datos.map(d => d.tps)) +
+    fila('Puntuales · continuos', datos.map(d => `${d.puntuales} · ${d.continuos}`)) +
+    fila('Dimensiones activas', datos.map(d => countDims(d.s.touchpoints || []).activas.join(' ') || '—')) +
+    grupo('Las condiciones') +
+    fila('Estudiantes', datos.map(d => d.estudiantes)) +
+    fila('Equipo docente', datos.map(d => d.equipo)) +
+    fila('Tu dedicación (h/sem)', datos.map(d => d.dedicacion)) +
+    fila('Horas lectivas (h/sem)', datos.map(d => d.horasLect)) +
+    grupo('Las cuatro decisiones') +
+    fila('D1 · Momentos', datos.map(d => d.s['d1-momentos'] || '')) +
+    fila('D2 · IA del estudiante', datos.map(d => d.s['d2-postura'] || '')) +
+    fila('D3 · Evidencias', datos.map(d => d.s['d3-ahora'] || '')) +
+    fila('D4 · IA docente', datos.map(d => d.s['d4-postura'] || '')) +
+    '</tbody>';
+
+  const sinEstimar = datos.every(d => d.sem.horas === null);
+  const aviso = sinEstimar
+    ? `<p class="cmp-nota"><strong>Ninguno de tus escenarios tiene estimada la carga por touchpoint</strong>, así que
+       la comparación solo puede enseñarte los parámetros y una lectura por volumen. Estima lo que te cuesta cada
+       touchpoint —en el Paso 5, «Lo que te cuesta»— y esta tabla pasará a decirte en horas qué te costaría cada
+       escenario. Es ahí donde una prueba de resistencia empieza a doler.</p>`
+    : '';
+  cont.innerHTML = `<div class="cmp-scroll"><table class="cmp-tabla">${cabecera}${cuerpo}</table></div>
+    <p class="cmp-nota">En azul, lo que cambia respecto al primer escenario. Si has creado una prueba de
+    resistencia variando un solo parámetro, lo que aparezca en azul además de ese parámetro es la
+    consecuencia: ahí es donde tu diseño cede. Una cifra precedida de <strong>~</strong> no la has
+    declarado tú: es el valor sugerido que la plantilla usa mientras el campo esté vacío.</p>${aviso}`;
+}
+
 function switchView(name){
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.view === name));
   document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === 'view-' + name));
   if(name === 'canvas') renderCanvasView();
   else if(name === 'blueprint') renderBlueprintView();
+  else if(name === 'comparar') renderCompararView();
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
@@ -2569,34 +3279,135 @@ function refreshActiveView(){
   if(!active) return;
   if(active.id === 'view-canvas') renderCanvasView();
   else if(active.id === 'view-blueprint') renderBlueprintView();
+  else if(active.id === 'view-comparar') renderCompararView();
 }
 form.addEventListener('input', refreshActiveView);
 form.addEventListener('change', refreshActiveView);
 
-function loadExample(){
-  const actual = cuentaTrabajo();
-  if(!actual.vacia){
-    if(!confirm('Cargar el caso ejemplo reemplazará lo que tienes en la Plantilla. ' +
-                'Se guardará una copia para que puedas deshacerlo. ¿Continuar?')) return;
-    try { localStorage.setItem(CLAVE_COPIA, JSON.stringify(collectState())); } catch(err){ /* sin copia, seguimos */ }
-  }
-  applyState(DEMO_STATE, true);
-  persist();
-  muestraDeshacer();
-  refreshActiveView();
+
+// Asignaturas sintéticas de ejemplo. Cada una trae tres escenarios: el punto
+// de partida, una evolución posible y una prueba de resistencia. Están aquí
+// dentro y no en archivos aparte porque la plantilla se distribuye a veces
+// como adjunto de correo y tiene que funcionar sin conexión.
+const EJEMPLOS = [
+  {
+  id:'ingesoft', nombre:'Diseño de Servicios Digitales',
+  modelo:'Técnica · basada en proyectos',
+  resumen:'Si tu asignatura se estructura en torno a un proyecto por equipos con entregas intermedias y defensa final, esta es la tuya.',
+  base: DEMO_STATE,
+  escenarios:[
+    { nombre:'El rediseño que quiero', variacion:null, cambios:{} },
+    { nombre:'El doble de estudiantes', variacion:'Nº de estudiantes: 75 → 150',
+      cambios:{ 'asig-estudiantes':'150' } },
+    { nombre:'Sin el segundo profesor', variacion:'Equipo docente: 2 → 1',
+      cambios:{ 'asig-equipo':'1' } }
+  ]
+},
+  {"id":"clasica","nombre":"Introducción a la Microeconomía","modelo":"Clásica · magistrales y exámenes","resumen":"Si das un grupo grande de primero, explicas en el aula y lo evalúas todo con un parcial y un final, esta es tu asignatura.","base":{"asig-nombre":"Introducción a la Microeconomía","asig-codigo":"ECO-1102","asig-titulacion":"Grado en Administración y Dirección de Empresas","asig-curso":"1º","asig-ects":"6","asig-semestre":"Primer cuatrimestre","asig-estudiantes":"180","asig-equipo":"1","asig-horas-semana":"4","asig-dedicacion-docente":"11","asig-pico-docente":"18","asig-dedicacion-estudiante":"10","asig-pico-estudiante":"20","asig-formato":"Presencial","asig-rol":"Docencia sin coordinación","eje-a1":"10","eje-a2":"30","eje-a3":"5","eje-a4":"15","eje-a5":"40","eje-b1":"45","eje-b2":"15","eje-b3":"35","eje-b4":"5","combo":["A2×B3","A4×B1"],"combo-otra":"A5 × B1 · el grueso silencioso: van bien, estudian para el examen y no pisan una tutoría","combo-comentario":"Primero de grado, aula de 180 en gradas. Domina el estudiante que estudia para el examen y que no aparece hasta la semana anterior. El grupo que me preocupa es el que llega con las matemáticas justas y se bloquea en las pruebas largas: en el parcial se les nota, y en el final ya vienen derrotados.","hoy-descripcion":"Dos exámenes y nada más: parcial en la semana 8 (40 %) y final en convocatoria oficial (60 %), los dos con tipo test corregido por lector óptico más problemas escritos. No hay entregas ni trabajos. La asignatura tiene cuatro grupos con examen común, pero cada profesor corrige el suyo: los 180 son míos. La retroalimentación es el solucionario publicado y una clase de repaso; individual, solo la de quien viene a revisión. La IA hoy no me afecta, porque todo se evalúa en papel y en el aula. De información recojo lo que da el lector óptico, aciertos por pregunta, y una hoja de cálculo con las notas por bloque.","hoy-funciona":"Cuesta poco tiempo y el tiempo que cuesta está concentrado: dos semanas de corrección al año y el resto del curso lo tengo para preparar clase. Con 180 estudiantes eso no es un detalle menor, es lo que hace que la asignatura sea sostenible. Y el examen común entre grupos evita la discusión de si a unos se les exige más que a otros.","hoy-fricciona":"Que no me entero de nada hasta la semana 8. Cuando corrijo el parcial descubro que media clase no distingue coste medio de coste marginal, y llevamos dos meses construyendo encima de eso. El estudiante tampoco tiene forma de saber cómo va: aprueba o suspende, y lo sabe cuando ya no puede hacer nada con esa información. Los que se caen suelen ser los mismos y se caen pronto, solo que yo lo veo tarde.","d1-momentos":"Dos: parcial en la semana 8 (40 %) y examen final en convocatoria oficial (60 %). No hay ningún otro momento evaluativo en todo el cuatrimestre.","d1-criterio":"No los elegí, para ser sincero: son los que hereda la asignatura y los que caben con 180 estudiantes. Si tengo que defender el criterio, diría que el parcial corta el temario en dos mitades que se sostienen solas. Lo que no tienen es ninguna función de aviso: el primero llega demasiado tarde para cambiar el rumbo y el segundo ya no cambia nada.","d2-postura":"Lo veré en Sprint 1","d2-comunicacion":"Hoy no digo nada sobre IA porque no tengo dónde decirlo: los dos exámenes son en papel, en el aula y sin dispositivos. Sé que la usan para estudiar y no tengo ni idea de cómo. En el momento en que ponga una sola tarea fuera del aula esto deja de ser gratis y tendré que escribir una norma de verdad.","d3-ahora":"Enunciado con el reparto de puntos por apartado · solucionario publicado junto con las notas · tabla de aciertos por pregunta del lector óptico · hoja de notas por bloque temático.","d3-despues":"Comparación de resultados por bloque entre ediciones · alguna forma de saber quién se está descolgando antes de la semana 8.","d3-fuera":"No guardo nada de lo que pasa entre exámenes: ni ejercicios de clase, ni asistencia, ni las dudas de tutoría. No es una decisión meditada, es que nunca me lo he planteado; y con 180 personas cualquier registro que abra tengo que poder mantenerlo hasta junio.","d4-postura":"Sin uso deliberado","d4-nota":"No la uso para nada docente. La he probado para redactar preguntas de test y salen planas, con distractores que no engañan a nadie. Donde sí me interesaría es en leer 180 respuestas abiertas y decirme por dónde van los errores, pero hoy no tengo ninguna respuesta abierta que leer.","touchpoints":[{"nombre":"Examen parcial","naturaleza":"Puntual","cuando":"Semana 8 · 90 min, en la franja de clase","cuandoRetro":"Notas a los 12 días · solucionario en el aula virtual · repaso de los fallos frecuentes en la clase siguiente","hPrep":"6","minDur":"90","minCorr":"4","minFb":"1","dims":{"C2":{"estado":"No aplica","nota":""},"C3":{"estado":"No aplica","nota":"En papel, en el aula y sin dispositivos: aquí la cuestión no llega a plantearse."},"C4":{"estado":"Activa","nota":"30 preguntas tipo test con lector óptico y un problema de dos apartados. El reparto de puntos va impreso en el enunciado y el solucionario se publica con las notas."},"C5":{"estado":"Activa","nota":"La tabla de aciertos por pregunta que da el lector óptico. La miro siempre; el problema es que la tengo en la semana 10."},"C6":{"estado":"Activa","nota":"Colectiva: media clase dedicada a las tres preguntas peor contestadas. Individual, solo en tutoría, y vienen ocho o diez de 180."},"C7":{"estado":"Lo veré en Sprint 1","nota":"Guardo los resultados por pregunta de cada edición, pero no he hecho nunca nada sistemático con ellos."}},"open":true},{"nombre":"Examen final","naturaleza":"Puntual","cuando":"Convocatoria oficial · 3 h","cuandoRetro":"Acta a los 15 días · revisión presencial en fecha oficial, una hora para todo el grupo","hPrep":"8","minDur":"180","minCorr":"7","minFb":"2","dims":{"C2":{"estado":"No aplica","nota":""},"C3":{"estado":"No aplica","nota":"Mismo caso que el parcial: papel y aula vigilada."},"C4":{"estado":"Activa","nota":"40 preguntas tipo test de todo el temario y dos problemas. Los criterios van en el propio enunciado: cuánto vale cada apartado y cuánto resta un fallo en el test."},"C5":{"estado":"Activa","nota":"Notas por bloque temático en una hoja de cálculo. Es la única foto fina que tengo del curso y llega cuando el curso ya ha terminado."},"C6":{"estado":"Activa","nota":"Revisión presencial, una hora, en fecha oficial. Vienen unos treinta y casi todos a discutir décimas, no a entender el fallo."},"C7":{"estado":"Lo veré en Sprint 1","nota":"Quiero comparar el bloque de elasticidades entre ediciones para ver si el problema es mío explicándolo. Nunca encuentro el momento."}},"open":false}]},"escenarios":[{"nombre":"Lo que tengo hoy","variacion":null,"cambios":{}},{"nombre":"Tres avisos por el camino","variacion":"Añado tres comprobaciones sin nota en las semanas 4, 7 y 11, autocorregidas en el aula virtual. Los dos exámenes se quedan exactamente igual.","cambios":{"d1-momentos":"Cinco: tres comprobaciones sin nota (semanas 4, 7 y 11), parcial en la semana 8 (40 %) y final en convocatoria oficial (60 %). Las tres primeras no puntúan; están para que el estudiante y yo sepamos por dónde vamos antes de que sea tarde.","d1-criterio":"La comprobación de la semana 4 llega a tiempo de que alguien cambie cómo estudia. Ese es todo el criterio: mover la primera señal del día 55 al día 25. Los dos exámenes no los toco, porque son lo que hace que esto quepa en mis horas.","d2-postura":"Herramienta abierta con reglas","d2-comunicacion":"En las comprobaciones podéis usar lo que queráis, incluida la IA: no puntúan y el único perjudicado si os las resolvéis con ayuda sois vosotros, porque el gráfico que sale en pantalla deja de deciros nada. En el parcial y en el final, papel y nada más.","d3-ahora":"Enunciado con el reparto de puntos por apartado · solucionario publicado junto con las notas · tabla de aciertos por pregunta del lector óptico · porcentaje de acierto por pregunta de cada comprobación, desde la semana 4.","d3-despues":"Qué hago con la lista de quien falla las tres comprobaciones · si la de la semana 11 debería contar algo para la nota · cómo comparar los mismos ítems entre ediciones.","d4-postura":"Uso cauteloso","d4-nota":"Sí para agrupar en cuatro o cinco patrones las respuestas abiertas de la tercera comprobación; después leo una muestra a mano para comprobar que el resumen no se ha inventado nada. No para corregir exámenes ni para poner notas.","touchpoints":[{"nombre":"Tres comprobaciones en el aula virtual","naturaleza":"Continuo","cuando":"Semanas 4, 7 y 11 · 15 min al final de la clase, desde el móvil","cuandoRetro":"Gráfico de aciertos en pantalla al terminar, en la misma sesión · los tres errores más repetidos, al empezar la clase siguiente","hPrep":"16","minDur":"45","minCorr":"1","minFb":"2","dims":{"C2":{"estado":"Activa","nota":"Antes de ver el resultado, cada uno marca cuántas cree que ha acertado. La distancia entre lo que creen y lo que sacan es la mitad del mensaje."},"C3":{"estado":"Activa","nota":"No puntúan, así que preguntárselo a un chatbot solo sirve para engañarse a uno mismo. Lo digo con esas palabras y funciona razonablemente bien."},"C4":{"estado":"Activa","nota":"Ocho preguntas de opción múltiple por comprobación y, en la tercera, una pregunta abierta de dos líneas. La abierta no la leo entera: leo unas cuarenta al azar, que es lo que da de sí una tarde."},"C5":{"estado":"Activa","nota":"El aula virtual me da el porcentaje de acierto por pregunta esa misma tarde. Es exactamente lo que llevaba años echando de menos y no sabía nombrar."},"C6":{"estado":"Activa","nota":"Colectiva y rápida: diez minutos al empezar la clase siguiente sobre lo que ha salido mal. Individual no llego, y prefiero no prometerlo."},"C7":{"estado":"Activa","nota":"Si una pregunta la falla el 70 %, el problema es cómo la he explicado. Ese año cambio la clase, no la pregunta."}},"open":true},{"nombre":"Examen parcial","naturaleza":"Puntual","cuando":"Semana 8 · 90 min, en la franja de clase","cuandoRetro":"Notas a los 12 días · solucionario en el aula virtual · repaso de los fallos frecuentes en la clase siguiente","hPrep":"6","minDur":"90","minCorr":"4","minFb":"1","dims":{"C2":{"estado":"No aplica","nota":""},"C3":{"estado":"No aplica","nota":"En papel, en el aula y sin dispositivos: aquí la cuestión no llega a plantearse."},"C4":{"estado":"Activa","nota":"30 preguntas tipo test con lector óptico y un problema de dos apartados. El reparto de puntos va impreso en el enunciado y el solucionario se publica con las notas."},"C5":{"estado":"Activa","nota":"Sigue siendo la tabla del lector óptico, pero ya no es la primera señal del curso: ahora confirma o desmiente lo que vi en la semana 4."},"C6":{"estado":"Activa","nota":"Colectiva: media clase dedicada a las tres preguntas peor contestadas. Individual, solo en tutoría, y vienen ocho o diez de 180."},"C7":{"estado":"Lo veré en Sprint 1","nota":"Cruzar el resultado del parcial con quien falló las comprobaciones. Sé que quiero hacerlo; no sé todavía con qué."}},"open":false},{"nombre":"Examen final","naturaleza":"Puntual","cuando":"Convocatoria oficial · 3 h","cuandoRetro":"Acta a los 15 días · revisión presencial en fecha oficial, una hora para todo el grupo","hPrep":"8","minDur":"180","minCorr":"7","minFb":"2","dims":{"C2":{"estado":"No aplica","nota":""},"C3":{"estado":"No aplica","nota":"Mismo caso que el parcial: papel y aula vigilada."},"C4":{"estado":"Activa","nota":"40 preguntas tipo test de todo el temario y dos problemas. Los criterios van en el propio enunciado: cuánto vale cada apartado y cuánto resta un fallo en el test."},"C5":{"estado":"Activa","nota":"Notas por bloque temático en una hoja de cálculo. Ya no es la única foto del curso, que era el problema de verdad."},"C6":{"estado":"Activa","nota":"Revisión presencial, una hora, en fecha oficial. Vienen unos treinta y casi todos a discutir décimas, no a entender el fallo."},"C7":{"estado":"Lo veré en Sprint 1","nota":"Quiero comparar el bloque de elasticidades entre ediciones para ver si el problema es mío explicándolo. Nunca encuentro el momento."}},"open":false}]}},{"nombre":"Y si tuviera que devolver uno a uno","variacion":"Un solo parámetro forzado: los minutos de retroalimentación individual por estudiante pasan de 1 y 2 a 12 en el parcial y 15 en el final. Todo lo demás, idéntico a hoy.","cambios":{"touchpoints":[{"nombre":"Examen parcial","naturaleza":"Puntual","cuando":"Semana 8 · 90 min, en la franja de clase","cuandoRetro":"Comentario escrito individual a cada estudiante, comprometido en 15 días","hPrep":"6","minDur":"90","minCorr":"4","minFb":"12","dims":{"C2":{"estado":"No aplica","nota":""},"C3":{"estado":"No aplica","nota":"En papel, en el aula y sin dispositivos: aquí la cuestión no llega a plantearse."},"C4":{"estado":"Activa","nota":"30 preguntas tipo test con lector óptico y un problema de dos apartados. El reparto de puntos va impreso en el enunciado y el solucionario se publica con las notas."},"C5":{"estado":"Activa","nota":"La tabla de aciertos por pregunta que da el lector óptico. La miro siempre; el problema es que la tengo en la semana 10."},"C6":{"estado":"Activa","nota":"Ya no basta la nota: un comentario escrito individual con qué falla y qué hacer antes del final. Doce minutos por persona, 180 personas: 36 h en dos semanas de noviembre."},"C7":{"estado":"Lo veré en Sprint 1","nota":"Guardo los resultados por pregunta de cada edición, pero no he hecho nunca nada sistemático con ellos."}},"open":true},{"nombre":"Examen final","naturaleza":"Puntual","cuando":"Convocatoria oficial · 3 h","cuandoRetro":"Informe individual con el desglose por bloque, antes del cierre de actas","hPrep":"8","minDur":"180","minCorr":"7","minFb":"15","dims":{"C2":{"estado":"No aplica","nota":""},"C3":{"estado":"No aplica","nota":"Mismo caso que el parcial: papel y aula vigilada."},"C4":{"estado":"Activa","nota":"40 preguntas tipo test de todo el temario y dos problemas. Los criterios van en el propio enunciado: cuánto vale cada apartado y cuánto resta un fallo en el test."},"C5":{"estado":"Activa","nota":"Notas por bloque temático en una hoja de cálculo. Es la única foto fina que tengo del curso y llega cuando el curso ya ha terminado."},"C6":{"estado":"Activa","nota":"Informe breve individual con el desglose por bloque y qué repasar de cara a la siguiente convocatoria. Quince minutos por estudiante son 45 h, y las actas se cierran en quince días."},"C7":{"estado":"Lo veré en Sprint 1","nota":"Quiero comparar el bloque de elasticidades entre ediciones para ver si el problema es mío explicándolo. Nunca encuentro el momento."}},"open":false}]}}]},
+  {"id":"seminario","nombre":"Seminario de teoría política contemporánea","modelo":"Seminario · discusión y ensayo","resumen":"Si evalúas con la discusión de clase y un ensayo largo en un grupo de veinte y pocos, y la participación la pones a ojo, esta asignatura es la tuya.","base":{"asig-nombre":"Seminario de teoría política contemporánea","asig-codigo":"MFP-2214","asig-titulacion":"Máster en Filosofía Política y Social","asig-curso":"Máster","asig-ects":"6","asig-semestre":"Primer cuatrimestre","asig-estudiantes":"24","asig-equipo":"1","asig-horas-semana":"3","asig-dedicacion-docente":"7","asig-pico-docente":"11","asig-dedicacion-estudiante":"10","asig-pico-estudiante":"16","asig-formato":"Presencial","asig-rol":"Coordinación + docencia","eje-a1":"25","eje-a2":"10","eje-a3":"15","eje-a4":"5","eje-a5":"45","eje-b1":"20","eje-b2":"45","eje-b3":"25","eje-b4":"10","combo":["A1×B2","A2×B3"],"combo-otra":"A5 × B3 · normales bajo presión: escriben los mejores ensayos y no abren la boca en catorce semanas.","combo-comentario":"Grupo de máster de veinticuatro personas: casi todos vienen leídos y con ganas, y el seminario se sostiene solo. La minoría que me importa son los cuatro o cinco que no hablan nunca. No es desinterés: es miedo a decir una tontería en una mesa donde todos parecen haber leído más. Hoy mi sistema los penaliza sin que yo lo haya decidido.","hoy-descripcion":"Puntúan tres cosas: la participación en la discusión (30 %), un ensayo final de 4.000 palabras (60 %) y la exposición de una lectura, una por estudiante a lo largo del cuatrimestre (10 %). La participación la pongo en enero, de memoria y sin haber anotado nada durante el curso. El ensayo lo leo entero y lo devuelvo comentado, pero llega tres semanas después de las actas. Sobre la IA no digo nada: en la guía queda un párrafo heredado que pide «trabajo original» y que ya no sé cómo se lee.","hoy-funciona":"La discusión. Con veinticuatro personas alrededor de una mesa, la conversación de la semana ocho está a otra altura que la de la semana dos, y eso se ve luego en los ensayos. Y la extensión: 4.000 palabras dan sitio para sostener un argumento largo, que es justo lo que no cabe en un examen.","hoy-fricciona":"La participación vale un 30 % y la decido a ojo. Si alguien me preguntara por qué un 7 y no un 5 tendría una respuesta, pero no una que pueda enseñar por escrito. El ensayo lo escriben entero en las dos últimas semanas, lo leo cuando ya no puedo influir en nada, y desde hace dos cursos leo párrafos impecables de los que no sé si son suyos. Corregir veinticuatro ensayos me come casi un mes de tardes.","d1-momentos":"Dos de verdad: (1) la discusión semanal, que es la asignatura entera, y (2) el ensayo final de 4.000 palabras de la semana 15. La exposición de una lectura es un tercero menor, repartido a lo largo del cuatrimestre.","d1-criterio":"Si quito la discusión, esto es una asignatura de lecturas por correo. Si quito el ensayo, no queda ningún sitio donde se demuestre que se puede sostener un argumento durante veinte páginas. Lo demás se puede mover sin que la asignatura deje de ser lo que es.","d2-postura":"Uso invisible","d2-comunicacion":"Hoy no digo nada, y eso es exactamente el problema: en la guía queda un párrafo sobre «trabajo original» que nadie sabe cómo leer. No es una postura que haya elegido, es una que se me ha quedado puesta.","d3-ahora":"La pauta de entrega del ensayo (extensión, formato de citas, fecha) y la lista de doce temas posibles. Es lo único que el estudiante ve por escrito el día uno.","d3-despues":"Los criterios de participación: qué cuenta como intervención y qué es hablar por hablar. Es la deuda gorda que llevo al Sprint 1. También cómo se comprueba la autoría del ensayo sin convertir la asignatura en un interrogatorio.","d3-fuera":"No guardo nada del proceso del ensayo: ni tema, ni guion, ni borradores; solo la versión final. Y de la discusión no queda ni una línea escrita en todo el cuatrimestre.","d4-postura":"Sin uso deliberado","d4-nota":"En nada. Leer los veinticuatro ensayos seguidos es donde entiendo qué ha pasado en el cuatrimestre; si eso lo hace otro, me quedo sin la única información seria que tengo del curso. Otra cosa es la parte administrativa, que sí me gustaría dejar de cargar.","touchpoints":[{"nombre":"Participación en la discusión","naturaleza":"Continuo","cuando":"Todas las sesiones, semanas 1–14 · 3 h de seminario por semana","cuandoRetro":"No hay devolución intermedia: la participación aparece por primera vez en la nota de enero","hPrep":"1","minDur":"0","minCorr":"5","minFb":"0","dims":{"C2":{"estado":"No aplica","nota":"Nadie valora aquí su propia participación ni la de los demás. Se podría, pero no lo he montado."},"C3":{"estado":"No aplica","nota":"Es el único sitio de la asignatura donde la IA no entra: o has leído el texto o no lo has leído, y alrededor de una mesa eso se ve en tres minutos."},"C4":{"estado":"Lo veré en Sprint 1","nota":"No hay criterios públicos. Vale un 30 % de la nota y lo único escrito que existe es la palabra «participación» en la guía docente."},"C5":{"estado":"Lo veré en Sprint 1","nota":"No registro nada durante el curso: la nota sale de memoria en enero, cinco minutos por estudiante. Las tres horas de seminario no las cuento como coste de evaluar, porque son docencia; lo que no cuento porque no existe es el tiempo de anotar."},"C6":{"estado":"No aplica","nota":"No hay devolución de ningún tipo. Nadie sabe cómo va su participación hasta que ya no puede hacer nada con esa información."},"C7":{"estado":"Activa","nota":"Cambio dos o tres lecturas cada año según cuáles encendieron la mesa y cuáles la dejaron muerta. Es la única mejora docente que hago con este momento evaluativo, y la hago de memoria."}},"open":true},{"nombre":"Exposición de una lectura","naturaleza":"Continuo","cuando":"Una por estudiante, repartidas entre las semanas 3 y 14 · 20 min al abrir la sesión","cuandoRetro":"Comentario oral al terminar, dentro de la misma sesión","hPrep":"1","minDur":"0","minCorr":"20","minFb":"0","dims":{"C2":{"estado":"No aplica","nota":""},"C3":{"estado":"Lo veré en Sprint 1","nota":"Los guiones han empezado a parecerse mucho entre sí y a estar mejor escritos que quien los defiende. No he decidido qué hacer con eso."},"C4":{"estado":"Activa","nota":"Guion de dos páginas: tesis del texto, con qué discute y dos preguntas para la mesa."},"C5":{"estado":"Activa","nota":"Me quedo el guion en papel. Junto con el ensayo, es lo único escrito que conservo del cuatrimestre."},"C6":{"estado":"Activa","nota":"La devolución es oral y ocurre dentro de la sesión, así que no me cuesta tiempo aparte. El precio es que no queda rastro: ni el estudiante ni yo podemos volver a ella en enero."},"C7":{"estado":"No aplica","nota":""}},"open":false},{"nombre":"Ensayo final de 4.000 palabras","naturaleza":"Puntual","cuando":"Entrega en la semana 15 · sin entregas intermedias ni tema aprobado","cuandoRetro":"Comentario escrito de media página, unas tres semanas después del cierre de actas","hPrep":"2","minDur":"0","minCorr":"40","minFb":"20","dims":{"C2":{"estado":"No aplica","nota":""},"C3":{"estado":"Lo veré en Sprint 1","nota":"Un ensayo de 4.000 palabras escrito en casa es exactamente lo que un modelo de lenguaje hace con soltura. No tengo ninguna regla escrita y no pienso montar una policía: si la pieza es vulnerable, hay que cambiar la pieza, no vigilarla."},"C4":{"estado":"Activa","nota":"Ensayo de 4.000 palabras con aparato de citas, sobre un tema de una lista de doce. Se valora con cuatro criterios que tengo claros y que nunca he puesto por escrito."},"C5":{"estado":"Activa","nota":"Se entrega en el campus virtual. Guardo el archivo final y la nota, nada del proceso."},"C6":{"estado":"Activa","nota":"Media página escrita por estudiante, que llega después de las actas. Sospecho que la mitad no la abre, y les entiendo."},"C7":{"estado":"Lo veré en Sprint 1","nota":"Cada enero veo qué temas salen mal y qué lecturas no han cuajado, pero no lo apunto en ninguna parte y en septiembre ya no me acuerdo."}},"open":false}]},"escenarios":[{"nombre":"Lo que tengo hoy","variacion":null,"cambios":{}},{"nombre":"El ensayo por etapas y la participación con criterios","variacion":"La participación gana cuatro criterios públicos y diez minutos de registro por sesión; el ensayo gana una propuesta en la semana 6 y una conversación de quince minutos al final. La exposición deja de puntuar aparte.","cambios":{"d1-momentos":"Tres: (1) la discusión, ahora con criterios públicos y registro semanal; (2) la propuesta de ensayo de la semana 6, que no puntúa pero sin la cual no se admite el ensayo; (3) el ensayo final y su conversación de quince minutos, que son una sola pieza. La exposición de lectura deja de puntuar aparte: es una intervención más, la mejor del cuatrimestre, y cuenta dentro de la participación.","d1-criterio":"El ensayo llegaba tarde y llegaba solo. Con la propuesta hay una devolución cuando todavía se puede cambiar de rumbo; con la conversación, la nota se pone hablando con la persona en lugar de adivinando quién escribió el texto. Y quitar la exposición como momento aparte no resta evidencia: la misma exposición sigue ahí, contada donde tiene sentido.","d2-postura":"Herramienta abierta con reglas","d2-comunicacion":"Podéis usar IA en este seminario, y lo tenéis que decir: media página al final del ensayo con qué usasteis, para qué y qué descartasteis. No la prohíbo por dos razones. La primera es que no puedo comprobarlo, y prohibir lo que no se puede comprobar solo castiga al que es honesto. La segunda es que lo que evalúo no es que hayáis producido veinte páginas, sino el criterio que hay detrás: por qué esta pregunta y no otra, por qué esta fuente, qué dejasteis fuera. Eso lo hablaremos quince minutos con vuestro ensayo encima de la mesa, y ahí se ve enseguida quién ha pensado el texto y quién lo ha recibido. La discusión de los martes, además, sigue siendo el sitio donde no hay ayuda posible: por eso ahora pesa más.","d3-ahora":"Los cuatro criterios de participación, en una hoja, el día uno. La pauta de la propuesta de la semana 6. La plantilla de declaración de uso de IA, con un ejemplo ya rellenado para que no se convierta en una fórmula vacía.","d3-despues":"La rúbrica fina de participación: los cuatro criterios están, los niveles no. Y el guion de la conversación de quince minutos: qué se pregunta, en qué orden y qué se anota al terminar.","d3-fuera":"Sigo sin pedir borradores intermedios del ensayo. Me darían más rastro, pero convierten un trabajo en un expediente y a mí en un inspector, y no es la relación que quiero con este grupo. Tampoco grabo las sesiones.","d4-postura":"Uso cauteloso","d4-nota":"Para una sola cosa: juntar mis notas sueltas de sesión en un resumen por estudiante antes de escribir la devolución de la semana 8. El resumen lo leo y lo corrijo entero; la devolución la escribo yo. Los ensayos no los toca, ni siquiera para un primer borrador de comentario: si les pido que no deleguen su criterio, no puedo delegar el mío.","touchpoints":[{"nombre":"La discusión, con criterios y registro","naturaleza":"Continuo","cuando":"Todas las sesiones, semanas 1–14 · diez minutos de registro al terminar cada una","cuandoRetro":"Media página escrita a cada estudiante en la semana 8, y el cierre en la 14","hPrep":"6","minDur":"130","minCorr":"8","minFb":"12","dims":{"C2":{"estado":"Activa","nota":"En la semana 8 cada uno se pone nota con los mismos cuatro criterios que uso yo y escribe tres líneas justificándola. Donde no coincidimos es donde hay conversación; donde coincidimos, me ahorro la mitad de la devolución."},"C3":{"estado":"No aplica","nota":"Sigue siendo la parte de la asignatura donde no hay ayuda posible, y por eso ahora pesa más."},"C4":{"estado":"Activa","nota":"Cuatro criterios públicos el día uno: haber leído, sostener una posición, responder a la de otro y cambiar de opinión con argumentos. El cuarto vale tanto como el primero, y eso hay que decirlo en voz alta."},"C5":{"estado":"Activa","nota":"Diez minutos al acabar cada sesión: una línea por cada persona que ha intervenido. No es un acta ni una grabación; es lo mínimo para que la nota tenga base y para poder enseñarla si alguien la discute."},"C6":{"estado":"Activa","nota":"Media página a cada uno en la semana 8, cuando todavía quedan siete semanas para cambiar algo. Es la mitad del coste nuevo de este momento evaluativo y es lo que de verdad mueve la aguja."},"C7":{"estado":"Lo veré en Sprint 1","nota":"El registro semanal me va a decir qué lecturas encienden la mesa y cuáles la apagan. Cómo lo leo al cerrar el curso, lo veo en Sprint 1."}},"open":true},{"nombre":"Propuesta de ensayo","naturaleza":"Puntual","cuando":"Semana 6 · una página: pregunta, tesis provisional y cinco fuentes leídas","cuandoRetro":"Respuesta escrita en una semana, sin nota","hPrep":"2","minDur":"0","minCorr":"10","minFb":"10","dims":{"C2":{"estado":"No aplica","nota":""},"C3":{"estado":"Activa","nota":"Aquí la IA está permitida para explorar, y hay que decir con qué y para qué. Buscar fuentes con ayuda no me molesta; que la pregunta no sea suya, sí, y en una página se nota."},"C4":{"estado":"Activa","nota":"Una página con la pregunta, una tesis provisional y cinco fuentes que ya hayan leído. No puntúa, pero sin ella no se admite el ensayo."},"C5":{"estado":"Activa","nota":"La propuesta se guarda y es la primera pieza del rastro del ensayo: en la semana 15 se entrega otra vez junto al texto final."},"C6":{"estado":"Activa","nota":"Respuesta escrita corta, entre cinco y diez líneas, dentro de la semana siguiente. En la mitad de los casos consiste en decir que la pregunta es demasiado grande."},"C7":{"estado":"No aplica","nota":""}},"open":false},{"nombre":"Ensayo final de 4.000 palabras","naturaleza":"Puntual","cuando":"Entrega en la semana 15, con la propuesta de la semana 6 adjunta","cuandoRetro":"Comentario escrito antes de la conversación, no después","hPrep":"3","minDur":"0","minCorr":"35","minFb":"20","dims":{"C2":{"estado":"No aplica","nota":""},"C3":{"estado":"Activa","nota":"Permitida y declarada: al final del ensayo va media página diciendo qué usó, para qué y qué descartó. Usarla no es una falta; mentir en esa media página sí lo es."},"C4":{"estado":"Activa","nota":"Ensayo de 4.000 palabras + declaración de uso de IA + la propuesta de la semana 6. Los cuatro criterios de valoración van escritos en la pauta desde el día uno."},"C5":{"estado":"Activa","nota":"Guardo propuesta y ensayo del mismo estudiante en el mismo sitio. Poder leerlos seguidos es lo que convierte dos entregas en un proceso."},"C6":{"estado":"Activa","nota":"Comentario escrito que ahora llega antes de la conversación, para que la conversación sirva de algo. Bajo de veinte a quince minutos por texto: ya conozco la pregunta desde la semana 6."},"C7":{"estado":"Activa","nota":"Al cerrar comparo la propuesta y el ensayo de cada uno. La distancia entre las dos es la mejor medida que tengo de qué ha hecho el cuatrimestre."}},"open":false},{"nombre":"Conversación sobre el ensayo","naturaleza":"Puntual","cuando":"Semana 16 · 15 min por estudiante, con el ensayo impreso encima de la mesa","cuandoRetro":"En el acto: la nota se cierra al terminar la conversación","hPrep":"2","minDur":"0","minCorr":"15","minFb":"5","dims":{"C2":{"estado":"Activa","nota":"Empieza el estudiante: qué parte defendería delante de cualquiera y qué párrafo no sostendría. Casi todos señalan el mismo que yo había marcado."},"C3":{"estado":"Activa","nota":"Aquí es donde se resuelve el asunto de la IA, y sin acusar a nadie ni comprar un detector. Quince minutos con el texto delante bastan para saber si las decisiones del ensayo son de quien lo firma: por qué esta pregunta, por qué esta fuente y no otra, qué se quedó fuera. Quien lo ha pensado lo cuenta sin esfuerzo."},"C4":{"estado":"Activa","nota":"La evidencia es la conversación misma, valorada con un quinto criterio anunciado: sostener el propio texto. Pesa poco en la nota, pero puede bajarla mucho."},"C5":{"estado":"Lo veré en Sprint 1","nota":"Qué queda por escrito de estos quince minutos, y si lo escribo yo o el estudiante, lo decido en Sprint 1."},"C6":{"estado":"Activa","nota":"Inmediata y oral, con el comentario escrito ya leído por los dos. Es la única retroalimentación del curso que ocurre en tiempo real."},"C7":{"estado":"No aplica","nota":""}},"open":false}]}},{"nombre":"El grupo pasa de 24 a 50","variacion":"Un solo parámetro: el máster fusiona dos itinerarios y el seminario pasa de 24 a 50 estudiantes, con el mismo diseño de hoy y el mismo docente.","cambios":{"asig-estudiantes":"50"}}]},
+  {"id":"practicum","nombre":"Prácticum Clínico III · Rotación hospitalaria","modelo":"Prácticum · desempeño en contexto real","resumen":"Si tu asignatura se evalúa en un centro externo, con un supervisor que observa y una rúbrica que cada uno aplica a su manera, este ejemplo te va a sonar.","base":{"asig-nombre":"Prácticum Clínico III · Rotación hospitalaria","asig-codigo":"ENF-3042","asig-titulacion":"Grado en Enfermería","asig-curso":"3º","asig-ects":"12","asig-semestre":"Segundo cuatrimestre","asig-estudiantes":"48","asig-equipo":"2","asig-horas-semana":"1","asig-dedicacion-docente":"12","asig-pico-docente":"18","asig-dedicacion-estudiante":"20","asig-pico-estudiante":"28","asig-formato":"Mixta","asig-rol":"Coordinación + docencia","eje-a1":"15","eje-a2":"15","eje-a3":"25","eje-a4":"5","eje-a5":"40","eje-b1":"20","eje-b2":"35","eje-b3":"35","eje-b4":"10","combo":["A2×B3","A3×B4"],"combo-otra":"A5 × B3 · estudiantes sin ninguna dificultad previa que se bloquean las dos primeras semanas en planta y se recuperan solos","combo-comentario":"En el aula ordinaria esto no se ve; en planta sí. Hay un grupo que sabe la teoría y se bloquea delante del primer paciente, y otro que funciona bien con los pacientes y mal con el equipo del centro. Los dos acaban penalizados por el mismo ítem de la rúbrica del supervisor —«actitud»— y no es lo mismo. La postura ante la evaluación cambia también: aquí casi nadie va a por nota, van a que no les echen del centro.","hoy-descripcion":"Rotación de 14 semanas en 11 centros concertados. La nota sale de tres sitios: la rúbrica que rellena el supervisor clínico (60 %), el diario reflexivo (20 %) y la sesión final de caso (20 %). El desempeño es presencial al 100 %; todo el seguimiento —diario, actas, tutorías— vive en el aula virtual, y por eso la asignatura figura como mixta.","hoy-funciona":"El estudiante aprende de verdad: nadie discute que catorce semanas en planta enseñan más que catorce sesiones de aula. Y los supervisores clínicos se toman en serio el papel, aunque no cobren por ello y lo hagan encima de su turno.","hoy-fricciona":"Dos supervisores con la misma rúbrica ponen notas distintas al mismo desempeño, y lo sabemos todos. Hay centros donde el 9 es el suelo y centros donde un 8 es una alegría; a igualdad de estudiante, la plaza que te toque vale medio punto. No tengo forma de corregirlo sin desautorizar a nadie. Y el diario lo leo entero en la semana 15, cuando ya no sirve para cambiar nada.","d1-momentos":"5 touchpoints, y solo uno es puntual: rúbrica del supervisor (continuo, cortes en las semanas 7 y 14), diario reflexivo (una entrada semanal), tutoría individual (semanas 4 y 12), visita al centro (semanas 5 a 11) y sesión final de caso clínico (semana 15).","d1-criterio":"La evidencia principal de esta asignatura no es un producto entregado: es un desempeño observado durante catorce semanas por alguien que no soy yo. Por eso casi todo es continuo y por eso las casillas de esta herramienta se me quedan cortas. Los dos momentos con fecha existen solo para cerrar y para poner al estudiante a explicar en voz alta lo que ha hecho con las manos.","d2-postura":"Herramienta abierta con reglas","d2-comunicacion":"Tres reglas, y las tres son innegociables. Una: ningún dato de paciente sale del centro ni entra en ninguna herramienta, con IA o sin ella; esto no es política docente, es la ley y vuestra responsabilidad profesional. Dos: el diario se escribe en primera persona y sin IA, porque lo que evalúo ahí es vuestro criterio, no vuestra redacción. Tres: en el caso clínico final podéis usar IA para buscar y contrastar evidencia, y lo declaráis en la última página.","d3-ahora":"Rúbrica de 18 ítems del supervisor en dos cortes · autoevaluación del estudiante con esa misma rúbrica · diario de 14 entradas · actas de tutoría y de visita · rúbrica del caso final.","d3-despues":"Registro sistemático de discrepancias entre supervisor y tutora académica · lo que los diarios dicen de cada centro, tratado de forma que no exponga a quien lo escribió · seguimiento del mismo estudiante entre Prácticum II y III (Sprint 1).","d3-fuera":"Lo que me cuentan los supervisores por teléfono y no queda escrito · las conversaciones de pasillo durante la visita · la impresión de la enfermera de turno, que casi siempre acierta y que no puedo usar para poner una nota.","d4-postura":"Uso cauteloso","d4-nota":"La uso para ordenar mis notas de visita y para sacar un primer borrador de la devolución escrita, que después reescribo entera. No la uso para leer los diarios: si delego eso, pierdo lo único que me dice qué está pasando de verdad en cada centro.","touchpoints":[{"nombre":"Rúbrica de competencias del supervisor clínico","naturaleza":"Continuo","cuando":"Las 14 semanas de rotación · cortes en la semana 7 y en la 14. No tiene duración propia: no es un acto con hora de inicio, es observación sostenida.","cuandoRetro":"El supervisor, en el centro tras cada corte · yo, por escrito en la semana 15","hPrep":"14","minDur":"0","minCorr":"20","minFb":"10","dims":{"C2":{"estado":"Activa","nota":"El estudiante rellena la misma rúbrica sobre sí mismo antes de ver la del supervisor, en los dos cortes. La distancia entre las dos es el material de la tutoría. No pondera nota."},"C3":{"estado":"No aplica","nota":""},"C4":{"estado":"Activa","nota":"Rúbrica de 18 ítems en cuatro competencias (cuidado, seguridad, comunicación, trabajo en equipo), escala de 4 niveles con descriptores de conducta. La evidencia es el desempeño observado, no un documento que se entrega. Y aquí está el problema conocido de la asignatura: el mismo desempeño puntúa distinto según quién mire. Hay centros donde el 9 es el suelo y centros donde un 8 es una alegría."},"C5":{"estado":"Activa","nota":"Guardo las dos rúbricas del supervisor, las dos autoevaluaciones y mi registro de discrepancias. Ese registro es el dato más útil que produce la asignatura y ahora mismo no hago nada con él."},"C6":{"estado":"Activa","nota":"El supervisor devuelve oralmente en el centro tras cada corte. Yo añado media página escrita al cierre, con un solo próximo paso."},"C7":{"estado":"Activa","nota":"La dispersión entre centros en el mismo ítem es lo que llevo a la reunión de coordinación de junio. De momento se comenta y no se corrige."}},"open":true},{"nombre":"Diario reflexivo de práctica","naturaleza":"Continuo","cuando":"Una entrada por semana durante las 14 semanas de rotación","cuandoRetro":"Una sola vez, al final: lo leo entero en la semana 15","hPrep":"6","minDur":"0","minCorr":"35","minFb":"15","dims":{"C2":{"estado":"Activa","nota":"Cada entrada cierra con dos líneas de autoevaluación: qué haría distinto mañana. Sin nota."},"C3":{"estado":"Activa","nota":"Regla más estricta que la general: el diario se escribe sin IA. Un diario reflexivo redactado por una máquina no me sirve para nada, y además se nota a la tercera entrada."},"C4":{"estado":"Activa","nota":"14 entradas de media página con pauta fija: qué hice, qué me pasó por dentro, qué haría distinto. La pauta es pública desde el primer día."},"C5":{"estado":"Lo veré en Sprint 1","nota":"Los diarios son la mejor fuente que tengo sobre qué centros enseñan y cuáles usan al estudiante como un par de manos más. No tengo forma sistemática de extraer eso sin exponer a quien lo escribió."},"C6":{"estado":"Activa","nota":"Hoy, devolución escrita única en la semana 15. Es lo que peor funciona de toda la asignatura: llega cuando ya no puede cambiar nada."},"C7":{"estado":"Lo veré en Sprint 1","nota":"Las entradas de las dos primeras semanas dicen mucho sobre la preparación previa que les damos. Aún no lo he mirado en serio."}},"open":false},{"nombre":"Tutoría individual de seguimiento","naturaleza":"Continuo","cuando":"Dos por estudiante: semana 4 y semana 12 · 30 min cada una, presencial o por videollamada","cuandoRetro":"En la propia tutoría; el compromiso queda escrito en el acta","hPrep":"4","minDur":"0","minCorr":"8","minFb":"60","dims":{"C2":{"estado":"Activa","nota":"La tutoría empieza siempre con el estudiante leyendo su propia autoevaluación en voz alta. Cambia la conversación."},"C3":{"estado":"No aplica","nota":""},"C4":{"estado":"Activa","nota":"Acta de media página con un compromiso concreto para las semanas siguientes. La firma el estudiante y queda en su expediente."},"C5":{"estado":"Activa","nota":"Las actas de la semana 4 me dicen qué centros arrancan mal. Es la única alerta temprana que tengo."},"C6":{"estado":"Activa","nota":"La tutoría es la retroalimentación: por eso los 60 min por estudiante están en «retroalimentar» y la duración propia del touchpoint queda a cero. Son dos conversaciones de 30 min repartidas por el semestre, no un acto con hora de inicio."},"C7":{"estado":"Lo veré en Sprint 1","nota":"Tengo la sensación de que la tutoría de la semana 4 vale el doble que la de la 12, pero no lo he comprobado."}},"open":false},{"nombre":"Visita al centro y contraste con el supervisor","naturaleza":"Continuo","cuando":"Una visita por centro entre las semanas 5 y 11 · 11 centros, de 3 a 6 estudiantes en cada uno","cuandoRetro":"Al estudiante en la misma visita · al supervisor por correo la semana siguiente","hPrep":"10","minDur":"0","minCorr":"6","minFb":"12","dims":{"C2":{"estado":"No aplica","nota":""},"C3":{"estado":"No aplica","nota":""},"C4":{"estado":"Activa","nota":"Acta de visita de una página por estudiante: qué he visto, qué me dice el supervisor, qué acordamos. No pone nota, pero pesa en el cierre."},"C5":{"estado":"Activa","nota":"Las 10 h de «prepararlo» no son preparar nada: son cerrar 48 plazas con 11 centros, cuadrar el calendario de visitas y resolver bajas, cambios de turno e incidencias. Es el trabajo que sostiene la asignatura y no cabe en ninguna casilla de esta herramienta; lo meto aquí para que al menos aparezca. En un semestre malo son el doble."},"C6":{"estado":"Activa","nota":"Al estudiante, en la misma visita y de pie. Al supervisor, por correo la semana siguiente: ahí es donde se recalibra su rúbrica sin decirlo, uno a uno y sin ningún criterio común."},"C7":{"estado":"Activa","nota":"La visita es donde detecto el centro que no enseña. Dos plazas se han retirado en tres años por lo que vi en una visita."}},"open":false},{"nombre":"Sesión final de caso clínico","naturaleza":"Puntual","cuando":"Semana 15 · cuatro sesiones de 90 min con 12 estudiantes cada una. Cada tutora académica cubre dos.","cuandoRetro":"Oral en la propia sesión · rúbrica cerrada y publicada en 7 días","hPrep":"5","minDur":"360","minCorr":"12","minFb":"6","dims":{"C2":{"estado":"Activa","nota":"Coevaluación entre pares con tres preguntas cerradas después de cada exposición. Solo formativa, no pondera."},"C3":{"estado":"Activa","nota":"Aquí sí: puede usar IA para buscar y contrastar evidencia clínica, y lo declara en la última página. Los datos del paciente no entran en ninguna herramienta; el caso llega anonimizado desde el primer borrador."},"C4":{"estado":"Activa","nota":"Caso clínico de 4 páginas anonimizado + exposición de 6 min + preguntas. Rúbrica de 6 ítems publicada en la semana 1."},"C5":{"estado":"Lo veré en Sprint 1","nota":"Grabar las exposiciones ayudaría a comparar entre ediciones, pero antes hay que resolver el consentimiento y dónde se guarda."},"C6":{"estado":"Activa","nota":"Oral e inmediata en la sesión; rúbrica cerrada y publicada en 7 días."},"C7":{"estado":"Lo veré en Sprint 1","nota":"Los errores que se repiten en los casos apuntan a lo que no estamos enseñando en 2º. Falta sentarse con quien da esa asignatura."}},"open":false}]},"escenarios":[{"nombre":"Lo que tengo hoy","variacion":null,"cambios":{}},{"nombre":"Calibrar antes, leer el diario en dos cortes","variacion":"Dos sesiones de calibración con los supervisores antes de empezar (con seis casos ancla) y el diario partido en dos entregas con devolución en la semana 8. Ahorra poco tiempo: lo que compra es que la rúbrica signifique lo mismo en los 11 centros.","cambios":{"d3-ahora":"Rúbrica de 18 ítems del supervisor en dos cortes · seis casos ancla puntuados en común con los supervisores · registro de discrepancias · autoevaluación del estudiante con esa misma rúbrica · diario en dos cortes con síntesis de una página · actas de tutoría y de visita · rúbrica del caso final.","touchpoints":[{"nombre":"Rúbrica de competencias del supervisor clínico","naturaleza":"Continuo","cuando":"Las 14 semanas de rotación · dos sesiones de calibración con los supervisores en la semana 0 y cortes en la 7 y en la 14","cuandoRetro":"El supervisor, en el centro tras cada corte · yo, por escrito en la semana 15","hPrep":"26","minDur":"0","minCorr":"10","minFb":"10","dims":{"C2":{"estado":"Activa","nota":"El estudiante rellena la misma rúbrica sobre sí mismo antes de ver la del supervisor, en los dos cortes. La distancia entre las dos es el material de la tutoría. No pondera nota."},"C3":{"estado":"No aplica","nota":""},"C4":{"estado":"Activa","nota":"La misma rúbrica de 18 ítems, pero acompañada de seis casos ancla puntuados en común con los supervisores en dos sesiones de dos horas. Los descriptores dejan de leerse a ojo. La evidencia sigue siendo el desempeño observado."},"C5":{"estado":"Activa","nota":"El registro de discrepancias pasa a ser el indicador de la asignatura. Espero pasar de arbitrar una de cada tres rúbricas a una de cada ocho; si no baja, la calibración no vale lo que cuesta y hay que decirlo."},"C6":{"estado":"Activa","nota":"El supervisor devuelve oralmente en el centro tras cada corte. Yo añado media página escrita al cierre, con un solo próximo paso."},"C7":{"estado":"Activa","nota":"La calibración es en sí misma el ciclo de mejora: lo que discrepamos en la sesión de enero es lo que reescribimos en la rúbrica de junio."}},"open":true},{"nombre":"Diario reflexivo de práctica","naturaleza":"Continuo","cuando":"Una entrada por semana durante las 14 semanas de rotación","cuandoRetro":"Dos cortes: leo las entradas 1–7 en la semana 8 y devuelvo en tres días; las 8–14, en la semana 15","hPrep":"8","minDur":"0","minCorr":"18","minFb":"12","dims":{"C2":{"estado":"Activa","nota":"Cada entrada cierra con dos líneas de autoevaluación: qué haría distinto mañana. Sin nota."},"C3":{"estado":"Activa","nota":"Regla más estricta que la general: el diario se escribe sin IA. Un diario reflexivo redactado por una máquina no me sirve para nada, y además se nota a la tercera entrada."},"C4":{"estado":"Activa","nota":"Sigue siendo una entrada por semana, pero se entrega en dos bloques, cada uno con una síntesis de una página. Lo que valoro es la síntesis; las entradas son el material que la sostiene. Leer una página por corte cuesta la mitad que catorce medias páginas de golpe."},"C5":{"estado":"Lo veré en Sprint 1","nota":"Los diarios son la mejor fuente que tengo sobre qué centros enseñan y cuáles usan al estudiante como un par de manos más. No tengo forma sistemática de extraer eso sin exponer a quien lo escribió."},"C6":{"estado":"Activa","nota":"Devolución intermedia en la semana 8, cuando todavía quedan seis semanas de rotación para cambiar algo. Es el cambio que más echaba de menos."},"C7":{"estado":"Lo veré en Sprint 1","nota":"Las entradas de las dos primeras semanas dicen mucho sobre la preparación previa que les damos. Aún no lo he mirado en serio."}},"open":false},{"nombre":"Tutoría individual de seguimiento","naturaleza":"Continuo","cuando":"Dos por estudiante: semana 4 y semana 12 · 30 min cada una, presencial o por videollamada","cuandoRetro":"En la propia tutoría; el compromiso queda escrito en el acta","hPrep":"4","minDur":"0","minCorr":"8","minFb":"60","dims":{"C2":{"estado":"Activa","nota":"La tutoría empieza siempre con el estudiante leyendo su propia autoevaluación en voz alta. Cambia la conversación."},"C3":{"estado":"No aplica","nota":""},"C4":{"estado":"Activa","nota":"Acta de media página con un compromiso concreto para las semanas siguientes. La firma el estudiante y queda en su expediente."},"C5":{"estado":"Activa","nota":"Las actas de la semana 4 me dicen qué centros arrancan mal. Es la única alerta temprana que tengo."},"C6":{"estado":"Activa","nota":"La tutoría es la retroalimentación: por eso los 60 min por estudiante están en «retroalimentar» y la duración propia del touchpoint queda a cero. Son dos conversaciones de 30 min repartidas por el semestre, no un acto con hora de inicio."},"C7":{"estado":"Lo veré en Sprint 1","nota":"Tengo la sensación de que la tutoría de la semana 4 vale el doble que la de la 12, pero no lo he comprobado."}},"open":false},{"nombre":"Visita al centro y contraste con el supervisor","naturaleza":"Continuo","cuando":"Una visita por centro entre las semanas 5 y 11 · 11 centros, de 3 a 6 estudiantes en cada uno","cuandoRetro":"Al estudiante en la misma visita · al supervisor por correo la semana siguiente","hPrep":"10","minDur":"0","minCorr":"6","minFb":"12","dims":{"C2":{"estado":"No aplica","nota":""},"C3":{"estado":"No aplica","nota":""},"C4":{"estado":"Activa","nota":"Acta de visita de una página por estudiante: qué he visto, qué me dice el supervisor, qué acordamos. No pone nota, pero pesa en el cierre."},"C5":{"estado":"Activa","nota":"Las 10 h de «prepararlo» no son preparar nada: son cerrar 48 plazas con 11 centros, cuadrar el calendario de visitas y resolver bajas, cambios de turno e incidencias. Es el trabajo que sostiene la asignatura y no cabe en ninguna casilla de esta herramienta; lo meto aquí para que al menos aparezca. En un semestre malo son el doble."},"C6":{"estado":"Activa","nota":"Al estudiante, en la misma visita y de pie. Al supervisor, por correo la semana siguiente: ahí es donde se recalibra su rúbrica sin decirlo, uno a uno y sin ningún criterio común."},"C7":{"estado":"Activa","nota":"La visita es donde detecto el centro que no enseña. Dos plazas se han retirado en tres años por lo que vi en una visita."}},"open":false},{"nombre":"Sesión final de caso clínico","naturaleza":"Puntual","cuando":"Semana 15 · cuatro sesiones de 90 min con 12 estudiantes cada una. Cada tutora académica cubre dos.","cuandoRetro":"Oral en la propia sesión · rúbrica cerrada y publicada en 7 días","hPrep":"5","minDur":"360","minCorr":"12","minFb":"6","dims":{"C2":{"estado":"Activa","nota":"Coevaluación entre pares con tres preguntas cerradas después de cada exposición. Solo formativa, no pondera."},"C3":{"estado":"Activa","nota":"Aquí sí: puede usar IA para buscar y contrastar evidencia clínica, y lo declara en la última página. Los datos del paciente no entran en ninguna herramienta; el caso llega anonimizado desde el primer borrador."},"C4":{"estado":"Activa","nota":"Caso clínico de 4 páginas anonimizado + exposición de 6 min + preguntas. Rúbrica de 6 ítems publicada en la semana 1."},"C5":{"estado":"Lo veré en Sprint 1","nota":"Grabar las exposiciones ayudaría a comparar entre ediciones, pero antes hay que resolver el consentimiento y dónde se guarda."},"C6":{"estado":"Activa","nota":"Oral e inmediata en la sesión; rúbrica cerrada y publicada en 7 días."},"C7":{"estado":"Lo veré en Sprint 1","nota":"Los errores que se repiten en los casos apuntan a lo que no estamos enseñando en 2º. Falta sentarse con quien da esa asignatura."}},"open":false}]}},{"nombre":"Me quedo sola con el prácticum","variacion":"Equipo docente de 2 a 1: la otra tutora académica pasa a otro grado y la plaza no se cubre. Nada más cambia; el diseño es el mismo.","cambios":{"asig-equipo":"1"}}]},
+  {"id":"masiva","nombre":"Fundamentos de Programación","modelo":"Masiva · 300 estudiantes","resumen":"Primero de ingeniería con trescientos matriculados y tres profesores: aquí cada minuto por estudiante son cinco horas y la corrección individual sencillamente no existe.","base":{"asig-nombre":"Fundamentos de Programación","asig-codigo":"FP-1011","asig-titulacion":"Grado en Ingeniería Informática · asignatura común a tres grados de la rama","asig-curso":"1º","asig-ects":"6","asig-semestre":"Primer cuatrimestre","asig-estudiantes":"300","asig-equipo":"3","asig-horas-semana":"4","asig-dedicacion-docente":"11","asig-pico-docente":"18","asig-dedicacion-estudiante":"9","asig-pico-estudiante":"16","asig-formato":"Presencial","asig-rol":"Coordinación + docencia","eje-a1":"12","eje-a2":"30","eje-a3":"8","eje-a4":"15","eje-a5":"35","eje-b1":"40","eje-b2":"20","eje-b3":"32","eje-b4":"8","combo":["A2×B3","A4×B1"],"combo-otra":"A5 × B1 · la mayoría tranquila que hace lo que se pide y solo aparece la semana del examen.","combo-comentario":"Es un aula de primero, y eso se nota: un tercio llega sin haber programado nunca y bloquea ante la pantalla en blanco (A2×B3), y hay un grupo estable que desconecta en la semana 5 y reaparece en la convocatoria (A4×B1). Los brillantes existen, pero son doce o quince de trescientos y se aburren con los primeros ejercicios. Con este tamaño no puedo detectar quién es quién mirando: solo lo veo en los datos de los cuestionarios.","hoy-descripcion":"12 cuestionarios semanales autocorregidos en el campus (10 % de la nota), 6 prácticas de programación entregadas en laboratorio y corregidas a mano por el equipo (30 %), un parcial escrito en la semana 8 (20 %) y un examen final (40 %). Somos tres profesores para 300 matriculados repartidos en cinco grupos de laboratorio. La IA la usan casi todos para las prácticas y nadie lo declara; yo la uso solo para generar variantes de preguntas del banco.","hoy-funciona":"Los cuestionarios semanales. Son lo único que llega a los 300 con retroalimentación inmediata, cuestan cero minutos por estudiante una vez montados y el informe de ítems fallados me dice qué reexplicar el lunes. Las prácticas de laboratorio también funcionan mientras el estudiante está en el aula: ahí sí hay conversación.","hoy-fricciona":"Que corregir seis prácticas por trescientas personas es abrir 1.800 ficheros, y sale un número, no un comentario. Escribo cero líneas de retroalimentación individual en todo el cuatrimestre salvo en las cuarenta revisiones presenciales del final. La nota del parcial llega diez días tarde, cuando ya hemos cambiado de tema. Y el abandono se concentra entre las semanas 4 y 6, justo donde no tengo forma de ver quién se está descolgando hasta que ya se ha descolgado.","d1-momentos":"4 touchpoints: cuestionarios semanales (TP1 · continuo, semanas 2–14), prácticas de laboratorio (TP2 · continuo, 6 entregas), parcial escrito (TP3 · semana 8) y examen final (TP4 · semana 15).","d1-criterio":"Con 300 estudiantes el criterio no es pedagógico, es aritmético: solo sobrevive un momento evaluativo cuyo coste por estudiante sea cero o casi. Por eso hay dos continuos baratos que sostienen el ritmo semanal y dos puntuales caros que sostienen la acreditación. Cualquier quinto touchpoint tendría que costar menos de dos minutos por estudiante o no cabe.","d2-postura":"Herramienta abierta con reglas","d2-comunicacion":"En las prácticas podéis usar IA: no puedo impedirlo y fingir que no pasa sería peor. La regla es que el código que entregáis lo tenéis que poder explicar línea a línea, y que en la cabecera del fichero declaráis qué parte habéis generado con IA y qué habéis hecho vosotros. En el parcial y en el final no hay IA: son a papel y presenciales, y son el momento en el que compruebo que lo que sabéis es vuestro. Si lo que entregáis en prácticas y lo que escribís en el examen no se parecen, eso lo veo.","d3-ahora":"Rúbrica pública de las prácticas (cuatro criterios: corrección, legibilidad, estructura, explicación) publicada la semana 1 · pauta de entrega con los juegos de pruebas que debe pasar el código · criterios de puntuación del parcial y del final · declaración obligatoria de uso de IA en la cabecera de cada práctica.","d3-despues":"Protocolo de moderación por muestreo de las revisiones entre pares · plantilla de la retroalimentación colectiva por patrones de error · alerta temprana con los datos de los cuestionarios de las semanas 3 a 6 (quién ha dejado de entregar) · registro de qué errores se repiten entre ediciones.","d3-fuera":"No guardo versiones intermedias del código: solo la entrega que pasa el corrector. Con 1.800 ficheros al cuatrimestre, guardar el proceso significaría no mirar ninguno. Tampoco guardo registro de asistencia a laboratorio: no lo uso para nada y me costaría diez minutos por sesión y grupo.","d4-postura":"Uso cauteloso","d4-nota":"Hoy solo la uso para generar variantes de los ítems del banco de preguntas, y las reviso todas antes de publicarlas. No la uso para valorar ni para escribir nada que lea un estudiante. La tentación es evidente —con 300 entregas, una IA que las lea y devuelva un comentario resolvería el agujero de un plumazo—, pero no me fío de dar por buena una valoración que yo no he leído, y el estudiante tiene derecho a que quien le puntúa sea una persona. Lo que sí me planteo para el Sprint 1 es usarla del lado del análisis: que agrupe errores, no que juzgue a nadie.","touchpoints":[{"nombre":"Cuestionarios semanales de autocomprobación","naturaleza":"Continuo","cuando":"Semanas 2–14 · 12 cuestionarios en el campus virtual, abiertos siete días","cuandoRetro":"Automática al enviar: solución razonada de cada ítem, en el mismo minuto","hPrep":"45","minDur":"0","minCorr":"0","minFb":"0","dims":{"C2":{"estado":"Activa","nota":"Autoevaluación pura: el cuestionario te dice dónde has fallado en el momento. No es reflexiva, es un termómetro, y con 300 personas un termómetro ya es mucho."},"C3":{"estado":"Activa","nota":"Sin restricción: está abierto siete días y fuera del aula, así que no puedo controlarlo y no voy a fingir que sí. Lo asumo bajando el peso al 10 % de la nota."},"C4":{"estado":"Activa","nota":"12 cuestionarios de 10 ítems: opción múltiple, trazas de ejecución y «qué imprime este programa»."},"C5":{"estado":"Activa","nota":"Campus virtual. Corrección, registro y estadística de ítems, automáticos."},"C6":{"estado":"Activa","nota":"Es la única retroalimentación que llega a los 300 y llega en segundos. Cuesta cero minutos por estudiante: por eso existe."},"C7":{"estado":"Lo veré en Sprint 1","nota":"El informe de ítems fallados ya lo miro, pero de forma improvisada. Sistematizar qué hago con él —y cruzar quién deja de entregar entre las semanas 3 y 6— es trabajo del Sprint 1."}},"open":true},{"nombre":"Prácticas de programación en laboratorio","naturaleza":"Continuo","cuando":"6 entregas · semanas 3, 5, 7, 9, 11 y 13 · la última hora de cada sesión de laboratorio se dedica a cerrar y entregar","cuandoRetro":"Nota en el campus a los 7-10 días. Comentario escrito, ninguno.","hPrep":"40","minDur":"360","minCorr":"20","minFb":"0","dims":{"C2":{"estado":"No aplica","nota":"Hoy no hay nada de esto: reviso yo, seis veces, trescientas entregas. Es exactamente donde el diseño se rompe."},"C3":{"estado":"Activa","nota":"Permitida con declaración obligatoria en la cabecera del fichero. Si el código no lo sabes explicar en el laboratorio, la práctica no cuenta."},"C4":{"estado":"Activa","nota":"Fichero de código que pasa el juego de pruebas publicado + tres líneas explicando la decisión de diseño."},"C5":{"estado":"Activa","nota":"Entrega por el campus virtual, un repositorio por estudiante."},"C6":{"estado":"Lo veré en Sprint 1","nota":"Hoy la retroalimentación es la nota y poco más: veinte minutos por estudiante y cuatrimestre se me van en decidir el número, no en escribir nada. Es el agujero del diseño y no se tapa echándole más horas: 1.800 ficheros no se comentan."},"C7":{"estado":"No aplica","nota":"Corrijo contrarreloj y no me queda registro de qué falla de forma sistemática. Al año siguiente empiezo de cero."}},"open":false},{"nombre":"Parcial escrito de mitad de cuatrimestre","naturaleza":"Puntual","cuando":"Semana 8 · 90 min · cinco aulas en paralelo, todo el equipo vigilando","cuandoRetro":"Nota a los 10 días + sesión colectiva de revisión de errores en la semana 10","hPrep":"12","minDur":"90","minCorr":"10","minFb":"0","dims":{"C2":{"estado":"No aplica","nota":"Es un examen: aquí no hay autoevaluación ni pares."},"C3":{"estado":"Activa","nota":"Prohibida. Presencial y a papel. Es el único momento del cuatrimestre en el que puedo afirmar que lo que está escrito es de quien firma."},"C4":{"estado":"Activa","nota":"Cuatro ejercicios de trazado y escritura de código a mano."},"C5":{"estado":"Activa","nota":"Papel, escaneo de las hojas y volcado de notas a la hoja del equipo."},"C6":{"estado":"Activa","nota":"Devolución colectiva de los cinco errores más frecuentes. Colectiva porque individual no cabe: un comentario de un minuto por persona serían cinco horas más."},"C7":{"estado":"Lo veré en Sprint 1","nota":"Los errores que veo corrigiendo son oro para reajustar la segunda mitad, pero hoy los recojo de memoria y en una conversación de pasillo entre los tres."}},"open":false},{"nombre":"Examen final","naturaleza":"Puntual","cuando":"Semana 15 · 3 h · convocatoria oficial","cuandoRetro":"Nota + revisión presencial a quien la pide: unas 40 personas de 300","hPrep":"15","minDur":"180","minCorr":"15","minFb":"2","dims":{"C2":{"estado":"No aplica","nota":""},"C3":{"estado":"Activa","nota":"Prohibida. Presencial y a papel, como el parcial."},"C4":{"estado":"Activa","nota":"Programa completo escrito a mano + preguntas de razonamiento sobre coste y casos límite."},"C5":{"estado":"Activa","nota":"Papel, con plantilla de corrección compartida entre los tres para que puntuemos igual."},"C6":{"estado":"Activa","nota":"Los dos minutos por estudiante de la casilla son el promedio de las revisiones presenciales: cuarenta personas a un cuarto de hora son diez horas, repartidas entre trescientos. Los otros 260 se llevan un número y nada más."},"C7":{"estado":"No aplica","nota":"Cuando corrijo el final ya no hay margen para ajustar nada de esta edición."}},"open":false}]},"escenarios":[{"nombre":"Lo que tengo hoy","variacion":null,"cambios":{}},{"nombre":"Corrector automático y revisión entre pares","variacion":"Las prácticas pasan a corrector automático más revisión entre pares con rúbrica, y la IA docente agrupa los errores de los exámenes en patrones. Baja del 72 % al 59 %, pero lo importante no es eso: aparece retroalimentación escrita para los 300 donde antes no había ninguna.","cambios":{"d4-postura":"Herramienta operativa","d4-nota":"La uso en dos sitios concretos y en ninguno más. Uno: agrupar en patrones las respuestas de los exámenes —«estos 80 confunden el paso por valor con el paso por referencia»— para poder preparar una devolución colectiva por patrón en vez de una genérica. Dos: revisar los juegos de pruebas del corrector automático antes de publicarlos. No la uso para poner notas ni para escribir retroalimentación que se publique sin que yo la haya leído entera. Riesgos declarados: los grupos que propone los verifico a mano sobre una muestra de treinta exámenes antes de darlos por buenos, porque una agrupación mal hecha convierte un error mío en un mensaje equivocado enviado a ochenta personas a la vez; y no subo a ninguna herramienta externa un examen con nombre y apellidos, van anonimizados.","d3-ahora":"Rúbrica pública de las prácticas (cuatro criterios: corrección, legibilidad, estructura, explicación), que ahora es también la rúbrica con la que os revisáis entre vosotros · pauta de entrega con los juegos de pruebas del corrector automático · protocolo de revisión entre pares: cada estudiante revisa dos entregas anónimas y recibe dos · criterios del parcial y del final · declaración obligatoria de uso de IA en cada práctica.","d3-despues":"Protocolo de moderación por muestreo: qué porcentaje de revisiones entre pares reviso yo y con qué criterio de discrepancia · verificación a mano de los patrones que propone la IA antes de usarlos · alerta temprana con los datos de los cuestionarios de las semanas 3 a 6 · registro de errores recurrentes entre ediciones.","hoy-fricciona":"Sigue habiendo un cuello: la revisión entre pares es tan buena como la rúbrica y como la seriedad de quien revisa, y en primero eso es desigual. Modero por muestreo el 15 %, y ahí es donde se me va el tiempo que antes se iba en corregir. La otra fricción es nueva: si dos compañeros le dicen a alguien cosas contradictorias, tiene que haber una vía para preguntarme, y esa vía no puede costar minutos por estudiante o vuelvo al punto de partida.","touchpoints":[{"nombre":"Cuestionarios semanales de autocomprobación","naturaleza":"Continuo","cuando":"Semanas 2–14 · 12 cuestionarios en el campus virtual, abiertos siete días","cuandoRetro":"Automática al enviar: solución razonada de cada ítem, en el mismo minuto","hPrep":"45","minDur":"0","minCorr":"0","minFb":"0","dims":{"C2":{"estado":"Activa","nota":"Autoevaluación pura: el cuestionario te dice dónde has fallado en el momento."},"C3":{"estado":"Activa","nota":"Sin restricción, con el peso bajo al 10 % precisamente por eso."},"C4":{"estado":"Activa","nota":"12 cuestionarios de 10 ítems: opción múltiple, trazas de ejecución y «qué imprime este programa»."},"C5":{"estado":"Activa","nota":"Campus virtual. Corrección, registro y estadística de ítems, automáticos."},"C6":{"estado":"Activa","nota":"Inmediata y a coste cero por estudiante. Es la pieza que hace viable todo lo demás."},"C7":{"estado":"Activa","nota":"El informe de ítems fallados de la semana n decide qué reexplico en la n+1, y quién deja de entregar entre la 3 y la 6 entra en la lista de aviso."}},"open":true},{"nombre":"Prácticas con corrector automático y revisión entre pares","naturaleza":"Continuo","cuando":"6 entregas · semanas 3, 5, 7, 9, 11 y 13 · entrega en la última hora de laboratorio, revisión de pares en las 72 h siguientes","cuandoRetro":"Informe del corrector en minutos + dos revisiones de compañeros con rúbrica en 72 h","hPrep":"85","minDur":"360","minCorr":"5","minFb":"0","dims":{"C2":{"estado":"Activa","nota":"El cambio grande. Cada estudiante revisa dos entregas anónimas de compañeros con la rúbrica de cuatro criterios y recibe otras dos. Son 600 revisiones por entrega que no escribo yo. Y no es un adorno pedagógico: con 300 personas es literalmente la única forma de que exista un comentario escrito sobre el código de cada uno."},"C3":{"estado":"Activa","nota":"Permitida con declaración en la cabecera. Novedad: la revisión de pares también incluye «¿la explicación de tres líneas se corresponde con el código?», que es donde se nota quién ha pegado algo sin entenderlo."},"C4":{"estado":"Activa","nota":"Código que pasa el juego de pruebas + explicación de tres líneas + las dos revisiones que ha escrito de otros, que también son evidencia de su criterio."},"C5":{"estado":"Activa","nota":"Corrector automático sobre el repositorio + formulario de rúbrica para las revisiones cruzadas, con reparto aleatorio."},"C6":{"estado":"Activa","nota":"Pasa de no existir a existir: dos comentarios por entrega para todo el mundo. Mi papel deja de ser escribirla y pasa a ser garantizar que la que se escribe vale algo."},"C7":{"estado":"Activa","nota":"El corrector me da la estadística de qué caso de prueba falla más, y con eso decido el ejercicio del laboratorio siguiente. Esto antes no existía."}},"open":false},{"nombre":"Parcial escrito de mitad de cuatrimestre","naturaleza":"Puntual","cuando":"Semana 8 · 90 min · cinco aulas en paralelo","cuandoRetro":"Nota en 7 días + sesión de devolución por patrones de error en la semana 10","hPrep":"20","minDur":"90","minCorr":"6","minFb":"0","dims":{"C2":{"estado":"No aplica","nota":"Es un examen: aquí no hay autoevaluación ni pares."},"C3":{"estado":"Activa","nota":"Prohibida. Presencial y a papel."},"C4":{"estado":"Activa","nota":"Cuatro ejercicios de trazado y escritura de código a mano."},"C5":{"estado":"Activa","nota":"Papel escaneado y anonimizado; de ahí sale el agrupamiento por patrones."},"C6":{"estado":"Activa","nota":"Devolución por patrones en vez de genérica: la IA docente agrupa los fallos y preparo una explicación por patrón, de modo que cada estudiante recibe la que le toca. Sigue costando cero minutos por persona, pero ya no es la misma charla para todos."},"C7":{"estado":"Activa","nota":"Los patrones quedan escritos y se comparan con los de la edición anterior. Ese registro es la mitad del valor de usar la IA aquí."}},"open":false},{"nombre":"Examen final","naturaleza":"Puntual","cuando":"Semana 15 · 3 h · convocatoria oficial","cuandoRetro":"Nota + revisión presencial a quien la pide","hPrep":"18","minDur":"180","minCorr":"10","minFb":"2","dims":{"C2":{"estado":"No aplica","nota":""},"C3":{"estado":"Activa","nota":"Prohibida. Presencial y a papel."},"C4":{"estado":"Activa","nota":"Programa completo escrito a mano + preguntas de razonamiento sobre coste y casos límite."},"C5":{"estado":"Activa","nota":"Papel, plantilla de corrección compartida y preclasificación por patrones para repartir la corrección entre los tres de forma homogénea."},"C6":{"estado":"Activa","nota":"Los dos minutos de la casilla siguen siendo las cuarenta revisiones presenciales. Aquí no he ganado nada, y es honesto decirlo: al final del cuatrimestre la retroalimentación ya no cambia nada."},"C7":{"estado":"Lo veré en Sprint 1","nota":"Comparar los patrones del final con los del parcial para ver qué se ha corregido de verdad entre semana 8 y semana 15."}},"open":false}]}},{"nombre":"Un minuto de comentario personal por entrega","variacion":"Se fuerza un solo parámetro sobre el punto de partida: minFb = 1 minuto por estudiante en cada uno de los 20 momentos evaluados (12 cuestionarios, 6 prácticas, 2 exámenes). Un minuto por estudiante y entrega son 5 h; por 20 entregas, 100 h. Del 72 % al 92 %.","cambios":{"hoy-fricciona":"Un minuto no es nada. Un minuto es lo que tardo en escribir «bien planteado, revisa el caso de la lista vacía». El problema es que un minuto por estudiante son cinco horas por entrega, y hay veinte entregas: cien horas de comentario personal, treinta y tres para cada uno de los tres. Sumadas a lo que ya cuesta poner las notas, el cuatrimestre no cabe. Y lo peor es que el ejercicio no es un absurdo teórico: es exactamente lo que me pide el cuerpo hacer cada vez que abro una entrega.","touchpoints":[{"nombre":"Cuestionarios semanales de autocomprobación","naturaleza":"Continuo","cuando":"Semanas 2–14 · 12 cuestionarios en el campus virtual, abiertos siete días","cuandoRetro":"Automática al enviar + una línea escrita por mí a cada estudiante en cada cuestionario","hPrep":"45","minDur":"0","minCorr":"0","minFb":"12","dims":{"C2":{"estado":"Activa","nota":"Autoevaluación pura: el cuestionario te dice dónde has fallado en el momento."},"C3":{"estado":"Activa","nota":"Sin restricción, con el peso bajo al 10 % precisamente por eso."},"C4":{"estado":"Activa","nota":"12 cuestionarios de 10 ítems: opción múltiple, trazas de ejecución y «qué imprime este programa»."},"C5":{"estado":"Activa","nota":"Campus virtual. Corrección y registro automáticos; el comentario, a mano."},"C6":{"estado":"Activa","nota":"Aquí está la trampa: doce cuestionarios por un minuto por estudiante son sesenta horas, sobre un touchpoint que hoy cuesta cuarenta y cinco en total. El momento más barato del diseño se convierte en el más caro por añadirle un gesto que parece gratis."},"C7":{"estado":"Lo veré en Sprint 1","nota":"Sistematizar qué hago con el informe de ítems fallados."}},"open":true},{"nombre":"Prácticas de programación en laboratorio","naturaleza":"Continuo","cuando":"6 entregas · semanas 3, 5, 7, 9, 11 y 13","cuandoRetro":"Nota + un comentario escrito de un minuto por estudiante en cada una de las seis entregas","hPrep":"40","minDur":"360","minCorr":"20","minFb":"6","dims":{"C2":{"estado":"No aplica","nota":"Sigue sin haber pares: aquí el comentario lo escribo yo, que es justo lo que estamos poniendo a prueba."},"C3":{"estado":"Activa","nota":"Permitida con declaración obligatoria en la cabecera del fichero."},"C4":{"estado":"Activa","nota":"Fichero de código que pasa el juego de pruebas + tres líneas explicando la decisión de diseño."},"C5":{"estado":"Activa","nota":"Entrega por el campus virtual, un repositorio por estudiante."},"C6":{"estado":"Activa","nota":"Seis minutos por estudiante en el cuatrimestre, uno por entrega: treinta horas más solo aquí. Este touchpoint pasa de 146 a 176 horas y sigue siendo el más caro del diseño con diferencia."},"C7":{"estado":"No aplica","nota":"Corrijo contrarreloj y no me queda registro de qué falla de forma sistemática."}},"open":false},{"nombre":"Parcial escrito de mitad de cuatrimestre","naturaleza":"Puntual","cuando":"Semana 8 · 90 min · cinco aulas en paralelo","cuandoRetro":"Nota + una línea personal en cada examen + sesión colectiva de revisión","hPrep":"12","minDur":"90","minCorr":"10","minFb":"1","dims":{"C2":{"estado":"No aplica","nota":"Es un examen: aquí no hay autoevaluación ni pares."},"C3":{"estado":"Activa","nota":"Prohibida. Presencial y a papel."},"C4":{"estado":"Activa","nota":"Cuatro ejercicios de trazado y escritura de código a mano."},"C5":{"estado":"Activa","nota":"Papel, escaneo de las hojas y volcado de notas a la hoja del equipo."},"C6":{"estado":"Activa","nota":"Un minuto por examen: cinco horas. Es el añadido más barato de los cuatro y aun así equivale a una jornada de trabajo del equipo."},"C7":{"estado":"Lo veré en Sprint 1","nota":"Recoger de forma ordenada los errores que veo corrigiendo."}},"open":false},{"nombre":"Examen final","naturaleza":"Puntual","cuando":"Semana 15 · 3 h · convocatoria oficial","cuandoRetro":"Nota + una línea personal a cada uno + revisión presencial a quien la pide","hPrep":"15","minDur":"180","minCorr":"15","minFb":"3","dims":{"C2":{"estado":"No aplica","nota":""},"C3":{"estado":"Activa","nota":"Prohibida. Presencial y a papel."},"C4":{"estado":"Activa","nota":"Programa completo escrito a mano + preguntas de razonamiento sobre coste y casos límite."},"C5":{"estado":"Activa","nota":"Papel, con plantilla de corrección compartida entre los tres."},"C6":{"estado":"Activa","nota":"Dos minutos de revisiones presenciales más uno de comentario escrito. Y aquí, encima, llega en julio: es el minuto peor invertido de los veinte."},"C7":{"estado":"No aplica","nota":"Cuando corrijo el final ya no hay margen para ajustar nada de esta edición."}},"open":false}]}}]}
+];
+
+// ── Galería de asignaturas de ejemplo ────────────────────────────────
+// Añaden sus escenarios junto a los del profesor. No reemplazan nada: la
+// alternativa obligaba a elegir entre mirar un ejemplo y conservar el trabajo.
+function abreGaleria(){
+  const lista = document.getElementById('gal-lista');
+  lista.innerHTML = EJEMPLOS.map(ej => `
+    <div class="gal-item">
+      <div>
+        <div class="gal-modelo">${escC(ej.modelo)}</div>
+        <h3>${escC(ej.nombre)}</h3>
+        <p>${escC(ej.resumen)}</p>
+        <div class="gal-escenarios">${ej.escenarios.length} escenarios · ${ej.escenarios.map(e => escC(e.nombre)).join(' · ')}</div>
+      </div>
+      <button type="button" class="btn outline" onclick="añadeEjemplo('${ej.id}')">Añadir a mis escenarios</button>
+    </div>`).join('');
+  document.getElementById('gal-fondo').hidden = false;
+  document.querySelector('.gal-cerrar').focus();
+  document.addEventListener('keydown', cierraGaleriaConEscape);
 }
 
+function cierraGaleria(){
+  document.getElementById('gal-fondo').hidden = true;
+  document.removeEventListener('keydown', cierraGaleriaConEscape);
+}
+function cierraGaleriaConEscape(e){ if(e.key === 'Escape') cierraGaleria(); }
+
+function añadeEjemplo(id){
+  const ej = EJEMPLOS.find(e => e.id === id);
+  if(!ej) return;
+  const yaEsta = libro.escenarios.some(e => e.ejemplo === id);
+  if(yaEsta && !confirm(`Ya tienes los escenarios de «${ej.nombre}» en tu lista.\n\n` +
+                        'Si los añades otra vez quedarán duplicados y no podrás distinguirlos por el nombre. ¿Continúas?')) return;
+  vuelcaFormularioAlEscenario();
+  let primero = null;
+  ej.escenarios.forEach(esc => {
+    const estado = Object.assign({}, JSON.parse(JSON.stringify(ej.base)), JSON.parse(JSON.stringify(esc.cambios || {})));
+    const nid = nuevoId();
+    if(!primero) primero = nid;
+    libro.escenarios.push({ id: nid, nombre: `${ej.nombre} · ${esc.nombre}`, _tocado: Date.now(),
+                            variacion: esc.variacion || null, derivadoDe: null, ejemplo: ej.id, estado });
+  });
+  libro.activo = primero;
+  applyState(libro.escenarios.find(e => e.id === primero).estado, true);
+  persist();
+  pintaBarraEscenarios();
+  cierraGaleria();
+  refreshActiveView();
+  alert(`Añadidos ${ej.escenarios.length} escenarios de «${ej.nombre}».\n\n` +
+        'Tus escenarios siguen donde estaban: cambia entre ellos en la barra de arriba, ' +
+        'y en la pestaña «Comparar» los verás todos juntos.');
+}
+
+// Se mantiene por compatibilidad con cualquier enlace antiguo.
+function loadExample(){ abreGaleria(); }
+
 // ===== INIT =====
-try {
-  const raw = localStorage.getItem(STORAGE_KEY);
-  if(raw){
-    const parsed = JSON.parse(raw);
-    // Migración silenciosa v1→v2: si no hay touchpoints pero hay m1..m7, arrancamos vacío.
-    applyState(parsed);
-  } else {
-    applyState({});
+capturaSugeridos();
+capturaRangos();
+// Lee la primera clave que contenga un JSON válido, en orden: la actual y
+// después la antigua. Se prueba a interpretarlo ANTES de copiar nada, para no
+// propagar a la clave nueva un contenido corrupto, y para que un trabajo
+// antiguo legible siga sirviendo aunque lo nuevo esté ilegible.
+function leeGuardado(){
+  const ilegibles = [];
+  for(const clave of [STORAGE_KEY, STORAGE_KEY_ANTIGUA]){
+    const crudo = localStorage.getItem(clave);
+    if(crudo === null) continue;
+    try {
+      const dato = JSON.parse(crudo);
+      // Migración: se copia, no se mueve. Si algo saliera mal en esta sesión,
+      // el trabajo original sigue donde estaba.
+      if(clave !== STORAGE_KEY) localStorage.setItem(STORAGE_KEY, crudo);
+      return { dato, ilegibles, migrado: clave !== STORAGE_KEY };
+    } catch(err){
+      ilegibles.push({ clave, crudo });
+    }
   }
-} catch(e){ applyState({}); }
+  if(ilegibles.length) throw Object.assign(new Error('guardado ilegible'), { ilegibles });
+  return { dato: null, ilegibles, migrado: false };
+}
+
+try {
+  libro = aLibro(leeGuardado().dato);
+} catch(e){
+  // No se ha podido leer lo guardado. Antes se empezaba de cero en silencio y la
+  // primera tecla lo sobrescribía: el trabajo anterior desaparecía sin rastro.
+  try {
+    (e.ilegibles || []).forEach(({clave, crudo}) => {
+      localStorage.setItem(clave + '-ilegible-' + Date.now(), crudo);
+    });
+  } catch(err){ /* si tampoco se puede copiar, seguimos */ }
+  libro = aLibro(null);
+  setTimeout(() => alert('No se ha podido leer lo que tenías guardado en este navegador, así que la plantilla ' +
+        'ha arrancado vacía.\n\nNo se ha borrado nada: la copia ilegible sigue en el almacenamiento del navegador ' +
+        'por si hay que recuperarla. Si tienes un archivo JSON descargado, cárgalo con «Cargar JSON» antes de ' +
+        'seguir trabajando.'), 400);
+}
+applyState((escenarioActivo() || {}).estado || {});
+pintaBarraEscenarios();
 muestraDeshacer();
 updateSemaforo();
 updateProgress();

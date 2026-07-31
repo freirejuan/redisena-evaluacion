@@ -8,11 +8,17 @@
 /* ============ DESIGN SYSTEM · UC3M-IMPULSO (alineado con Canvas v1, Guía v4, Glosario) ============ */
 :root{
   --azul-reflex:#171796; --azul-deep:#0F0F6B; --azul-mid:#2D2DA8; --azul-soft:#E8E8F6;
-  --acento-teal:#1A9E7A; --acento-teal-soft:#E0F2EC;
+  --acento-teal:#1A9E7A;
+  /* Variantes oscurecidas para TEXTO. Los acentos de marca se mantienen para
+     fondos, bordes y superficies; en texto pequeño no llegaban a 4,5:1. */
+  --texto-teal:#0F6F55;
+  --texto-coral:#B81F1F;
+  --texto-ambar:#8A5A00;
+ --acento-teal-soft:#E0F2EC;
   --acento-amber:#E8A317; --acento-amber-soft:#FBF0D9;
   --acento-coral:#E05555; --acento-coral-soft:#FADDDD;
   --gris-900:#0E1116; --gris-800:#1F2329; --gris-700:#3A4049; --gris-600:#575E68;
-  --gris-500:#7A818B; --gris-400:#9DA3AB; --gris-300:#C8CCD2; --gris-200:#E2E4E8;
+  --gris-500:#666D76; --gris-400:#9DA3AB; --gris-300:#C8CCD2; --gris-200:#E2E4E8;
   --gris-100:#F1F2F5; --gris-050:#F8F9FB; --blanco:#FFFFFF;
   --sans:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
   --serif:'Iowan Old Style','Palatino Linotype','Book Antiqua',Georgia,serif;
@@ -111,11 +117,11 @@ a.kit-tag:hover{opacity:1;}
 .callout.success{
   background:var(--acento-teal-soft);border-left-color:var(--acento-teal);color:#0D5C47;
 }
-.callout.success .callout-label{color:var(--acento-teal);}
+.callout.success .callout-label{color:var(--texto-teal);}
 .callout.warn{
   background:var(--acento-amber-soft);border-left-color:var(--acento-amber);color:#5B3D00;
 }
-.callout.warn .callout-label{color:#A46A00;}
+.callout.warn .callout-label{color:var(--texto-ambar);}
 
 /* ============ CHECKLIST ============ */
 .checklist{
