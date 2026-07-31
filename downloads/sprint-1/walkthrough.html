@@ -443,10 +443,12 @@ a.kit-tag:hover{opacity:1;}
             <span class="time-stamp-label">Bloque 6</span>
           </div>
           <div class="time-body">
-            <h3>Cronograma: cuándo cae cada cosa</h3>
-            <div class="time-screen"><strong>Pantalla</strong> · Hoja <em>Cronograma</em>. Bajar a ver la matriz TP × semana.</div>
+            <h3>Cuándo cae cada cosa: el Panel</h3>
+            <div class="time-screen"><strong>Pantalla</strong> · Abrir el <em>Panel del plan operativo</em> y subir la Plantilla. Ir a <em>Calendario semanal</em>.</div>
             <div class="narration">
-              <p>El <strong>Cronograma</strong> es una matriz: cada fila un touchpoint, cada columna una semana. La plantilla distribuye las horas de forma realista: el diseño cae dos semanas antes del inicio, la ejecución en la semana del TP, y la corrección y retroalimentación dos semanas después. Hay <strong>tres bloques apilados</strong>: carga base, carga con IA, y carga del estudiante.</p>
+              <p>El calendario semana a semana no vive en la hoja de cálculo, sino en el <strong>Panel</strong>: subes este mismo archivo y lo genera al instante. Es una matriz con cada fila un touchpoint y cada columna una semana, en dos mapas de calor apilados —arriba el estudiante, abajo tú—.</p>
+              <p>El reparto sigue el ritmo real del trabajo: el <strong>diseño</strong> cae en las dos semanas previas al inicio, la <strong>ejecución</strong> en la semana de cada ocurrencia, la <strong>corrección</strong> en las dos semanas siguientes a esa ocurrencia y la <strong>retroalimentación</strong> en la tercera. Si un touchpoint se repite, cada ocurrencia arrastra su propia corrección: no se amontonan todas al final.</p>
+              <p>Fíjate en las tres últimas columnas, <strong>C1, C2 y C3</strong>: son semanas de cierre, posteriores al final de la docencia. Ahí aparece el trabajo que genera lo que ocurre al final —la corrección del examen final, típicamente— y que en versiones anteriores de la plantilla, sencillamente, no se contaba.</p>
             </div>
           </div>
         </div>
@@ -458,15 +460,16 @@ a.kit-tag:hover{opacity:1;}
           </div>
           <div class="time-body">
             <h3>Las tres lentes</h3>
-            <div class="time-screen"><strong>Pantalla</strong> · Hoja <em>Lente 1 · Carga docente</em>. Mostrar el gráfico.</div>
+            <div class="time-screen"><strong>Pantalla</strong> · Hoja <em>Lente 1 · Carga docente</em>. Mostrar el consumo del presupuesto.</div>
             <div class="narration">
-              <p><strong>Lente 1: tu carga docente.</strong> Aquí miramos dos cosas a la vez. La primera es el <strong>consumo del presupuesto</strong>: cuántas horas te ha pedido el diseño completo (suma de todas las fases) frente al presupuesto total que declaraste — dedicación promedio × semanas. Si pasas del 100 %, la planificación no cabe en lo que tú mismo dijiste que podías sostener. La segunda lectura es la <strong>distribución semana a semana</strong>: cuántas semanas superan el umbral de pico (15 h/sem por defecto). En el ejemplo, el diseño consume el 91 % del presupuesto y tiene ocho semanas en pico — entra justo en horas globales pero está muy concentrado. La columna IA, justo al lado, muestra cuánto se aliviarían ambas cifras si se cumple tu hipótesis. <em>La herramienta no te juzga, te muestra</em>.</p>
-              <p>Si quieres ver el reparto semanal con detalle, súbela al <strong>Panel del plan operativo</strong>: su <em>Calendario semanal</em> tiene un heatmap apilado con tu carga docente y la del estudiante, y un toggle para alternar entre la línea base y la hipótesis IA en la fila docente.</p>
+              <p><strong>Lente 1: tu carga docente.</strong> La lectura es el <strong>consumo del presupuesto</strong>: cuántas horas te pide el diseño completo, sumando las cuatro fases, frente al presupuesto que declaraste — dedicación promedio × semanas. Conviene tener claro qué compara: son las horas de <em>evaluar</em> sobre las horas que dedicas a la asignatura <em>entera</em>. Hasta el 40 % es sostenible; entre el 40 % y el 70 % es mucho para la parte evaluativa y conviene haberlo decidido a propósito; por encima del 70 % el plan no cabe, porque además de evaluar hay que dar la asignatura.</p>
+              <p>En el ejemplo, el diseño consume el <strong>187 %</strong>: pide 280 horas donde hay 150. Es un caso deliberadamente exigente, y sirve justo para eso — para ver cómo se lee un plan que no cabe. La columna IA muestra que la hipótesis lo bajaría a 249 horas, el 166 %: alivia, pero no resuelve. <em>La herramienta no te juzga, te muestra</em>.</p>
+              <p>Las semanas de pico y la forma de la curva se ven en el <strong>Panel</strong>, que además permite alternar entre la línea base y la hipótesis con IA.</p>
             </div>
-            <div class="time-screen"><strong>Pantalla</strong> · Hoja <em>Lente 2 · Carga estudiante</em>. Mostrar curva y presupuesto ECTS.</div>
+            <div class="time-screen"><strong>Pantalla</strong> · Hoja <em>Lente 2 · Carga estudiante</em>. Mostrar el presupuesto ECTS y el solapamiento.</div>
             <div class="narration">
-              <p><strong>Lente 2: tu estudiantado.</strong> Curva semanal de horas y el consumo del presupuesto ECTS. En el ejemplo, 87 horas sobre 150 disponibles — un 58 % — con tres semanas de pico. Deja margen, pero marca acumulación.</p>
-              <p>Un aviso importante sobre esta lente: <strong>concentra toda la carga del estudiante en la semana de entrega</strong>, así que exagera los picos. En la realidad el estudiante reparte el trabajo en las semanas previas. El número fiable aquí es el <em>consumo total</em> — el 58 % — más que la forma de la curva. Si quieres ver la distribución realista, súbe tu Plantilla al <strong>Panel del plan operativo</strong> (pieza complementaria): su vista <em>Calendario semanal</em> reparte las horas 50 / 30 / 20 % en las tres semanas previas a cada entrega.</p>
+              <p><strong>Lente 2: tu estudiantado.</strong> El consumo del presupuesto ECTS y el aviso de sumativos solapados. En el ejemplo, 87 horas sobre 150 disponibles — un 58 % — así que deja margen.</p>
+              <p>La curva semanal del estudiante también se lee en el <strong>Panel</strong>, y allí está bien repartida: las horas de una entrega se distribuyen 50 / 30 / 20 % en las tres semanas previas, porque el estudiante no trabaja el día de la entrega sino antes.</p>
             </div>
             <div class="time-screen"><strong>Pantalla</strong> · Hoja <em>Lente 3 · Equilibrio F-S</em>. Mostrar pie chart y solapamientos.</div>
             <div class="narration">
@@ -565,7 +568,7 @@ a.kit-tag:hover{opacity:1;}
           <a class="link-card" href="plantilla-plan-operativo.xlsx" download>
             <div class="link-card-label">Tu plantilla</div>
             <div class="link-card-title">Plantilla del plan operativo</div>
-            <div class="link-card-hint">XLSX en blanco · 11 hojas</div>
+            <div class="link-card-hint">XLSX en blanco · 10 hojas</div>
           </a>
           <a class="link-card" href="guia-breve.html">
             <div class="link-card-label">Lectura de fondo</div>

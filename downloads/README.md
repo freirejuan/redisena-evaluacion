@@ -22,7 +22,7 @@ Este directorio contiene las piezas descargables servidas desde la web. Las URLs
 
 | Archivo | Tipo | Estado | Descripción |
 |---|---|---|---|
-| `sprint-1/plantilla-plan-operativo.xlsx` | XLSX 11 hojas | disponible | Pieza principal. Declaración de touchpoints, T1–T9, cuatro fases, dos escenarios, tres lentes. |
+| `sprint-1/plantilla-plan-operativo.xlsx` | XLSX 10 hojas | disponible | Pieza principal. Declaración de touchpoints, T1–T9, cuatro fases, dos escenarios, tres lentes. El reparto semanal ya no se calcula aquí: se lee en el Panel (decisión E2, 31-jul-2026). |
 | `sprint-1/plantilla-ejemplo-ingesoft.xlsx` | XLSX pre-rellenado | disponible | Caso Ingeniería del Software completo, para ver la plantilla en funcionamiento. |
 | `sprint-1/guia-breve.html` | HTML autocontenido | disponible | Guía breve de uso — léela antes que nada. Navegable con índice. |
 | `sprint-1/walkthrough.html` | HTML autocontenido | disponible | Recorrido guiado hoja por hoja (guion 5-7 min sobre el ejemplo IngeSoft). |

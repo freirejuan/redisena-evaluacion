@@ -243,6 +243,16 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 .action-bar .save-state{font-size:var(--text-xs);color:var(--gris-500);display:flex;align-items:center;gap:6px;}
 .action-bar .save-state.saved::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--acento-teal);}
 .action-bar .save-state.unsaved::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--acento-amber);}
+.action-bar .save-state.error{color:var(--acento-coral);font-weight:700;}
+.action-bar .save-state.error::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--acento-coral);}
+.aviso-conflicto{position:fixed;right:24px;bottom:88px;z-index:200;max-width:390px;background:var(--white);
+  border:1.5px solid var(--acento-amber);border-left-width:5px;border-radius:var(--radius-md);
+  box-shadow:0 8px 30px rgba(23,23,150,.14);padding:16px 18px;display:flex;flex-direction:column;gap:8px;}
+.aviso-conflicto strong{font-size:var(--text-sm);color:var(--azul-deep);}
+.aviso-conflicto span{font-size:var(--text-xs);color:var(--gris-600);line-height:1.45;}
+.aviso-conflicto .aviso-acciones{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;}
+.aviso-conflicto .btn{font-size:11px;padding:7px 12px;}
+@media print{.aviso-conflicto{display:none;}}
 .action-bar .btn-group{display:flex;gap:8px;}
 .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:var(--radius-sm);font-family:var(--sans);font-size:var(--text-xs);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;border:1.5px solid transparent;transition:all 0.2s;text-decoration:none;}
 .btn.primary{background:var(--azul-reflex);color:#fff;border-color:var(--azul-reflex);}
@@ -1214,7 +1224,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 
   <div class="callout warning">
     <span class="callout-icon">!</span>
-    <div><strong>Lectura del semáforo.</strong> <em>Verde</em>: carga sostenible con tu equipo y tu dedicación actual. <em>Ámbar</em>: vigila; con este volumen de retroalimentación conviene apoyarse en coevaluación (C2) o en IA docente (D4). <em>Rojo</em>: riesgo de saturación; prioriza los touchpoints clave (D1) o pide refuerzo. Y una advertencia sobre el porcentaje: es la parte de tu dedicación a la asignatura que se va en evaluar, no en dar clase ni en preparar contenidos. Que pase del 30&nbsp;% no es un error, pero sí algo que conviene haber decidido a propósito, porque esas horas compiten con preparar y dar la clase. Todo esto es orientativo: el Sprint 1 lo afina fase a fase.</div>
+    <div><strong>Lectura del semáforo.</strong> <em>Verde</em>: carga sostenible con tu equipo y tu dedicación actual. <em>Ámbar</em>: vigila; con este volumen de retroalimentación conviene apoyarse en coevaluación (C2) o en IA docente (D4). <em>Rojo</em>: riesgo de saturación; prioriza los touchpoints clave (D1) o pide refuerzo. Y una advertencia sobre el porcentaje: es la parte de tu dedicación a la asignatura que se va en evaluar, no en dar clase ni en preparar contenidos. Hasta el 40&nbsp;% es sostenible; entre el 40 y el 70&nbsp;% es mucho para la parte evaluativa y conviene haberlo decidido a propósito; por encima del 70&nbsp;% el plan no cabe, porque además de evaluar hay que dar la asignatura. Es el mismo criterio que usa el Sprint 1, para que un plan no salga rojo en un sprint y verde en el siguiente. Todo esto es orientativo: el Sprint 1 lo afina fase a fase.</div>
   </div>
 
   <div class="section-close">Con esto cierras el Paso 5. Tu listado de touchpoints y dimensiones activas es el mapa que el Sprint 1 convertirá en rúbricas, pautas y calendario.</div>
@@ -1410,6 +1420,12 @@ function addTouchpoint(data){
     el.addEventListener('input', persist);
     el.addEventListener('change', persist);
   });
+  // Un signo menos de más devolvía «carga sostenible» con horas negativas.
+  card.querySelectorAll('.tp-carga-grid input[type=number]').forEach(el => {
+    el.addEventListener('change', () => {
+      if(parseFloat(el.value) < 0){ el.value = ''; persist(); }
+    });
+  });
 
   // Apply data
   if(data){
@@ -1510,8 +1526,21 @@ function collectState(){
   return state;
 }
 
-function applyState(state){
+// Vacía el formulario entero. Sin esto, cargar un JSON fusionaba: las claves
+// ausentes conservaban el valor anterior y los grupos de opciones no se
+// desmarcaban nunca, así que se acababa con las decisiones de dos asignaturas
+// mezcladas y sin ninguna señal.
+function limpiarFormulario(){
+  form.querySelectorAll('input[type=text],input[type=number],input[type=email],textarea').forEach(el => { el.value = ''; });
+  form.querySelectorAll('select').forEach(el => { el.selectedIndex = 0; });
+  form.querySelectorAll('input[type=radio],input[type=checkbox]').forEach(el => { el.checked = false; });
+  form.querySelectorAll('.combo-card.selected').forEach(el => el.classList.remove('selected'));
+  tpListEl.innerHTML = ''; tpCounter = 0;
+}
+
+function applyState(state, limpiarAntes){
   if(!state) return;
+  if(limpiarAntes) limpiarFormulario();
   form.querySelectorAll('input[type=text],input[type=number],input[type=email],select,textarea').forEach(el => {
     if(el.name && state[el.name] !== undefined) el.value = state[el.name];
   });
@@ -1538,25 +1567,108 @@ function applyState(state){
 }
 
 // ===== PERSIST =====
+// Identificador de esta pestaña. Sirve para detectar que otra pestaña ha
+// escrito encima: antes, dos pestañas abiertas se pisaban en silencio y se
+// perdía el trabajo de una de las dos.
+const SESION = 'p' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+const CLAVE_COPIA = STORAGE_KEY + '-copia-previa';
 let saveTimer;
+let hayCambiosSinGuardar = false;
+let conflictoOtraPestana = false;
+let fallosDeGuardadoAvisados = false;
+
+function escribeEstado(){
+  const payload = collectState();
+  payload._sesion = SESION;
+  payload._guardado_en = new Date().toISOString();
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+}
+
+function guardaYa(){
+  clearTimeout(saveTimer);
+  if(conflictoOtraPestana) return false;
+  try {
+    escribeEstado();
+    hayCambiosSinGuardar = false;
+    saveState.classList.remove('unsaved', 'error');
+    saveState.classList.add('saved');
+    saveState.textContent = 'Guardado localmente';
+    updateSemaforo();
+    updateProgress();
+    return true;
+  } catch(e){
+    // Que el aviso sea un texto pequeño en una barra que además solo se ve en
+    // una de las tres pestañas no es suficiente: el profesor seguía escribiendo
+    // sin saber que nada se estaba guardando.
+    saveState.classList.remove('saved', 'unsaved');
+    saveState.classList.add('error');
+    saveState.textContent = 'NO se está guardando';
+    if(!fallosDeGuardadoAvisados){
+      fallosDeGuardadoAvisados = true;
+      alert('Esta plantilla no puede guardar en tu navegador, así que tu trabajo NO se está conservando.\n\n' +
+            'Suele pasar en ventanas de navegación privada o con las cookies restringidas. ' +
+            'Descarga el JSON ahora mismo con el botón «Descargar JSON» para no perder lo hecho, ' +
+            'y si puedes, abre la plantilla en una ventana normal.');
+    }
+    return false;
+  }
+}
+
 function persist(){
+  hayCambiosSinGuardar = true;
   saveState.classList.remove('saved');
   saveState.classList.add('unsaved');
   saveState.textContent = 'Guardando…';
   clearTimeout(saveTimer);
-  saveTimer = setTimeout(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(collectState()));
-      saveState.classList.remove('unsaved');
-      saveState.classList.add('saved');
-      saveState.textContent = 'Guardado localmente';
-      updateSemaforo();
-      updateProgress();
-    } catch(e){
-      saveState.textContent = 'Error al guardar';
-    }
-  }, 250);
+  saveTimer = setTimeout(guardaYa, 250);
 }
+
+// El guardado está diferido: si el profesor se va antes de que salte, lo último
+// escrito se perdía. Estos tres eventos lo fuerzan antes de salir.
+window.addEventListener('pagehide', () => { if(hayCambiosSinGuardar) guardaYa(); });
+document.addEventListener('visibilitychange', () => {
+  if(document.visibilityState === 'hidden' && hayCambiosSinGuardar) guardaYa();
+});
+window.addEventListener('beforeunload', (e) => {
+  if(hayCambiosSinGuardar && !guardaYa()){
+    e.preventDefault(); e.returnValue = '';
+  }
+});
+
+// ===== DOS PESTAÑAS A LA VEZ =====
+function avisaConflicto(){
+  if(document.getElementById('aviso-conflicto')) return;
+  const caja = document.createElement('div');
+  caja.id = 'aviso-conflicto';
+  caja.className = 'aviso-conflicto';
+  caja.innerHTML = '<strong>Has abierto esta plantilla en otra pestaña</strong>' +
+    '<span>La otra pestaña ha guardado cambios. Para no pisaros el trabajo, aquí se ha pausado el guardado automático. Elige con cuál te quedas.</span>' +
+    '<div class="aviso-acciones">' +
+      '<button type="button" class="btn primary" id="btn-conflicto-mio">Conservar lo de esta pestaña</button>' +
+      '<button type="button" class="btn outline" id="btn-conflicto-otra">Cargar lo de la otra</button>' +
+    '</div>';
+  document.body.appendChild(caja);
+  document.getElementById('btn-conflicto-mio').addEventListener('click', () => {
+    conflictoOtraPestana = false; caja.remove(); guardaYa();
+  });
+  document.getElementById('btn-conflicto-otra').addEventListener('click', () => {
+    conflictoOtraPestana = false; caja.remove(); location.reload();
+  });
+}
+
+window.addEventListener('storage', (e) => {
+  if(e.key !== STORAGE_KEY || !e.newValue) return;
+  try {
+    const otro = JSON.parse(e.newValue);
+    if(otro._sesion && otro._sesion === SESION) return;   // eco de esta misma pestaña
+  } catch(err){ /* si no se puede leer, avisamos igual */ }
+  conflictoOtraPestana = true;
+  clearTimeout(saveTimer);
+  saveState.classList.remove('saved');
+  saveState.classList.add('unsaved');
+  saveState.textContent = 'Pausado · otra pestaña';
+  avisaConflicto();
+});
 
 // ===== SEMAFORO ECONÓMICO =====
 // Lee el valor numérico de un input; si está vacío, cae al placeholder.
@@ -1581,7 +1693,9 @@ function readNumWithPlaceholder(id, parser){
 // Horas docente que cuesta un touchpoint en todo el semestre, según lo que el
 // profesor haya estimado. Devuelve null si no ha estimado nada en él.
 function cargaTouchpoint(tp, estudiantes){
-  const num = v => { const n = parseFloat(v); return isNaN(n) ? 0 : n; };
+  // Un signo menos de más pasaba desapercibido y devolvía «carga sostenible»
+  // con horas negativas. Lo que no sea un número positivo no cuenta.
+  const num = v => { const n = parseFloat(v); return (isNaN(n) || n < 0) ? 0 : n; };
   const prep = num(tp.hPrep), dur = num(tp.minDur), corr = num(tp.minCorr), fb = num(tp.minFb);
   if(prep === 0 && dur === 0 && corr === 0 && fb === 0) return null;
   // Preparar es coste único; la duración es tiempo que tú también estás ahí;
@@ -1799,27 +1913,89 @@ function exportJSON(){
 }
 
 function importJSON(){ document.getElementById('file-import').click(); }
+
+// ¿El archivo es de esta plantilla? Antes se aceptaba cualquier JSON: uno
+// ajeno vaciaba los touchpoints, se guardaba encima y la aplicación
+// respondía «Plantilla importada correctamente».
+const CLAVES_CONOCIDAS = ['asig-nombre','asig-titulacion','asig-ects','hoy-descripcion',
+                          'd1-momentos','d2-postura','d3-ahora','d4-postura','combo','touchpoints'];
+function pareceDeEstaPlantilla(obj){
+  if(!obj || typeof obj !== 'object' || Array.isArray(obj)) return false;
+  return CLAVES_CONOCIDAS.some(k => Object.prototype.hasOwnProperty.call(obj, k));
+}
+
+function cuentaTrabajo(){
+  const s = collectState();
+  const tps = (s.touchpoints || []).length;
+  const campos = Object.keys(s).filter(k => k !== 'touchpoints' && k !== 'combo' &&
+                                            typeof s[k] === 'string' && s[k].trim() !== '').length;
+  return { tps, campos, vacia: tps === 0 && campos === 0 };
+}
+
 function handleImport(event){
   const file = event.target.files[0];
   if(!file) return;
   const reader = new FileReader();
   reader.onload = e => {
+    let state;
     try {
-      const state = JSON.parse(e.target.result);
-      applyState(state);
-      persist();
-      alert('Plantilla importada correctamente.');
+      state = JSON.parse(e.target.result);
     } catch(err){
-      alert('Error al leer el archivo: no es un JSON válido.');
+      alert('No se ha podido leer el archivo: no es un JSON válido.');
+      return;
     }
+    if(!pareceDeEstaPlantilla(state)){
+      alert('Este archivo no es una plantilla estratégica.\n\n' +
+            'No se ha tocado nada de lo que tienes. Busca el archivo que descargaste ' +
+            'desde aquí con «Descargar JSON»: su nombre empieza por «uc3m-plantilla-».');
+      return;
+    }
+    const actual = cuentaTrabajo();
+    if(!actual.vacia){
+      const detalle = actual.tps > 0
+        ? `${actual.tps} touchpoint${actual.tps === 1 ? '' : 's'} y ${actual.campos} campos rellenos`
+        : `${actual.campos} campos rellenos`;
+      if(!confirm(`Vas a reemplazar la plantilla que tienes abierta, que contiene ${detalle}.\n\n` +
+                  'Se guardará una copia para que puedas deshacerlo. ¿Continúas?')) return;
+      try { localStorage.setItem(CLAVE_COPIA, JSON.stringify(collectState())); } catch(err){ /* sin copia, seguimos */ }
+    }
+    applyState(state, true);      // reemplaza, no fusiona
+    persist();
+    muestraDeshacer();
+    alert('Plantilla cargada. Revisa que es la asignatura que esperabas antes de seguir.');
   };
+  reader.onerror = () => alert('No se ha podido leer el archivo.');
   reader.readAsText(file);
   event.target.value = '';
 }
 
+// Botón de deshacer, solo mientras haya copia previa de una importación.
+function muestraDeshacer(){
+  if(!localStorage.getItem(CLAVE_COPIA) || document.getElementById('btn-deshacer-import')) return;
+  const grupo = document.querySelector('.action-bar .btn-group');
+  if(!grupo) return;
+  const b = document.createElement('button');
+  b.type = 'button'; b.id = 'btn-deshacer-import'; b.className = 'btn outline';
+  b.textContent = 'Deshacer carga';
+  b.title = 'Volver a la plantilla que tenías antes de cargar el archivo';
+  b.addEventListener('click', () => {
+    const copia = localStorage.getItem(CLAVE_COPIA);
+    if(!copia) return;
+    if(!confirm('Se recuperará la plantilla que tenías antes de la última carga. ¿Continúas?')) return;
+    applyState(JSON.parse(copia), true);
+    localStorage.removeItem(CLAVE_COPIA);
+    b.remove();
+    persist();
+  });
+  grupo.insertBefore(b, grupo.firstChild);
+}
+
 function clearAll(){
-  if(!confirm('¿Seguro que quieres limpiar toda la plantilla? Esta acción no se puede deshacer.')) return;
+  if(!confirm('¿Seguro que quieres limpiar toda la plantilla? Esta acción no se puede deshacer.\n\n' +
+              'Si quieres conservarla, cancela y pulsa antes «Descargar JSON».')) return;
   localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(CLAVE_COPIA);
+  hayCambiosSinGuardar = false;
   location.reload();
 }
 
@@ -1984,10 +2160,10 @@ function computeSemaforo(s){
 
     const lectivas = Math.round(horasSemana * semanas);
     const contexto = lectivas > 0 ? ` De esas ${Math.round(presupuesto)} h, unas ${lectivas} se te van solo en clase.` : '';
-    if(pct <= 30){
+    if(pct <= 40){
       color='verde'; titulo='Carga sostenible';
       desc = `Evaluar te ocuparía unas ${Math.round(horas)} h en el semestre, el ${pct} % de las ${Math.round(presupuesto)} h que declaras dedicar a la asignatura.${contexto}${pista} Queda margen para la docencia y la preparación.${cola}`;
-    } else if(pct <= 50){
+    } else if(pct <= 70){
       color='ambar'; titulo='Carga tensionada · vigila la retroalimentación';
       desc = `Evaluar se llevaría unas ${Math.round(horas)} h, el ${pct} % de tu dedicación a la asignatura.${contexto}${pista} Es mucho para la parte evaluativa, que compite con preparar y dar la clase: mira si puedes aligerar la corrección con coevaluación (C2), retroalimentación en grupo o IA docente (D4).${cola}`;
     } else {
@@ -2398,9 +2574,15 @@ form.addEventListener('input', refreshActiveView);
 form.addEventListener('change', refreshActiveView);
 
 function loadExample(){
-  if(!confirm('Cargar el caso ejemplo reemplazará los datos actuales de la Plantilla. ¿Continuar?')) return;
-  applyState(DEMO_STATE);
+  const actual = cuentaTrabajo();
+  if(!actual.vacia){
+    if(!confirm('Cargar el caso ejemplo reemplazará lo que tienes en la Plantilla. ' +
+                'Se guardará una copia para que puedas deshacerlo. ¿Continuar?')) return;
+    try { localStorage.setItem(CLAVE_COPIA, JSON.stringify(collectState())); } catch(err){ /* sin copia, seguimos */ }
+  }
+  applyState(DEMO_STATE, true);
   persist();
+  muestraDeshacer();
   refreshActiveView();
 }
 
@@ -2415,6 +2597,7 @@ try {
     applyState({});
   }
 } catch(e){ applyState({}); }
+muestraDeshacer();
 updateSemaforo();
 updateProgress();
 </script>
