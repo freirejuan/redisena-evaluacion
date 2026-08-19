@@ -53,6 +53,8 @@
 
   /* Radios */
   --radius-sm:4px; --radius-md:8px; --radius-lg:12px; --radius-xl:16px; --radius-pill:100px;
+  /* Medida de lectura de la portadilla: título y texto comparten columna. */
+  --medida-hero:720px;
 
   /* Sombras */
   --shadow-sm: 0 1px 3px rgba(23,23,150,0.06);
@@ -297,7 +299,13 @@ ul li { margin-bottom: var(--sp-2); color: var(--gris-700); }
 .hero.dark .hero-meta { color: rgba(255,255,255,0.75); }
 .hero.dark .hero-meta strong { color: var(--white); }
 
-.hero p { font-size: var(--text-md); line-height: 1.65; max-width: 720px; margin-bottom: var(--sp-4); }
+/* Una sola columna de lectura en la portadilla. El texto va limitado a 720 px
+   —unos 75 caracteres a 18 px, que es donde la línea empieza a cansar— y el
+   título iba suelto hasta el borde del bloque, 230 px más a la derecha. Esa
+   diferencia no se leía como una decisión: se leía como un margen mal puesto.
+   Ahora comparten medida y el título rompe donde rompe el texto. */
+.hero h1, .hero p { max-width: var(--medida-hero); }
+.hero p { font-size: var(--text-md); line-height: 1.65; margin-bottom: var(--sp-4); }
 .hero-meta {
   display: flex; gap: var(--sp-10); margin-top: var(--sp-5); flex-wrap: wrap;
   color: var(--gris-600); font-size: var(--text-sm);
