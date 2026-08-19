@@ -273,7 +273,7 @@ table.datos .num{text-align:right;font-family:var(--mono);white-space:nowrap}
 
 <div class="intro-card">
   <div class="intro-card-title">Cómo se usa este cuaderno</div>
-  <p><strong>No se rellena de una sentada: se rellena a lo largo del cuatrimestre.</strong> Cada apartado tiene escrito cuándo le toca. En septiembre sólo se tocan los tres primeros; el resto no tiene nada que registrar todavía.</p>
+  <p><strong>Se rellena paulatinamente a lo largo del cuatrimestre.</strong> Cada apartado tiene escrito cuándo le toca. En septiembre sólo se tocan los tres primeros; el resto no tiene nada que registrar todavía.</p>
   <p>El cuaderno no recoge lo que producen los instrumentos de observación —las respuestas de tus estudiantes, tus datos de entregas— sino <strong>qué has leído en ellos y qué has decidido</strong>. Los instrumentos y cómo interpretarlos están en la <a href="/downloads/sprint-2/guia-observar-y-leer.html">guía «Observar y leer lo que ocurre»</a>.</p>
   <p><strong>Tu trabajo se guarda en este navegador y no sale de aquí.</strong> No hay cuenta, no hay servidor, no hay analítica. Descárgalo con «Descargar JSON» para llevártelo a otro equipo o para tener una copia.</p>
   <div class="intro-stats">
@@ -757,7 +757,7 @@ function revisaInstrumentos(){
   caja.hidden = false;
   if(n > 3){
     caja.className = 'callout mal';
-    caja.innerHTML = '<strong>' + n + ' instrumentos son demasiados.</strong> Con más de tres a la vez, en la semana ocho no queda ninguno. Quita los que menos te vayan a decir.';
+    caja.innerHTML = '<strong>Has elegido ' + n + ' de los 5 instrumentos: son demasiados</strong> y corres el riesgo de no poder mantener el esfuerzo. Te sugiero quedarte con tres; elimina los que te vayan a aportar menos.';
   } else if(n < 3){
     caja.className = 'callout aviso';
     caja.innerHTML = '<strong>Llevas ' + n + ' de 3.</strong> Con menos de tres no se triangula: una sola fuente no distingue una señal de una casualidad.';
@@ -1265,7 +1265,7 @@ function vaciaTodo(){
 }
 
 // ─── Ejemplo ───
-// Ninguna pieza del kit se entrega en blanco: este es el mismo caso que recorre
+// Ningún recurso del kit se entrega en blanco: este es el mismo caso que recorre
 // la guía «Observar y leer», para poder ver a dónde se llega antes de empezar.
 const EJEMPLO = {
   _formato:'cuaderno-v1',

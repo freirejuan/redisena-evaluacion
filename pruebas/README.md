@@ -38,6 +38,7 @@ Devuelve 1 si algo falla, así que sirve tal cual en un gancho de pre-push o en 
 | `a11y.js` | Enlace de salto, barra de progreso expuesta como tal, anuncios de los cambios, pasos bloqueados declarados, deslizadores con etiqueta y valor. |
 | `teclado.js` | Que los botones repetidos se distingan entre sí, que los desplegables digan si están abiertos y a qué, que el foco no se pierda al eliminar y que los grupos de opciones tengan nombre. |
 | `impresion-capas.js` | Que al imprimir se abran los apartados plegados —el navegador no lo hace solo y se perdía hasta el 65 % del texto— y que sin JavaScript no queden cajas vacías. |
+| `desfase.js` | **Que el HTML y sus assets no se hayan desincronizado.** `/assets/*` se sirve con caché de un año e `immutable`; si se cambia una hoja o un script sin renombrarlo, el HTML nuevo llega a todo el mundo y el asset viejo se queda. Comprueba que ninguna página dependa de una clase que su hoja no define ni de una función que su script no trae, y que el enlace de salto y el texto de lector de pantalla se comporten como deben. Va la primera de la batería porque cuando falla, falla todo lo demás por debajo. |
 
 **Comportamiento**
 

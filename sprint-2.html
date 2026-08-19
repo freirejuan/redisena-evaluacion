@@ -8,7 +8,7 @@
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">  <link rel="stylesheet" href="/assets/css/fuentes.v1.css">
-  <link rel="stylesheet" href="/assets/css/styles.v3.css">
+  <link rel="stylesheet" href="/assets/css/styles.v5.css">
 </head>
 <body data-page="sprint-2">
 
@@ -44,8 +44,8 @@
       </div>
       <div class="actions">
         <button class="btn ghost small" data-action="detalle" aria-pressed="false">Ver todo el detalle</button>
-        <button class="btn ghost small" data-action="export">Descargar progreso</button>
-        <button class="btn ghost small" data-action="import">Cargar progreso</button>
+        <button class="btn ghost small" data-action="export" title="Baja un único archivo con tu avance, los escenarios de la Plantilla y el Cuaderno de pilotaje">Descargar mi trabajo</button>
+        <button class="btn ghost small" data-action="import" title="Recupera un archivo descargado antes, en este equipo o en otro">Cargar trabajo</button>
         <button class="btn ghost small" data-action="reset">Reiniciar</button>
       </div>
     </div>
@@ -60,8 +60,8 @@
       <h1>Pilotaje con estudiantes y mejora del diseño</h1>
       <p>El tercer sprint se vive con tus estudiantes, a lo largo de un cuatrimestre completo. Implementas el plan del Sprint 1, observas qué ocurre con tres instrumentos ligeros y recalibras tus hipótesis con los tiempos que mides de verdad. Al cerrar tienes un informe de pilotaje y una versión mejorada del diseño.</p>
       <div class="hero-meta">
-        <div><strong>Duración</strong>Un cuatrimestre</div>
-        <div><strong>Pieza principal</strong>Cuaderno de pilotaje</div>
+        <div><strong>Duración</strong>Un cuatrimestre o semestre</div>
+        <div><strong>Recurso principal</strong>Cuaderno de pilotaje</div>
         <div><strong>Estado</strong><span id="sprint-2-state">Próximamente</span></div>
       </div>
       <div class="progress-bar" style="margin-top: var(--sp-5);"><div class="fill" id="sprint-2-progress" style="width: 0%;"></div></div>
@@ -146,6 +146,8 @@
       <h3>Cierra el pilotaje y genera el informe</h3>
       <p>Con la docencia terminada, la segunda lectura; con las actas cerradas, los resultados. El informe de pilotaje se genera solo a partir de lo que hayas ido registrando: no hay que volver a escribir nada.</p>
 
+      <p class="lectura">La pregunta sobre la IA no es cuánto tiempo ahorra, sino en qué se convierte el tiempo que ahorra: <a href="https://juanfreire.substack.com/p/la-ia-generativa-como-amplificador" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>La IA generativa como amplificador de la evaluación y el acompañamiento</a>, de Juan Freire.</p>
+
       <details class="capa">
         <summary>Qué contiene el informe <span class="capa-pista">· seis apartados</span></summary>
         <ol>
@@ -195,6 +197,6 @@
   </footer>
 
 
-  <script src="/assets/js/app.v3.js"></script>
+  <script src="/assets/js/app.v4.js"></script>
 </body>
 </html>

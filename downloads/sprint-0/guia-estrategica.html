@@ -5,10 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guía estratégica · Rediseño de la evaluación</title>
 <!-- Tipografías servidas desde el propio kit. Antes se pedían a Google, que
-     recibía la IP de cada profesor que abriese esta pieza. Si guardas este
+     recibía la IP de cada profesor que abriese este recurso. Si guardas este
      archivo en tu equipo y lo abres sin conexión, el texto se ve igual con las
      tipografías del sistema: no se pierde nada. -->
-<link rel="stylesheet" href="/assets/css/fuentes.css">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/css/fuentes.v1.css">
 <style>
 :root {
   --azul-reflex:#171796; --azul-deep:#0F0F6B; --azul-mid:#3A3AB8;
@@ -102,6 +105,16 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
 .callout.danger .callout-icon{background:var(--acento-coral);}
 .callout strong{color:inherit;font-weight:700;}
 .callout p{margin:0;color:inherit;font-size:inherit;}
+
+/* Sólo para el lector de pantalla: no ocupa sitio ni se ve, pero se lee. */
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;}
+
+/* Lecturas de apoyo. Enlazan a los textos publicados que sostienen el marco:
+   quien quiera el porqué desarrollado sabe dónde encontrarlo, y quien no,
+   sigue leyendo sin tropezar. En papel se imprime la dirección. */
+.lectura{font-size:var(--text-sm);color:var(--gris-600);border-left:2px solid var(--azul-light);padding-left:var(--sp-4);margin:var(--sp-5) 0;line-height:1.7;}
+.lectura::before{content:'Lectura recomendada';display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--azul-mid);margin-bottom:3px;}
+.lectura a{color:var(--azul-reflex);}
 .callout p + p{margin-top:6px;}
 
 .badge{display:inline-flex;align-items:center;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 12px;border-radius:var(--radius-pill);margin-right:6px;}
@@ -187,6 +200,8 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   .section h2{page-break-after:avoid;}
   .journey{overflow:visible;}
   .callout,.signpost,.card{page-break-inside:avoid;}
+  .lectura{page-break-inside:avoid;}
+  .lectura a::after{content:' (' attr(href) ')';font-family:var(--mono);font-size:10px;word-break:break-all;}
 }
 </style>
 </head>
@@ -256,6 +271,8 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
     <li><strong>Los arquetipos de estudiante se reconocen, pero la evaluación no se adapta a ellos.</strong> El profesorado identifica con claridad 3-5 perfiles, pero el diseño evaluativo suele ser uniforme.</li>
     <li><strong>La mejora se percibe como añadir, no como rediseñar.</strong> La falta de tiempo y apoyos hace que fortalecer la evaluación formativa se sienta utópico, como si exigiera carga adicional y no una redistribución inteligente de la existente.</li>
   </ul>
+  <p>A ese diagnóstico se le ha superpuesto, en muy poco tiempo, el cambio que explica el <strong>ahora</strong>: la IA generativa ha erosionado la base probatoria de los instrumentos clásicos. Cuando el entregable que se califica puede producirse al margen del proceso de aprendizaje que pretendía acreditar, lo que se rompe no es solo la detección del plagio: es el <strong>acoplamiento entre la nota y la evidencia de aprendizaje</strong>, y con él la credibilidad de lo que la universidad certifica. La respuesta útil no es defensiva —vigilar más, prohibir más— sino de diseño: <strong>desacoplar</strong> la calificación del entregable, <strong>diseñar hacia atrás</strong> desde lo que se quiere acreditar y construir pruebas que aguanten. Es, en buena medida, lo que hace el resto de esta guía.</p>
+  <p class="lectura">El diagnóstico y la respuesta, desarrollados: <a href="https://juanfreire.substack.com/p/las-tres-crisis-que-la-ia-ha-abierto" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>La inminente crisis de credibilidad de la universidad</a> y <a href="https://juanfreire.substack.com/p/redisenar-la-evaluacion-cuando-el" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>Rediseñar la evaluación cuando el estudiante usa IA generativa</a>, de Juan Freire. El segundo apoya su análisis en un corpus de 57 entrevistas transcritas con profesorado universitario, y es la referencia larga de las decisiones D1 a D3 de este kit.</p>
   <p>Nuestra hipótesis central es que se puede rediseñar la evaluación sin más horas de trabajo, siempre que se diseñe como un proceso coherente: momentos distribuidos con propósitos diferenciados, criterios compartidos, retroalimentación oportuna y un circuito de mejora que no se apague al terminar el curso.</p>
   <div class="callout info">
     <span class="callout-icon">i</span>
@@ -263,7 +280,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   </div>
   <div class="callout info">
     <span class="callout-icon">i</span>
-    <div><strong>Qué vas a recibir en este kit.</strong><p>Cuatro piezas pensadas para que un profesor pueda abordar un primer rediseño estratégico (Sprint 0) de la evaluación de su asignatura: esta <strong>Guía estratégica</strong> (el marco), una <strong>Plantilla estratégica</strong> (donde tomas las decisiones clave y produces un primer espejo cuantitativo), un <strong>Canvas</strong> (donde ves tu estrategia de evaluación de un golpe de vista) y una <strong>Mini-guía de pre-trabajo</strong> para orientar el primer uso del kit.</p></div>
+    <div><strong>Qué vas a recibir en este kit.</strong><p>Cuatro recursos pensados para que un profesor pueda abordar un primer rediseño estratégico (Sprint 0) de la evaluación de su asignatura: esta <strong>Guía estratégica</strong> (el marco), una <strong>Plantilla estratégica</strong> (donde tomas las decisiones clave y produces un primer espejo cuantitativo), un <strong>Canvas</strong> (donde ves tu estrategia de evaluación de un golpe de vista) y una <strong>Mini-guía de pre-trabajo</strong> para orientar el primer uso del kit.</p></div>
   </div>
   <div class="callout success">
     <span class="callout-icon">&#10003;</span>
@@ -448,7 +465,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
     <div><strong>Cómo se articulan los componentes.</strong><p><strong>C1, Touchpoints, son los momentos donde realmente ocurre la evaluación</strong>: el esqueleto del sistema. Los otros seis (C2 a C7) son las <strong>dimensiones con las que se parametriza cada touchpoint</strong>: si hay autoevaluación o coevaluación, qué rol juega la IA del estudiante, qué criterios y evidencias se producen, qué información se recoge, cómo se retroalimenta y qué alimenta la mejora docente.</p><p>Por eso, al diseñar, no se decide componente por componente en abstracto: se decide <strong>touchpoint por touchpoint</strong>, activando las dimensiones que cada uno requiere. La intensidad de un componente en tu asignatura <em>emerge</em> de cuántos touchpoints lo activan y con qué profundidad, no se declara por separado.</p></div>
   </div>
   <div class="cards">
-    <div class="card"><div class="card-accent"></div><div class="card-body"><div class="card-overline">C1 · Touchpoints</div><h3>Momentos evaluativos · el articulador</h3><p>Hitos distribuidos a lo largo del semestre. Cada uno declara propósito (formativo / sumativo / diagnóstico), audiencia, peso y <strong>naturaleza temporal</strong> (puntual o continuo). Los demás componentes se activan en función de cada touchpoint.</p></div></div>
+    <div class="card"><div class="card-accent"></div><div class="card-body"><div class="card-overline">C1 · Touchpoints</div><h3>Momentos evaluativos · el articulador</h3><p>Hitos distribuidos a lo largo del semestre. Cada uno declara su naturaleza —el propósito: formativo, sumativo o mixto—, audiencia, peso y <strong>formato</strong> (puntual o continuo). Los demás componentes se activan en función de cada touchpoint.</p></div></div>
     <div class="card"><div class="card-accent"></div><div class="card-body"><div class="card-overline">C2 · Autoevaluación + coevaluación</div><h3>Bloque con estatuto propio</h3><p>No es un apéndice: el estudiante evalúa su aprendizaje y el de sus pares con criterios compartidos. Escala la retroalimentación.</p></div></div>
     <div class="card"><div class="card-accent"></div><div class="card-body"><div class="card-overline">C3 · IA y tecnología</div><h3>Posición explícita</h3><p>Declaras qué papel tiene la IA en generación, análisis y retroalimentación, tanto para el estudiante como en tu propio trabajo docente. Las reglas del juego se comunican al estudiante.</p></div></div>
     <div class="card"><div class="card-accent"></div><div class="card-body"><div class="card-overline">C4 · Evidencias y criterios</div><h3>Qué se evalúa, con qué criterio</h3><p>Las evidencias son trazables, los criterios son públicos, las rúbricas están compartidas antes del hito.</p></div></div>
@@ -461,10 +478,10 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
     <div><strong>Arquitectura touchpoints-dimensiones = libertad con disciplina.</strong> Puedes declarar pocos touchpoints muy parametrizados o muchos más ligeros, pero ningún touchpoint queda huérfano de dimensiones. La Plantilla te pedirá, en cada touchpoint, qué dimensiones C2-C7 se activan y con qué forma mínima. Si aún no lo has decidido, basta con marcar <em>"lo veré en Sprint 1"</em>: eso también es una decisión consciente.</div>
   </div>
   <h3>¿Qué cuenta como touchpoint?</h3>
-  <p>Al cerrar la Plantilla estratégica te pediremos declarar tus touchpoints y un total orientativo para la asignatura. Antes de estimarlos, conviene fijar qué consideramos touchpoint y su naturaleza temporal:</p>
+  <p>Al cerrar la Plantilla estratégica te pediremos declarar tus touchpoints y un total orientativo para la asignatura. Antes de estimarlos, conviene fijar qué consideramos touchpoint y qué formato puede tener:</p>
   <div class="callout info">
     <span class="callout-icon">i</span>
-    <div><strong>Un touchpoint —o momento evaluativo— es cualquier interacción evaluativa con el estudiante que produzca una lectura sobre su aprendizaje y genere retroalimentación</strong>, ya sea para él o para ti. En el kit usamos las dos formas indistintamente: <em>touchpoint</em> es el identificador técnico (con la sigla <strong>TP</strong>) y <em>momento evaluativo</em> la expresión más natural en prosa.<p><strong>Ejemplos típicos:</strong> entregas con rúbrica aplicada · pruebas cortas · checkpoints conversacionales · autoevaluaciones y coevaluaciones · evaluaciones integradoras · sumativas · síntesis finales · observaciones sistemáticas del aula · interacciones en foro con devolución.</p><p><strong>No cuentan como touchpoints:</strong> clases magistrales sin recogida de evidencia · debates informales sin devolución posterior · entregas en las que no se produce lectura alguna del aprendizaje.</p><p><strong>Naturaleza temporal.</strong> Los touchpoints pueden ser <strong>puntuales</strong> (suceden en un momento concreto del semestre: un examen parcial, una entrega, un punto de control fijado en una semana) o <strong>continuos</strong> (observaciones sistemáticas en clase, bitácoras, interacciones en foro que el profesor lee periódicamente). Declararla importa, porque condiciona cuándo llega la retroalimentación.</p><p><strong>Consecuencia de diseño.</strong> En los <em>puntuales</em>, la retroalimentación es necesariamente posterior al acto evaluativo y conviene fijar en qué plazo llega. En los <em>continuos</em>, la recogida es continua pero la retroalimentación suele ser puntual (un cierre semanal, una devolución en tutoría); también conviene declararla.</p></div>
+    <div><strong>Un touchpoint —o momento evaluativo— es cualquier interacción evaluativa con el estudiante que produzca una lectura sobre su aprendizaje y genere retroalimentación</strong>, ya sea para él o para ti. En el kit usamos las dos formas indistintamente: <em>touchpoint</em> es el identificador técnico (con la sigla <strong>TP</strong>) y <em>momento evaluativo</em> la expresión más natural en prosa.<p><strong>Ejemplos típicos:</strong> entregas con rúbrica aplicada · exámenes, parciales y finales · pruebas cortas · checkpoints conversacionales · autoevaluaciones y coevaluaciones · evaluaciones integradoras · sumativas · síntesis finales · observaciones sistemáticas del aula · interacciones en foro con devolución.</p><p><strong>No cuentan como touchpoints:</strong> clases magistrales sin recogida de evidencia · debates informales sin devolución posterior · entregas en las que no se produce lectura alguna del aprendizaje.</p><p><strong>Formato.</strong> Los touchpoints pueden ser <strong>puntuales</strong> (suceden en un momento concreto del semestre: un examen parcial, una entrega, un punto de control fijado en una semana) o <strong>continuos</strong> (observaciones sistemáticas en clase, bitácoras, interacciones en foro que el profesor lee periódicamente). Declararlo importa, porque condiciona cuándo llega la retroalimentación. En el kit, <strong>formato</strong> es siempre la forma temporal —puntual o continuo— y <strong>naturaleza</strong> es siempre el propósito —formativo, sumativo o mixto—. El libro del Sprint 1 usa las dos palabras con ese mismo sentido y añade un tercer formato, <em>serie</em>, para lo que se repite en ocurrencias separadas.</p><p><strong>Consecuencia de diseño.</strong> En los <em>puntuales</em>, la retroalimentación es necesariamente posterior al acto evaluativo y conviene fijar en qué plazo llega. En los <em>continuos</em>, la recogida es continua pero la retroalimentación suele ser puntual (un cierre semanal, una devolución en tutoría); también conviene declararla.</p></div>
   </div>
   <p class="mini-note" style="font-size:var(--text-sm);color:var(--gris-500);font-style:italic;margin-top:-8px;">El total de touchpoints es orientativo. No inviertas más de tres o cuatro minutos en estimarlo en la Plantilla: es un espejo, no un compromiso.</p>
 </section>
@@ -490,7 +507,8 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   </div>
   <div class="signpost">
     <div class="signpost-num">D4</div>
-    <div><h3>¿Cómo usas tú la IA como profesor para evaluar, analizar y retroalimentar?</h3><p>Decisión operativa sobre tu propio trabajo: qué tareas evaluativas delegas o agilizas con IA (generación de ítems, análisis de patrones, primeros borradores de retroalimentación, detección de señales en evidencias). Es el complemento interno de D2: la viabilidad de sostener el rediseño sin aumentar carga depende, en gran parte, de esta decisión.</p></div>
+    <div><h3>¿Cómo usas tú la IA como profesor para evaluar, analizar y retroalimentar?</h3><p>Decisión operativa sobre tu propio trabajo: qué tareas evaluativas delegas o agilizas con IA (generación de ítems, análisis de patrones, primeros borradores de retroalimentación, detección de señales en evidencias). Es el complemento interno de D2: la viabilidad de sostener el rediseño sin aumentar carga depende, en gran parte, de esta decisión.</p>
+    <p class="lectura">Para decidir D4 con criterio —qué se amplifica y qué no se delega—: <a href="https://juanfreire.substack.com/p/la-ia-generativa-como-amplificador" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>La IA generativa como amplificador de la evaluación y el acompañamiento</a>, de Juan Freire. La idea que lo ordena es la del <em>último kilómetro</em>: la IA puede dar un primer retorno sobre borradores, detectar patrones en grupos grandes y preparar la conversación, pero el juicio sobre la calidad del pensamiento y la relación con cada estudiante no se delegan.</p></div>
     <span class="tag">Plantilla · D4</span>
   </div>
   <div class="callout info">
@@ -522,7 +540,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   <h4 style="margin-top:var(--sp-6);">Touchpoints declarados · 6 en total</h4>
   <div class="table-wrap" tabindex="0" role="region" aria-label="Tabla: Touchpoints declarados · 6 en total (desplazable en horizontal)">
     <table class="tbl">
-      <thead><tr><th style="width:60px;">#</th><th style="width:32%;">Touchpoint · naturaleza · tiempo</th><th>Dimensiones activas</th></tr></thead>
+      <thead><tr><th style="width:60px;">#</th><th style="width:32%;">Touchpoint · formato · tiempo</th><th>Dimensiones activas</th></tr></thead>
       <tbody>
         <tr>
           <td><strong>TP1</strong></td>
@@ -586,7 +604,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   <h4 style="margin-top:var(--sp-6);">Touchpoints declarados · 8 en total</h4>
   <div class="table-wrap" tabindex="0" role="region" aria-label="Tabla: Touchpoints declarados · 8 en total (desplazable en horizontal)">
     <table class="tbl">
-      <thead><tr><th style="width:60px;">#</th><th style="width:32%;">Touchpoint · naturaleza · tiempo</th><th>Dimensiones activas</th></tr></thead>
+      <thead><tr><th style="width:60px;">#</th><th style="width:32%;">Touchpoint · formato · tiempo</th><th>Dimensiones activas</th></tr></thead>
       <tbody>
         <tr>
           <td><strong>TP1</strong></td>
@@ -654,7 +672,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   <p class="lead">El kit articula una secuencia clara: cuatro estaciones conectadas que llevan desde el marco estratégico hasta el diseño operativo de tu asignatura, y luego a su puesta a prueba en el aula. El Sprint 0 produce el encuadre y un primer espejo cuantitativo; el Sprint 1 lo afina.</p>
   <ol class="numbered">
     <li><h3>Lees la Guía estratégica · ~45 min</h3><p>Entiendes el marco, las convicciones y las cuatro decisiones pendientes. Marcas los puntos donde tu contexto difiere del marco general: ese choque es información valiosa.</p></li>
-    <li><h3>Rellenas la Plantilla estratégica · 45-75 min</h3><p>Tomas las cuatro decisiones (D1-D4), declaras tus touchpoints con su naturaleza temporal (puntual o continuo) y los parametrizas activando las dimensiones C2-C7 que cada uno requiere, y cierras con un total orientativo y un semáforo de factibilidad económica. La Plantilla es tu decisión ejecutiva, no un ejercicio de rellenar; si algo aún no está decidido, marcarlo como <em>"lo veré en Sprint 1"</em> también es una decisión válida.</p></li>
+    <li><h3>Rellenas la Plantilla estratégica · 45-75 min</h3><p>Tomas las cuatro decisiones (D1-D4), declaras tus touchpoints con su formato (puntual o continuo) y los parametrizas activando las dimensiones C2-C7 que cada uno requiere, y cierras con un total orientativo y un semáforo de factibilidad económica. La Plantilla es tu decisión ejecutiva, no un ejercicio de rellenar; si algo aún no está decidido, marcarlo como <em>"lo veré en Sprint 1"</em> también es una decisión válida.</p></li>
     <li><h3>Pasas tu Plantilla al Canvas · ~30 min</h3><p>Una página con tu estrategia de evaluación visible de un golpe de vista, incluyendo total de touchpoints y semáforo. Es el artefacto que puedes compartir con colegas, coordinación o contigo mismo dentro de unos meses.</p></li>
     <li><h3>Entras al Sprint 1 como refinamiento, no como nuevo ejercicio</h3><p>El Sprint 1 <strong>parte</strong> del listado de touchpoints y sus dimensiones activas que has dejado en la Plantilla. Su trabajo es desagregar cada touchpoint en instrumentos concretos con rúbricas aplicadas, afinar la factibilidad económica con herramientas más finas, resolver lo que quedó marcado como <em>"lo veré en Sprint 1"</em> y distribuir todo en un calendario semanal. No se reabre la estrategia: se afina.</p></li>
     <li><h3>Implementas y pilotas durante el semestre</h3><p>El diseño se prueba en uso (Sprint 2). Recoges datos, ajustas sobre la marcha, cierras el ciclo de mejora al terminar el curso. Tu rediseño es una hipótesis que se valida enseñando; las mejoras alimentan una siguiente versión.</p></li>
@@ -686,7 +704,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--gris-claro);line-
   <ol class="numbered">
     <li><h3>Lee esta guía completa, en una sola sesión si es posible</h3><p>Anota los puntos donde tu contexto difiere del marco. Esos puntos son oro: son las conversaciones a tener durante el diseño y los ajustes a considerar en tu primer rediseño.</p></li>
     <li><h3>Abre la Plantilla estratégica y empieza por "lo que ya hago hoy"</h3><p>No hace falta que la termines de una sentada. Arrancar por describir en tres o cuatro líneas cómo evalúas hoy te prepara para avanzar con criterio por las decisiones D1-D4 y la estimación de touchpoints.</p></li>
-    <li><h3>Lee la Mini-guía de pre-trabajo</h3><p>Es la pieza más operativa del kit: te dice exactamente qué preparar antes de sentarte a decidir, cuánto tiempo invertir y qué esperar. Unos 20 minutos de lectura.</p></li>
+    <li><h3>Lee la Mini-guía de pre-trabajo</h3><p>Es el recurso más operativo del kit: te dice exactamente qué preparar antes de sentarte a decidir, cuánto tiempo invertir y qué esperar. Unos 20 minutos de lectura.</p></li>
   </ol>
   <div class="callout success">
     <span class="callout-icon">&#10003;</span>

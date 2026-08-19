@@ -40,10 +40,16 @@ const BASE='http://localhost:8099';
   const destino = await pg.locator('#siguiente-paso a').getAttribute('href');
   check(destino==='/sprint-1', `con enlace al Sprint 1 (${destino})`);
 
-  // ── La misma indicación en otra página
-  await pg.goto(BASE+'/kit.html'); await pg.waitForTimeout(400);
+  // ── La misma indicación en otra página del recorrido…
+  await pg.goto(BASE+'/proceso.html'); await pg.waitForTimeout(400);
   txt = await pg.locator('#siguiente-paso .sp-texto').textContent();
-  check(/Sprint 1/.test(txt), 'y la misma indicación aparece en el Kit');
+  check(/Sprint 1/.test(txt), 'y la misma indicación aparece en «El proceso»');
+  // …y en ninguna de las dos de consulta: el Kit es la biblioteca y
+  //    Documentación es referencia, y ahí no se empuja a ninguna acción.
+  for (const f of ['kit.html','documentacion.html']) {
+    await pg.goto(BASE+'/'+f); await pg.waitForTimeout(300);
+    check((await pg.locator('#siguiente-paso').count())===0, `pero no en ${f}, que es de consulta`);
+  }
 
   // ── No hay ninguna llamada a un servidor
   const peticiones=[];

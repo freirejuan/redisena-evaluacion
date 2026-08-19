@@ -37,7 +37,7 @@ const S=(estado,pasos=[])=>({estado, pasos_completados:pasos, completado_en:null
   // D · La portada y el guiado dicen lo mismo
   await cargar(sem(S('completado',['paso_1','paso_2','paso_3']), S('en_progreso',['paso_1']), S('proximamente')), 'index.html');
   const bot = await pg.locator('#continue-btn').getAttribute('href');
-  await pg.goto(B+'/kit.html'); await pg.waitForTimeout(500);
+  await pg.goto(B+'/proceso.html'); await pg.waitForTimeout(500);
   const dest = await pg.locator('#siguiente-paso a').getAttribute('href');
   check(bot===dest, `la portada y el guiado apuntan al mismo sitio (${bot} = ${dest})`);
 

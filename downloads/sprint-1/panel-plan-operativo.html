@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Panel del plan operativo · Sprint 1 · Rediseña.Evaluacion</title>
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="description" content="Sube tu Plantilla del plan operativo y visualiza el Blueprint y el Calendario semanal generados automáticamente. Un kit de Eutika.">
 <style>
 /* ============ DESIGN SYSTEM · UC3M-IMPULSO ============ */
@@ -1176,7 +1179,7 @@ function renderCalendarioDocente(){
     <div class="cal-total-card ${over ? 'over' : (warn ? 'warn' : '')}">
       <div class="ct-label">Consumo del presupuesto docente</div>
       <div class="ct-value">${fmt(pctPresupuesto,1)} %</div>
-      <div class="ct-hint">${fmt(totalDocenteH)} h de <strong>evaluar</strong> sobre las ${fmt(presupuestoTotal)} h que dedicas a la asignatura entera (${fmt(dedProm,1)} h/sem × ${numSem} sem · escenario ${escenarioLabel}). Evaluar compite con preparar y dar la clase: <strong>hasta el 40 % es sostenible, del 40 al 70 % conviene haberlo decidido a propósito, por encima del 70 % el plan no cabe</strong>.</div>
+      <div class="ct-hint">${fmt(totalDocenteH)} h de <strong>evaluar</strong> sobre las ${fmt(presupuestoTotal)} h que dedicas a la asignatura entera (${fmt(dedProm,1)} h/sem × ${numSem} sem · escenario ${escenarioLabel}). Esas horas son tu dedicación total, con las lectivas dentro. Evaluar compite con preparar y dar la clase: <strong>hasta el 40 % es sostenible, del 40 al 70 % conviene haberlo decidido a propósito, por encima del 70 % el plan no cabe</strong>.</div>
     </div>
     <div class="cal-total-card">
       <div class="ct-label">Dedicación promedio</div>

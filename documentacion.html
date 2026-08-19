@@ -8,7 +8,7 @@
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">  <link rel="stylesheet" href="/assets/css/fuentes.v1.css">
-  <link rel="stylesheet" href="/assets/css/styles.v3.css">
+  <link rel="stylesheet" href="/assets/css/styles.v5.css">
 </head>
 <body data-page="documentacion">
 
@@ -44,8 +44,8 @@
       </div>
       <div class="actions">
         <button class="btn ghost small" data-action="detalle" aria-pressed="false">Ver todo el detalle</button>
-        <button class="btn ghost small" data-action="export">Descargar progreso</button>
-        <button class="btn ghost small" data-action="import">Cargar progreso</button>
+        <button class="btn ghost small" data-action="export" title="Baja un único archivo con tu avance, los escenarios de la Plantilla y el Cuaderno de pilotaje">Descargar mi trabajo</button>
+        <button class="btn ghost small" data-action="import" title="Recupera un archivo descargado antes, en este equipo o en otro">Cargar trabajo</button>
         <button class="btn ghost small" data-action="reset">Reiniciar</button>
       </div>
     </div>
@@ -69,24 +69,46 @@
       <a href="/proceso" class="card card-linkable with-accent">
         <div class="meta">Descripción extensa</div>
         <h3>Cómo funciona el proceso</h3>
-        <p>Los tres sprints, sus piezas principales, cómo encajan entre sí y por qué están en este orden. Para quien quiere entender el diseño del kit antes de recorrerlo.</p>
+        <p>Los tres sprints, sus recursos principales, cómo encajan entre sí y por qué están en este orden. Para quien quiere entender el diseño del kit antes de recorrerlo.</p>
         <span class="card-link">Abrir →</span>
       </a>
       <a href="/downloads/sprint-0/guia-estrategica.html#decisiones" class="card card-linkable with-accent" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>
         <div class="meta">Enfoque</div>
         <h3>La IA como eje del proceso y del kit</h3>
-        <p>El enfoque sobre la IA no se concentra en una pieza aparte, sino que aparece distribuido en los propios materiales del kit. La Guía estratégica introduce las decisiones D4 (IA docente) y D2 (IA en el trabajo del estudiante); la Plantilla del plan operativo pide una línea base y una hipótesis con IA para cada fase; y la recalibración con tiempos medidos es lo que cierra el ciclo al final del cuatrimestre. Si quieres entrar por algún sitio, la Guía estratégica suele ser la mejor puerta.</p>
+        <p>El enfoque sobre la IA no se concentra en un recurso aparte, sino que aparece distribuido en los propios materiales del kit. La Guía estratégica introduce las decisiones D4 (IA docente) y D2 (IA en el trabajo del estudiante); la Plantilla del plan operativo pide una línea base y una hipótesis con IA para cada fase; y la recalibración con tiempos medidos es lo que cierra el ciclo al final del cuatrimestre. Si quieres entrar por algún sitio, la Guía estratégica suele ser la mejor puerta.</p>
         <span class="card-link">Leer Guía estratégica →</span>
       </a>
+
       <a href="#glosario" class="card card-linkable with-accent">
         <div class="meta">Vocabulario</div>
         <h3>Glosario operativo</h3>
-        <p>Taxonomía T1–T9, cuatro fases de dedicación, tres lentes de factibilidad, roles, umbrales EEES, línea base vs hipótesis con IA, y el resto del vocabulario del kit.</p>
+        <p>Canvas, Blueprint, taxonomía T1–T9, cuatro fases de dedicación, tres lentes de factibilidad, horas de trabajo del estudiante, línea base frente a hipótesis con IA, y el resto del vocabulario del kit.</p>
         <span class="card-link">Abrir →</span>
       </a>
     </div>
 
-    <div id="siguiente-paso" hidden></div>
+    <h2 id="lecturas">Lecturas de fondo, de fuera del kit</h2>
+    <p>Tres textos de Juan Freire —autor del kit, en Eutika— que desarrollan el razonamiento del que sale este proceso. No hacen falta para usarlo: ayudan a entender por qué está montado así. Se leen en el orden en que se publicaron.</p>
+    <div class="grid-3">
+      <a href="https://juanfreire.substack.com/p/las-tres-crisis-que-la-ia-ha-abierto" class="card card-linkable with-accent" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>
+        <div class="meta">1 · El diagnóstico</div>
+        <h3>La inminente crisis de credibilidad de la universidad</h3>
+        <p>Qué se rompe cuando los entregables y los exámenes dejan de probar lo que decían probar. Es el problema del que parte todo lo demás.</p>
+        <span class="card-link">Leer en Substack →</span>
+      </a>
+      <a href="https://juanfreire.substack.com/p/redisenar-la-evaluacion-cuando-el" class="card card-linkable with-accent" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>
+        <div class="meta">2 · La respuesta</div>
+        <h3>Rediseñar la evaluación cuando el estudiante usa IA generativa</h3>
+        <p>Desacople, diseño hacia atrás y pruebas que aguantan: cómo devolver a la nota evidencias que sólo se producen aprendiendo, en vez de responder a la defensiva. Es el razonamiento que hay detrás del Sprint 0.</p>
+        <span class="card-link">Leer en Substack →</span>
+      </a>
+      <a href="https://juanfreire.substack.com/p/la-ia-generativa-como-amplificador" class="card card-linkable with-accent" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>
+        <div class="meta">3 · La otra cara</div>
+        <h3>La IA generativa como amplificador de la evaluación y el acompañamiento</h3>
+        <p>La IA no en el trabajo del estudiante sino en el del profesor, y con un límite explícito: el <em>último kilómetro</em> —el juicio sobre la calidad del pensamiento y la relación con cada estudiante— no se delega. Es el encuadre de la línea base y la hipótesis con IA del Sprint 1.</p>
+        <span class="card-link">Leer en Substack →</span>
+      </a>
+    </div>
 
     <h2 id="glosario">Glosario operativo rápido</h2>
     <p>Los términos que más se repiten en el kit, con definición breve.</p>
@@ -96,12 +118,28 @@
         <dd>Cada momento evaluativo concreto de la asignatura: una entrega, una prueba, una corrección con rúbrica, una sesión de retroalimentación. Es la unidad mínima con la que se trabaja en el Sprint 1. A lo largo del kit usamos las dos formas, <em>touchpoint</em> (más breve, identificador técnico, sigla <strong>TP</strong>) y <em>momento evaluativo</em> (más descriptivo en prosa).</dd>
       </div>
       <div class="glossary-item">
+        <dt>Canvas</dt>
+        <dd>Tu asignatura resumida en una sola página, generada por la Plantilla estratégica a partir de lo que has rellenado: la ficha, los arquetipos de tu aula, las cuatro decisiones y la línea de tiempo de tus momentos evaluativos. Es la vista que se enseña a una colega, a coordinación o a uno mismo dentro de seis meses.</dd>
+      </div>
+      <div class="glossary-item">
+        <dt>Blueprint <span style="font-weight:400;color:var(--gris-600);font-size:0.85em;">· y Blueprint 0</span></dt>
+        <dd>Una matriz con un momento evaluativo por columna y una dimensión del diseño por fila —cuándo ocurre, quién carga las horas, qué política de IA tiene, qué evidencia deja, qué prácticas con IA se han declarado—. Sirve para ver de una ojeada qué está decidido, qué es una posición provisional y qué falta por diseñar. El <strong>Blueprint 0</strong> es el que genera el Sprint 0, a grano grueso; el del Sprint 1 lo afina y lo genera el Panel a partir de tu Plantilla del plan operativo. Se mantiene la palabra en inglés porque ya está asentada en el kit y en la literatura de diseño de servicios.</dd>
+      </div>
+      <div class="glossary-item">
+        <dt>Cuatrimestre <span style="font-weight:400;color:var(--gris-600);font-size:0.85em;">· o semestre</span></dt>
+        <dd>Uno de los dos periodos lectivos en que se divide el curso académico. Los dos términos se usan según el país y en lo organizativo significan lo mismo. El kit asume una asignatura de un cuatrimestre, con doce a dieciséis semanas de docencia, que es el formato más habitual; si la tuya es anual, trimestral o intensiva, lo único que cambia es el número de semanas que declaras.</dd>
+      </div>
+      <div class="glossary-item">
         <dt>Taxonomía T1–T9</dt>
         <dd>Nueve tipos de touchpoint según la forma que adopta el encuentro evaluativo: T1 examen, T2 entrega, T3 presentación, T4 observación, T5 autoevaluación, T6 evaluación entre pares, T7 tutoría uno a uno, T8 checkpoint y T9 canal de comunicación continua. Hay además una categoría abierta, T-Otro, para lo que no encaje en ninguna. Cada tipo llega con unos atributos por defecto (naturaleza, formato, uso de IA, evidencia) que puedes sobrescribir. Se asigna un tipo a cada touchpoint en la Plantilla del plan operativo.</dd>
       </div>
       <div class="glossary-item">
+        <dt>Naturaleza <span style="font-weight:400;color:var(--gris-600);font-size:0.85em;">· y formato</span></dt>
+        <dd>Las dos formas de calificar un touchpoint, y no significan lo mismo. La <strong>naturaleza</strong> es su <strong>propósito</strong>: formativo (devuelve información pero no pondera nota), sumativo (pondera) o mixto. El <strong>formato</strong> es su <strong>forma temporal</strong>: puntual (ocurre una vez), serie (se repite en ocurrencias separadas) o continuo (se sostiene durante varias semanas). Son independientes: un touchpoint formativo puede ser puntual y uno sumativo puede ser una serie. El Sprint 0 pide sólo el formato, y con dos valores —puntual o continuo—, porque a esa altura del rediseño la distinción entre serie y continuo todavía no cambia ninguna decisión; el plan operativo del Sprint 1 pide los dos y añade <em>serie</em>.</dd>
+      </div>
+      <div class="glossary-item">
         <dt>Cuatro fases</dt>
-        <dd>La dedicación de cada touchpoint se descompone en diseño (preparar el touchpoint), ejecución (el momento en el aula o la entrega), corrección (revisar el producto) y retroalimentación (devolver información al estudiante).</dd>
+        <dd>La dedicación de cada touchpoint se descompone en diseño (preparar el touchpoint), ejecución (el momento en el aula o la entrega), corrección (revisar los entregables) y retroalimentación (devolver información al estudiante).</dd>
       </div>
       <div class="glossary-item">
         <dt>Tres lentes</dt>
@@ -109,7 +147,7 @@
       </div>
       <div class="glossary-item">
         <dt>Semáforo económico</dt>
-        <dd>Compara las horas que te costaría evaluar con la dedicación que has declarado para la asignatura entera. <strong>Verde hasta el 40 %, ámbar del 40 al 70 %, rojo por encima del 70 %.</strong> El mismo criterio en el Sprint 0 y en el Sprint 1, para que la lectura no cambie de un sprint a otro. Mide coste, no calidad: un modelo de clase magistral y examen final sale verde porque es el diseño más barato que existe en dedicación docente, y eso no lo convierte en el mejor.</dd>
+        <dd>Compara las horas que te costaría evaluar con la dedicación que has declarado para la asignatura entera. <strong>Verde hasta el 40 %, ámbar del 40 al 70 %, rojo por encima del 70 %.</strong> <strong>El denominador es tu dedicación total, con las horas de clase dentro</strong> —es la pregunta que más se repite al usarlo—: se hace así porque evaluar no compite con un tiempo aparte, sino con dar la clase y con prepararla. Si prefieres leerlo contra el tiempo que te queda fuera del aula, resta tus horas lectivas del total; los umbrales de 40 y 70 están calibrados para el total y no valdrían tal cual. El mismo criterio en el Sprint 0 y en el Sprint 1, para que la lectura no cambie de un sprint a otro. Mide coste, no calidad: un modelo de clase magistral y examen final sale verde porque es el diseño más eficiente que existe en términos de dedicación docente, y eso no lo convierte en el mejor.</dd>
       </div>
       <div class="glossary-item">
         <dt>Semanas de cierre · C1, C2, C3</dt>
@@ -132,8 +170,8 @@
         <dd>Cada estimación de dedicación va en dos columnas: línea base (cómo lo harías sin IA) e hipótesis con IA (qué cambia si integras IA en esa fase). Al final del cuatrimestre recalibras con tiempos medidos.</dd>
       </div>
       <div class="glossary-item">
-        <dt>Umbrales EEES</dt>
-        <dd>Referencias de carga del estudiante derivadas del Espacio Europeo de Educación Superior (25–30 horas por ECTS; el kit usa 25 por defecto). Se usan como techo de la Lente 2.</dd>
+        <dt>Crédito ECTS <span style="font-weight:400;color:var(--gris-600);font-size:0.85em;">· y las horas de trabajo del estudiante</span></dt>
+        <dd>La unidad en la que se mide una asignatura en el Espacio Europeo de Educación Superior, y en la que piensa primero la mayoría del profesorado europeo. <strong>No tiene una duración fija</strong>: el marco europeo la define entre 25 y 30 horas de trabajo del estudiante y cada universidad declara la suya. <strong>El kit declara 1 ECTS = 25 horas</strong>, que es la más extendida en España, la que deja la cuenta a la vista —6 ECTS = 150 h— y la más prudente, porque un presupuesto menor hace que la misma carga se lea como más exigente. Es un parámetro editable: si tu universidad usa 30, se cambia en la hoja <em>Parámetros</em>. Lo que el kit calcula siempre son <strong>horas</strong>, así que quien trabaje fuera del sistema europeo puede saltarse la conversión y poner el total de horas directamente. Ese total es el techo de la Lente 2.</dd>
       </div>
     </dl>
 
@@ -165,6 +203,12 @@
     </div>
 
     <div class="faq-item">
+      <h3>Trabajo en el portátil y en el despacho. ¿Cómo llevo mi trabajo de uno a otro?</h3>
+      <p>Con un archivo, y sin que aparezca ningún tercero. <strong>«Descargar mi trabajo»</strong>, en la barra de arriba, baja un único archivo <code>.json</code> con todo lo que tienes: tu avance por los sprints, los escenarios de la Plantilla estratégica y el Cuaderno de pilotaje. Guárdalo en el Drive, OneDrive o carpeta sincronizada que ya usas para la asignatura y, en el otro equipo, cárgalo con <strong>«Cargar trabajo»</strong>: lo que traiga el archivo sustituye a lo que hubiera en ese navegador.</p>
+      <p>Es lo mismo que daría una cuenta de usuario, con una diferencia que no es menor: el archivo queda en <em>tu</em> almacenamiento, bajo tus reglas y las de tu universidad, y este sitio no llega a saber que existe. Como el kit no puede recordártelo por correo, te ofrece la descarga al cerrar cada sprint, que es cuando hay algo terminado que merece la pena llevarse.</p>
+    </div>
+
+    <div class="faq-item">
       <h3>¿Y si quiero volver a empezar con otra asignatura?</h3>
       <p>La web trabaja con una asignatura activa por navegador. Si quieres rediseñar otra, tienes dos opciones: o exportas el progreso de la primera (como JSON), reinicias la web y empiezas la segunda; o trabajas la segunda desde otro navegador o perfil. Estamos dándole vueltas a un modo multi-asignatura para próximas iteraciones.</p>
     </div>
@@ -187,6 +231,6 @@
   </footer>
 
 
-  <script src="/assets/js/app.v3.js"></script>
+  <script src="/assets/js/app.v4.js"></script>
 </body>
 </html>

@@ -26,14 +26,40 @@ const ok=[],mal=[]; const check=(c,m)=>(c?ok:mal).push(m);
   check(await page.locator('#asig-nombre').inputValue()==='Termodinámica II', 'el trabajo del formato antiguo aparece intacto');
   check(await page.locator('.tp-card').count()===2, 'con sus 2 touchpoints');
   check(await page.locator('#asig-estudiantes').inputValue()==='90', 'y sus datos del Paso 1');
+  // El campo del formato se llamaba «naturaleza» hasta agosto de 2026. Quien
+  // guardó antes del cambio tiene que seguir viendo lo que marcó: si esto falla,
+  // el touchpoint aparece sin formato y el profesor cree que perdió el dato.
+  const fmtViejo = await page.evaluate(() =>
+    [...document.querySelectorAll('.tp-card')].map(c => {
+      const m = c.querySelector('input[name$="-formato"]:checked');
+      return m ? m.value : null;
+    }));
+  check(JSON.stringify(fmtViejo)===JSON.stringify(['Puntual','Continuo']),
+    `y el formato guardado como «naturaleza» se sigue leyendo (${JSON.stringify(fmtViejo)})`);
   const nom = await page.locator('#esc-select option').first().textContent();
   check(nom==='Lo que tengo hoy', `y se convierte en el primer escenario, llamado «${nom}»`);
   const guardado = await page.evaluate(k=>JSON.parse(localStorage.getItem(k)),CLAVE);
   check(guardado._formato==='escenarios-v1' && guardado.escenarios.length===1, 'el formato guardado ya es el de escenarios');
 
   // ══ 2 · Escenario de estrés generado por la aplicación
+  // Con un solo escenario no hay nada que comparar y el botón no está.
+  check(await page.locator('#esc-comparar').isVisible()===false,
+    'con un solo escenario no se ofrece comparar');
+
   respuesta='2';   // «El doble de estudiantes»
   await page.click('text=+ Nuevo escenario'); await page.waitForTimeout(900);
+
+  // En cuanto hay dos, la comparación se ofrece donde se acaba de crear el
+  // segundo, y no sólo en la pestaña 4 del otro extremo de la pantalla.
+  const btnCmp = page.locator('#esc-comparar');
+  check(await btnCmp.isVisible(), 'al haber dos, aparece el botón de comparar en la barra de escenarios');
+  check(/2 escenarios/.test(await btnCmp.innerText()), `y dice cuántos son («${(await btnCmp.innerText()).trim()}»)`);
+  check(/\(2\)/.test(await page.locator('.tab-btn[data-view="comparar"]').innerText()),
+    'y la pestaña también lleva la cuenta');
+  await btnCmp.click(); await page.waitForTimeout(700);
+  check(await page.evaluate(()=>document.querySelector('.view.active').id)==='view-comparar',
+    'y el botón lleva a la comparación');
+  await page.evaluate(()=>switchView('plantilla')); await page.waitForTimeout(400);
   const opciones = await page.locator('#esc-select option').allTextContents();
   check(opciones.length===2, `ahora hay 2 escenarios (${opciones.join(' | ')})`);
   check(await page.locator('#asig-estudiantes').inputValue()==='180', 'el doble de estudiantes: 90 → 180');

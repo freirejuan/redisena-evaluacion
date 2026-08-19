@@ -85,7 +85,7 @@ const check = (cond, msg) => (cond ? ok : fallos).push(msg);
   ]).then(r => r[0]);
   const ruta = TMP + '/' + descarga.suggestedFilename();
   await descarga.saveAs(ruta);
-  check(/redisena-ingenieria-del-software-\d{8}\.json/.test(descarga.suggestedFilename()),
+  check(/redisena-kit-ingenieria-del-software-\d{8}\.json/.test(descarga.suggestedFilename()),
         `el archivo se llama bien: ${descarga.suggestedFilename()}`);
 
   await page.evaluate(() => localStorage.clear());

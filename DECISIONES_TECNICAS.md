@@ -39,10 +39,10 @@ redisena-evaluacion/
 │
 ├── assets/
 │   ├── css/
-│   │   ├── styles.v2.css        Sistema de diseño
+│   │   ├── styles.v3.css        Sistema de diseño
 │   │   └── fuentes.v1.css       @font-face de las tres familias
 │   ├── js/
-│   │   └── app.v2.js            Estado, localStorage, capas, guiado
+│   │   └── app.v4.js            Estado, localStorage, capas, guiado
 │   ├── fonts/                   19 woff2, subconjunto latino (SIL OFL 1.1)
 │   ├── vendor/
 │   │   ├── xlsx-0.18.5.min.js   SheetJS CE (Apache-2.0)
@@ -251,7 +251,11 @@ Archivo `_headers` en la raíz — Cloudflare Pages lo interpreta automáticamen
 
 **La política de seguridad de contenidos no es decorativa: es la promesa de privacidad hecha cumplir por el navegador.** `default-src 'self'` y `connect-src 'self'` impiden cargar cualquier recurso de terceros o abrir cualquier conexión fuera del dominio; `form-action 'none'` impide enviar un formulario a ninguna parte. Desde el 31 de julio de 2026 no hay ningún recurso externo: las tipografías se sirven desde `/assets/fonts/` y SheetJS desde `/assets/vendor/`. Antes se pedían a `fonts.googleapis.com` y a `cdnjs.cloudflare.com`, que recibían la IP de cada profesor. **`'unsafe-inline'` en `script-src` es necesario porque las piezas descargables usan `<script>` en línea y atributos `onclick`;** si algún día se eliminan, conviene endurecerlo con hashes.
 
-Cuando se publique una nueva versión de un asset **hay que cambiarle el nombre**. No es opcional: `immutable` con un año de caducidad significa que un navegador que ya cargó la versión anterior no vuelve a preguntar por ella, así que una corrección publicada sobre el mismo nombre no llega a quien ya ha entrado alguna vez. El 31 de julio de 2026, al corregir los fallos de estado de la aplicación, se pasó a `styles.v2.css` y `app.v2.js` por esta razón.
+Cuando se publique una nueva versión de un asset **hay que cambiarle el nombre**. No es opcional: `immutable` con un año de caducidad significa que un navegador que ya cargó la versión anterior no vuelve a preguntar por ella, así que una corrección publicada sobre el mismo nombre no llega a quien ya ha entrado alguna vez.
+
+**Esto ya ha fallado una vez, y conviene saber cómo se ve cuando falla.** El 31 de julio de 2026 se publicó `styles.v2.css` y ese mismo día se editó dos veces más sin renombrarlo. El HTML —que se sirve con caché de cinco minutos— llegaba actualizado a todo el mundo; el CSS, no. Resultado para cualquiera que hubiese entrado antes: el enlace «Saltar al contenido» aparecía como texto suelto encima de la cabecera, el `(se abre en una pestaña nueva)` del pie se hacía visible, y los apartados plegables salían sin formato, porque el HTML pedía reglas que su copia del CSS no tenía. Se corrigió pasando a `styles.v3.css` y `app.v4.js`.
+
+La regla práctica: **si el HTML y el asset cambian en el mismo commit, el asset cambia de nombre.** Y la prueba `pruebas/desfase.js` comprueba que ningún HTML dependa de un selector o de una función que su hoja o su script no contengan.
 
 ---
 
@@ -281,7 +285,7 @@ Las páginas raíz se leen en dos capas. La primera —lo que se ve al abrir— 
 
 Dos cosas que no son obvias y conviene no romper:
 
-- **`app.v2.js` los abre en `beforeprint` y los devuelve a como estaban en `afterprint`.** El navegador no despliega un `<details>` cerrado al imprimir, y sin esto en papel se perdía hasta el 65 % del texto de la página, sin ninguna señal de que faltara algo.
+- **`app.v4.js` los abre en `beforeprint` y los devuelve a como estaban en `afterprint`.** El navegador no despliega un `<details>` cerrado al imprimir, y sin esto en papel se perdía hasta el 65 % del texto de la página, sin ninguna señal de que faltara algo.
 - **`#siguiente-paso[hidden]` y `.btn[hidden]` necesitan su regla explícita.** `#siguiente-paso{display:flex}` y `.btn{display:inline-flex}` ganan por especificidad al `[hidden]` del navegador; sin esas dos reglas quedaba una barra azul vacía en seis páginas sin JavaScript, y un botón visible que no hacía nada en las dos páginas sin capas.
 - `lang="es"` declarado en la raíz.
 
@@ -295,7 +299,6 @@ Explicitado para no olvidarlo, no para hacerlo ahora.
 
 - **Analytics.** Decidir si se instala Cloudflare Web Analytics (nativo, sin cookies) o Plausible.
 - **Multi-asignatura.** Hoy una por navegador; abrir soporte para varias requiere cambiar el modelo de estado.
-- **Reserva de sesión 1:1.** Enlazar a Cal.com / Calendly del lead.
 - **Modo colaborativo.** Compartir una asignatura entre varios profesores de la misma materia.
 - **Exportación de Blueprint/Canvas como PDF desde la web.** Hoy se hace dentro de las plantillas.
 - **Internacionalización.** Todo está en español. El kit está diseñado para ser traducible, pero no hay infra de i18n por ahora.

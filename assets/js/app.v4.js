@@ -123,12 +123,34 @@ function state_normalize(state) {
   return state;
 }
 
+// Un navegador puede aceptar la escritura y no guardarla —navegación privada,
+// almacenamiento lleno, cookies restringidas—. Callarlo es lo peor que se puede
+// hacer: el profesor marca pasos durante media hora y al volver no hay nada.
+// Las dos piezas descargables ya avisaban; la web no.
+let avisoAlmacenamientoDado = false;
+
+function aviso_no_guarda() {
+  if (avisoAlmacenamientoDado) return;
+  avisoAlmacenamientoDado = true;
+  const banda = document.createElement('div');
+  banda.className = 'aviso-no-guarda';
+  banda.setAttribute('role', 'alert');
+  banda.innerHTML = '<strong>Este navegador no está guardando tu avance.</strong> ' +
+    'Suele pasar en navegación privada, con las cookies restringidas o con el almacenamiento lleno. ' +
+    'Puedes seguir, pero al cerrar la pestaña se perderá lo que marques: ' +
+    'descárgate tu trabajo antes de irte.';
+  document.body.insertBefore(banda, document.body.firstChild);
+}
+
 function state_save(state) {
   state.actualizado_en = new Date().toISOString();
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    // Escribir sin excepción no basta: hay navegadores que aceptan y descartan.
+    if (localStorage.getItem(STORAGE_KEY) === null) aviso_no_guarda();
   } catch (e) {
     console.error('Error guardando estado', e);
+    aviso_no_guarda();
   }
 }
 
@@ -485,7 +507,7 @@ function ui_marcaPasoEnCurso(sprint, casillas, bloqueado) {
     if (activo && !marca) {
       marca = document.createElement('span');
       marca.className = 'marca-en-curso';
-      marca.textContent = 'Vas por aquí';
+      marca.textContent = 'Estás aquí';
       const num = bloque.querySelector('.step-num');
       if (num) num.appendChild(marca);
     } else if (!activo && marca) {
@@ -592,6 +614,10 @@ function ui_bindSprintPage(sprintId) {
       const s = state_ensure();
       sprint_markComplete(s, sprintId);
       refrescar();
+      // Cerrar un sprint es el momento natural para llevarse el trabajo: hay
+      // algo terminado que perder y el profesor va a estar semanas sin volver.
+      // Se ofrece aquí en vez de recordarlo cada tantos días, que es ruido.
+      ofrece_descarga(sprintId);
     });
   }
 }
@@ -600,10 +626,59 @@ function ui_bindSprintPage(sprintId) {
 // EXPORT / IMPORT
 // ═══════════════════════════════════════════════════
 
+// El trabajo del profesor vive en tres cajones del mismo navegador: el avance
+// por los sprints (esta web), los escenarios de la Plantilla estratégica y el
+// Cuaderno de pilotaje. Sin cuenta de usuario, el fichero ES la portabilidad,
+// así que tiene que bajar entero: tres descargas separadas se convierten en
+// tres oportunidades de perder una.
+const CLAVES_KIT = [
+  ['progreso',  'redisena_evaluacion',                 'tu avance por los sprints'],
+  ['plantilla', 'redisena-plantilla-estrategica-v0',   'los escenarios de la Plantilla estratégica'],
+  ['cuaderno',  'redisena-cuaderno-pilotaje-v0',       'el Cuaderno de pilotaje'],
+];
+
+function kit_recoge() {
+  const piezas = {};
+  CLAVES_KIT.forEach(([nombre, clave]) => {
+    try {
+      const crudo = localStorage.getItem(clave);
+      if (crudo) piezas[nombre] = JSON.parse(crudo);
+    } catch (e) { console.warn('No se pudo leer', clave, e); }
+  });
+  return piezas;
+}
+
+function kit_describe(piezas) {
+  return CLAVES_KIT.filter(([n]) => piezas[n]).map(([, , texto]) => texto);
+}
+
+const NOMBRE_SPRINT = { sprint_0: 'Sprint 0', sprint_1: 'Sprint 1', sprint_2: 'Sprint 2' };
+
+// Se ofrece la descarga al cerrar un sprint. No se fuerza: quien diga que no,
+// no vuelve a verlo por ese sprint.
+function ofrece_descarga(sprintId) {
+  const piezas = kit_describe(kit_recoge());
+  const que = piezas.length ? piezas.join(', ') : 'tu avance';
+  const nombre = NOMBRE_SPRINT[sprintId] || 'el sprint';
+  const texto = `Has cerrado el ${nombre}.\n\n` +
+    `Tu trabajo vive sólo en este navegador: si borras los datos del sitio o cambias de equipo, no viaja contigo. ` +
+    `Puedes descargarlo ahora en un único archivo, que incluye ${que}.\n\n` +
+    `Guárdalo donde ya guardas lo demás —tu Drive, tu carpeta de la asignatura— y podrás volver a cargarlo desde cualquier equipo.\n\n` +
+    `¿Lo descargas?`;
+  if (confirm(texto)) state_export();
+}
+
 function state_export() {
   const s = state_load();
   if (!s) { alert('No hay estado para exportar todavía.'); return; }
-  const blob = new Blob([JSON.stringify(s, null, 2)], { type: 'application/json' });
+  const piezas = kit_recoge();
+  const sobre = {
+    _archivo: 'redisena-kit-v1',
+    guardado_en: new Date().toISOString(),
+    contiene: kit_describe(piezas),
+    piezas: piezas,
+  };
+  const blob = new Blob([JSON.stringify(sobre, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   const stamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
@@ -612,7 +687,7 @@ function state_export() {
     .normalize('NFD').replace(/\p{Diacritic}/gu, '')
     .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'asignatura';
   a.href = url;
-  a.download = `redisena-${name}-${stamp}.json`;
+  a.download = `redisena-kit-${name}-${stamp}.json`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -624,6 +699,24 @@ function state_import(file) {
   reader.onload = (e) => {
     try {
       const parsed = JSON.parse(e.target.result);
+
+      // Sobre nuevo: trae las tres piezas. Se restaura cada una en su cajón.
+      if (parsed._archivo === 'redisena-kit-v1' && parsed.piezas) {
+        const puestas = [];
+        CLAVES_KIT.forEach(([nombre, clave, texto]) => {
+          const pieza = parsed.piezas[nombre];
+          if (!pieza) return;
+          const valor = (nombre === 'progreso') ? state_normalize(pieza) : pieza;
+          localStorage.setItem(clave, JSON.stringify(valor));
+          puestas.push(texto);
+        });
+        if (!puestas.length) throw new Error('el archivo no trae ninguna pieza reconocible');
+        alert('Restaurado: ' + puestas.join(' · ') + '.');
+        location.reload();
+        return;
+      }
+
+      // Archivo antiguo: sólo el avance por los sprints. Se sigue admitiendo.
       if (!parsed.schema_version) throw new Error('el archivo no parece un progreso de Rediseña.Evaluacion');
       if (!parsed.sprints) throw new Error('el archivo no contiene datos de sprints');
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state_normalize(parsed)));

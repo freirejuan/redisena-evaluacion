@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guía breve de uso · Plantilla del plan operativo · Sprint 1 · Rediseña.Evaluacion</title>
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <style>
 /* ============ DESIGN SYSTEM · UC3M-IMPULSO ============ */
 :root{
@@ -418,7 +421,11 @@ a.kit-tag:hover{opacity:1;}
         </div>
         <div class="def-item">
           <div class="def-term">Naturaleza (F/S/M)</div>
-          <div class="def-body"><strong>Formativo</strong> (da retroalimentación pero no pondera nota), <strong>Sumativo</strong> (ponderación en nota final), <strong>Mixto</strong> (las dos cosas). Es la distinción clave para leer la Lente 3.</div>
+          <div class="def-body"><strong>El propósito del TP.</strong> <strong>Formativo</strong> (da retroalimentación pero no pondera nota), <strong>Sumativo</strong> (ponderación en nota final), <strong>Mixto</strong> (las dos cosas). Es la distinción clave para leer la Lente 3.</div>
+        </div>
+        <div class="def-item">
+          <div class="def-term">Formato</div>
+          <div class="def-body"><strong>La forma temporal del TP.</strong> <strong>Puntual</strong> (ocurre una vez), <strong>Serie</strong> (se repite en ocurrencias separadas: un quiz semanal, una tutoría que se repite) o <strong>Continuo</strong> (se sostiene a lo largo de varias semanas: una bitácora, la observación sistemática del aula). Naturaleza y formato son independientes: un TP formativo puede ser puntual, y uno sumativo puede ser una serie.</div>
         </div>
         <div class="def-item">
           <div class="def-term">Fases de un TP</div>
@@ -491,7 +498,7 @@ a.kit-tag:hover{opacity:1;}
               <span class="check-time">2 min</span>
               <span class="check-piece">Hoja Parámetros</span>
             </div>
-            <p>Abre la hoja <strong>Parámetros</strong>. Ajusta: número de semanas lectivas (por defecto 15), ECTS de la asignatura (por defecto 6), horas por ECTS (25 por defecto, estándar EEES), tamaño del grupo y umbrales de pico si quieres afinar cuándo se dispara una alerta.</p>
+            <p>Abre la hoja <strong>Parámetros</strong>. Ajusta: número de semanas lectivas (por defecto 15), ECTS de la asignatura (por defecto 6), horas por ECTS (25, que es la equivalencia que declara el kit; el marco europeo admite de 25 a 30 y cada universidad fija la suya, así que si la tuya usa otra cámbiala aquí), tamaño del grupo y umbrales de pico si quieres afinar cuándo se dispara una alerta.</p>
           </div>
         </li>
 
@@ -507,8 +514,8 @@ a.kit-tag:hover{opacity:1;}
             <ul>
               <li><strong>Nombre</strong> del TP (ej.: "Parcial 1", "Entrega P3", "Tutoría evaluativa").</li>
               <li><strong>Tipo</strong> (elige del desplegable).</li>
-              <li><strong>Naturaleza</strong>: Formativo, Sumativo o Mixto.</li>
-              <li><strong>Formato</strong>: presencial, online, mixto.</li>
+              <li><strong>Naturaleza</strong> —el propósito—: Formativo, Sumativo o Mixto.</li>
+              <li><strong>Formato</strong> —la forma temporal—: Puntual (ocurre una vez), Serie (se repite en ocurrencias separadas) o Continuo (se sostiene a lo largo de varias semanas). El Panel usa esta columna para repartir el TP en el calendario, así que conviene que diga esto y no cómo se imparte.</li>
               <li><strong>Política IA</strong>: lo que esperas del estudiante respecto al uso de IA en ese TP.</li>
               <li><strong>Responsable</strong>: Coordinador, Profesor o Ambos.</li>
               <li><strong>Ocurrencias</strong>: cuántas veces se repite en el curso.</li>
@@ -573,7 +580,7 @@ a.kit-tag:hover{opacity:1;}
           <h3>Carga docente</h3>
         </div>
         <p class="lente-question"><strong>Qué responde:</strong> ¿cuándo voy a ir ahogado este cuatrimestre y cabe mi plan en el presupuesto que me he marcado?</p>
-        <p class="prose"><strong>Qué miras:</strong> el <strong>consumo de presupuesto</strong>, que es la suma de horas docente del cuatrimestre dividida entre la dedicación promedio que declaraste (10 h/sem por defecto) multiplicada por el número de semanas. Ojo con lo que mide: son las horas de <em>evaluar</em> sobre las horas que dedicas a la asignatura <em>entera</em>, y evaluar compite con preparar y dar la clase. La <strong>curva semanal</strong> y los picos los ves en el Panel, subiendo este archivo.</p>
+        <p class="prose"><strong>Qué miras:</strong> el <strong>consumo de presupuesto</strong>, que es la suma de horas docente del cuatrimestre dividida entre la dedicación promedio que declaraste (10 h/sem por defecto) multiplicada por el número de semanas. Ojo con lo que mide: son las horas de <em>evaluar</em> sobre las horas que dedicas a la asignatura <em>entera</em>, y evaluar compite con preparar y dar la clase. <strong>Esa dedicación es la total, con las horas de clase dentro</strong>: es la duda que más se repite al leer el porcentaje. La <strong>curva semanal</strong> y los picos los ves en el Panel, subiendo este archivo.</p>
         <div class="prose">
           <ul>
             <li><strong>Consumo hasta el 40 %</strong> = carga sostenible. Queda margen para la docencia y la preparación.</li>
@@ -604,7 +611,7 @@ a.kit-tag:hover{opacity:1;}
         <div class="callout warn">
           <span class="callout-label">Aviso · La Lente 2 concentra la carga en la semana de entrega</span>
           <p>La Lente 2 asume que todas las horas de estudiante de un TP caen en la semana de entrega (sem_ini = sem_fin). En la realidad el estudiante reparte el trabajo en las 2-4 semanas previas, así que esta curva <strong>exagera los picos y los valles</strong>. Úsala para ver "cuándo tiene que entregar", no "cuánto va a trabajar exactamente esa semana".</p>
-          <p>Para ver la distribución realista, apóyate en el <strong>Panel del plan operativo</strong> (pieza complementaria del Sprint 1: lee tu XLSX y genera un Calendario semanal con reparto realista, 50 / 30 / 20 % en las semanas previas a la entrega para TPs puntuales). Aplana típicamente los picos del estudiante un 30-50 % respecto a la Lente 2. Antes de decidir "aplano el diseño porque S8 tiene 12 h", contrasta ese pico con el Calendario del Panel.</p>
+          <p>Para ver la distribución realista, apóyate en el <strong>Panel del plan operativo</strong> (recurso complementario del Sprint 1: lee tu XLSX y genera un Calendario semanal con reparto realista, 50 / 30 / 20 % en las semanas previas a la entrega para TPs puntuales). Aplana típicamente los picos del estudiante un 30-50 % respecto a la Lente 2. Antes de decidir "aplano el diseño porque S8 tiene 12 h", contrasta ese pico con el Calendario del Panel.</p>
         </div>
       </div>
 

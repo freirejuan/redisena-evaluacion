@@ -45,6 +45,30 @@ const BASE='http://localhost:8099';
   check((await pg.locator('.checkbox[data-sprint]').count())===3, 'los tres pasos siguen en la primera capa');
   check(await pg.locator('[data-action="complete-sprint"]').isVisible(), 'y el botón de cerrar el sprint también');
 
+  // ── La biblioteca: un recurso por línea, la descripción a un clic
+  await pg.goto(BASE+'/kit.html'); await pg.waitForTimeout(600);
+  const recursos = await pg.locator('details.capa-recurso').count();
+  check(recursos>=8, `el Kit lista ${recursos} recursos plegables`);
+  check((await pg.locator('details.capa-recurso[open]').count())===0, 'y todos empiezan recogidos');
+  // El título y los enlaces se ven sin abrir nada
+  const visibles = await pg.evaluate(()=>{
+    // getBoundingClientRect no vale aquí: el contenido de un <details> cerrado
+    // se oculta con content-visibility y los hijos siguen midiendo. checkVisibility
+    // sí lo tiene en cuenta, que es lo que de verdad ve el profesor.
+    const ve = el => !!el && el.checkVisibility({ contentVisibilityAuto: true, visibilityProperty: true, opacityProperty: true });
+    const c = [...document.querySelectorAll('.tool-card')];
+    return { titulos: c.filter(x => ve(x.querySelector('.rec-titulo'))).length,
+             enlaces: c.filter(x => ve(x.querySelector('.actions a'))).length,
+             descripciones: c.filter(x => ve(x.querySelector('.capa-recurso > p'))).length };
+  });
+  check(visibles.titulos===recursos && visibles.enlaces===recursos && visibles.descripciones===0,
+    `sin abrir nada se ven ${visibles.titulos} títulos y ${visibles.enlaces} grupos de enlaces, y ninguna descripción (${visibles.descripciones})`);
+  await pg.locator('details.capa-recurso').first().locator('summary').click(); await pg.waitForTimeout(300);
+  check((await pg.locator('details.capa-recurso[open]').count())===1, 'abrir uno abre sólo ese');
+  await pg.click('[data-action="detalle"]'); await pg.waitForTimeout(400);
+  check((await pg.locator('details.capa-recurso[open]').count())===recursos, 'y el conmutador los abre todos');
+  check((await pg.locator('#siguiente-paso').count())===0, 'la biblioteca no lleva la barra de «lo siguiente»');
+
   check(errs.length===0,'sin errores de JavaScript'+(errs.length?': '+errs.join(' | '):''));
   await b.close();
   console.log(ok.map(m=>'  ✓ '+m).join('\n'));

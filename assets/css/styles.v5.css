@@ -432,14 +432,22 @@ ul li { margin-bottom: var(--sp-2); color: var(--gris-700); }
 /* ═══════════════════════════════════════════════════
    CALLOUT
    ═══════════════════════════════════════════════════ */
+/* El aviso era un contenedor flexible, y en un contenedor flexible cada trozo
+   de texto suelto y cada <strong> se convierte en una columna: cualquier aviso
+   con más de una frase con negritas se rompía en tiras verticales. Ahora la
+   etiqueta flota y el texto fluye normal, que es lo que se esperaba siempre. */
 .callout {
   border-radius: var(--radius-md);
   padding: var(--sp-3) var(--sp-4);
   font-size: var(--text-sm);
   line-height: 1.65;
-  display: flex; gap: var(--sp-3); align-items: flex-start;
   margin: var(--sp-3) 0;
 }
+.callout::before { float: left; margin: 0 var(--sp-3) 0 0; }
+.callout::after { content: ''; display: block; clear: both; }
+.callout > p { margin-bottom: var(--sp-2); }
+.callout > p:last-child { margin-bottom: 0; }
+.callout > ul, .callout > ol { margin: var(--sp-2) 0 var(--sp-2) var(--sp-5); }
 .callout.wireframe {
   background: var(--azul-ghost);
   border-left: 3px solid var(--azul-mid);
@@ -452,8 +460,7 @@ ul li { margin-bottom: var(--sp-2); color: var(--gris-700); }
   letter-spacing: 0.1em; text-transform: uppercase;
   font-weight: 700; font-style: normal;
   padding: 2px 8px; background: var(--azul-pale);
-  border-radius: var(--radius-sm); align-self: flex-start;
-  flex-shrink: 0;
+  border-radius: var(--radius-sm);
 }
 .callout.info {
   background: var(--azul-ghost);
@@ -465,8 +472,7 @@ ul li { margin-bottom: var(--sp-2); color: var(--gris-700); }
   letter-spacing: 0.1em; text-transform: uppercase;
   font-weight: 700;
   padding: 2px 8px; background: var(--azul-pale);
-  border-radius: var(--radius-sm); align-self: flex-start;
-  flex-shrink: 0; color: var(--azul-reflex);
+  border-radius: var(--radius-sm); color: var(--azul-reflex);
 }
 
 /* ═══════════════════════════════════════════════════
@@ -774,3 +780,112 @@ footer a:hover { color: var(--azul-reflex); }
   #siguiente-paso .btn { display: none; }
   .step-block.ya-hecho { opacity: 1; }
 }
+
+/* Lectura de fuera del kit. Se marca como tal para que se distinga de lo que
+   el propio kit trae, y no se presenta nunca como obligatoria. */
+.lectura {
+  font-size: var(--text-sm);
+  color: var(--gris-600);
+  border-left: 2px solid var(--azul-light);
+  padding-left: var(--sp-4);
+  margin-top: var(--sp-4);
+}
+.lectura::before {
+  content: 'Lectura recomendada';
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--azul-mid);
+  margin-bottom: 3px;
+}
+
+/* ═══════════════════════════════════════════════════
+   RECURSOS PLEGADOS · página del Kit
+   La biblioteca se recorre buscando, no leyendo. Por defecto se ve el título
+   y los botones; la descripción se abre a un clic, o de golpe con el
+   conmutador de la barra de estado, porque es un <details class="capa"> más.
+   ═══════════════════════════════════════════════════ */
+
+.tool-card > .capa-recurso {
+  flex: 1;
+  border-top: none;
+  margin: 0;
+  min-width: 0;
+}
+.capa-recurso > summary {
+  padding: 0;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+.capa-recurso > summary::before {
+  color: var(--azul-mid);
+  font-size: var(--text-md);
+  align-self: center;
+}
+.capa-recurso .rec-titulo {
+  font-family: var(--sans);
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--ink);
+}
+.capa-recurso > summary:hover .rec-titulo { color: var(--azul-reflex); }
+.capa-recurso > summary .capa-pista {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--azul-mid);
+  font-weight: 600;
+}
+.capa-recurso > p {
+  margin: var(--sp-2) 0 var(--sp-1) calc(1em + var(--sp-3));
+  font-size: var(--text-sm);
+  color: var(--gris-700);
+  line-height: 1.6;
+}
+.capa-recurso > :last-child { margin-bottom: 0; }
+
+/* Índice de una página larga que se lee de arriba abajo. No se pliega —plegar
+   protege una acción o una comparación, no acorta una lectura—: se navega. */
+.indice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--sp-2) var(--sp-4);
+  font-size: var(--text-sm);
+  border-top: 1px solid var(--gris-200);
+  border-bottom: 1px solid var(--gris-200);
+  padding: var(--sp-3) 0;
+  margin: var(--sp-5) 0 var(--sp-6);
+}
+.indice strong {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gris-600);
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════════════
+   EL NAVEGADOR NO ESTÁ GUARDANDO
+   Sin cuenta de usuario, el almacenamiento del navegador es lo único que hay.
+   Cuando no está disponible —navegación privada, cookies restringidas, disco
+   lleno—, callarlo significa que el profesor trabaja media hora y lo pierde.
+   La banda va arriba del todo, antes de la cabecera, y no se puede cerrar:
+   mientras la condición dure, el aviso es cierto.
+   ═══════════════════════════════════════════════════ */
+.aviso-no-guarda {
+  background: var(--acento-amber-pale, #FBF0D9);
+  border-bottom: 3px solid var(--acento-amber, #E8A317);
+  color: #6B4400;
+  padding: var(--sp-3) var(--sp-6);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  text-align: center;
+}
+.aviso-no-guarda strong { color: #5B3A00; }
+@media print { .aviso-no-guarda { display: none; } }

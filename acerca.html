@@ -8,7 +8,7 @@
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">  <link rel="stylesheet" href="/assets/css/fuentes.v1.css">
-  <link rel="stylesheet" href="/assets/css/styles.v3.css">
+  <link rel="stylesheet" href="/assets/css/styles.v5.css">
 </head>
 <body data-page="acerca">
 
@@ -44,8 +44,8 @@
       </div>
       <div class="actions">
         <button class="btn ghost small" data-action="detalle" aria-pressed="false">Ver todo el detalle</button>
-        <button class="btn ghost small" data-action="export">Descargar progreso</button>
-        <button class="btn ghost small" data-action="import">Cargar progreso</button>
+        <button class="btn ghost small" data-action="export" title="Baja un único archivo con tu avance, los escenarios de la Plantilla y el Cuaderno de pilotaje">Descargar mi trabajo</button>
+        <button class="btn ghost small" data-action="import" title="Recupera un archivo descargado antes, en este equipo o en otro">Cargar trabajo</button>
         <button class="btn ghost small" data-action="reset">Reiniciar</button>
       </div>
     </div>
@@ -58,6 +58,16 @@
     <h1>Acerca de Rediseña.Evaluacion</h1>
     <p class="lead">Rediseña.Evaluacion es un proceso guiado y un kit de herramientas pensados para rediseñar la evaluación de asignaturas universitarias con criterio, y con la experimentación con IA como uno de los ejes del trabajo. Lo desarrollamos desde <a href="https://eutika.com/" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>Eutika</a> y lo publicamos con licencia abierta para que pueda reutilizarse en cualquier universidad o contexto de formación superior.</p>
 
+    <p class="indice"><strong>En esta página</strong>
+      <a href="#para-quien">Para quién está pensado</a>
+      <a href="#por-que">Por qué existe</a>
+      <a href="#estado">Estado del kit</a>
+      <a href="#privacidad">Privacidad</a>
+      <a href="#licencia">Licencia y reutilización</a>
+      <a href="#contacto">Contacto y créditos</a>
+      <a href="#retroalimentacion">Retroalimentación</a>
+    </p>
+
     <h2 id="para-quien">Para quién está pensado</h2>
     <p>Está pensado para profesoras y profesores universitarios que quieren rediseñar con criterio la evaluación de una de sus asignaturas, mejorando el acompañamiento al estudiante y afinando los tiempos de dedicación, con la IA integrada como eje explícito de experimentación. Funciona en cualquier asignatura de grado o máster y en cualquier formato docente (presencial, online o híbrido).</p>
     <p>Si te reconoces en alguna de estas situaciones, el kit encaja con lo que buscas:</p>
@@ -69,7 +79,8 @@
       <li><strong>Quieres salir de aquí con material concreto</strong>, no con un taller interesante que luego se queda en el cuaderno, sino con un plan, un calendario y un Blueprint que puedas llevar a tu próxima coordinación.</li>
     </ul>
 
-    <h2>Por qué existe</h2>
+    <h2 id="por-que">Por qué existe</h2>
+    <p class="lectura">El diagnóstico del que parte el kit, desarrollado: <a href="https://juanfreire.substack.com/p/las-tres-crisis-que-la-ia-ha-abierto" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>La inminente crisis de credibilidad de la universidad</a>, de Juan Freire. Es el primero de una serie de tres sobre la IA en la educación superior; los otros dos están en <a href="/documentacion#lecturas">Documentación</a>.</p>
     <p>El rediseño de la evaluación es una de las conversaciones más necesarias en la educación superior ahora mismo. La llegada de la IA generativa ha acelerado esa necesidad: muchas pruebas tradicionales han perdido parte de su sentido y, al mismo tiempo, se abren posibilidades didácticas y operativas que hace unos años no estaban sobre la mesa. Lo que nos encontramos, a la vez, es que el profesorado dispone de poco tiempo, de pocos marcos concretos y de muy pocas herramientas que sepan equilibrar el rigor con la factibilidad real del día a día.</p>
     <p>El kit intenta responder a tres carencias operativas que nos hemos encontrado una y otra vez al trabajar con docentes:</p>
     <ul>
@@ -78,29 +89,31 @@
       <li><strong>Falta de marco para la IA.</strong> Lo habitual es que la IA se trate como un tema aparte, en forma de "política de uso", en lugar de integrarla en el propio diseño de la evaluación. En el kit hemos preferido integrarla dentro de la estructura del plan operativo, a través de la línea base y la hipótesis con IA, para que la pregunta no se quede en "¿permito o no permito?" y pueda desplazarse hacia "¿cómo la uso para evaluar y acompañar mejor?".</li>
     </ul>
 
-    <h2>Estado del kit</h2>
-    <p>El kit está en desarrollo activo, lo cual quiere decir que algunas piezas están ya estables y otras las iremos incorporando a medida que vayamos aprendiendo del uso real. Así está el mapa hoy:</p>
+    <h2 id="estado">Estado del kit</h2>
+    <p>El kit está en desarrollo activo, lo cual quiere decir que algunos recursos están ya estables y otros los iremos incorporando a medida que vayamos aprendiendo del uso real. Así está el mapa hoy:</p>
     <ul>
       <li><strong>Sprint 0</strong> · estable. Incluye la Plantilla estratégica —con comparación de escenarios y cinco asignaturas de ejemplo—, la Guía estratégica y la Mini-guía de pre-trabajo.</li>
       <li><strong>Sprint 1</strong> · estable. Incluye la Plantilla del plan operativo, el Kit de onboarding (con Guía breve, Plantilla EJEMPLO IngeSoft y Recorrido guiado) y el Panel del plan operativo, que lee tu Plantilla y te devuelve automáticamente el Blueprint y el Calendario semanal.</li>
-      <li><strong>Sprint 2</strong> · primera versión publicada. Incluye el Cuaderno de pilotaje y la guía «Observar y leer lo que ocurre». Es la pieza más joven del kit: se ha construido después de los sprints 0 y 1 a propósito, y se afinará con el primer cuatrimestre de uso real.</li>
+      <li><strong>Sprint 2</strong> · primera versión publicada. Incluye el Cuaderno de pilotaje y la guía «Observar y leer lo que ocurre». Es la parte más reciente del kit: se ha construido después de los sprints 0 y 1 a propósito, y se afinará con el primer cuatrimestre de uso real.</li>
     </ul>
 
     <h2 id="privacidad">Privacidad</h2>
     <p>El kit no tiene cuenta de usuario, no envía nada a ningún servidor y no recoge ninguna analítica ni telemetría. Tu trabajo vive en el almacenamiento de tu navegador y en los archivos que tú te descargas. Es una decisión de diseño, no una funcionalidad pendiente.</p>
 
-    <details class="capa">
-      <summary>Cómo lo garantizamos, y no sólo lo prometemos <span class="capa-pista">· lo comprobable</span></summary>
+    <h3>Cómo lo garantizamos, y no sólo lo prometemos</h3>
       <p>Una promesa de privacidad que sólo se sostiene en la buena fe de quien la hace vale poco. Estas son las tres cosas concretas que la respaldan:</p>
       <ul>
-        <li><strong>Ninguna pieza del kit contacta con ningún dominio ajeno.</strong> Ni una. Las tipografías y el lector de hojas de cálculo se sirven desde este mismo sitio; antes venían de Google y de un CDN, que recibían tu dirección IP cada vez que abrías una página.</li>
+        <li><strong>Ningún recurso del kit contacta con ningún dominio ajeno.</strong> Ni una. Las tipografías y el lector de hojas de cálculo se sirven desde este mismo sitio; antes venían de Google y de un CDN, que recibían tu dirección IP cada vez que abrías una página.</li>
         <li><strong>El navegador lo impide, no sólo nosotros.</strong> El sitio se sirve con una <em>Content-Security-Policy</em> que bloquea cualquier carga de recursos de terceros, cualquier conexión fuera de este dominio y el envío de cualquier formulario a ninguna parte. Si alguien introdujera mañana una llamada externa, tu navegador la bloquearía.</li>
         <li><strong>El código es abierto y se puede comprobar.</strong> Licencia MIT. Lo que aquí se afirma se puede verificar leyéndolo, o abriendo el inspector de tu navegador y mirando la pestaña de red.</li>
       </ul>
-      <p>Como contrapartida honesta: si borras los datos del sitio, usas navegación privada o cambias de equipo, tu trabajo no viaja contigo solo. Descárgatelo con «Descargar progreso» y guárdalo donde tú quieras. Es el precio de que no haya nadie custodiándolo.</p>
-    </details>
+      <p>Como contrapartida honesta: si borras los datos del sitio, usas navegación privada o cambias de equipo, tu trabajo no viaja contigo solo. Es el precio de que no haya nadie custodiándolo.</p>
 
-    <h2>Licencia y reutilización</h2>
+      <h3>Cómo trabajar en dos equipos sin que nadie guarde nada tuyo</h3>
+      <p>Lo que da una cuenta de usuario —recuperar tu trabajo en otro sitio— se consigue con un archivo, y sin que aparezca ningún tercero: <strong>«Descargar mi trabajo» baja un único archivo con todo</strong>, tu avance por los sprints, los escenarios de la Plantilla estratégica y el Cuaderno de pilotaje. Guárdalo en el Drive, OneDrive o carpeta sincronizada que ya usas para la asignatura, y en el otro equipo cárgalo con «Cargar trabajo».</p>
+      <p>La diferencia con una cuenta no es de comodidad, es de quién custodia qué: el archivo queda en <em>tu</em> almacenamiento, bajo tus reglas y las de tu universidad, y este sitio no llega a saber que existe. El kit te ofrece la descarga al cerrar cada sprint, que es cuando hay algo terminado que merece la pena llevarse.</p>
+
+    <h2 id="licencia">Licencia y reutilización</h2>
     <p>El kit se publica con licencia abierta para que pueda ser adoptado y adaptado en otras universidades y contextos de formación. Se usan dos licencias complementarias según la naturaleza del material:</p>
     <ul>
       <li><strong>Contenidos del kit</strong> (guías, plantillas, blueprint, documentación, textos de la web) · <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank" rel="noopener license">Creative Commons Atribución-CompartirIgual 4.0 Internacional (CC&nbsp;BY-SA&nbsp;4.0)</a>.</li>
@@ -115,10 +128,10 @@
     <p>Atribución sugerida: <em>"Basado en Rediseña.Evaluacion, kit desarrollado por Eutika (eutika.com). Publicado bajo CC&nbsp;BY-SA&nbsp;4.0."</em></p>
     <p>Los textos legales completos están en el repositorio del proyecto: <code>LICENSE</code> (código, MIT) y <code>LICENSE-CONTENT.md</code> (contenidos, CC&nbsp;BY-SA&nbsp;4.0).</p>
 
-    <h2>Contacto y créditos</h2>
+    <h2 id="contacto">Contacto y créditos</h2>
     <p>Esta herramienta ha sido desarrollada por el equipo de <a href="https://eutika.com/" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>Eutika</a>. Para cualquier consulta, propuesta de colaboración o adaptación a otros contextos, la persona de contacto es Juan Freire · <a href="mailto:juan@eutika.com">juan@eutika.com</a>.</p>
 
-    <h2>Retroalimentación</h2>
+    <h2 id="retroalimentacion">Retroalimentación</h2>
     <p>Si estás probando el kit y quieres contarnos qué te ha funcionado, dónde te has atascado o qué te habría venido bien que estuviera y no está, escríbenos. Cada iteración del kit se alimenta de ese uso real: cuanto antes nos llega la retroalimentación, antes podemos incorporarlo al siguiente ciclo.</p>
 
   </main>
@@ -131,6 +144,6 @@
   </footer>
 
 
-  <script src="/assets/js/app.v3.js"></script>
+  <script src="/assets/js/app.v4.js"></script>
 </body>
 </html>

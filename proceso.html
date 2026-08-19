@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>El proceso · Rediseña.Evaluacion</title>
-  <meta name="description" content="El rediseño de la evaluación se organiza en tres sprints consecutivos. Cada uno tiene una pregunta central, una pieza de trabajo principal y salidas claras.">
+  <meta name="description" content="El rediseño de la evaluación se organiza en tres sprints consecutivos. Cada uno tiene una pregunta central, un recurso de trabajo principal y salidas claras.">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">  <link rel="stylesheet" href="/assets/css/fuentes.v1.css">
-  <link rel="stylesheet" href="/assets/css/styles.v3.css">
+  <link rel="stylesheet" href="/assets/css/styles.v5.css">
 </head>
 <body data-page="proceso">
 
@@ -44,8 +44,8 @@
       </div>
       <div class="actions">
         <button class="btn ghost small" data-action="detalle" aria-pressed="false">Ver todo el detalle</button>
-        <button class="btn ghost small" data-action="export">Descargar progreso</button>
-        <button class="btn ghost small" data-action="import">Cargar progreso</button>
+        <button class="btn ghost small" data-action="export" title="Baja un único archivo con tu avance, los escenarios de la Plantilla y el Cuaderno de pilotaje">Descargar mi trabajo</button>
+        <button class="btn ghost small" data-action="import" title="Recupera un archivo descargado antes, en este equipo o en otro">Cargar trabajo</button>
         <button class="btn ghost small" data-action="reset">Reiniciar</button>
       </div>
     </div>
@@ -56,7 +56,7 @@
     <div class="breadcrumb"><a href="/">Inicio</a> / El proceso</div>
     <span class="chip">Visión de conjunto</span>
     <h1>El proceso en tres sprints</h1>
-    <p class="lead">Hemos organizado el rediseño en tres sprints consecutivos. Cada uno tiene su pregunta central, su pieza de trabajo principal y un cierre razonablemente claro de lo que debería salir. Entre un sprint y el siguiente no hay validación externa ni plazos impuestos; avanzas según vas cerrando lo anterior y tu navegador conserva el progreso para que lo retomes cuando puedas.</p>
+    <p class="lead">Hemos organizado el rediseño en tres sprints consecutivos. Cada uno tiene su pregunta central, su recurso de trabajo principal y un cierre razonablemente claro de lo que debería salir. Entre un sprint y el siguiente no hay validación externa ni plazos impuestos; avanzas según vas cerrando lo anterior y tu navegador conserva el progreso para que lo retomes cuando puedas.</p>
 
     <h2>Cuatro ideas que atraviesan el proceso</h2>
     <p>Hay cuatro ideas que atraviesan todo el proceso y que explican por qué algunas decisiones del kit son como son.</p>
@@ -74,6 +74,7 @@
       <div>
         <h3>Dos escenarios por defecto</h3>
         <p>Cada estimación de dedicación se registra en dos columnas: la línea base, que refleja cómo harías las cosas sin IA, y la hipótesis con IA, donde describes qué harías de forma diferente si la integras. Esto no se queda en ejercicio especulativo: al final del cuatrimestre recalibras las hipótesis con los tiempos que realmente has medido. Así la evaluación se convierte en un campo de experimentación con resultados medibles.</p>
+        <p class="lectura">De dónde sale este planteamiento y por qué la pregunta no es cuánto tiempo ahorra la IA: <a href="https://juanfreire.substack.com/p/la-ia-generativa-como-amplificador" target="_blank" rel="noopener"><span class="visually-hidden">(se abre en una pestaña nueva) </span>La IA generativa como amplificador de la evaluación y el acompañamiento</a>, de Juan Freire. La idea que lo ordena todo es la del <em>último kilómetro</em>: la IA puede dar un primer retorno, detectar patrones en grupos grandes y preparar la conversación, pero el juicio sobre la calidad del pensamiento y la relación con cada estudiante no se delegan.</p>
       </div>
     </div>
 
@@ -81,7 +82,7 @@
       <div class="num">03</div>
       <div>
         <h3>Tres lentes de factibilidad</h3>
-        <p>Cada diseño pasa por tres lecturas antes de darse por bueno. La primera es la <strong>carga docente</strong>: ¿puedes sostenerlo durante el cuatrimestre sin colapsar? La segunda es la <strong>carga del estudiante</strong>: ¿cabe en las horas que su ECTS le asigna? Y la tercera es el <strong>balance entre formativa y sumativa</strong>: ¿la evaluación acompaña el aprendizaje o solo lo mide al final? Si alguna de las tres lentes falla, conviene ajustar antes de pasar al siguiente sprint.</p>
+        <p>Cada diseño pasa por tres lecturas antes de darse por bueno. La primera es la <strong>carga docente</strong>: ¿puedes sostenerlo durante el cuatrimestre sin colapsar? La segunda es la <strong>carga del estudiante</strong>: ¿cabe en las horas que sus créditos le asignan? Y la tercera es el <strong>balance entre formativa y sumativa</strong>: ¿la evaluación acompaña el aprendizaje o solo lo mide al final? Si alguna de las tres lentes falla, conviene ajustar antes de pasar al siguiente sprint.</p>
       </div>
     </div>
 
@@ -99,9 +100,12 @@
       <div class="step-num">Sprint 0 · 45–75 minutos</div>
       <h3>Decisiones estratégicas y primer rediseño</h3>
       <p><strong>Pregunta central:</strong> ¿qué evaluación quieres tener en tu asignatura y cómo vas a mejorar el acompañamiento al estudiante?</p>
-      <p><strong>Pieza principal:</strong> la Plantilla estratégica, un archivo HTML que se abre en el navegador sin instalar nada. Tiene seis pasos —ficha de la asignatura, arquetipos de tu aula, la foto de lo que haces hoy, las cuatro decisiones, tus touchpoints y el resumen— y al recorrerlos genera solo el Canvas y una primera versión del Blueprint.</p>
-      <p><strong>Salidas:</strong> la Plantilla cerrada, el Canvas y el Blueprint 0. Y un semáforo económico que compara las horas que te costaría evaluar con la dedicación que has declarado: verde hasta el 40 %, ámbar hasta el 70 %, rojo por encima.</p>
+      <p><strong>Recurso principal:</strong> la Plantilla estratégica, un archivo HTML que se abre en el navegador sin instalar nada. Tiene seis pasos —ficha de la asignatura, arquetipos de tu aula, la foto de lo que haces hoy, las cuatro decisiones, tus touchpoints y el resumen— y al recorrerlos genera solo el Canvas y una primera versión del Blueprint.</p>
+      <p><strong>Salidas:</strong> la Plantilla cerrada, el <strong>Canvas</strong> y el <strong>Blueprint 0</strong>. Y un semáforo económico que compara las horas que te costaría evaluar con la dedicación total que has declarado —las horas de clase dentro—: verde hasta el 40 %, ámbar hasta el 70 %, rojo por encima.</p>
       <p><strong>Y además:</strong> la Plantilla admite varios escenarios de la misma asignatura —lo que tienes hoy, lo que quieres, y pruebas de resistencia que genera la propia aplicación cambiando un solo parámetro— con una vista que los pone uno al lado del otro. Trae cinco asignaturas de ejemplo, de modelos pedagógicos distintos, para ver la mecánica antes de usarla con lo tuyo.</p>
+      <div class="callout info">
+        <strong>Dos palabras que conviene fijar aquí.</strong> El <strong>Canvas</strong> es tu asignatura resumida en una sola página: la ficha, los arquetipos de tu aula, las cuatro decisiones y la línea de tiempo de tus momentos evaluativos. Es la vista que enseñas a una colega, a coordinación o a ti mismo dentro de seis meses. El <strong>Blueprint</strong> es la otra mitad: una matriz con un momento evaluativo por columna y una dimensión del diseño por fila —cuándo ocurre, quién carga las horas, qué política de IA tiene, qué evidencia deja—, y sirve para ver de una ojeada qué está decidido, qué es provisional y qué falta. El Blueprint <strong>0</strong> es el que sale del Sprint 0, a grano grueso; el Sprint 1 lo afina.
+      </div>
       <a href="/sprint-0" class="btn outline" style="margin-top: var(--sp-3);">Entrar al Sprint 0 →</a>
     </div>
 
@@ -109,7 +113,7 @@
       <div class="step-num">Sprint 1 · 2–3 sesiones de 90 minutos</div>
       <h3>Plan de acción detallado</h3>
       <p><strong>Pregunta central:</strong> ¿cómo se materializa ese diseño semana a semana, con qué dedicación real por tu parte y con qué integración concreta de la IA?</p>
-      <p><strong>Pieza principal:</strong> la Plantilla del plan operativo, una hoja de cálculo con diez hojas conectadas entre sí. En ella vas declarando tus touchpoints y los clasificas con una taxonomía de nueve tipos que llamamos T1–T9. Después estimas la dedicación por fase (diseño, ejecución, corrección y retroalimentación) en dos escenarios: una línea base que refleja cómo trabajas hoy y una hipótesis de cómo podría cambiar eso si introduces IA en algunos puntos. A partir de ahí, la plantilla se encarga de cruzar los datos contra tres lentes de factibilidad.</p>
+      <p><strong>Recurso principal:</strong> la Plantilla del plan operativo, una hoja de cálculo con diez hojas conectadas entre sí. En ella vas declarando tus touchpoints y los clasificas con una taxonomía de nueve tipos que llamamos T1–T9. Después estimas la dedicación por fase (diseño, ejecución, corrección y retroalimentación) en dos escenarios: una línea base que refleja cómo trabajas hoy y una hipótesis de cómo podría cambiar eso si introduces IA en algunos puntos. A partir de ahí, la plantilla se encarga de cruzar los datos contra tres lentes de factibilidad.</p>
       <p><strong>Salidas:</strong> la Plantilla completa en XLSX —donde viven las tres lentes de factibilidad, cada una en su hoja— y un Panel del plan operativo: una pequeña web que lee tu Plantilla y te devuelve dos vistas, el Blueprint (matriz de touchpoints por dimensión) y el Calendario semanal (dos mapas de calor apilados, carga del estudiante y carga docente, con conmutador entre línea base e hipótesis con IA).</p>
       <a href="/sprint-1" class="btn outline" style="margin-top: var(--sp-3);">Entrar al Sprint 1 →</a>
     </div>
@@ -118,15 +122,28 @@
       <div class="step-num">Sprint 2 · 1 cuatrimestre</div>
       <h3>Pilotaje con estudiantes y mejora del diseño</h3>
       <p><strong>Pregunta central:</strong> ¿qué ha funcionado en el aula tal como lo habíamos imaginado, qué no, y qué hay que ajustar para la siguiente iteración?</p>
-      <p><strong>Pieza principal:</strong> el Cuaderno de pilotaje, un archivo HTML con siete apartados que se rellenan a lo largo del cuatrimestre —punto de partida, hipótesis, qué observas, registro de tiempos, dos lecturas y el cierre—. Le acompaña la guía «Observar y leer lo que ocurre», con cinco instrumentos de observación de los que se eligen tres, y con el criterio para distinguir una señal del ruido.</p>
+      <p><strong>Recurso principal:</strong> el Cuaderno de pilotaje, un archivo HTML con siete apartados que se rellenan a lo largo del cuatrimestre —punto de partida, hipótesis, qué observas, registro de tiempos, dos lecturas y el cierre—. Le acompaña la guía «Observar y leer lo que ocurre», con cinco instrumentos de observación de los que se eligen tres, y con el criterio para distinguir una señal del ruido.</p>
       <p><strong>Salidas:</strong> un informe de pilotaje que el Cuaderno genera solo, la recalibración de tus hipótesis con IA a partir de los tiempos realmente medidos, y una versión mejorada del diseño para la siguiente edición, con la evidencia que la sostiene al lado.</p>
       <a href="/sprint-2" class="btn outline" style="margin-top: var(--sp-3);">Entrar al Sprint 2 →</a>
     </div>
 
     <div id="siguiente-paso" hidden></div>
 
+    <h2>Qué tipo de asignatura asume</h2>
+    <p>El kit está pensado para una asignatura que se imparte a lo largo de <strong>un cuatrimestre o semestre</strong> —los dos términos se usan según el país y en lo organizativo significan lo mismo: uno de los dos periodos lectivos en que se divide el curso—, con una docencia de entre doce y dieciséis semanas. Es el formato más habitual y es el que suponen el calendario del Panel y las ventanas de observación del Sprint 2.</p>
+    <p>Si tu asignatura es anual, de trimestre o intensiva, el proceso vale igual: lo único que cambia es el número de semanas que declaras, y todo lo demás se recalcula a partir de ahí.</p>
+
+    <h3>Créditos y horas</h3>
+    <p>Si trabajas en el Espacio Europeo de Educación Superior, tu asignatura se mide en <strong>créditos ECTS</strong>, y es probable que sea la unidad en la que piensas primero. El kit parte de ahí, pero <strong>calcula siempre en horas</strong>, porque una hora de corrección es una hora se llame como se llame el crédito de tu titulación.</p>
+
+    <div class="callout info">
+      <strong>La equivalencia que usa el kit: 1 crédito ECTS = 25 horas de trabajo del estudiante.</strong> Hay que declararla porque el ECTS no tiene una duración fija: el marco europeo lo define en una horquilla de 25 a 30 horas y cada universidad fija la suya. Se ha elegido 25 por tres razones. Es la más extendida en España y la que usan por defecto las plantillas del kit. Hace la cuenta transparente: 6 ECTS son 150 horas y se puede comprobar de cabeza. Y es <strong>la lectura más prudente</strong>, porque un presupuesto de horas más pequeño hace que la misma carga se lea como más exigente, que es el error que conviene cometer en una herramienta cuyo trabajo es avisar de la sobrecarga.</p>
+    </div>
+
+    <p>Si tu universidad declara 30 horas por crédito, cámbialo en la hoja <em>Parámetros</em> de la Plantilla del plan operativo y todo se recalcula. Y si trabajas fuera del sistema europeo —créditos SCT, créditos por hora semanal, unidades, o unas horas declaradas en la guía docente—, la conversión no te hace falta: pon directamente el total de horas de la asignatura. La pregunta que responde la Lente 2 es la misma en los dos casos: <em>lo que le pides al estudiante, ¿cabe en las horas que tiene?</em></p>
+
     <h2>Cómo encaja en tu calendario real</h2>
-    <p>El kit no asume que tengas una semana libre. Más bien lo contrario: da por hecho que vas a trabajarlo a ratos, cuando puedas sacar el hueco.</p>
+    <p>El kit no asume que tengas una semana libre. Más bien lo contrario: da por hecho que vas a trabajarlo a ratos, cuando puedas sacar algo de tiempo.</p>
     <ul>
       <li><strong>Entre 5 y 7 horas de trabajo real</strong> repartidas a lo largo de <strong>6 a 8 semanas</strong>, contando el onboarding del Sprint 1. Menos de una hora por semana.</li>
       <li>El Sprint 0 se completa en <strong>una sesión concentrada de 45 a 75 minutos</strong>. Es el único tramo en el que conviene trabajar del tirón.</li>
@@ -138,7 +155,7 @@
     <p>El kit no requiere preparación especial, pero hay cuatro cosas que si las tienes a mano te van a ahorrar fricción:</p>
     <ul>
       <li><strong>Una asignatura concreta en mente.</strong> Se rediseña de una en una, no todas a la vez. Si impartes varias, elige la que más te urge o la que más te apetezca. Cualquiera de los dos criterios vale.</li>
-      <li><strong>La guía docente actual de esa asignatura</strong>, para tener a mano los datos de partida: ECTS, horas de contacto, número de estudiantes, pruebas existentes y sus pesos.</li>
+      <li><strong>La guía docente actual de esa asignatura</strong>, para tener a mano los datos de partida: créditos ECTS —u horas de trabajo del estudiante, si trabajas con otro sistema—, horas de contacto, número de estudiantes, pruebas existentes y sus pesos.</li>
       <li><strong>Una estimación honesta de tu dedicación actual</strong> por tipo de prueba. No hace falta que sea exacta: una aproximación razonable basta, y el propio kit te va ayudando a afinarla a medida que avanzas.</li>
       <li><strong>Un navegador moderno</strong> (Chrome, Firefox, Safari o Edge recientes) y la posibilidad de descargar archivos XLSX y HTML. No hace falta crear cuenta ni instalar nada.</li>
     </ul>
@@ -153,6 +170,6 @@
   </footer>
 
 
-  <script src="/assets/js/app.v3.js"></script>
+  <script src="/assets/js/app.v4.js"></script>
 </body>
 </html>

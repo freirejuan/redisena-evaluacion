@@ -48,9 +48,9 @@ Detalle completo en [DECISIONES_TECNICAS.md](./DECISIONES_TECNICAS.md).
 ├── acerca.html                  Sobre el proyecto
 │
 ├── assets/
-│   ├── css/styles.v2.css        Sistema de diseño
+│   ├── css/styles.v3.css        Sistema de diseño
 │   ├── css/fuentes.v1.css       @font-face de las tres familias
-│   ├── js/app.v2.js             Estado, localStorage, capas, guiado
+│   ├── js/app.v4.js             Estado, localStorage, capas, guiado
 │   ├── fonts/                   19 woff2, subconjunto latino (SIL OFL 1.1)
 │   └── vendor/                  SheetJS CE (Apache-2.0) + su licencia
 │
@@ -103,11 +103,11 @@ Detalle completo: [DECISIONES_TECNICAS.md § 5](./DECISIONES_TECNICAS.md).
 
 Verificado contra el código el 31 de julio de 2026. Lo que sigue abierto:
 
-- [ ] **Decidir qué se hace con la reserva de sesión 1:1.** Hoy no existe ni el botón ni la integración, y conviene decidir antes si tiene sitio en un kit reutilizable o si es acompañamiento propio de cada implantación.
 - [ ] **Una prueba con lector de pantalla real** (VoiceOver o NVDA, con una persona usándolo). La comprobación automática verifica que la información esté ahí, no que la experiencia sea buena.
 
 Resueltos:
 
+- [x] ~~La reserva de sesión 1:1~~ — descartada el 19 de agosto de 2026 (decisión E22). Es acompañamiento propio de cada implantación, no producto: en un uso autónomo por un profesor cualquiera no significa nada, y cualquier integración de calendario rompería la promesa de que ninguna pieza contacta con nadie.
 - [x] ~~Publicar las piezas del Sprint 2~~ — publicadas el 31 de julio de 2026: `cuaderno-pilotaje.html` y `guia-observar-y-leer.html`. El Sprint 2 deja de estar «próximamente» y tiene sus tres pasos marcables como los otros dos.
 - [x] ~~Auditoría de accesibilidad~~ — las quince piezas pasan axe-core (WCAG 2.0 A/AA, 2.1 A/AA y buenas prácticas) sin incumplimientos, incluidas las vistas que sólo existen al usarlas.
 - [x] ~~Dependencias de terceros~~ — retiradas el 31 de julio de 2026. Tipografías y SheetJS se sirven desde el propio dominio y una `Content-Security-Policy` impide al navegador cargar cualquier recurso externo, abrir conexiones fuera del dominio o enviar formularios a ninguna parte.
