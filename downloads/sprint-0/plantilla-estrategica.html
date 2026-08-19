@@ -2495,8 +2495,8 @@ function handleImport(event){
     if(!pareceDeEstaPlantilla(state)){
       alert('Este archivo no es una plantilla estratégica.\n\n' +
             'No se ha tocado nada de lo que tienes. Busca el archivo que descargaste ' +
-            'desde aquí con «Descargar JSON»: su nombre empieza por «redisena-plantilla-» ' +
-            '(o por «uc3m-plantilla-», si lo descargaste antes de julio de 2026).');
+            'desde aquí con «Descargar JSON»: su nombre empieza por «redisena-plantilla-». ' +
+            'Los archivos anteriores a julio de 2026 llevan otro prefijo y también valen.');
       return;
     }
     const actual = cuentaTrabajo();

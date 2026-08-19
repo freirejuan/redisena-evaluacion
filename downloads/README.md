@@ -35,7 +35,7 @@ Este directorio contiene las piezas descargables servidas desde la web. Las URLs
 | `sprint-2/cuaderno-pilotaje.html` | HTML interactivo (SheetJS) | disponible | Pieza principal. Siete apartados que se rellenan a lo largo del cuatrimestre. Lee la Plantilla del plan operativo del Sprint 1 para precargar el registro de tiempos, y genera el informe de pilotaje como vista derivada. Persistencia en localStorage, clave `redisena-cuaderno-pilotaje-v0`. |
 | `sprint-2/guia-observar-y-leer.html` | HTML autocontenido | disponible | Los cinco instrumentos de observación con sus ejemplos rellenos y el calendario mínimo (Parte 1, se lee antes de empezar), y el criterio para distinguir señal de ruido y decidir qué se ajusta (Parte 2, se lee a mitad de cuatrimestre). |
 
-Productizadas el 31 de julio de 2026 a partir de los instrumentos de pilotaje de la Ruta 5 (decisión D22 de su registro): lo pendiente no era diseñarlos sino quitarles lo específico de una universidad concreta y anclarlos al vocabulario del kit.
+Productizadas el 31 de julio de 2026 a partir de instrumentos de pilotaje ya probados en un despliegue real: lo pendiente no era diseñarlos, sino quitarles lo específico de una universidad concreta y anclarlos al vocabulario del kit.
 
 ---
 

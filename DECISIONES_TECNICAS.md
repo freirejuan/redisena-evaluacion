@@ -180,7 +180,7 @@ Una sola clave, un solo objeto JSON. Simple de razonar, simple de exportar.
 - La clase `active` en el link de nav se hardcodea en cada archivo.
 
 **CSS.**
-- Un único archivo `styles.css` con todos los tokens y componentes del Sistema UC3M IMPULSO.
+- Un único archivo `styles.vN.css` con todos los tokens y componentes del sistema de diseño del kit.
 - Variables CSS (custom properties) para tokens — la paleta, la tipografía, el espaciado, los radios y las sombras.
 - Sin preprocesador. Sin build.
 - Nomenclatura de clases: BEM ligero (`.card`, `.card-linkable`, `.card.with-accent`).
@@ -204,7 +204,7 @@ Una sola clave, un solo objeto JSON. Simple de razonar, simple de exportar.
 
 Flujo:
 
-1. El repositorio vive en GitHub (cuenta personal o de UC3M — decidir al crear).
+1. El repositorio vive en GitHub, en la cuenta de quien mantiene el kit.
 2. Cloudflare Pages se conecta al repo vía OAuth.
 3. Cada push a la rama `main` dispara un deploy automático.
 4. Pull requests generan previews automáticas en URL temporal (`pr-XX.redisena-evaluacion.pages.dev`).
